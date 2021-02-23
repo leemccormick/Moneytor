@@ -13,6 +13,8 @@ struct FontNames {
     static let textMoneytorBoldItatic = "Champagne & Limousines Bold Italic"
     static let textMoneytorItalic = "Champagne & Limousines Italic"
     static let textMoneytorMoneyFont = "Money Money Plus"
+    static let textMoneytorGoodLetter = "Letters for Learners"
+    
    
 }
 

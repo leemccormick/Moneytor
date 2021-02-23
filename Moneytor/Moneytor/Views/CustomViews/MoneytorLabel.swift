@@ -21,26 +21,26 @@ class MoneytorLabel: UILabel {
     }
 }
 
-class MoneytorLabelItalic: MoneytorLabel {
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        //super.updateFont(fontName: FontNames.latoLight)
-        updateFont(fontName: FontNames.textMoneytorItalic)
-    }
-}
-
-class MoneytorLabelBold: MoneytorLabel {
+class MoneytorGoodLetterLabel: MoneytorLabel {
     override func awakeFromNib() {
         super.awakeFromNib() //.awakeFromNib() from HypeLabel
        // super.updateFont(fontName: FontNames.latoBold)
-        updateFont(fontName: FontNames.textTitleBoldMoneytor)
+        updateFont(fontName: FontNames.textMoneytorGoodLetter)
     }
 }
 
-class MoneytorMoneyFont: MoneytorLabel {
-    override func awakeFromNib() {
+class MoneytorTitleFontWhiteLabel: UILabel {
+    override  func awakeFromNib() {
         super.awakeFromNib()
-        //super.updateFont(fontName: FontNames.latoLight)
+        // update the font
         updateFont(fontName: FontNames.textMoneytorMoneyFont)
+        // set the text color
+        self.textColor = .mtWhiteText
+    }
+    func updateFont(fontName: String) {
+        let size = self.font.pointSize
+        self.font = UIFont(name: fontName, size: size)
     }
 }
+
+

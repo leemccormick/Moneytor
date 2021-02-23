@@ -18,7 +18,7 @@ class MoneytorNavigationController: UINavigationController {
         UINavigationBar.appearance().tintColor = .mtTextDarkBrown
        // UINavigationBar.appearance().backgroundColor = UIColor.yellow
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mtTextDarkBrown]
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textTitleBoldMoneytor, size: 25)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textMoneytorMoneyFont, size: 25)!]
 //        UITabBar.appearance().barTintColor = UIColor(hexaRGB: "#E0AB5B")
 //        UITabBar.appearance().tintColor = UIColor(hexaRGB: "#2C2212")
 //        UITabBar.appearance().backgroundColor = UIColor.yellow
@@ -41,7 +41,7 @@ class MoneytorTabBarController: UITabBarController {
         UINavigationBar.appearance().tintColor = .mtTextDarkBrown
        // UINavigationBar.appearance().backgroundColor = UIColor.yellow
         //UITab.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.textDarkBrown]
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textTitleBoldMoneytor, size: 25)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)!]
      UITabBar.appearance().barTintColor = .mtBgBrownHeader
    UITabBar.appearance().tintColor = .mtTextDarkBrown
 

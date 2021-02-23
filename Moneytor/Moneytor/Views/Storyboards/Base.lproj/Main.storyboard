@@ -5,55 +5,17 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--INCOMES-->
-        <scene sceneID="j5F-3S-Kzx">
-            <objects>
-                <tableViewController id="f1J-Qc-Y16" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qlj-xo-uvy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="U9Z-Hr-bUH">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="13b-m1-qgc">
-                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="13b-m1-qgc" id="Xl4-X7-MGk">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="f1J-Qc-Y16" id="FAt-Q3-ztM"/>
-                            <outlet property="delegate" destination="f1J-Qc-Y16" id="f58-wl-MKX"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="INCOMES" id="rju-5F-SPb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TpV-bT-LBc"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7uy-vH-5TR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1023" y="52"/>
-        </scene>
         <!--Add Income-->
         <scene sceneID="s8R-wx-Up9">
             <objects>
-                <tableViewController id="9Nz-0l-ico" sceneMemberID="viewController">
+                <tableViewController id="9Nz-0l-ico" customClass="IncomeDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="whJ-EF-0sN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="darkGolder"/>
                         <sections>
                             <tableViewSection headerTitle="Income Name :" id="FSf-uF-s3u">
                                 <cells>
@@ -70,6 +32,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="2IO-cL-0MF" firstAttribute="top" secondItem="Zt0-hp-tv6" secondAttribute="top" constant="10" id="Pia-bR-wZS"/>
                                                 <constraint firstAttribute="bottom" secondItem="2IO-cL-0MF" secondAttribute="bottom" constant="10" id="p8y-zh-tWW"/>
@@ -77,6 +40,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="2IO-cL-0MF" secondAttribute="trailing" constant="20" id="wY5-nd-crT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -95,6 +59,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="sPE-mn-xf6" secondAttribute="trailing" constant="20" id="H2r-NS-z1x"/>
                                                 <constraint firstItem="sPE-mn-xf6" firstAttribute="leading" secondItem="Ebc-O9-KL0" secondAttribute="leading" constant="20" id="Pk5-Al-NLX"/>
@@ -102,6 +67,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="sPE-mn-xf6" secondAttribute="bottom" constant="10" id="wNf-2A-ord"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -114,10 +80,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SB6-j4-3yf">
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SB6-j4-3yf" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="112"/>
                                                 </pickerView>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="SB6-j4-3yf" firstAttribute="leading" secondItem="SGA-m0-YrV" secondAttribute="leading" constant="20" id="2oA-xM-4kT"/>
                                                 <constraint firstItem="SB6-j4-3yf" firstAttribute="top" secondItem="SGA-m0-YrV" secondAttribute="top" constant="10" id="4iP-F9-oI9"/>
@@ -125,6 +92,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="SB6-j4-3yf" secondAttribute="trailing" constant="20" id="U4J-hp-u9Q"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -137,10 +105,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="105"/>
                                                 </datePicker>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="ov6-K4-Idj"/>
                                                 <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="yCz-6G-bEK"/>
@@ -148,6 +117,7 @@
                                                 <constraint firstItem="Lyb-ou-Rs3" firstAttribute="leading" secondItem="2KW-Db-ovK" secondAttribute="leading" constant="20" id="z5b-Q9-TFT"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -163,8 +133,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9R-qK-4Hl" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="24"/>
                                                     <state key="normal" title="Save Income Data"/>
+                                                    <connections>
+                                                        <action selector="incomeSaveButtonTapped:" destination="9Nz-0l-ico" eventType="touchUpInside" id="l9R-6h-5r2"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="k9R-qK-4Hl" firstAttribute="top" secondItem="9X7-f7-f4c" secondAttribute="top" constant="10" id="0tn-5y-nM5"/>
                                                 <constraint firstAttribute="trailing" secondItem="k9R-qK-4Hl" secondAttribute="trailing" constant="20" id="SXb-ho-yFu"/>
@@ -172,6 +146,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="k9R-qK-4Hl" secondAttribute="bottom" constant="10" id="p7n-nw-JJX"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -182,8 +157,25 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Income" id="hVO-rj-dZd">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="jjN-lF-8ey"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="save" id="jjN-lF-8ey">
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="9Nz-0l-ico" id="0Zu-KZ-4Ny"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="zzl-1h-qhm">
+                                <connections>
+                                    <action selector="trashButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="incomeAmount" destination="sPE-mn-xf6" id="U2W-v1-LQy"/>
+                        <outlet property="incomeCategoryPicker" destination="SB6-j4-3yf" id="ts8-0E-siG"/>
+                        <outlet property="incomeDatePicker" destination="Lyb-ou-Rs3" id="RF9-LH-qkc"/>
+                        <outlet property="incomeNameTextField" destination="2IO-cL-0MF" id="lV0-Hm-QE0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0C-sd-pDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -192,28 +184,38 @@
         <!--EXPENSES-->
         <scene sceneID="NxG-PF-dkU">
             <objects>
-                <tableViewController id="QLi-Ig-Dqw" sceneMemberID="viewController">
+                <tableViewController id="QLi-Ig-Dqw" customClass="ExpenseListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pnm-Dr-2cM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="darkGolder"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="5Od-VW-dNd">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" name="darkGolder"/>
-                            <color key="barTintColor" name="darkYellow"/>
+                            <color key="barTintColor" name="mtDarkYellow"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="4tD-EM-cc5">
+                            <rect key="frame" x="0.0" y="702.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qt-eZa">
+                                    <rect key="frame" x="197" y="11.5" width="20" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                            </subviews>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ptY-WJ-AQo">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="expenseCell" id="ptY-WJ-AQo">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptY-WJ-AQo" id="0vz-Fj-yw6">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" name="darkGolder"/>
+                                    <color key="backgroundColor" name="mtDarkGolder"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" name="darkGolder"/>
+                                <color key="backgroundColor" name="mtDarkGolder"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -222,21 +224,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EXPENSES" id="QXL-CF-Xbt">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock.rtl" catalog="system" id="BwX-Nh-AeY">
+                            <connections>
+                                <action selector="calendarButtonTapped:" destination="QLi-Ig-Dqw" id="ruQ-1T-nWm"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TuO-mq-9PN">
                             <connections>
-                                <segue destination="9tl-Xm-gpl" kind="show" id="Eka-uz-FHz"/>
+                                <segue destination="9tl-Xm-gpl" kind="show" identifier="toExpenseDetailVC" id="Eka-uz-FHz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="6dT-qt-eZa" id="bPq-xN-xp3"/>
+                        <outlet property="activityView" destination="4tD-EM-cc5" id="Uso-Yu-JHm"/>
+                        <outlet property="expenseSearchBar" destination="5Od-VW-dNd" id="38o-Rm-MQ9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rRl-rV-Zc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="994" y="781"/>
+            <point key="canvasLocation" x="1022" y="838"/>
         </scene>
         <!--TOTAL-->
         <scene sceneID="IDH-oQ-Dyg">
             <objects>
-                <viewController id="I7L-hC-o0h" sceneMemberID="viewController">
+                <viewController id="I7L-hC-o0h" customClass="TotalBalanceViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QFT-CE-tzq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -249,9 +261,29 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView">
                                                 <rect key="frame" x="20.5" y="30" width="373" height="372.5"/>
-                                                <color key="backgroundColor" name="lightYellow"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
+                                                        <rect key="frame" x="8" y="8" width="357" height="356.5"/>
+                                                        <subviews>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
+                                                                <rect key="frame" x="8" y="8" width="341" height="340.5"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="cOS-K8-ftc" secondAttribute="trailing" constant="8" id="XFE-xa-fEH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="cOS-K8-ftc" secondAttribute="bottom" constant="8" id="kLu-u2-xAZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="leading" secondItem="jQu-IG-UqO" secondAttribute="leading" constant="8" id="knR-Jq-ydZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="top" secondItem="jQu-IG-UqO" secondAttribute="top" constant="8" id="ved-98-Gw0"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" name="mtDarkGolder"/>
                                                 <constraints>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="top" constant="8" id="6cu-Rf-bMR"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jQu-IG-UqO" secondAttribute="bottom" constant="8" id="ggf-Pl-E5W"/>
                                                     <constraint firstAttribute="width" secondItem="Sdg-WR-LzE" secondAttribute="height" multiplier="1:1" id="mUg-Ad-gTH"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jQu-IG-UqO" secondAttribute="trailing" constant="8" id="vgb-y2-fJF"/>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="leading" secondItem="Sdg-WR-LzE" secondAttribute="leading" constant="8" id="vnv-Gp-9AB"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-h3-1Xj">
@@ -260,7 +292,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DUV-uF-JCI">
                                                         <rect key="frame" x="0.0" y="0.0" width="373" height="26.5"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="26.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
@@ -280,7 +312,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oiP-3h-1vC">
                                                         <rect key="frame" x="0.0" y="66.5" width="373" height="32"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
@@ -296,6 +328,7 @@
                                                                     <color key="titleColor" name="darkBrownText"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="totalIncomeButtonTapped:" destination="I7L-hC-o0h" eventType="touchUpInside" id="vW4-4o-bbH"/>
                                                                     <segue destination="LFi-Cs-mBP" kind="show" id="nJf-dX-bhU"/>
                                                                 </connections>
                                                             </button>
@@ -304,7 +337,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ul7-2H-UdX">
                                                         <rect key="frame" x="0.0" y="138.5" width="373" height="33"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
@@ -320,6 +353,7 @@
                                                                     <color key="titleColor" name="darkBrownText"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="totalExpenseButtonTapped:" destination="I7L-hC-o0h" eventType="touchUpInside" id="Xzy-g3-t02"/>
                                                                     <segue destination="i5Z-lo-Ib2" kind="show" id="oM0-en-gPw"/>
                                                                 </connections>
                                                             </button>
@@ -328,7 +362,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1000" id="24y-y7-uZ8"/>
                                             <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="50" id="ER3-jm-opv"/>
@@ -340,7 +374,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" name="golderBG"/>
+                                <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
                                     <constraint firstItem="Nma-1h-9Ow" firstAttribute="width" secondItem="oW6-I8-qZC" secondAttribute="width" id="F1P-i8-tFl"/>
                                     <constraint firstAttribute="bottom" secondItem="Nma-1h-9Ow" secondAttribute="bottom" id="GTK-2I-jld"/>
@@ -351,7 +385,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eyX-dE-3A7"/>
-                        <color key="backgroundColor" name="golderBG"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
                             <constraint firstItem="eyX-dE-3A7" firstAttribute="bottom" secondItem="oW6-I8-qZC" secondAttribute="bottom" id="7AP-Xc-Vsd"/>
                             <constraint firstItem="oW6-I8-qZC" firstAttribute="leading" secondItem="eyX-dE-3A7" secondAttribute="leading" id="FLG-U4-rBb"/>
@@ -360,6 +394,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOTAL" id="UYf-tg-049"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="cOS-K8-ftc" id="yO4-RX-1JN"/>
+                        <outlet property="activityView" destination="jQu-IG-UqO" id="NMH-tu-eoa"/>
+                        <outlet property="pieChartView" destination="Sdg-WR-LzE" id="wUQ-S0-FNr"/>
+                        <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
+                        <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
+                        <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF6-Dn-xYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -368,33 +410,37 @@
         <!--Total Income-->
         <scene sceneID="RX8-4U-giW">
             <objects>
-                <tableViewController id="LFi-Cs-mBP" sceneMemberID="viewController">
+                <tableViewController id="LFi-Cs-mBP" customClass="TotalIncomeListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wYS-dO-jgc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="golderBG"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
+                        <activityIndicatorView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="XmY-UG-QeW">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <sections>
                             <tableViewSection id="Dkb-KQ-Q9U">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="480" id="BA8-jm-I0V">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="480"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="480"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BA8-jm-I0V" id="CLa-mW-ehz">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="480"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVK-Ca-XXL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="423"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="422.5"/>
                                                     <color key="backgroundColor" name="darkGolder"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="YVK-Ca-XXL" secondAttribute="height" multiplier="1:1.02" id="uJZ-KZ-jkW"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="ydG-qX-6lb" kind="embed" id="mO5-yl-CQC"/>
+                                                        <segue destination="ydG-qX-6lb" kind="embed" identifier="toIncomeLineChartVC" id="mO5-yl-CQC"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="YVK-Ca-XXL" firstAttribute="leading" secondItem="CLa-mW-ehz" secondAttribute="leading" id="Eav-oq-7Cz"/>
                                                 <constraint firstItem="YVK-Ca-XXL" firstAttribute="top" secondItem="CLa-mW-ehz" secondAttribute="top" id="G5X-2d-kaQ"/>
@@ -403,27 +449,27 @@
                                                 <constraint firstItem="YVK-Ca-XXL" firstAttribute="width" secondItem="CLa-mW-ehz" secondAttribute="width" id="xHu-O0-7PL"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="l5H-eB-9Do">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="KNK-qv-eTC" detailTextLabel="DHY-yA-IYo" rowHeight="45" style="IBUITableViewCellStyleValue1" id="BXh-2I-KiT">
-                                        <rect key="frame" x="0.0" y="564" width="414" height="45"/>
+                                        <rect key="frame" x="0.0" y="608" width="414" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BXh-2I-KiT" id="aiY-Yz-bwc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KNK-qv-eTC" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Cash" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KNK-qv-eTC" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="13" width="39" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DHY-yA-IYo" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DHY-yA-IYo" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="13" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -431,25 +477,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="2tM-qu-iT5" detailTextLabel="yN7-sP-YIu" rowHeight="49" style="IBUITableViewCellStyleValue1" id="zeQ-ht-afF">
-                                        <rect key="frame" x="0.0" y="609" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="653" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zeQ-ht-afF" id="IzT-R9-UYy">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Salary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2tM-qu-iT5" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Salary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2tM-qu-iT5" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="47.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yN7-sP-YIu" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yN7-sP-YIu" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -457,25 +503,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ok1-R3-6Y4" detailTextLabel="h4W-Hc-1l6" rowHeight="49" style="IBUITableViewCellStyleValue1" id="jK4-Vf-Eet">
-                                        <rect key="frame" x="0.0" y="658" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="702" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jK4-Vf-Eet" id="S2d-LX-9i7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Saving" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ok1-R3-6Y4" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Saving" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ok1-R3-6Y4" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="51" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h4W-Hc-1l6" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h4W-Hc-1l6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -483,25 +529,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="bqi-q6-nj8" detailTextLabel="BoI-W5-wcF" rowHeight="49" style="IBUITableViewCellStyleValue1" id="l9F-zs-uxJ">
-                                        <rect key="frame" x="0.0" y="707" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="751" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l9F-zs-uxJ" id="Egx-u1-XdF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bqi-q6-nj8" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bqi-q6-nj8" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="43.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BoI-W5-wcF" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BoI-W5-wcF" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -509,25 +555,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="cMk-gt-uO1" detailTextLabel="hcB-Hz-sau" rowHeight="49" style="IBUITableViewCellStyleValue1" id="gpk-SE-CgX">
-                                        <rect key="frame" x="0.0" y="756" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="800" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gpk-SE-CgX" id="AjG-Ux-eLB">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Total Income" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cMk-gt-uO1" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Total Income" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cMk-gt-uO1" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="97.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hcB-Hz-sau" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hcB-Hz-sau" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -535,9 +581,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="golderBG"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="golderBG"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -548,6 +594,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Total Income" id="q96-KC-nMI"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="XmY-UG-QeW" id="AVZ-CT-SsC"/>
+                        <outlet property="cashLabel" destination="DHY-yA-IYo" id="ZLw-KA-MgA"/>
+                        <outlet property="otherLabel" destination="BoI-W5-wcF" id="Xsd-RQ-D3m"/>
+                        <outlet property="salaryLabel" destination="yN7-sP-YIu" id="FVM-w7-rBo"/>
+                        <outlet property="savingLabel" destination="ok1-R3-6Y4" id="V8y-ae-LRm"/>
+                        <outlet property="totalIncomeLabel" destination="hcB-Hz-sau" id="1Fv-QA-J2O"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BHu-ud-6oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -570,26 +624,10 @@
             </objects>
             <point key="canvasLocation" x="104" y="781"/>
         </scene>
-        <!--Moneytor Navigation-->
-        <scene sceneID="YLy-JY-tkG">
-            <objects>
-                <navigationController id="gVS-nS-7yW" customClass="MoneytorNavigation" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kh4-uc-asx">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="f1J-Qc-Y16" kind="relationship" relationship="rootViewController" id="RrF-sq-1UR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ePp-63-vWQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="46" y="71"/>
-        </scene>
         <!--CURRENCY-->
         <scene sceneID="IzN-Sf-TDt">
             <objects>
-                <viewController id="nyT-zm-yWA" sceneMemberID="viewController">
+                <viewController id="nyT-zm-yWA" customClass="CurrencyMapViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dNR-VC-XcB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -597,9 +635,19 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-vC-qW2">
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                             </mapView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
+                                <rect key="frame" x="87" y="357" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
+                                        <rect key="frame" x="110" y="54" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PmB-I2-UDe"/>
-                        <color key="backgroundColor" name="darkGolder"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
                             <constraint firstItem="EoZ-vC-qW2" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="AUk-Gw-NDL"/>
                             <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="EoZ-vC-qW2" secondAttribute="bottom" id="SVA-am-xg4"/>
@@ -608,17 +656,26 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CURRENCY" id="ONU-uI-NUi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="nyT-zm-yWA" id="TgF-Zc-ewa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="YrB-In-r1O" id="EUX-Iy-C8e"/>
+                        <outlet property="activityView" destination="A4h-qJ-EC5" id="ra6-sT-hPA"/>
+                        <outlet property="currencyMapView" destination="EoZ-vC-qW2" id="vnm-EC-8L9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkN-bT-LUh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1022" y="1503"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="uGr-SF-zD9">
             <objects>
-                <viewController id="P2r-SA-ntB" sceneMemberID="viewController">
+                <viewController id="P2r-SA-ntB" customClass="LoginViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FeD-Hm-1Cc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -627,28 +684,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W7E-22-C7v">
-                                <rect key="frame" x="20.5" y="84" width="373" height="241"/>
+                                <rect key="frame" x="20.5" y="84" width="373" height="198"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPENSES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-e4-Mfp">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="72"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="72"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPENSES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-e4-Mfp" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="52"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="52"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONEYTOR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cT7-PI-rgc">
-                                        <rect key="frame" x="0.0" y="82" width="373" height="83"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="83"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONEYTOR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="29" translatesAutoresizingMaskIntoConstraints="NO" id="cT7-PI-rgc" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="62" width="373" height="58"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="58"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in or Sing up" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayc-ST-r0n">
-                                        <rect key="frame" x="0.0" y="175" width="373" height="28"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in or Sing up" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ayc-ST-r0n" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="130" width="373" height="30"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to moniter your expenses!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YT4-zI-sRg">
-                                        <rect key="frame" x="0.0" y="213" width="373" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to moniter your expenses!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="YT4-zI-sRg" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="170" width="373" height="28"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="28"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -656,7 +713,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-H5-hEU">
-                                <rect key="frame" x="20.5" y="355" width="373" height="210"/>
+                                <rect key="frame" x="20.5" y="312" width="373" height="210"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="769-1I-J1z">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="210"/>
@@ -664,10 +721,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRI-Ie-hKG" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="100"/>
                                                 <state key="normal" title="Log In"/>
+                                                <connections>
+                                                    <action selector="loginButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="gju-Rg-L1S"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsz-Aj-Vbz" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="110" width="72" height="100"/>
                                                 <state key="normal" title="Sign Up"/>
+                                                <connections>
+                                                    <action selector="signUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="m0i-pV-AVT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -704,36 +767,56 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-Aq-OKa" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                <rect key="frame" x="207" y="595" width="186.5" height="30"/>
+                                <rect key="frame" x="207" y="552" width="186.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4SL-k6-G6n"/>
+                                </constraints>
                                 <state key="normal" title="Sign Me Up!"/>
                                 <connections>
-                                    <segue destination="P6i-Oo-cHq" kind="show" id="nC8-CU-bnV"/>
+                                    <action selector="signMeUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="JOO-lV-U8S"/>
+                                    <segue destination="P6i-Oo-cHq" kind="show" identifier="toTabBarMoneytorController" id="nC8-CU-bnV"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BJo-CQ-ndd">
-                                <rect key="frame" x="20.5" y="655" width="373" height="150"/>
+                                <rect key="frame" x="20.5" y="632" width="373" height="150"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xXu-di-9Tg">
                                         <rect key="frame" x="0.0" y="0.0" width="121" height="150"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="T1e-oP-4S1">
-                                        <rect key="frame" x="126" y="0.0" width="121" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="l4R-Wr-bgb"/>
-                                        </constraints>
-                                    </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="9js-TZ-hcq">
-                                        <rect key="frame" x="252" y="0.0" width="121" height="150"/>
+                                        <rect key="frame" x="126" y="0.0" width="121" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="cT2-JA-hfA"/>
                                         </constraints>
                                     </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="T1e-oP-4S1">
+                                        <rect key="frame" x="252" y="0.0" width="121" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="l4R-Wr-bgb"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2be-9I-DIC">
+                                <rect key="frame" x="20" y="802" width="374" height="79"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EEI-Wb-zGD">
+                                        <rect key="frame" x="8" y="8" width="358" height="63"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="leading" secondItem="2be-9I-DIC" secondAttribute="leading" constant="8" id="3BY-Oc-civ"/>
+                                    <constraint firstAttribute="trailing" secondItem="EEI-Wb-zGD" secondAttribute="trailing" constant="8" id="INR-f7-gk7"/>
+                                    <constraint firstAttribute="bottom" secondItem="EEI-Wb-zGD" secondAttribute="bottom" constant="8" id="Zb1-Ju-ucG"/>
+                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="top" secondItem="2be-9I-DIC" secondAttribute="top" constant="8" id="zZh-hm-T33"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3JR-69-x6d"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Go5-oO-nQA" secondAttribute="bottom" id="2kd-wb-uRM"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" constant="20" id="3uN-oq-oWX"/>
                             <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="4Gu-S1-3sv"/>
                             <constraint firstItem="BJo-CQ-ndd" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="4fi-28-lMW"/>
                             <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="VGC-H5-hEU" secondAttribute="bottom" constant="30" id="4ur-v1-UXX"/>
@@ -742,16 +825,36 @@
                             <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="30" id="Jxh-uP-jnv"/>
                             <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" id="PAv-4l-5Jn"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="top" secondItem="3JR-69-x6d" secondAttribute="top" constant="40" id="R8H-us-Tt5"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="top" secondItem="BJo-CQ-ndd" secondAttribute="bottom" constant="20" id="XCp-O0-R2T"/>
                             <constraint firstItem="BJo-CQ-ndd" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="ZIi-eA-kv8"/>
+                            <constraint firstAttribute="bottom" secondItem="2be-9I-DIC" secondAttribute="bottom" constant="15" id="Zrw-dz-nPI"/>
+                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="bottom" constant="-344" id="cLM-zF-caY"/>
                             <constraint firstItem="Go5-oO-nQA" firstAttribute="trailing" secondItem="3JR-69-x6d" secondAttribute="trailing" id="ck0-WQ-on2"/>
                             <constraint firstItem="FP0-Aq-OKa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3JR-69-x6d" secondAttribute="leading" symbolic="YES" id="dhq-FT-xB4"/>
                             <constraint firstItem="BJo-CQ-ndd" firstAttribute="top" secondItem="FP0-Aq-OKa" secondAttribute="bottom" constant="30" id="e9C-31-Btn"/>
+                            <constraint firstItem="3JR-69-x6d" firstAttribute="trailing" secondItem="2be-9I-DIC" secondAttribute="trailing" constant="20" id="l62-72-TrQ"/>
                             <constraint firstItem="FP0-Aq-OKa" firstAttribute="trailing" secondItem="VGC-H5-hEU" secondAttribute="trailing" id="reZ-Ql-JRa"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="tA6-8B-LjT"/>
                             <constraint firstItem="Go5-oO-nQA" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="top" id="yMZ-Ho-vZG"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="ykX-9M-1sA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="EEI-Wb-zGD" id="xlq-dD-CMw"/>
+                        <outlet property="activityView" destination="2be-9I-DIC" id="qmd-7D-HHq"/>
+                        <outlet property="confirmPasswordTextFiled" destination="Tsn-xQ-GST" id="EdW-oc-YW3"/>
+                        <outlet property="firstLogoImage" destination="T1e-oP-4S1" id="bj0-EW-v7g"/>
+                        <outlet property="firstNameTextField" destination="DnR-CI-tLC" id="wl7-ac-Klm"/>
+                        <outlet property="lastNameTextField" destination="cEK-zr-Qi2" id="MfA-tt-5zh"/>
+                        <outlet property="loginButton" destination="MRI-Ie-hKG" id="2v2-jI-KuX"/>
+                        <outlet property="logoStackView" destination="BJo-CQ-ndd" id="Xfw-Wa-26K"/>
+                        <outlet property="passwordTextFileld" destination="V7O-Eg-h1y" id="5od-Lp-Uye"/>
+                        <outlet property="secondLogoImage" destination="9js-TZ-hcq" id="LYL-NE-lSM"/>
+                        <outlet property="signMeUpButton" destination="FP0-Aq-OKa" id="rwE-qU-p0z"/>
+                        <outlet property="signUpButton" destination="rsz-Aj-Vbz" id="MVB-Ea-lkT"/>
+                        <outlet property="thirdLogoImage" destination="xXu-di-9Tg" id="Ceg-ww-jxk"/>
+                        <outlet property="usernameTextField" destination="SJC-l4-OHS" id="RIx-Z9-eQ4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZtX-vC-bmS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -781,28 +884,53 @@
         <!--INCOMES-->
         <scene sceneID="tuR-oT-Bor">
             <objects>
-                <tableViewController id="gUq-1d-FNd" sceneMemberID="viewController">
+                <tableViewController id="gUq-1d-FNd" customClass="IncomeListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XcB-hp-tcR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="darkGolder"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="H65-uu-cJD">
+                        <color key="backgroundColor" name="mtDarkGolder"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="0YT-BM-9gs">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" name="darkGolder"/>
-                            <color key="barTintColor" name="darkYellow"/>
+                            <color key="barTintColor" name="mtDarkYellow"/>
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="F6f-ss-dQq">
+                            <rect key="frame" x="0.0" y="702.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="l7P-im-jY4">
+                                    <rect key="frame" x="0.0" y="-0.5" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                            </subviews>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="YVp-Ug-Tr9">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeCell" textLabel="ayF-Mg-nMz" detailTextLabel="Lgr-7W-X5P" style="IBUITableViewCellStyleValue1" id="YVp-Ug-Tr9">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVp-Ug-Tr9" id="ftM-Ny-qBG">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" name="darkGolder"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ayF-Mg-nMz">
+                                            <rect key="frame" x="20" y="12" width="33" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lgr-7W-X5P">
+                                            <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" name="mtDarkGolder"/>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" name="darkGolder"/>
+                                <color key="backgroundColor" name="mtDarkGolder"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -811,16 +939,26 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="INCOMES" id="HhH-AX-lSc">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock" catalog="system" id="3fb-ak-tTa">
+                            <connections>
+                                <action selector="calendarButtonTapped:" destination="gUq-1d-FNd" id="FWb-pD-3YN"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ywd-An-SaH">
                             <connections>
-                                <segue destination="9Nz-0l-ico" kind="show" id="7fR-dV-YrW"/>
+                                <segue destination="9Nz-0l-ico" kind="show" identifier="toIncomeDetailVC" id="7fR-dV-YrW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="l7P-im-jY4" id="8wm-l9-Z5z"/>
+                        <outlet property="activityView" destination="F6f-ss-dQq" id="fSh-10-n1q"/>
+                        <outlet property="incomeSearchBar" destination="0YT-BM-9gs" id="V7m-38-A1L"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9M-l8-z9P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1023" y="52"/>
+            <point key="canvasLocation" x="1022" y="3"/>
         </scene>
         <!--INCOME-->
         <scene sceneID="E2j-JK-uyV">
@@ -837,7 +975,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4eH-hd-rrx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46" y="71"/>
+            <point key="canvasLocation" x="-74" y="-249"/>
         </scene>
         <!--TOTAL-->
         <scene sceneID="8bX-45-6FC">
@@ -877,15 +1015,19 @@
             </objects>
             <point key="canvasLocation" x="103" y="1503"/>
         </scene>
-        <!--View Controller-->
+        <!--Income Line Chart View Controller-->
         <scene sceneID="eKZ-ei-65w">
             <objects>
-                <viewController id="ydG-qX-6lb" sceneMemberID="viewController">
+                <viewController id="ydG-qX-6lb" customClass="IncomeLineChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="juJ-fv-BqQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="423"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="422.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="darkGolder"/>
+                        <viewLayoutGuide key="safeArea" id="vqp-uU-jNv"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                     </view>
+                    <connections>
+                        <outlet property="lineChartView" destination="juJ-fv-BqQ" id="O8C-9c-gei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVI-Ge-gce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -894,16 +1036,21 @@
         <!--Total Expense-->
         <scene sceneID="eSs-3j-bfU">
             <objects>
-                <tableViewController id="i5Z-lo-Ib2" sceneMemberID="viewController">
+                <tableViewController id="i5Z-lo-Ib2" customClass="TotalExpenseListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QRk-Li-ReT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="darkGolder"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
+                        <color key="sectionIndexBackgroundColor" name="mtDarkGolder"/>
+                        <activityIndicatorView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="xXg-em-1dY">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <sections>
                             <tableViewSection id="8Ue-Bb-PPf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="368" id="lFh-Ni-3kN">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="368"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="368"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lFh-Ni-3kN" id="qsW-ZT-sdH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="368"/>
@@ -915,11 +1062,11 @@
                                                         <constraint firstAttribute="width" secondItem="1Bg-sv-oly" secondAttribute="height" multiplier="1:1" id="C3U-SW-iAI"/>
                                                     </constraints>
                                                     <connections>
-                                                        <segue destination="FRP-sB-1LR" kind="embed" id="DG0-rH-IsW"/>
+                                                        <segue destination="FRP-sB-1LR" kind="embed" identifier="toExpenseBarChartVC" id="DG0-rH-IsW"/>
                                                     </connections>
                                                 </containerView>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="1Bg-sv-oly" secondAttribute="trailing" id="8Zr-bU-Npr"/>
                                                 <constraint firstItem="1Bg-sv-oly" firstAttribute="leading" secondItem="qsW-ZT-sdH" secondAttribute="leading" id="NTE-BV-K5v"/>
@@ -927,27 +1074,27 @@
                                                 <constraint firstItem="1Bg-sv-oly" firstAttribute="top" secondItem="qsW-ZT-sdH" secondAttribute="top" id="ouv-Ji-Z17"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="Qbu-f6-TXN">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="bdR-9X-g8g" detailTextLabel="qRI-Vb-JsV" rowHeight="45" style="IBUITableViewCellStyleValue1" id="tb9-os-blU">
-                                        <rect key="frame" x="0.0" y="452" width="414" height="45"/>
+                                        <rect key="frame" x="0.0" y="496" width="414" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tb9-os-blU" id="Ywf-fb-1g2">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdR-9X-g8g" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdR-9X-g8g" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="13" width="39" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qRI-Vb-JsV" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qRI-Vb-JsV" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="13" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -955,25 +1102,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9wT-28-7m5" detailTextLabel="D9d-nZ-pkj" rowHeight="49" style="IBUITableViewCellStyleValue1" id="8h1-Ho-p7I">
-                                        <rect key="frame" x="0.0" y="497" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="541" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8h1-Ho-p7I" id="nVn-bY-IdN">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Utility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9wT-28-7m5" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Utility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9wT-28-7m5" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9d-nZ-pkj" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9d-nZ-pkj" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -981,25 +1128,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="mHt-ih-VeB" detailTextLabel="Iha-Ws-ZvD" rowHeight="49" style="IBUITableViewCellStyleValue1" id="qv9-l6-LnP">
-                                        <rect key="frame" x="0.0" y="546" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="590" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qv9-l6-LnP" id="puO-A1-ZJB">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mHt-ih-VeB" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mHt-ih-VeB" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="50" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iha-Ws-ZvD" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Iha-Ws-ZvD" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1007,25 +1154,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="r2n-S1-qLl" detailTextLabel="mEb-nm-uW6" rowHeight="49" style="IBUITableViewCellStyleValue1" id="Li7-Q6-YKD">
-                                        <rect key="frame" x="0.0" y="595" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="639" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Li7-Q6-YKD" id="a9t-1U-XQA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Grocery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r2n-S1-qLl" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Grocery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r2n-S1-qLl" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="61" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mEb-nm-uW6" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mEb-nm-uW6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1033,25 +1180,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="uM4-yS-FEb" detailTextLabel="wtI-su-GIG" rowHeight="49" style="IBUITableViewCellStyleValue1" id="V5Z-7s-j4m">
-                                        <rect key="frame" x="0.0" y="644" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="688" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5Z-7s-j4m" id="1sm-tM-VO7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shopping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uM4-yS-FEb" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Shopping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uM4-yS-FEb" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="73" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wtI-su-GIG" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wtI-su-GIG" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1059,25 +1206,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="rLh-b7-sEM" detailTextLabel="5kL-sJ-qv6" rowHeight="49" style="IBUITableViewCellStyleValue1" id="RD5-Nk-HnV">
-                                        <rect key="frame" x="0.0" y="693" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="737" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RD5-Nk-HnV" id="o8B-pY-CJU">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Entertainment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rLh-b7-sEM" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Entertainment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rLh-b7-sEM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="107.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5kL-sJ-qv6" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5kL-sJ-qv6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1085,25 +1232,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Nmc-kj-tDD" detailTextLabel="pmz-yL-PUt" rowHeight="49" style="IBUITableViewCellStyleValue1" id="H8P-fJ-awv">
-                                        <rect key="frame" x="0.0" y="742" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="786" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H8P-fJ-awv" id="tYk-ZR-rVp">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Transportation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nmc-kj-tDD" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Transportation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nmc-kj-tDD" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="111.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pmz-yL-PUt" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pmz-yL-PUt" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1111,25 +1258,25 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="z8v-7s-ftI" detailTextLabel="JfK-rS-1tT" rowHeight="49" style="IBUITableViewCellStyleValue1" id="913-wK-m3q">
-                                        <rect key="frame" x="0.0" y="791" width="414" height="49"/>
+                                        <rect key="frame" x="0.0" y="835" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="913-wK-m3q" id="GLt-kK-cYA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8v-7s-ftI" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Other" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="z8v-7s-ftI" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="15" width="43.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JfK-rS-1tT" customClass="MoneytorLabelBold" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JfK-rS-1tT" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="339" y="15" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1137,9 +1284,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" name="darkGolder"/>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="darkGolder"/>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1150,20 +1297,35 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Total Expense" id="ss0-TU-yMW"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="xXg-em-1dY" id="27x-xM-ADW"/>
+                        <outlet property="entertainmentLabel" destination="5kL-sJ-qv6" id="mfP-Gd-hGh"/>
+                        <outlet property="foodLabel" destination="qRI-Vb-JsV" id="t1p-dX-Uda"/>
+                        <outlet property="groceryLabel" destination="mEb-nm-uW6" id="0un-S6-dsd"/>
+                        <outlet property="healthLabel" destination="Iha-Ws-ZvD" id="KAU-5j-iQn"/>
+                        <outlet property="otherLabel" destination="JfK-rS-1tT" id="lAo-jr-Do4"/>
+                        <outlet property="shoppingLabel" destination="wtI-su-GIG" id="bIX-k9-o6H"/>
+                        <outlet property="transportationLabel" destination="pmz-yL-PUt" id="c5M-6M-mOB"/>
+                        <outlet property="utilityLabel" destination="D9d-nZ-pkj" id="g6W-rP-YsK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ll5-kQ-UhJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2302.898550724638" y="-981.02678571428567"/>
         </scene>
-        <!--View Controller-->
+        <!--Expense Bar Chart View Controller-->
         <scene sceneID="WHM-zq-L04">
             <objects>
-                <viewController id="FRP-sB-1LR" sceneMemberID="viewController">
+                <viewController id="FRP-sB-1LR" customClass="ExpenseBarChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6ld-rh-l7I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="EuW-GE-G86"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                     </view>
+                    <connections>
+                        <outlet property="barChartView" destination="6ld-rh-l7I" id="Src-Pi-L7W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCM-Qg-Ch2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1172,11 +1334,12 @@
         <!--Add Expense-->
         <scene sceneID="hTT-Jw-bwP">
             <objects>
-                <tableViewController id="9tl-Xm-gpl" sceneMemberID="viewController">
+                <tableViewController id="9tl-Xm-gpl" customClass="ExpenseDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vc7-zx-9I6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
+                        <color key="sectionIndexBackgroundColor" name="mtDarkGolder"/>
                         <sections>
                             <tableViewSection headerTitle="Expense Name :" id="0d7-FW-PYi">
                                 <cells>
@@ -1193,6 +1356,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="1Dy-SI-ipE" secondAttribute="trailing" constant="20" id="5Jt-ej-TW4"/>
                                                 <constraint firstItem="1Dy-SI-ipE" firstAttribute="top" secondItem="eJ0-ye-zNO" secondAttribute="top" constant="10" id="6j7-Yc-kJy"/>
@@ -1200,6 +1364,7 @@
                                                 <constraint firstItem="1Dy-SI-ipE" firstAttribute="leading" secondItem="eJ0-ye-zNO" secondAttribute="leading" constant="20" id="qTp-vb-lxA"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1218,6 +1383,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="jLO-8T-h5x" firstAttribute="top" secondItem="7r7-3j-XEM" secondAttribute="top" constant="10" id="5rL-no-e7H"/>
                                                 <constraint firstAttribute="trailing" secondItem="jLO-8T-h5x" secondAttribute="trailing" constant="20" id="J05-th-eyp"/>
@@ -1225,6 +1391,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="jLO-8T-h5x" secondAttribute="bottom" constant="10" id="gBx-Ab-PjU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1237,10 +1404,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Io-jPu">
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Io-jPu" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="112"/>
                                                 </pickerView>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="Ljx-Io-jPu" firstAttribute="leading" secondItem="urA-B8-nVw" secondAttribute="leading" constant="20" id="0tK-gx-tu6"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ljx-Io-jPu" secondAttribute="trailing" constant="20" id="EH6-Px-fp0"/>
@@ -1248,6 +1416,7 @@
                                                 <constraint firstItem="Ljx-Io-jPu" firstAttribute="top" secondItem="urA-B8-nVw" secondAttribute="top" constant="10" id="kGh-af-pF3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1260,10 +1429,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="105"/>
                                                 </datePicker>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="3nX-Q4-gwv"/>
                                                 <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="Z4k-OG-FfF"/>
@@ -1271,6 +1441,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="20" id="wQv-qj-HuO"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1286,8 +1457,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOD-Tq-9p1" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="24"/>
                                                     <state key="normal" title="Save Expense Data"/>
+                                                    <connections>
+                                                        <action selector="saveExpenseButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="Tbn-cv-gxy"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="sOD-Tq-9p1" secondAttribute="trailing" constant="20" id="81o-Uj-ULw"/>
                                                 <constraint firstItem="sOD-Tq-9p1" firstAttribute="leading" secondItem="5UP-QF-ZpM" secondAttribute="leading" constant="20" id="Etx-9d-t9n"/>
@@ -1295,6 +1470,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="sOD-Tq-9p1" secondAttribute="bottom" constant="10" id="Jqa-sU-lhY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL">
                                         <rect key="frame" x="0.0" y="674.5" width="414" height="43.5"/>
@@ -1306,8 +1482,12 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhG-Gs-bXI" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="10" width="374" height="24"/>
                                                     <state key="normal" title="Scan Expense Data"/>
+                                                    <connections>
+                                                        <action selector="scannerButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="cf1-Kt-Hij"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="qhG-Gs-bXI" firstAttribute="top" secondItem="HUP-5R-rt7" secondAttribute="top" constant="10" id="7ID-FB-v3C"/>
                                                 <constraint firstAttribute="trailing" secondItem="qhG-Gs-bXI" secondAttribute="trailing" constant="20" id="Vai-EN-fQ5"/>
@@ -1315,6 +1495,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="qhG-Gs-bXI" secondAttribute="bottom" constant="10" id="ixZ-So-gXx"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1326,14 +1507,24 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Expense" id="JUs-I0-L5e">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="save" id="nkv-DZ-LHX"/>
+                            <barButtonItem systemItem="save" id="nkv-DZ-LHX">
+                                <connections>
+                                    <action selector="saveButtonTapped:" destination="9tl-Xm-gpl" id="Tqy-95-Wd4"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="camera" id="Rz4-Pt-7XW">
                                 <connections>
-                                    <segue destination="rBE-mo-DEP" kind="show" id="ZkA-Ta-wMK"/>
+                                    <segue destination="rBE-mo-DEP" kind="show" identifier="toScannerVC" id="ZkA-Ta-wMK"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="expenseAmountTextField" destination="jLO-8T-h5x" id="2mV-IG-lJW"/>
+                        <outlet property="expenseCategoryPicker" destination="Ljx-Io-jPu" id="rDJ-QC-KM0"/>
+                        <outlet property="expenseDatePicker" destination="aAK-eW-UTW" id="so5-jR-wwv"/>
+                        <outlet property="expenseNameTextField" destination="1Dy-SI-ipE" id="6Wj-YM-kVp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLl-lb-K9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1342,16 +1533,20 @@
         <!--Scan Receipt-->
         <scene sceneID="FEL-94-0BT">
             <objects>
-                <viewController id="rBE-mo-DEP" sceneMemberID="viewController">
+                <viewController id="rBE-mo-DEP" customClass="ExpenseScannerViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I02-pv-WKD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="asW-Nx-Yng"/>
-                        <color key="backgroundColor" name="golderBG"/>
+                        <color key="backgroundColor" name="mtDarkGolder"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Scan Receipt" id="4HY-3J-5wC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zUi-BA-WqC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zUi-BA-WqC">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="rBE-mo-DEP" id="Kad-gn-O4j"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -1361,6 +1556,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
+        <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
         <image name="coinBg" width="360" height="225"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="logo" width="104" height="109"/>
@@ -1374,17 +1571,11 @@
         <namedColor name="darkGolder">
             <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="darkYellow">
+        <namedColor name="mtDarkGolder">
+            <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtDarkYellow">
             <color red="0.97254901960784312" green="0.86274509803921573" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="golderBG">
-            <color red="1" green="0.89411764705882357" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="lightYellow">
-            <color red="0.98431372549019602" green="0.93333333333333335" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

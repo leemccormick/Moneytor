@@ -20,7 +20,9 @@ class MoneytorTextField: UITextField {
         self.addCornerRadius()
         setupPlaceholderText()
         self.textColor = .mtTextDarkBrown
-        self.backgroundColor = .mtLightYellow
+        self.backgroundColor = .mtDarkOrage
+        self.layer.borderWidth = 2.5
+        self.layer.borderColor = UIColor.mtLightYellow.cgColor
         self.layer.masksToBounds = true //Add masksToBounds to invisible to the past we don't need to see.
         
     }
