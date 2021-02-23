@@ -30,13 +30,13 @@ class MoneytorTextField: UITextField {
     func setupPlaceholderText() {
         let currentPlaceholder = self.placeholder ?? "" //?? because placeholder is an optional
         self.attributedPlaceholder = NSAttributedString(string: currentPlaceholder, attributes: [
-            NSAttributedString.Key.foregroundColor : UIColor.mtTextLightBrown,
+            NSAttributedString.Key.foregroundColor : UIColor.mtWhiteText,
             NSAttributedString.Key.font : UIFont(name: FontNames.textMoneytor, size: 16)!
         ])
     }
     
     func updateFont(){
-        guard let size = self.font?.pointSize else {return} //Get the size that already exist in the textFiled
-        self.font = UIFont(name: FontNames.textMoneytor, size: size)
+//        guard let size = self.font?.pointSize else {return} //Get the size that already exist in the textFiled
+        self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
 }

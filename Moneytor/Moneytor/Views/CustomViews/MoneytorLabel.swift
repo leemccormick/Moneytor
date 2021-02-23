@@ -21,12 +21,20 @@ class MoneytorLabel: UILabel {
     }
 }
 
-class MoneytorGoodLetterLabel: MoneytorLabel {
+class MoneytorGoodLetterLabel: UILabel {
     override func awakeFromNib() {
         super.awakeFromNib() //.awakeFromNib() from HypeLabel
        // super.updateFont(fontName: FontNames.latoBold)
-        updateFont(fontName: FontNames.textMoneytorGoodLetter)
+       // updateFontGoodLetter(fontName: String)
+        
+        self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+
     }
+    
+//    func updateFontGoodLetter(fontName: String) {
+//    ///let size = self.font.pointSize
+//        self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+//    }
 }
 
 class MoneytorTitleFontWhiteLabel: UILabel {
@@ -41,6 +49,16 @@ class MoneytorTitleFontWhiteLabel: UILabel {
         let size = self.font.pointSize
         self.font = UIFont(name: fontName, size: size)
     }
+}
+
+class MoneytorTitleFontBrownLabel: UILabel {
+    override  func awakeFromNib() {
+        super.awakeFromNib()
+        let size = self.font.pointSize
+        self.font = UIFont(name: FontNames.textMoneytorMoneyFont, size: size)
+        self.textColor = .mtTextDarkBrown
+    }
+  
 }
 
 

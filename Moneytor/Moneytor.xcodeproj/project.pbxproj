@@ -191,10 +191,10 @@
 		36AFBC9025E41C7E00B559DB /* Moneytor */ = {
 			isa = PBXGroup;
 			children = (
-				36682D0025E438190075C03D /* Helpers&Extensions */,
-				36AFBCB525E4256000B559DB /* ModelControllers */,
 				36AFBCB425E4254100B559DB /* Models */,
 				36AFBCB125E4250C00B559DB /* Views */,
+				36AFBCB525E4256000B559DB /* Controllers */,
+				36682D0025E438190075C03D /* Helpers&Extensions */,
 				36AFBCAE25E4237700B559DB /* Resources */,
 			);
 			path = Moneytor;
@@ -248,13 +248,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		36AFBCB525E4256000B559DB /* ModelControllers */ = {
+		36AFBCB525E4256000B559DB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				36AFBCB725E4257E00B559DB /* ModelControllers */,
 				36AFBCB625E4256A00B559DB /* ViewControllers */,
 			);
-			path = ModelControllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		36AFBCB625E4256A00B559DB /* ViewControllers */ = {

@@ -21,3 +21,18 @@ class MoneytorButton: UIButton {
         self.titleLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 22)
     }
 }
+
+class MoneytorTotalButton: UIButton {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    func setupView() {
+       // self.backgroundColor = .mtBgBrownHeader
+        self.setTitleColor(.mtTextDarkBrown, for: .normal)
+        self.addCornerRadius() //from extension UIView
+        self.titleLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+    }
+}

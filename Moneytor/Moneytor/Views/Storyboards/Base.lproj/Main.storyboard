@@ -26,9 +26,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2IO-cL-0MF" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the income name.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2IO-cL-0MF" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="354" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -36,8 +36,8 @@
                                             <constraints>
                                                 <constraint firstItem="2IO-cL-0MF" firstAttribute="top" secondItem="Zt0-hp-tv6" secondAttribute="top" constant="10" id="Pia-bR-wZS"/>
                                                 <constraint firstAttribute="bottom" secondItem="2IO-cL-0MF" secondAttribute="bottom" constant="10" id="p8y-zh-tWW"/>
-                                                <constraint firstItem="2IO-cL-0MF" firstAttribute="leading" secondItem="Zt0-hp-tv6" secondAttribute="leading" constant="20" id="ttP-Ne-nYE"/>
-                                                <constraint firstAttribute="trailing" secondItem="2IO-cL-0MF" secondAttribute="trailing" constant="20" id="wY5-nd-crT"/>
+                                                <constraint firstItem="2IO-cL-0MF" firstAttribute="leading" secondItem="Zt0-hp-tv6" secondAttribute="leading" constant="30" id="ttP-Ne-nYE"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2IO-cL-0MF" secondAttribute="trailing" constant="30" id="wY5-nd-crT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -53,16 +53,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPE-mn-xf6" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="42"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the income amount here.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPE-mn-xf6" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="354" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="sPE-mn-xf6" secondAttribute="trailing" constant="20" id="H2r-NS-z1x"/>
-                                                <constraint firstItem="sPE-mn-xf6" firstAttribute="leading" secondItem="Ebc-O9-KL0" secondAttribute="leading" constant="20" id="Pk5-Al-NLX"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="sPE-mn-xf6" secondAttribute="trailing" constant="30" id="H2r-NS-z1x"/>
+                                                <constraint firstItem="sPE-mn-xf6" firstAttribute="leading" secondItem="Ebc-O9-KL0" secondAttribute="leading" constant="30" id="Pk5-Al-NLX"/>
                                                 <constraint firstItem="sPE-mn-xf6" firstAttribute="top" secondItem="Ebc-O9-KL0" secondAttribute="top" constant="10" id="qfm-zW-jNU"/>
                                                 <constraint firstAttribute="bottom" secondItem="sPE-mn-xf6" secondAttribute="bottom" constant="10" id="wNf-2A-ord"/>
                                             </constraints>
@@ -81,15 +81,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SB6-j4-3yf" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="112"/>
+                                                    <rect key="frame" x="30" y="10" width="354" height="112"/>
                                                 </pickerView>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="SB6-j4-3yf" firstAttribute="leading" secondItem="SGA-m0-YrV" secondAttribute="leading" constant="20" id="2oA-xM-4kT"/>
+                                                <constraint firstItem="SB6-j4-3yf" firstAttribute="leading" secondItem="SGA-m0-YrV" secondAttribute="leading" constant="30" id="2oA-xM-4kT"/>
                                                 <constraint firstItem="SB6-j4-3yf" firstAttribute="top" secondItem="SGA-m0-YrV" secondAttribute="top" constant="10" id="4iP-F9-oI9"/>
                                                 <constraint firstAttribute="bottom" secondItem="SB6-j4-3yf" secondAttribute="bottom" constant="10" id="FVP-YW-rgp"/>
-                                                <constraint firstAttribute="trailing" secondItem="SB6-j4-3yf" secondAttribute="trailing" constant="20" id="U4J-hp-u9Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="SB6-j4-3yf" secondAttribute="trailing" constant="30" id="U4J-hp-u9Q"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -106,15 +106,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="105"/>
+                                                    <rect key="frame" x="30" y="10" width="354" height="105"/>
                                                 </datePicker>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="ov6-K4-Idj"/>
                                                 <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="yCz-6G-bEK"/>
-                                                <constraint firstAttribute="trailing" secondItem="Lyb-ou-Rs3" secondAttribute="trailing" constant="20" id="ylj-nb-3R0"/>
-                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="leading" secondItem="2KW-Db-ovK" secondAttribute="leading" constant="20" id="z5b-Q9-TFT"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lyb-ou-Rs3" secondAttribute="trailing" constant="30" id="ylj-nb-3R0"/>
+                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="leading" secondItem="2KW-Db-ovK" secondAttribute="leading" constant="30" id="z5b-Q9-TFT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -131,7 +131,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9R-qK-4Hl" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="24"/>
+                                                    <rect key="frame" x="40" y="10" width="334" height="24"/>
                                                     <state key="normal" title="Save Income Data"/>
                                                     <connections>
                                                         <action selector="incomeSaveButtonTapped:" destination="9Nz-0l-ico" eventType="touchUpInside" id="l9R-6h-5r2"/>
@@ -141,8 +141,8 @@
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="k9R-qK-4Hl" firstAttribute="top" secondItem="9X7-f7-f4c" secondAttribute="top" constant="10" id="0tn-5y-nM5"/>
-                                                <constraint firstAttribute="trailing" secondItem="k9R-qK-4Hl" secondAttribute="trailing" constant="20" id="SXb-ho-yFu"/>
-                                                <constraint firstItem="k9R-qK-4Hl" firstAttribute="leading" secondItem="9X7-f7-f4c" secondAttribute="leading" constant="20" id="WZ7-Hx-7LG"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="k9R-qK-4Hl" secondAttribute="trailing" constant="40" id="SXb-ho-yFu"/>
+                                                <constraint firstItem="k9R-qK-4Hl" firstAttribute="leading" secondItem="9X7-f7-f4c" secondAttribute="leading" constant="40" id="WZ7-Hx-7LG"/>
                                                 <constraint firstAttribute="bottom" secondItem="k9R-qK-4Hl" secondAttribute="bottom" constant="10" id="p7n-nw-JJX"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -301,7 +301,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="105" y="0.0" width="268" height="26.5"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
@@ -321,7 +321,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="105" y="0.0" width="268" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
@@ -346,7 +346,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
                                                                 <rect key="frame" x="105" y="0.0" width="268" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
@@ -635,23 +635,31 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-vC-qW2">
                                 <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                             </mapView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
-                                <rect key="frame" x="87" y="357" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
-                                        <rect key="frame" x="110" y="54" width="20" height="20"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="703"/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="YrB-In-r1O" firstAttribute="top" secondItem="A4h-qJ-EC5" secondAttribute="top" id="55l-up-9XZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="YrB-In-r1O" secondAttribute="trailing" id="TBw-NC-PJm"/>
+                                    <constraint firstItem="YrB-In-r1O" firstAttribute="leading" secondItem="A4h-qJ-EC5" secondAttribute="leading" id="ZkO-1M-o56"/>
+                                    <constraint firstAttribute="bottom" secondItem="YrB-In-r1O" secondAttribute="bottom" id="gYK-FO-UhU"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PmB-I2-UDe"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
                             <constraint firstItem="EoZ-vC-qW2" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="AUk-Gw-NDL"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="A4h-qJ-EC5" secondAttribute="bottom" id="Qfi-eh-RVQ"/>
                             <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="EoZ-vC-qW2" secondAttribute="bottom" id="SVA-am-xg4"/>
                             <constraint firstItem="EoZ-vC-qW2" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="WKK-vO-Iao"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="A4h-qJ-EC5" secondAttribute="trailing" id="ez7-B3-cO3"/>
+                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="itE-BA-gfS"/>
+                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="mQV-ow-yzj"/>
                             <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="EoZ-vC-qW2" secondAttribute="trailing" id="ryf-Id-ggM"/>
                         </constraints>
                     </view>
@@ -684,49 +692,37 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="W7E-22-C7v">
-                                <rect key="frame" x="20.5" y="84" width="373" height="198"/>
+                                <rect key="frame" x="20.5" y="54" width="373" height="179"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXPENSES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-e4-Mfp" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="373" height="52"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="EXPENSES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="26" translatesAutoresizingMaskIntoConstraints="NO" id="Fan-e4-Mfp" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="111"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="52"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONEYTOR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="29" translatesAutoresizingMaskIntoConstraints="NO" id="cT7-PI-rgc" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="62" width="373" height="58"/>
+                                        <rect key="frame" x="0.0" y="121" width="373" height="58"/>
                                         <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="58"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in or Sing up" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ayc-ST-r0n" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="373" height="30"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="30"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to moniter your expenses!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="YT4-zI-sRg" customClass="MoneytorTitleFontWhiteLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="170" width="373" height="28"/>
-                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="28"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-H5-hEU">
-                                <rect key="frame" x="20.5" y="312" width="373" height="210"/>
+                                <rect key="frame" x="20.5" y="253" width="373" height="269"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="769-1I-J1z">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="210"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="269"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRI-Ie-hKG" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="72" height="129.5"/>
                                                 <state key="normal" title="Log In"/>
                                                 <connections>
                                                     <action selector="loginButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="gju-Rg-L1S"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsz-Aj-Vbz" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="110" width="72" height="100"/>
+                                                <rect key="frame" x="0.0" y="139.5" width="72" height="129.5"/>
                                                 <state key="normal" title="Sign Up"/>
                                                 <connections>
                                                     <action selector="signUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="m0i-pV-AVT"/>
@@ -735,30 +731,30 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MN3-Yo-oQv">
-                                        <rect key="frame" x="82" y="0.0" width="291" height="210"/>
+                                        <rect key="frame" x="82" y="0.0" width="291" height="269"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your First Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-CI-tLC" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="291" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="291" height="46"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your Last Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cEK-zr-Qi2" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44" width="291" height="34"/>
+                                                <rect key="frame" x="0.0" y="56" width="291" height="45.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJC-l4-OHS" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="88" width="291" height="34"/>
+                                                <rect key="frame" x="0.0" y="111.5" width="291" height="46"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V7O-Eg-h1y" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="132" width="291" height="34"/>
+                                                <rect key="frame" x="0.0" y="167.5" width="291" height="45.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-xQ-GST" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="176" width="291" height="34"/>
+                                                <rect key="frame" x="0.0" y="223" width="291" height="46"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -767,10 +763,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-Aq-OKa" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                <rect key="frame" x="207" y="552" width="186.5" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="4SL-k6-G6n"/>
-                                </constraints>
+                                <rect key="frame" x="207" y="542" width="186.5" height="30"/>
                                 <state key="normal" title="Sign Me Up!"/>
                                 <connections>
                                     <action selector="signMeUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="JOO-lV-U8S"/>
@@ -778,65 +771,70 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BJo-CQ-ndd">
-                                <rect key="frame" x="20.5" y="632" width="373" height="150"/>
+                                <rect key="frame" x="20.5" y="602" width="373" height="134.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xXu-di-9Tg">
-                                        <rect key="frame" x="0.0" y="0.0" width="121" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="134.5"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="9js-TZ-hcq">
-                                        <rect key="frame" x="126" y="0.0" width="121" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="cT2-JA-hfA"/>
-                                        </constraints>
+                                        <rect key="frame" x="126" y="0.0" width="121" height="134.5"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="T1e-oP-4S1">
-                                        <rect key="frame" x="252" y="0.0" width="121" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="l4R-Wr-bgb"/>
-                                        </constraints>
+                                        <rect key="frame" x="252" y="0.0" width="121" height="134.5"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2be-9I-DIC">
-                                <rect key="frame" x="20" y="802" width="374" height="79"/>
+                                <rect key="frame" x="20" y="602" width="374" height="134.5"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EEI-Wb-zGD">
-                                        <rect key="frame" x="8" y="8" width="358" height="63"/>
+                                        <rect key="frame" x="8" y="8" width="358" height="118.5"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="leading" secondItem="2be-9I-DIC" secondAttribute="leading" constant="8" id="3BY-Oc-civ"/>
-                                    <constraint firstAttribute="trailing" secondItem="EEI-Wb-zGD" secondAttribute="trailing" constant="8" id="INR-f7-gk7"/>
-                                    <constraint firstAttribute="bottom" secondItem="EEI-Wb-zGD" secondAttribute="bottom" constant="8" id="Zb1-Ju-ucG"/>
-                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="top" secondItem="2be-9I-DIC" secondAttribute="top" constant="8" id="zZh-hm-T33"/>
+                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="top" secondItem="2be-9I-DIC" secondAttribute="top" constant="8" id="Ev8-7N-J0h"/>
+                                    <constraint firstAttribute="trailing" secondItem="EEI-Wb-zGD" secondAttribute="trailing" constant="8" id="VAv-eA-HUL"/>
+                                    <constraint firstItem="EEI-Wb-zGD" firstAttribute="leading" secondItem="2be-9I-DIC" secondAttribute="leading" constant="8" id="Wvw-Eh-eDo"/>
+                                    <constraint firstAttribute="bottom" secondItem="EEI-Wb-zGD" secondAttribute="bottom" constant="8" id="y1K-h2-blq"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In or Sign Up !!!                  To monitor your money!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-WA-8Q1" customClass="MoneytorTitleFontBrownLabel" customModule="Moneytor" customModuleProvider="target">
+                                <rect key="frame" x="20.5" y="756.5" width="373" height="64.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3JR-69-x6d"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Go5-oO-nQA" secondAttribute="bottom" id="2kd-wb-uRM"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" constant="20" id="3uN-oq-oWX"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="4Gu-S1-3sv"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="4fi-28-lMW"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="VGC-H5-hEU" secondAttribute="bottom" constant="30" id="4ur-v1-UXX"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="9cK-fJ-ucK"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="width" secondItem="VGC-H5-hEU" secondAttribute="width" multiplier="0.5" id="DIF-ag-fGS"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="30" id="Jxh-uP-jnv"/>
-                            <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" id="PAv-4l-5Jn"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="top" secondItem="3JR-69-x6d" secondAttribute="top" constant="40" id="R8H-us-Tt5"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="top" secondItem="BJo-CQ-ndd" secondAttribute="bottom" constant="20" id="XCp-O0-R2T"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="ZIi-eA-kv8"/>
-                            <constraint firstAttribute="bottom" secondItem="2be-9I-DIC" secondAttribute="bottom" constant="15" id="Zrw-dz-nPI"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="bottom" constant="-344" id="cLM-zF-caY"/>
-                            <constraint firstItem="Go5-oO-nQA" firstAttribute="trailing" secondItem="3JR-69-x6d" secondAttribute="trailing" id="ck0-WQ-on2"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3JR-69-x6d" secondAttribute="leading" symbolic="YES" id="dhq-FT-xB4"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="top" secondItem="FP0-Aq-OKa" secondAttribute="bottom" constant="30" id="e9C-31-Btn"/>
-                            <constraint firstItem="3JR-69-x6d" firstAttribute="trailing" secondItem="2be-9I-DIC" secondAttribute="trailing" constant="20" id="l62-72-TrQ"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="trailing" secondItem="VGC-H5-hEU" secondAttribute="trailing" id="reZ-Ql-JRa"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="tA6-8B-LjT"/>
-                            <constraint firstItem="Go5-oO-nQA" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="top" id="yMZ-Ho-vZG"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="ykX-9M-1sA"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="height" secondItem="W7E-22-C7v" secondAttribute="height" multiplier="1.5" id="2wl-uF-LjP"/>
+                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3JR-69-x6d" secondAttribute="leading" symbolic="YES" id="3kb-da-oDi"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="W7E-22-C7v" secondAttribute="width" id="3zb-WO-qhA"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="height" secondItem="BJo-CQ-ndd" secondAttribute="height" id="6Ow-G3-RdB"/>
+                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="width" secondItem="VGC-H5-hEU" secondAttribute="width" multiplier="0.5" id="8rx-P3-kcX"/>
+                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="trailing" secondItem="VGC-H5-hEU" secondAttribute="trailing" id="EEo-xy-0Ns"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="20" id="Ekg-Fn-IYy"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="centerY" secondItem="BJo-CQ-ndd" secondAttribute="centerY" id="HOh-YF-gcS"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="top" secondItem="FP0-Aq-OKa" secondAttribute="bottom" constant="30" id="JDv-5r-C0i"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="Jba-y7-4bB"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.2" id="MDq-DK-68A"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="width" secondItem="BJo-CQ-ndd" secondAttribute="width" multiplier="1.00268" id="Q80-Cv-q0h"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="QGB-8N-U0y"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="centerX" secondItem="BJo-CQ-ndd" secondAttribute="centerX" id="QNr-po-ZMX"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="Sqx-7C-JN6"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="centerX" secondItem="W7E-22-C7v" secondAttribute="centerX" id="aG2-3T-4PW"/>
+                            <constraint firstAttribute="trailing" secondItem="Go5-oO-nQA" secondAttribute="trailing" id="aVK-Vn-dRS"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="top" secondItem="3JR-69-x6d" secondAttribute="top" constant="10" id="b2Y-aW-V1B"/>
+                            <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="FeD-Hm-1Cc" secondAttribute="leading" id="i8N-H7-aSe"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="top" secondItem="BJo-CQ-ndd" secondAttribute="bottom" constant="20" id="jkZ-rE-eOd"/>
+                            <constraint firstAttribute="bottom" secondItem="Go5-oO-nQA" secondAttribute="bottom" id="kZK-K7-Ekd"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="centerX" secondItem="VGC-H5-hEU" secondAttribute="centerX" id="qwk-bu-Nxb"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.15" id="r8z-WY-yl4"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="t2R-mG-7qo"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="width" secondItem="VGC-H5-hEU" secondAttribute="width" id="vgs-1e-9cl"/>
+                            <constraint firstItem="Go5-oO-nQA" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="top" id="wGq-Ph-l3X"/>
+                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="VGC-H5-hEU" secondAttribute="bottom" constant="20" id="y9g-RE-t2m"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1350,18 +1348,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-SI-ipE" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="40"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter expense name here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-SI-ipE" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="354" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="1Dy-SI-ipE" secondAttribute="trailing" constant="20" id="5Jt-ej-TW4"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="1Dy-SI-ipE" secondAttribute="trailing" constant="30" id="5Jt-ej-TW4"/>
                                                 <constraint firstItem="1Dy-SI-ipE" firstAttribute="top" secondItem="eJ0-ye-zNO" secondAttribute="top" constant="10" id="6j7-Yc-kJy"/>
                                                 <constraint firstAttribute="bottom" secondItem="1Dy-SI-ipE" secondAttribute="bottom" constant="10" id="9RG-pi-qeH"/>
-                                                <constraint firstItem="1Dy-SI-ipE" firstAttribute="leading" secondItem="eJ0-ye-zNO" secondAttribute="leading" constant="20" id="qTp-vb-lxA"/>
+                                                <constraint firstItem="1Dy-SI-ipE" firstAttribute="leading" secondItem="eJ0-ye-zNO" secondAttribute="leading" constant="30" id="qTp-vb-lxA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1377,17 +1375,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jLO-8T-h5x" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="42"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter expenses amount here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jLO-8T-h5x" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="354" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="jLO-8T-h5x" firstAttribute="top" secondItem="7r7-3j-XEM" secondAttribute="top" constant="10" id="5rL-no-e7H"/>
-                                                <constraint firstAttribute="trailing" secondItem="jLO-8T-h5x" secondAttribute="trailing" constant="20" id="J05-th-eyp"/>
-                                                <constraint firstItem="jLO-8T-h5x" firstAttribute="leading" secondItem="7r7-3j-XEM" secondAttribute="leading" constant="20" id="cKw-VY-dRE"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="jLO-8T-h5x" secondAttribute="trailing" constant="30" id="J05-th-eyp"/>
+                                                <constraint firstItem="jLO-8T-h5x" firstAttribute="leading" secondItem="7r7-3j-XEM" secondAttribute="leading" constant="30" id="cKw-VY-dRE"/>
                                                 <constraint firstAttribute="bottom" secondItem="jLO-8T-h5x" secondAttribute="bottom" constant="10" id="gBx-Ab-PjU"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1405,13 +1403,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Io-jPu" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="112"/>
+                                                    <rect key="frame" x="30" y="10" width="354" height="112"/>
                                                 </pickerView>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="Ljx-Io-jPu" firstAttribute="leading" secondItem="urA-B8-nVw" secondAttribute="leading" constant="20" id="0tK-gx-tu6"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ljx-Io-jPu" secondAttribute="trailing" constant="20" id="EH6-Px-fp0"/>
+                                                <constraint firstItem="Ljx-Io-jPu" firstAttribute="leading" secondItem="urA-B8-nVw" secondAttribute="leading" constant="30" id="0tK-gx-tu6"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ljx-Io-jPu" secondAttribute="trailing" constant="30" id="EH6-Px-fp0"/>
                                                 <constraint firstAttribute="bottom" secondItem="Ljx-Io-jPu" secondAttribute="bottom" constant="10" id="GIU-j4-fAA"/>
                                                 <constraint firstItem="Ljx-Io-jPu" firstAttribute="top" secondItem="urA-B8-nVw" secondAttribute="top" constant="10" id="kGh-af-pF3"/>
                                             </constraints>
@@ -1430,15 +1428,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="105"/>
+                                                    <rect key="frame" x="30" y="10" width="354" height="105"/>
                                                 </datePicker>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="3nX-Q4-gwv"/>
                                                 <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="Z4k-OG-FfF"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="20" id="jGj-28-XXA"/>
-                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="20" id="wQv-qj-HuO"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="jGj-28-XXA"/>
+                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="wQv-qj-HuO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1455,7 +1453,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOD-Tq-9p1" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="24"/>
+                                                    <rect key="frame" x="40" y="10" width="334" height="24"/>
                                                     <state key="normal" title="Save Expense Data"/>
                                                     <connections>
                                                         <action selector="saveExpenseButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="Tbn-cv-gxy"/>
@@ -1464,8 +1462,8 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="sOD-Tq-9p1" secondAttribute="trailing" constant="20" id="81o-Uj-ULw"/>
-                                                <constraint firstItem="sOD-Tq-9p1" firstAttribute="leading" secondItem="5UP-QF-ZpM" secondAttribute="leading" constant="20" id="Etx-9d-t9n"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="sOD-Tq-9p1" secondAttribute="trailing" constant="40" id="81o-Uj-ULw"/>
+                                                <constraint firstItem="sOD-Tq-9p1" firstAttribute="leading" secondItem="5UP-QF-ZpM" secondAttribute="leading" constant="40" id="Etx-9d-t9n"/>
                                                 <constraint firstItem="sOD-Tq-9p1" firstAttribute="top" secondItem="5UP-QF-ZpM" secondAttribute="top" constant="10" id="Gah-Dw-gfu"/>
                                                 <constraint firstAttribute="bottom" secondItem="sOD-Tq-9p1" secondAttribute="bottom" constant="10" id="Jqa-sU-lhY"/>
                                             </constraints>
@@ -1480,7 +1478,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhG-Gs-bXI" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="10" width="374" height="24"/>
+                                                    <rect key="frame" x="40" y="10" width="334" height="24"/>
                                                     <state key="normal" title="Scan Expense Data"/>
                                                     <connections>
                                                         <action selector="scannerButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="cf1-Kt-Hij"/>
@@ -1490,8 +1488,8 @@
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
                                                 <constraint firstItem="qhG-Gs-bXI" firstAttribute="top" secondItem="HUP-5R-rt7" secondAttribute="top" constant="10" id="7ID-FB-v3C"/>
-                                                <constraint firstAttribute="trailing" secondItem="qhG-Gs-bXI" secondAttribute="trailing" constant="20" id="Vai-EN-fQ5"/>
-                                                <constraint firstItem="qhG-Gs-bXI" firstAttribute="leading" secondItem="HUP-5R-rt7" secondAttribute="leading" constant="20" id="hz2-rT-an5"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="qhG-Gs-bXI" secondAttribute="trailing" constant="40" id="Vai-EN-fQ5"/>
+                                                <constraint firstItem="qhG-Gs-bXI" firstAttribute="leading" secondItem="HUP-5R-rt7" secondAttribute="leading" constant="40" id="hz2-rT-an5"/>
                                                 <constraint firstAttribute="bottom" secondItem="qhG-Gs-bXI" secondAttribute="bottom" constant="10" id="ixZ-So-gXx"/>
                                             </constraints>
                                         </tableViewCellContentView>
