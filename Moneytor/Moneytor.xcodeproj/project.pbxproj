@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36682CF225E42FF00075C03D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF125E42FF00075C03D /* Colors.xcassets */; };
+		36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */; };
+		36682CFC25E4376D0075C03D /* Champagne & Limousines Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */; };
+		36682CFD25E4376D0075C03D /* Champagne & Limousines Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF925E4376D0075C03D /* Champagne & Limousines Bold.ttf */; };
+		36682CFE25E4376D0075C03D /* Champagne & Limousines.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CFA25E4376D0075C03D /* Champagne & Limousines.ttf */; };
+		36682D0325E438490075C03D /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36682D0225E438490075C03D /* StyleGuide.swift */; };
+		36682D0725E43B690075C03D /* MoneytorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36682D0625E43B690075C03D /* MoneytorLabel.swift */; };
+		36682D0B25E43CAD0075C03D /* MoneytorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36682D0A25E43CAD0075C03D /* MoneytorButton.swift */; };
+		36682D0E25E43D830075C03D /* MoneytorTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36682D0D25E43D830075C03D /* MoneytorTextField.swift */; };
+		36682D1125E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36682D1025E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift */; };
 		36AFBC9225E41C7E00B559DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AFBC9125E41C7E00B559DB /* AppDelegate.swift */; };
 		36AFBC9425E41C7E00B559DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AFBC9325E41C7E00B559DB /* SceneDelegate.swift */; };
 		36AFBC9925E41C7E00B559DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36AFBC9725E41C7E00B559DB /* Main.storyboard */; };
@@ -17,6 +27,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36682CF125E42FF00075C03D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold Italic.ttf"; sourceTree = "<group>"; };
+		36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Italic.ttf"; sourceTree = "<group>"; };
+		36682CF925E4376D0075C03D /* Champagne & Limousines Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold.ttf"; sourceTree = "<group>"; };
+		36682CFA25E4376D0075C03D /* Champagne & Limousines.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines.ttf"; sourceTree = "<group>"; };
+		36682D0225E438490075C03D /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
+		36682D0625E43B690075C03D /* MoneytorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorLabel.swift; sourceTree = "<group>"; };
+		36682D0A25E43CAD0075C03D /* MoneytorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorButton.swift; sourceTree = "<group>"; };
+		36682D0D25E43D830075C03D /* MoneytorTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorTextField.swift; sourceTree = "<group>"; };
+		36682D1025E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorNavigationAndTabBar.swift; sourceTree = "<group>"; };
+		36A4525025E4B0200099FC52 /* Money Money Plus.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Money Money Plus.ttf"; sourceTree = "<group>"; };
 		36AFBC8E25E41C7E00B559DB /* Moneytor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneytor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36AFBC9125E41C7E00B559DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36AFBC9325E41C7E00B559DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +62,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36682CF625E4376D0075C03D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				36A4525025E4B0200099FC52 /* Money Money Plus.ttf */,
+				36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */,
+				36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */,
+				36682CF925E4376D0075C03D /* Champagne & Limousines Bold.ttf */,
+				36682CFA25E4376D0075C03D /* Champagne & Limousines.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		36682D0025E438190075C03D /* Helpers&Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				36682D0225E438490075C03D /* StyleGuide.swift */,
+			);
+			path = "Helpers&Extensions";
+			sourceTree = "<group>";
+		};
+		36682D0525E43B0A0075C03D /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				36682D0625E43B690075C03D /* MoneytorLabel.swift */,
+				36682D0A25E43CAD0075C03D /* MoneytorButton.swift */,
+				36682D0D25E43D830075C03D /* MoneytorTextField.swift */,
+				36682D1025E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		36AFBC8525E41C7E00B559DB = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +113,7 @@
 		36AFBC9025E41C7E00B559DB /* Moneytor */ = {
 			isa = PBXGroup;
 			children = (
+				36682D0025E438190075C03D /* Helpers&Extensions */,
 				36AFBCB525E4256000B559DB /* ModelControllers */,
 				36AFBCB425E4254100B559DB /* Models */,
 				36AFBCB125E4250C00B559DB /* Views */,
@@ -80,10 +133,12 @@
 		36AFBCAE25E4237700B559DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				36682CF625E4376D0075C03D /* Fonts */,
 				36AFBCA225E41C8200B559DB /* Info.plist */,
 				36AFBC9D25E41C8200B559DB /* Assets.xcassets */,
 				36AFBC9325E41C7E00B559DB /* SceneDelegate.swift */,
 				36AFBC9125E41C7E00B559DB /* AppDelegate.swift */,
+				36682CF125E42FF00075C03D /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -91,6 +146,7 @@
 		36AFBCB125E4250C00B559DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				36682D0525E43B0A0075C03D /* CustomViews */,
 				36AFBCB225E4252400B559DB /* Storyboards */,
 			);
 			path = Views;
@@ -194,7 +250,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36682CFE25E4376D0075C03D /* Champagne & Limousines.ttf in Resources */,
+				36682CFD25E4376D0075C03D /* Champagne & Limousines Bold.ttf in Resources */,
 				36AFBCA125E41C8200B559DB /* LaunchScreen.storyboard in Resources */,
+				36682CFC25E4376D0075C03D /* Champagne & Limousines Italic.ttf in Resources */,
+				36682CF225E42FF00075C03D /* Colors.xcassets in Resources */,
+				36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */,
 				36AFBC9E25E41C8200B559DB /* Assets.xcassets in Resources */,
 				36AFBC9925E41C7E00B559DB /* Main.storyboard in Resources */,
 			);
@@ -207,9 +268,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36682D1125E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift in Sources */,
+				36682D0E25E43D830075C03D /* MoneytorTextField.swift in Sources */,
 				36AFBC9225E41C7E00B559DB /* AppDelegate.swift in Sources */,
 				36AFBC9C25E41C7E00B559DB /* Moneytor.xcdatamodeld in Sources */,
+				36682D0325E438490075C03D /* StyleGuide.swift in Sources */,
 				36AFBC9425E41C7E00B559DB /* SceneDelegate.swift in Sources */,
+				36682D0B25E43CAD0075C03D /* MoneytorButton.swift in Sources */,
+				36682D0725E43B690075C03D /* MoneytorLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Moneytor/Moneytor.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Moneytor/Models/Moneytor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L73M8R7276;
 				INFOPLIST_FILE = Moneytor/Resources/Info.plist;
@@ -376,7 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Moneytor/Moneytor.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Moneytor/Models/Moneytor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L73M8R7276;
 				INFOPLIST_FILE = Moneytor/Resources/Info.plist;
