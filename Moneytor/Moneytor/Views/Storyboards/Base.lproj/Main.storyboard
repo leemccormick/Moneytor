@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,7 +14,7 @@
             <objects>
                 <tableViewController id="9Nz-0l-ico" customClass="IncomeDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="whJ-EF-0sN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="darkGolder"/>
                         <sections>
@@ -190,7 +191,7 @@
             <objects>
                 <tableViewController id="QLi-Ig-Dqw" customClass="ExpenseListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Pnm-Dr-2cM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="5Od-VW-dNd">
@@ -201,7 +202,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="4tD-EM-cc5">
-                            <rect key="frame" x="0.0" y="702.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="724.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qt-eZa">
@@ -273,11 +274,11 @@
             <objects>
                 <viewController id="I7L-hC-o0h" customClass="TotalBalanceViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QFT-CE-tzq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oW6-I8-qZC">
-                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nma-1h-9Ow" userLabel="ScrollViewContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
@@ -435,7 +436,7 @@
             <objects>
                 <tableViewController id="LFi-Cs-mBP" customClass="TotalIncomeListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wYS-dO-jgc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <activityIndicatorView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="XmY-UG-QeW">
@@ -636,7 +637,7 @@
                 <navigationController id="I25-ct-yuv" customClass="MoneytorNavigationController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="EXPENSE" image="square.and.arrow.up" catalog="system" id="LTl-Mo-MRC"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sa3-aO-jiP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -652,17 +653,17 @@
             <objects>
                 <viewController id="nyT-zm-yWA" customClass="CurrencyMapViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dNR-VC-XcB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-vC-qW2">
-                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
-                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="703"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <constraints>
@@ -731,53 +732,47 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-H5-hEU">
-                                <rect key="frame" x="20.5" y="253" width="373" height="269"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-H5-hEU">
+                                <rect key="frame" x="20.5" y="253" width="373" height="210"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="769-1I-J1z">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="269"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gPd-2f-btq">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="210"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRI-Ie-hKG" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="72" height="129.5"/>
-                                                <state key="normal" title="Log In"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-Aq-OKa">
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="210"/>
+                                                <state key="normal" title="Sign Up!"/>
                                                 <connections>
-                                                    <action selector="loginButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="gju-Rg-L1S"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsz-Aj-Vbz" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="139.5" width="72" height="129.5"/>
-                                                <state key="normal" title="Sign Up"/>
-                                                <connections>
-                                                    <action selector="signUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="m0i-pV-AVT"/>
+                                                    <action selector="signMeUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="JOO-lV-U8S"/>
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <color key="backgroundColor" name="mtBrownHearder"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MN3-Yo-oQv">
-                                        <rect key="frame" x="82" y="0.0" width="291" height="269"/>
+                                        <rect key="frame" x="83" y="0.0" width="290" height="210"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your First Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-CI-tLC" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="291" height="46"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your full name here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-CI-tLC" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your Last Name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cEK-zr-Qi2" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="291" height="45.5"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your email here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cEK-zr-Qi2" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your username..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJC-l4-OHS" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="111.5" width="291" height="46"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your username here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJC-l4-OHS" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="88" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V7O-Eg-h1y" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="167.5" width="291" height="45.5"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your password here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V7O-Eg-h1y" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="132" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-xQ-GST" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="223" width="291" height="46"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-xQ-GST" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="176" width="290" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -785,16 +780,33 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-Aq-OKa" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
-                                <rect key="frame" x="207" y="542" width="186.5" height="30"/>
-                                <state key="normal" title="Sign Me Up!"/>
-                                <connections>
-                                    <action selector="signMeUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="JOO-lV-U8S"/>
-                                    <segue destination="P6i-Oo-cHq" kind="show" identifier="toTabBarMoneytorController" id="nC8-CU-bnV"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="769-1I-J1z">
+                                <rect key="frame" x="20.5" y="483" width="373" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRI-Ie-hKG">
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="40"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="28"/>
+                                        <state key="normal" title="Log In ||">
+                                            <color key="titleColor" name="mtDarkBrownText"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="gju-Rg-L1S"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsz-Aj-Vbz">
+                                        <rect key="frame" x="201" y="0.0" width="172" height="40"/>
+                                        <fontDescription key="fontDescription" name="DINCondensed-Bold" family="DIN Condensed" pointSize="28"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="m0i-pV-AVT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BJo-CQ-ndd">
-                                <rect key="frame" x="20.5" y="602" width="373" height="134.5"/>
+                                <rect key="frame" x="20.5" y="543" width="373" height="134.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xXu-di-9Tg">
                                         <rect key="frame" x="0.0" y="0.0" width="121" height="134.5"/>
@@ -808,7 +820,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2be-9I-DIC">
-                                <rect key="frame" x="20" y="602" width="374" height="134.5"/>
+                                <rect key="frame" x="20" y="543" width="374" height="134.5"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="EEI-Wb-zGD">
                                         <rect key="frame" x="8" y="8" width="358" height="118.5"/>
@@ -821,9 +833,9 @@
                                     <constraint firstAttribute="bottom" secondItem="EEI-Wb-zGD" secondAttribute="bottom" constant="8" id="y1K-h2-blq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In or Sign Up !!!                  To monitor your money!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-WA-8Q1" customClass="MoneytorTitleFontBrownLabel" customModule="Moneytor" customModuleProvider="target">
-                                <rect key="frame" x="20.5" y="756.5" width="373" height="64.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your money!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-WA-8Q1" customClass="MoneytorTitleFontBrownLabel" customModule="Moneytor" customModuleProvider="target">
+                                <rect key="frame" x="20.5" y="697.5" width="373" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -831,47 +843,48 @@
                         <viewLayoutGuide key="safeArea" id="3JR-69-x6d"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="height" secondItem="W7E-22-C7v" secondAttribute="height" multiplier="1.5" id="2wl-uF-LjP"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3JR-69-x6d" secondAttribute="leading" symbolic="YES" id="3kb-da-oDi"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="W7E-22-C7v" secondAttribute="width" id="3zb-WO-qhA"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="height" secondItem="BJo-CQ-ndd" secondAttribute="height" id="6Ow-G3-RdB"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="width" secondItem="VGC-H5-hEU" secondAttribute="width" multiplier="0.5" id="8rx-P3-kcX"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="trailing" secondItem="VGC-H5-hEU" secondAttribute="trailing" id="EEo-xy-0Ns"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="20" id="Ekg-Fn-IYy"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="centerY" secondItem="BJo-CQ-ndd" secondAttribute="centerY" id="HOh-YF-gcS"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="top" secondItem="FP0-Aq-OKa" secondAttribute="bottom" constant="30" id="JDv-5r-C0i"/>
-                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="Jba-y7-4bB"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.2" id="MDq-DK-68A"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="width" secondItem="BJo-CQ-ndd" secondAttribute="width" multiplier="1.00268" id="Q80-Cv-q0h"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="QGB-8N-U0y"/>
-                            <constraint firstItem="2be-9I-DIC" firstAttribute="centerX" secondItem="BJo-CQ-ndd" secondAttribute="centerX" id="QNr-po-ZMX"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="Sqx-7C-JN6"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="centerX" secondItem="W7E-22-C7v" secondAttribute="centerX" id="aG2-3T-4PW"/>
-                            <constraint firstAttribute="trailing" secondItem="Go5-oO-nQA" secondAttribute="trailing" id="aVK-Vn-dRS"/>
-                            <constraint firstItem="W7E-22-C7v" firstAttribute="top" secondItem="3JR-69-x6d" secondAttribute="top" constant="10" id="b2Y-aW-V1B"/>
-                            <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="FeD-Hm-1Cc" secondAttribute="leading" id="i8N-H7-aSe"/>
-                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="top" secondItem="BJo-CQ-ndd" secondAttribute="bottom" constant="20" id="jkZ-rE-eOd"/>
-                            <constraint firstAttribute="bottom" secondItem="Go5-oO-nQA" secondAttribute="bottom" id="kZK-K7-Ekd"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="centerX" secondItem="VGC-H5-hEU" secondAttribute="centerX" id="qwk-bu-Nxb"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.15" id="r8z-WY-yl4"/>
-                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="t2R-mG-7qo"/>
-                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="width" secondItem="VGC-H5-hEU" secondAttribute="width" id="vgs-1e-9cl"/>
-                            <constraint firstItem="Go5-oO-nQA" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="top" id="wGq-Ph-l3X"/>
-                            <constraint firstItem="FP0-Aq-OKa" firstAttribute="top" secondItem="VGC-H5-hEU" secondAttribute="bottom" constant="20" id="y9g-RE-t2m"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="top" secondItem="769-1I-J1z" secondAttribute="bottom" constant="20" id="0Da-x5-ACv"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="1ko-Mv-CYs"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="width" secondItem="Go5-oO-nQA" secondAttribute="width" multiplier="0.9" id="1wE-wb-o99"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="20" id="2c1-Lx-HJc"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.2" id="3kD-vH-GyT"/>
+                            <constraint firstItem="3JR-69-x6d" firstAttribute="trailing" secondItem="2be-9I-DIC" secondAttribute="trailing" constant="20" id="4lO-tc-kLu"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="MN3-Yo-oQv" secondAttribute="width" id="64K-k2-n8h"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="centerX" secondItem="Go5-oO-nQA" secondAttribute="centerX" id="7sw-fp-zN1"/>
+                            <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" id="9Fe-bo-gzf"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" constant="20" id="Aez-oT-3Q5"/>
+                            <constraint firstItem="769-1I-J1z" firstAttribute="top" secondItem="VGC-H5-hEU" secondAttribute="bottom" constant="20" id="GKm-W8-r5N"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="KZH-cp-91z"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="top" secondItem="3JR-69-x6d" secondAttribute="top" constant="10" id="PKU-dO-ri6"/>
+                            <constraint firstItem="Go5-oO-nQA" firstAttribute="trailing" secondItem="3JR-69-x6d" secondAttribute="trailing" id="Pg6-yJ-1Ky"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.15" id="RF0-uw-DH4"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="top" secondItem="BJo-CQ-ndd" secondAttribute="bottom" constant="20" id="cCB-Pm-EFL"/>
+                            <constraint firstItem="769-1I-J1z" firstAttribute="trailing" secondItem="MN3-Yo-oQv" secondAttribute="trailing" id="czP-P9-5RI"/>
+                            <constraint firstItem="769-1I-J1z" firstAttribute="leading" secondItem="VGC-H5-hEU" secondAttribute="leading" id="hIt-Fr-Wye"/>
+                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="lCG-zP-uZZ"/>
+                            <constraint firstAttribute="bottom" secondItem="Go5-oO-nQA" secondAttribute="bottom" id="mOB-nN-4il"/>
+                            <constraint firstItem="BJo-CQ-ndd" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="mhL-GJ-sr2"/>
+                            <constraint firstItem="Go5-oO-nQA" firstAttribute="top" secondItem="FeD-Hm-1Cc" secondAttribute="top" id="pWo-SA-eMa"/>
+                            <constraint firstItem="2be-9I-DIC" firstAttribute="top" secondItem="769-1I-J1z" secondAttribute="bottom" constant="20" id="piM-Z7-Une"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="tjy-Zh-tJU"/>
+                            <constraint firstItem="nxD-WA-8Q1" firstAttribute="top" secondItem="2be-9I-DIC" secondAttribute="bottom" constant="20" id="wSE-px-849"/>
+                            <constraint firstItem="MN3-Yo-oQv" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.7" id="xEt-99-GrA"/>
+                            <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="zxl-7s-asz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="EEI-Wb-zGD" id="xlq-dD-CMw"/>
                         <outlet property="activityView" destination="2be-9I-DIC" id="qmd-7D-HHq"/>
                         <outlet property="confirmPasswordTextFiled" destination="Tsn-xQ-GST" id="EdW-oc-YW3"/>
+                        <outlet property="emailTextField" destination="cEK-zr-Qi2" id="MfA-tt-5zh"/>
                         <outlet property="firstLogoImage" destination="T1e-oP-4S1" id="bj0-EW-v7g"/>
-                        <outlet property="firstNameTextField" destination="DnR-CI-tLC" id="wl7-ac-Klm"/>
-                        <outlet property="lastNameTextField" destination="cEK-zr-Qi2" id="MfA-tt-5zh"/>
+                        <outlet property="fullNameTextField" destination="DnR-CI-tLC" id="wl7-ac-Klm"/>
                         <outlet property="loginButton" destination="MRI-Ie-hKG" id="2v2-jI-KuX"/>
                         <outlet property="logoStackView" destination="BJo-CQ-ndd" id="Xfw-Wa-26K"/>
                         <outlet property="passwordTextFileld" destination="V7O-Eg-h1y" id="5od-Lp-Uye"/>
                         <outlet property="secondLogoImage" destination="9js-TZ-hcq" id="LYL-NE-lSM"/>
                         <outlet property="signMeUpButton" destination="FP0-Aq-OKa" id="rwE-qU-p0z"/>
+                        <outlet property="signMeUpStackView" destination="gPd-2f-btq" id="OJF-6S-6H1"/>
                         <outlet property="signUpButton" destination="rsz-Aj-Vbz" id="MVB-Ea-lkT"/>
                         <outlet property="thirdLogoImage" destination="xXu-di-9Tg" id="Ceg-ww-jxk"/>
                         <outlet property="usernameTextField" destination="SJC-l4-OHS" id="RIx-Z9-eQ4"/>
@@ -884,7 +897,7 @@
         <!--Moneytor Tab Bar Controller-->
         <scene sceneID="ctm-hE-R1u">
             <objects>
-                <tabBarController id="P6i-Oo-cHq" customClass="MoneytorTabBarController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MoneytorStoryboardID" id="P6i-Oo-cHq" customClass="MoneytorTabBarController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="5Ft-i1-Yhe"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3YA-f3-Zqf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -907,7 +920,7 @@
             <objects>
                 <tableViewController id="gUq-1d-FNd" customClass="IncomeListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XcB-hp-tcR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="0YT-BM-9gs">
@@ -917,7 +930,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="F6f-ss-dQq">
-                            <rect key="frame" x="0.0" y="702.5" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="724.5" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="l7P-im-jY4">
@@ -990,7 +1003,7 @@
                 <navigationController id="MKu-4i-UdP" customClass="MoneytorNavigationController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="INCOME" image="square.and.arrow.down" catalog="system" id="OEc-a6-PTJ"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OCn-yr-jl1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -1008,7 +1021,7 @@
                     <tabBarItem key="tabBarItem" title="TOTAL" image="dollarsign.square" catalog="system" id="ixB-Rx-Cjc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Efe-c7-IgH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1027,7 +1040,7 @@
                     <tabBarItem key="tabBarItem" title="CURRENCY" image="network" catalog="system" id="VNT-T7-etG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eoY-Y3-juE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1062,7 +1075,7 @@
             <objects>
                 <tableViewController id="i5Z-lo-Ib2" customClass="TotalExpenseListTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="QRk-Li-ReT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <color key="sectionIndexBackgroundColor" name="mtDarkGolder"/>
@@ -1360,7 +1373,7 @@
             <objects>
                 <tableViewController id="9tl-Xm-gpl" customClass="ExpenseDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vc7-zx-9I6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <color key="sectionIndexBackgroundColor" name="mtDarkGolder"/>
@@ -1562,7 +1575,7 @@
             <objects>
                 <viewController id="rBE-mo-DEP" customClass="ExpenseScannerViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I02-pv-WKD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="asW-Nx-Yng"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1601,6 +1614,12 @@
         </namedColor>
         <namedColor name="darkGolder">
             <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtBrownHearder">
+            <color red="0.74117647058823533" green="0.57647058823529407" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtDarkBrownText">
+            <color red="0.29019607843137257" green="0.22352941176470589" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mtDarkGolder">
             <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
