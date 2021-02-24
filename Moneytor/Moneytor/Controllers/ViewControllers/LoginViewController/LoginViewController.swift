@@ -152,14 +152,14 @@ extension LoginViewController {
     
     func startAnimationLogo() {
         countingTimeForAnimationLogo = Timer(timeInterval: 2, repeats: true, block: { (timer) in
-            print("Show startTim")
+            //print("Show startTim")
             self.hideFirstLogo()
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                print("Second 5 second")
+               // print("Second 5 second")
                 self.hideSecondLogo()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                print("third3 second")
+                //print("third3 second")
                 self.hideThirdLogo()
             }
         })
@@ -168,10 +168,10 @@ extension LoginViewController {
     
     func stopAnimationLogo(){
         countingTimeForAnimationLogo = Timer(timeInterval: 2, repeats: true, block: { (timer) in
-            print("Stopping plzzz")
+           // print("Stopping plzzz")
             timer.invalidate()
         })
-        print("Stopping plzzz  countingTimeForAnimationLogo.invalidate() ")
+        //print("Stopping plzzz  countingTimeForAnimationLogo.invalidate() ")
         countingTimeForAnimationLogo.invalidate()
     }
 

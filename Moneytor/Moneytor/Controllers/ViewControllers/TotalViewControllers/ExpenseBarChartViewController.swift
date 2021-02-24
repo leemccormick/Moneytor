@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import Charts
 
 class ExpenseBarChartViewController: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet var barChartView: UIView!
-    @IBOutlet weak var activityView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var barChartView: BarChartView!
+ 
     
     
     // MARK: - Properties

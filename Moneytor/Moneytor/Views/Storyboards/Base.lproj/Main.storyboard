@@ -283,7 +283,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nma-1h-9Ow" userLabel="ScrollViewContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
                                                 <rect key="frame" x="20.5" y="30" width="373" height="372.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
@@ -421,7 +421,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="cOS-K8-ftc" id="yO4-RX-1JN"/>
                         <outlet property="activityView" destination="jQu-IG-UqO" id="NMH-tu-eoa"/>
-                        <outlet property="pieChartView" destination="Sdg-WR-LzE" id="wUQ-S0-FNr"/>
+                        <outlet property="pieChartView" destination="Sdg-WR-LzE" id="XNN-5o-rsH"/>
                         <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
                         <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
                         <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
@@ -1054,14 +1054,14 @@
         <scene sceneID="eKZ-ei-65w">
             <objects>
                 <viewController id="ydG-qX-6lb" customClass="IncomeLineChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="juJ-fv-BqQ">
+                    <view key="view" contentMode="scaleToFill" id="juJ-fv-BqQ" customClass="LineChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="422.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="vqp-uU-jNv"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                     </view>
                     <connections>
-                        <outlet property="lineChartView" destination="juJ-fv-BqQ" id="O8C-9c-gei"/>
+                        <outlet property="lineChartView" destination="juJ-fv-BqQ" id="pnq-tV-ph8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVI-Ge-gce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1352,14 +1352,14 @@
         <scene sceneID="WHM-zq-L04">
             <objects>
                 <viewController id="FRP-sB-1LR" customClass="ExpenseBarChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6ld-rh-l7I">
+                    <view key="view" contentMode="scaleToFill" id="6ld-rh-l7I" customClass="BarChartView" customModule="Charts">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="EuW-GE-G86"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                     </view>
                     <connections>
-                        <outlet property="barChartView" destination="6ld-rh-l7I" id="Src-Pi-L7W"/>
+                        <outlet property="barChartView" destination="6ld-rh-l7I" id="LGq-ty-P1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCM-Qg-Ch2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

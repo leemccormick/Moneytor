@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Charts
 
-class TotalBalanceViewController: UIViewController {
+class TotalBalanceViewController: UIViewController, ChartViewDelegate {
 
     // MARK: - Outlets
-    @IBOutlet weak var pieChartView: UIView!
+    @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var totalBalanceLabel: UILabel!
     @IBOutlet weak var totalIncomeButton: UIButton!
     @IBOutlet weak var totalExpenseButton: UIButton!
@@ -25,6 +26,7 @@ class TotalBalanceViewController: UIViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        pieChartView.delegate = self
 
     }
     

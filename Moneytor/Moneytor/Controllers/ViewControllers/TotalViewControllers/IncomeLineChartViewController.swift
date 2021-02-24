@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Charts
 
 class IncomeLineChartViewController: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet var lineChartView: UIView!
+    @IBOutlet var lineChartView: LineChartView!
 
     
     
