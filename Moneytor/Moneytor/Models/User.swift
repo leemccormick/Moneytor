@@ -25,33 +25,8 @@ class User {
     var username: String
     var email: String
     var password: String
-    //var bio: String
     var recordID: CKRecord.ID
     var appleUserRef: CKRecord.Reference
-    
-//    // User profile photo
-//    var profilePhoto: UIImage? {
-//        get { // Get Run code anytime you read property.
-//            guard let photoData = self.photoData else { return nil}
-//            return UIImage(data: photoData)
-//        } set {
-//            photoData = newValue?.jpegData(compressionQuality: 0.5)
-//        }
-//    }
-//    var photoData: Data?
-//    var photoAsset: CKAsset { // We are giving photoAsset the URL ==> the address
-//        get {
-//            let tempDirectory = NSTemporaryDirectory()
-//            let tempDirecotoryURL = URL(fileURLWithPath: tempDirectory)
-//            let fileURL = tempDirecotoryURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpg")
-//            do {
-//                try photoData?.write(to: fileURL)
-//            } catch {
-//                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-//            }
-//            return CKAsset(fileURL: fileURL)
-//        }
-//    }
     
     init(fullname: String, username: String, email: String, password: String, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
         self.fullName = fullname
@@ -72,20 +47,6 @@ extension User {
               let password = ckRecord[UserStrings.passwordKey] as? String,
               let appleUserRef = ckRecord[UserStrings.appleUserRefKey] as? CKRecord.Reference else { return nil}
         
-//        // profile Photo
-//        var foundPhoto: UIImage?
-//        if let photoAsset = ckRecord[UserStrings.photoAssetKey] as? CKAsset {
-//            do {
-//                let data = try Data(contentsOf: photoAsset.fileURL!)
-//                foundPhoto = UIImage(data: data)
-//            } catch {
-//                print("Could Not Transform Asset to Data")
-//            }
-//        }
-//
-        
-        // translate to User to CkRecord
-//        self.init(username: username, recordID: ckRecord.recordID, appleUserRef: appleUserRef, profilePhoto: foundPhoto)
         self.init(fullname: fullName, username: username, email: email, password: password, appleUserRef: appleUserRef)
     }
 }

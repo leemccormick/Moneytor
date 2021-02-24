@@ -50,7 +50,7 @@ class IncomeController {
 func subscribeForRomoteNotifications(completion: @escaping (Bool) -> Void ) {
     
     let allIncomesPredicate = NSPredicate(value: true)
-    let subscription = CKQuerySubscription(recordType: "CD_Moneytor", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
+    let subscription = CKQuerySubscription(recordType: "CD_Income", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
     let notificationInfo = CKSubscription.NotificationInfo()
     notificationInfo.title = "MONEYTOR!"
     notificationInfo.alertBody = "INCOME is updating from somewhere."

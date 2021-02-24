@@ -10,6 +10,7 @@ import CloudKit
 import UIKit
 
 class UserController {
+    
     // MARK: - Properties
     static let shared = UserController()
     var currentUser: User?
@@ -33,6 +34,7 @@ class UserController {
                     guard let record = record else {return completion(.failure(.unexpectedRecordsFound))}
                     guard let savedUser = User(ckRecord: record) else {return completion(.failure(.cloudNotUpwrap))}
                     print("Create User: \(record.recordID.recordName)")
+                    print("\nSUCCESSFULLY! CREATE USER IN THE CLOUDKIT.\n")
                     completion(.success(savedUser))
                 }
             case .failure(let error) :
@@ -55,8 +57,8 @@ class UserController {
                     }
                     guard let record = records?.first else { return completion(.failure(.unexpectedRecordsFound))}
                     guard let foundUser = User(ckRecord: record) else { return completion(.failure(.cloudNotUpwrap))}
-                    
                     print("Fetched user: \(record.recordID.recordName)")
+                    print("\nSUCCESSFULLY! FETCHED USER FORM THE CLOUDKIT.\n")
                     completion(.success(foundUser))
                 }
             case .failure(let error):
@@ -65,23 +67,6 @@ class UserController {
         }
     }
     
-//    // Fetch the user for the hype
-//    func fetchUserFor(_ hype: Hype, completion: @escaping (Result<User,UserError>) -> Void) {
-//        guard let userID = hype.userReference?.recordID else { return completion(.failure(.noUserForHype))}
-//        let predicate = NSPredicate(format: "%K == %@", argumentArray: ["recordID", userID])
-//        let query = CKQuery(recordType: UserStrings.recordTypeKey, predicate: predicate)
-//        publicDB.perform(query, inZoneWith: nil) { (records, error) in
-//            if let error = error {
-//                completion(.failure(.ckError(error)))
-//            }
-//            guard let record = records?.first else { return completion(.failure(.unexpectedRecordsFound))}
-//            guard let foundUser = User(ckRecord: record) else { return completion(.failure(.cloudNotUpwrap))}
-//            print("Found user for hype")
-//            completion(.success(foundUser))
-//            
-//        }
-//    }
-    
     // private ==> preventing ???
     private func fetchAppleUserRefernce(completion: @escaping (Result<CKRecord.Reference?, UserError>) -> Void) {
         // Using the default().fetchUserRecordID to fetch
@@ -89,17 +74,13 @@ class UserController {
             if let error = error {
                 completion(.failure(.ckError(error)))
             }
-            
             // if we have recordID
             if let recordID = recordID {
                 // action: .deleteSelf ==> we are not deleting the record of user, just something in apple???
                 let reference = CKRecord.Reference(recordID: recordID, action: .deleteSelf)
+                print("\nSUCCESSFULLY! FETCHED APPLE USER REFERNCE FORM THE CLOUDKIT.\n")
                 completion(.success(reference)) // Then return the reference ==> fetchAppleUserRefernce
             }
         }
     }
-    
-    // UPDATE
-    
-    // DELETE
 }

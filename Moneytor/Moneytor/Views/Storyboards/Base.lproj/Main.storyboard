@@ -736,10 +736,10 @@
                                 <rect key="frame" x="20.5" y="253" width="373" height="210"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gPd-2f-btq">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="210"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="113.5" height="210"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-Aq-OKa">
-                                                <rect key="frame" x="0.0" y="0.0" width="70" height="210"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="113.5" height="210"/>
                                                 <state key="normal" title="Sign Up!"/>
                                                 <connections>
                                                     <action selector="signMeUpButtonTapped:" destination="P2r-SA-ntB" eventType="touchUpInside" id="JOO-lV-U8S"/>
@@ -749,30 +749,30 @@
                                         <color key="backgroundColor" name="mtBrownHearder"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MN3-Yo-oQv">
-                                        <rect key="frame" x="83" y="0.0" width="290" height="210"/>
+                                        <rect key="frame" x="126.5" y="0.0" width="246.5" height="210"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your full name here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DnR-CI-tLC" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="290" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="246.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your email here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cEK-zr-Qi2" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44" width="290" height="34"/>
+                                                <rect key="frame" x="0.0" y="44" width="246.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your username here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SJC-l4-OHS" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="88" width="290" height="34"/>
+                                                <rect key="frame" x="0.0" y="88" width="246.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your password here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V7O-Eg-h1y" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="132" width="290" height="34"/>
+                                                <rect key="frame" x="0.0" y="132" width="246.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tsn-xQ-GST" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="176" width="290" height="34"/>
+                                                <rect key="frame" x="0.0" y="176" width="246.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -833,7 +833,7 @@
                                     <constraint firstAttribute="bottom" secondItem="EEI-Wb-zGD" secondAttribute="bottom" constant="8" id="y1K-h2-blq"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your money!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-WA-8Q1" customClass="MoneytorTitleFontBrownLabel" customModule="Moneytor" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor your money!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nxD-WA-8Q1" customClass="MoneytorTitleFontBrownLabel" customModule="Moneytor" customModuleProvider="target">
                                 <rect key="frame" x="20.5" y="697.5" width="373" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <nil key="textColor"/>
@@ -849,7 +849,6 @@
                             <constraint firstItem="VGC-H5-hEU" firstAttribute="top" secondItem="W7E-22-C7v" secondAttribute="bottom" constant="20" id="2c1-Lx-HJc"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="height" secondItem="FeD-Hm-1Cc" secondAttribute="height" multiplier="0.2" id="3kD-vH-GyT"/>
                             <constraint firstItem="3JR-69-x6d" firstAttribute="trailing" secondItem="2be-9I-DIC" secondAttribute="trailing" constant="20" id="4lO-tc-kLu"/>
-                            <constraint firstItem="VGC-H5-hEU" firstAttribute="width" secondItem="MN3-Yo-oQv" secondAttribute="width" id="64K-k2-n8h"/>
                             <constraint firstItem="nxD-WA-8Q1" firstAttribute="centerX" secondItem="Go5-oO-nQA" secondAttribute="centerX" id="7sw-fp-zN1"/>
                             <constraint firstItem="Go5-oO-nQA" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" id="9Fe-bo-gzf"/>
                             <constraint firstItem="2be-9I-DIC" firstAttribute="leading" secondItem="3JR-69-x6d" secondAttribute="leading" constant="20" id="Aez-oT-3Q5"/>
@@ -868,7 +867,6 @@
                             <constraint firstItem="2be-9I-DIC" firstAttribute="top" secondItem="769-1I-J1z" secondAttribute="bottom" constant="20" id="piM-Z7-Une"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="centerX" secondItem="3JR-69-x6d" secondAttribute="centerX" id="tjy-Zh-tJU"/>
                             <constraint firstItem="nxD-WA-8Q1" firstAttribute="top" secondItem="2be-9I-DIC" secondAttribute="bottom" constant="20" id="wSE-px-849"/>
-                            <constraint firstItem="MN3-Yo-oQv" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.7" id="xEt-99-GrA"/>
                             <constraint firstItem="W7E-22-C7v" firstAttribute="width" secondItem="FeD-Hm-1Cc" secondAttribute="width" multiplier="0.9" id="zxl-7s-asz"/>
                         </constraints>
                     </view>
