@@ -16,29 +16,60 @@ class IncomeDetailTableViewController: UITableViewController {
     @IBOutlet weak var incomeDatePicker: UIDatePicker!
     
     // MARK: - Properties
-        
+    var income: Income?
+    var selectedIncomeCategory: String = ""
     
-    
-
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
+        incomeCategoryPicker.delegate = self
+        incomeCategoryPicker.dataSource = self
+        updateViews()
     }
+    
+    
+    
     
     // MARK: - Actions
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        saveIncome()
     }
     
     @IBAction func trashButtonTapped(_ sender: Any) {
+        guard let income = income else {return}
+        IncomeController.shared.deleteIncome(income: income)
     }
     
     
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
+        saveIncome()
     }
     
+    
+    @IBAction func incomeDatePickerValueChange(_ sender: Any) {
+    }
+    
+    // MARK: - Helper Fuctions
+    func updateViews() {
+        guard let income = income else {return}
+        incomeNameTextField.text = income.name
+     //   incomeAmount.text = income.amount
+       // incomeCategoryPicker.
+    }
+    
+    func saveIncome() {
+        guard let name = incomeNameTextField.text, !name.isEmpty else {return}
+        guard let amount = incomeAmount.text, !amount.isEmpty else {return}
+        if let income = income {
+            IncomeController.shared.updateIncome(income: income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date)
+        } else {
+            IncomeController.shared.createIncome(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date)
+        }
+        navigationController?.popViewController(animated: true)
+    }
     
     // MARK: - Table View
      override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -57,7 +88,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
 }
 
-/*
+
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -65,15 +96,12 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return //CalculatorController.shared.resturants.count
+        return IncomeCategory.allCases.count
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return //CalculatorController.shared.resturants[row]
-    }
+
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //selectedResturant = CalculatorController.shared.resturants[row]
+        selectedIncomeCategory = IncomeCategory.allCases[row].rawValue
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -83,9 +111,9 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
             pickerLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
             pickerLabel?.textAlignment = .center
         }
-        // pickerLabel?.text = CalculatorController.shared.resturants[row]
+        pickerLabel?.text = IncomeCategory.allCases[row].systemNameForPicker
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }
 }
-*/
+

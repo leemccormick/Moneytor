@@ -31,6 +31,7 @@ class MoneytorDatePickerView: UIDatePicker {
         self.backgroundColor = .mtDarkOrage
         self.layer.borderWidth = 2.5
         self.layer.borderColor = UIColor.mtLightYellow.cgColor
+        self.tintColor = .mtTextDarkBrown
         self.addCornerRadius()
     }
 }

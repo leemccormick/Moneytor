@@ -26,7 +26,7 @@ class MoneytorGoodLetterLabel: UILabel {
         super.awakeFromNib() //.awakeFromNib() from HypeLabel
        // super.updateFont(fontName: FontNames.latoBold)
        // updateFontGoodLetter(fontName: String)
-        
+        self.textColor = .mtTextDarkBrown
         self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
 
     }

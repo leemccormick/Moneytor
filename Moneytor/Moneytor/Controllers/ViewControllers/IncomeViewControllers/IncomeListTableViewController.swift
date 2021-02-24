@@ -22,6 +22,12 @@ class IncomeListTableViewController: UITableViewController {
         view.addGestureRecognizer(tap)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IncomeController.shared.fetchAllIncomes()
+        tableView.reloadData()
+    }
+    
     // MARK: - Actions
     
     @IBAction func calendarButtonTapped(_ sender: Any) {
@@ -30,22 +36,21 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 0
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return IncomeController.shared.incomes.count
     }
 
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCell", for: indexPath)
-
+        let income = IncomeController.shared.incomes[indexPath.row]
+        cell.textLabel?.text = income.incomeCategoryString.systemNameIcon + " " + income.incomeNameString
+        cell.detailTextLabel?.text = income.incomeAmountString
         // Configure the cell...
-
         return cell
     }
    
@@ -55,8 +60,9 @@ class IncomeListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let income = IncomeController.shared.incomes[indexPath.row]
+            IncomeController.shared.deleteIncome(income: income)
+            tableView.reloadData()
         }
     }
    
@@ -64,7 +70,12 @@ class IncomeListTableViewController: UITableViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // toIncomeDetailVC
+        if segue.identifier == "toIncomeDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
+            let income = IncomeController.shared.incomes[indexPath.row]
+            destinationVC.income = income
+        }
     }
  
 

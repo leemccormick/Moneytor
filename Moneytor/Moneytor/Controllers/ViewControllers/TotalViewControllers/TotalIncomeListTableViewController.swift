@@ -10,9 +10,9 @@ import UIKit
 class TotalIncomeListTableViewController: UITableViewController {
     
     // MARK: - Outlets
-    @IBOutlet weak var cashLabel: MoneytorGoodLetterLabel!
     @IBOutlet weak var salaryLabel: MoneytorGoodLetterLabel!
     @IBOutlet weak var savingLabel: MoneytorGoodLetterLabel!
+    @IBOutlet weak var checkingLabel: MoneytorGoodLetterLabel!
     @IBOutlet weak var otherLabel: MoneytorGoodLetterLabel!
     @IBOutlet weak var totalIncomeLabel: MoneytorGoodLetterLabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
