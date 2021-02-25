@@ -17,7 +17,7 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedCategory: String = ""
+    var selectedCategory: ExpenseCategory = ExpenseCategory(name: "other", emoji: "💸")
     
     
     // MARK: - Life Cycle Methods
@@ -52,17 +52,19 @@ class ExpenseDetailTableViewController: UITableViewController {
     func updateView() {
         guard let expense = expense else {return}
         expenseNameTextField.text = expense.name
-        expenseAmountTextField.text = expense.expenseAmountString
-        // For DatePicker and PickerView Update HERE.....
+        expenseAmountTextField.text = expense.expenseAmountToUpdate
+        // For  and PickerView Update HERE.....
+        expenseDatePicker.date = expense.date ?? Date()
+        
     }
     
     func saveExpense() {
         guard let name = expenseNameTextField.text, !name.isEmpty else {return}
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {return}
         if let expense = expense {
-            ExpenseController.shared.updateExpense(expense: expense, name: name, amount: Double(amount) ?? 00.00, category: selectedCategory, date: expenseDatePicker.date)
+            ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
-            ExpenseController.shared.createIncome(name: name, amount: Double(amount) ?? 00.00, category: selectedCategory, date: expenseDatePicker.date)
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -82,28 +84,26 @@ class ExpenseDetailTableViewController: UITableViewController {
         }
       }
 
-      
     // MARK: - Navigation
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // toScannerVC
    }
-
 }
 
 // MARK: - Picker
 
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+   
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ExpenseCategory.allCases.count
+        return ExpenseCategoryController.shared.expenseCategories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCategory = ExpenseCategory.allCases[row].rawValue
+        selectedCategory = ExpenseCategoryController.shared.expenseCategories[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -113,7 +113,8 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
             pickerLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
             pickerLabel?.textAlignment = .center
         }
-        pickerLabel?.text = ExpenseCategory.allCases[row].systemNameForPicker
+        let expenseCategory = ExpenseCategoryController.shared.expenseCategories[row]
+        pickerLabel?.text = "\(expenseCategory.emoji ?? "💸")  \(expenseCategory.name ?? "other")"
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }

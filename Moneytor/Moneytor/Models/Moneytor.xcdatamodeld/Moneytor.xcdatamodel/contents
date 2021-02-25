@@ -2,18 +2,30 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Expense" representedClassName="Expense" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="expenseCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExpenseCategory" inverseName="expenses" inverseEntity="ExpenseCategory"/>
+    </entity>
+    <entity name="ExpenseCategory" representedClassName="ExpenseCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="emoji" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expense" inverseName="expenseCategory" inverseEntity="Expense"/>
     </entity>
     <entity name="Income" representedClassName="Income" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="incomeCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IncomeCategory" inverseName="incomes" inverseEntity="IncomeCategory"/>
+    </entity>
+    <entity name="IncomeCategory" representedClassName="IncomeCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="emoji" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="incomes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Income" inverseName="incomeCategory" inverseEntity="Income"/>
     </entity>
     <elements>
-        <element name="Income" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Expense" positionX="-54" positionY="18" width="128" height="103"/>
+        <element name="Expense" positionX="-811.1640625" positionY="91.03125" width="128" height="103"/>
+        <element name="ExpenseCategory" positionX="-609.02734375" positionY="105.31640625" width="128" height="88"/>
+        <element name="Income" positionX="-854.1484375" positionY="268.88671875" width="128" height="103"/>
+        <element name="IncomeCategory" positionX="-614.73828125" positionY="257.6953125" width="128" height="88"/>
     </elements>
 </model>

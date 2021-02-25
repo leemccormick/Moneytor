@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P2r-SA-ntB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="P6i-Oo-cHq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -161,6 +161,9 @@
                             <outlet property="delegate" destination="9Nz-0l-ico" id="Umx-NT-qpg"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="8aN-wC-Jgs"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Add Income" id="hVO-rj-dZd">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="save" id="jjN-lF-8ey">
@@ -175,6 +178,7 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="incomeAmount" destination="sPE-mn-xf6" id="U2W-v1-LQy"/>
                         <outlet property="incomeCategoryPicker" destination="SB6-j4-3yf" id="ts8-0E-siG"/>
@@ -184,7 +188,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0C-sd-pDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2016" y="-127"/>
+            <point key="canvasLocation" x="2151" y="-23"/>
         </scene>
         <!--EXPENSES-->
         <scene sceneID="NxG-PF-dkU">
@@ -421,7 +425,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="cOS-K8-ftc" id="yO4-RX-1JN"/>
                         <outlet property="activityView" destination="jQu-IG-UqO" id="NMH-tu-eoa"/>
-                        <outlet property="pieChartView" destination="Sdg-WR-LzE" id="XNN-5o-rsH"/>
+                        <outlet property="pieChartView" destination="Sdg-WR-LzE" id="Kd2-oC-X9m"/>
                         <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
                         <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
                         <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
@@ -890,7 +894,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZtX-vC-bmS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2843.4782608695655" y="829.6875"/>
+            <point key="canvasLocation" x="-2749" y="869"/>
         </scene>
         <!--Moneytor Tab Bar Controller-->
         <scene sceneID="ctm-hE-R1u">
@@ -911,7 +915,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeA-wu-scz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1813" y="839"/>
+            <point key="canvasLocation" x="-1786" y="1043"/>
         </scene>
         <!--INCOMES-->
         <scene sceneID="tuR-oT-Bor">
@@ -964,7 +968,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <connections>
-                                    <segue destination="9Nz-0l-ico" kind="show" identifier="toIncomeDetailVC" id="bgT-ri-lEF"/>
+                                    <segue destination="9Nz-0l-ico" kind="show" identifier="toIncomeDetailVC" id="sdv-pE-Ro6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1595,7 +1599,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="wuN-aR-Pod"/>
-        <segue reference="bgT-ri-lEF"/>
+        <segue reference="sdv-pE-Ro6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>

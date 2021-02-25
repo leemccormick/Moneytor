@@ -112,6 +112,8 @@ class LoginViewController: UIViewController {
                 self.presentMoneytorVC()
             case .failure(let error):
                 print(error.localizedDescription)
+                self.presentErrorToUser(titleAlert: "User Not Found!", messageAlert: "Please, login with your apple id on the device to monitor your money.")
+                //
             }
         })
     }

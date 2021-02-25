@@ -8,19 +8,25 @@
 import CoreData
 
 class IncomeController {
+    
+    
     // MARK: - Properties
     static let shared = IncomeController()
     var incomes:[Income] = []
+    //var sections: [[IncomeCategory]] = []
     private lazy var fetchRequest: NSFetchRequest<Income> = {
         let request = NSFetchRequest<Income>(entityName: "Income")
         request.predicate = NSPredicate(value: true)
         return request
     }()
     
+    
+    
+    
     // MARK: - CRUD Methods
     // CREATE
-    func createIncome(name: String, amount: Double, category: String, date: Date) {
-        let newIncome = Income(name: name, amount: amount, category: category, date: date)
+    func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
+        let newIncome = Income(name: name, amount: amount, date: date, incomeCategory: category)
         incomes.append(newIncome)
         CoreDataStack.shared.saveContext()
     }
@@ -32,16 +38,16 @@ class IncomeController {
     }
     
     // UPDATE
-    func updateIncome(income: Income, name: String, amount: Double, category: String, date: Date){
+    func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
         income.name = name
         income.amount = NSDecimalNumber(value: amount)
-        income.category = category
+        income.incomeCategory = category
         income.date = date
         CoreDataStack.shared.saveContext()
     }
     
     // DELETE
-    func deleteIncome(income: Income){
+    func deleteIncome(_ income: Income){
         CoreDataStack.shared.context.delete(income)
         CoreDataStack.shared.saveContext()
     }

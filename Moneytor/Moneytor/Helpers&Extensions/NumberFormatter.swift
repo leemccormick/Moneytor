@@ -7,38 +7,34 @@
 
 import Foundation
 
-extension NSNumber {
-    
-    func doubleToString(format: NSNumber) -> String {
-        let formatter = NumberFormatter()
-        formatter.isLenient = true
-        formatter.numberStyle = .decimal
-        // minimum decimal digit, eg: to display 2 as 2.00
-        formatter.minimumFractionDigits = 2
-        // maximum decimal digit, eg: to display 2.5021 as 2.50
-        formatter.maximumFractionDigits = 2
+//extension NSNumber {
+//
+//    func doubleToString(format: NSNumber) -> String {
+//        let formatter = NumberFormatter()
+//        formatter.isLenient = true
+//        formatter.numberStyle = .decimal
+//        // minimum decimal digit, eg: to display 2 as 2.00
+//        formatter.minimumFractionDigits = 2
+//        // maximum decimal digit, eg: to display 2.5021 as 2.50
+//        formatter.maximumFractionDigits = 2
+//
+//        return formatter.string(from: format) ?? "$00.00"
+//    }
+//
+//
+//    func doubleToCurrencyString(format: NSNumber) -> String {
+//    let formatter = NumberFormatter()
+//formatter.locale = Locale.current // Change this to another locale if you want to force a specific locale, otherwise this is redundant as the current locale is the default already
+//formatter.numberStyle = .currency
+//    return formatter.string(from: format) ?? "$00.00"
+//}
+//
+//
+//
+//}
 
-        return formatter.string(from: format) ?? "$00.00"
-    }
-    
-    
-    func doubleToCurrencyString(format: NSNumber) -> String {
-    let formatter = NumberFormatter()
-formatter.locale = Locale.current // Change this to another locale if you want to force a specific locale, otherwise this is redundant as the current locale is the default already
-formatter.numberStyle = .currency
-    return formatter.string(from: format) ?? "$00.00"
-}
-    
-}
 
-/*
-
-func dateToString(format: DateFormatType) -> String{
-    let formatter = DateFormatter()
-    formatter.dateFormat = format.rawValue
-    return formatter.string(from: self)
-}
-struct Formatter {
+struct AmountFormatter {
 
     static let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -49,7 +45,7 @@ struct Formatter {
         return formatter
     }()
     
-    static let numberFormatterIn2DecimalPlaces: NumberFormatter = {
+    static let numberIn2DecimalPlaces: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.isLenient = true
         formatter.numberStyle = .decimal
@@ -62,7 +58,7 @@ struct Formatter {
     }()
     
     
-    static let numberFormatterInPercent: NumberFormatter = {
+    static let numberInPercent: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.isLenient = true
         formatter.numberStyle = .percent
@@ -74,13 +70,17 @@ struct Formatter {
         return formatter
     }()
     
-    static let numberFormatterInEachCurrency: NumberFormatter = {
+    static let numberInEachCurrency: NumberFormatter = {
         let formatter = NumberFormatter()
     formatter.locale = Locale.current // Change this to another locale if you want to force a specific locale, otherwise this is redundant as the current locale is the default already
     formatter.numberStyle = .currency
         return formatter
     }()
+    
+//    static func doubleToStringInCurrency(amount: Double) {
+//        self.numberFormatterIn2DecimalPlaces.string(from: NSNumber(value: ?? 0)) ?? ""
+//    }
         
 }
-*/
+
 

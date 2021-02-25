@@ -18,8 +18,8 @@ class IncomeListTableViewController: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-    let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+    // let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+       // view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +48,7 @@ class IncomeListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCell", for: indexPath)
         let income = IncomeController.shared.incomes[indexPath.row]
-        cell.textLabel?.text = income.incomeCategoryString.systemNameIcon + " " + income.incomeNameString
+        cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString)"
         cell.detailTextLabel?.text = income.incomeAmountString
         // Configure the cell...
         return cell
@@ -61,7 +61,7 @@ class IncomeListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let income = IncomeController.shared.incomes[indexPath.row]
-            IncomeController.shared.deleteIncome(income: income)
+            IncomeController.shared.deleteIncome(income)
             tableView.reloadData()
         }
     }

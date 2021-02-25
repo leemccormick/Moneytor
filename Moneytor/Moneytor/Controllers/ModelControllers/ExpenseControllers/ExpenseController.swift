@@ -19,8 +19,8 @@ class ExpenseController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createIncome(name: String, amount:Double, category: String, date: Date) {
-        let newExpense = Expense(name: name, amount: amount, category: category, date: date)
+    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
+        let newExpense = Expense(name: name, amount: amount, date: date, expensesCategory: category)
         expenses.append(newExpense)
         CoreDataStack.shared.saveContext()
     }
@@ -32,16 +32,16 @@ class ExpenseController {
     }
     
     // UPDATE
-    func updateExpense(expense: Expense, name: String, amount: Double, category: String, date: Date){
+    func updateWith(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){
         expense.name = name
         expense.amount = NSDecimalNumber(value: amount)
-        expense.category = category
+        expense.expenseCategory = category
         expense.date = date
         CoreDataStack.shared.saveContext()
     }
     
     // DELETE
-    func deleteExpense(expense: Expense){
+    func deleteExpense(_ expense: Expense){
         CoreDataStack.shared.context.delete(expense)
         CoreDataStack.shared.saveContext()
     }

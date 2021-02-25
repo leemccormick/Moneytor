@@ -18,8 +18,8 @@ class ExpenseListTableViewController: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+//        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,8 +48,8 @@ class ExpenseListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
-        let expense = ExpenseController.shared.expenses[indexPath.row]
-        cell.textLabel?.text = expense.expenseCategoryString.systemNameIcon + " " + expense.expenseNameString
+      let expense = ExpenseController.shared.expenses[indexPath.row] 
+        cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
         cell.detailTextLabel?.text = expense.expenseAmountString
         return cell
     }
@@ -60,7 +60,7 @@ class ExpenseListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let expense = ExpenseController.shared.expenses[indexPath.row]
-            ExpenseController.shared.deleteExpense(expense: expense)
+            ExpenseController.shared.deleteExpense(expense)
             tableView.reloadData()
         }
     }

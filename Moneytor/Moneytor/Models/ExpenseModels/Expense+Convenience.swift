@@ -8,12 +8,13 @@
 import CoreData
 
 extension Expense {
-    @discardableResult convenience init(name: String, amount: Double, category: String, date: Date, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String, amount: Double, date: Date, expensesCategory: ExpenseCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.amount = NSDecimalNumber(value: amount)
-        self.category = category
         self.date = date
+        self.expenseCategory = expensesCategory
+       
     }
 }
 extension Expense {
@@ -23,15 +24,19 @@ extension Expense {
     }
     
     var expenseAmountString: String {
-        let amountString = NSString(format: "%@", self.amount ?? 00.00)
-           let newAmountString = "$ \(amountString as String)"
-           return newAmountString
+        let newFormatAmount = AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+        return "$ \(newFormatAmount)"
     }
     
-    var expenseCategoryString: IncomeCategory {
-          IncomeCategory(rawValue: category ?? "") ?? .other
-      }
+    var expenseAmountToUpdate: String {
+ AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+    }
     
+    
+//    var expenseCategoryString: IncomeCategory {
+//          IncomeCategory(rawValue: category ?? "") ?? .other
+//      }
+//    
     var expenseDateText: String {
         self.date?.dateToString(format: .monthDayTimestamp) ?? Date().dateToString(format: .monthDayTimestamp)
     }
