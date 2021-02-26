@@ -13,7 +13,10 @@ class IncomeController {
     // MARK: - Properties
     static let shared = IncomeController()
     var incomes:[Income] = []
-    //var sections: [[IncomeCategory]] = []
+   
+    var sections: [[IncomeCategory]] = []
+    var numberOfSection: Int = 0
+    
     private lazy var fetchRequest: NSFetchRequest<Income> = {
         let request = NSFetchRequest<Income>(entityName: "Income")
         request.predicate = NSPredicate(value: true)
@@ -31,11 +34,31 @@ class IncomeController {
         CoreDataStack.shared.saveContext()
     }
     
+    
+    
     // READ
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomes = fetchIncomes
+        
+        // create section
+        // section 1
+        // iterate to each income
+//        for income in incomes {
+//            var newCategoryGroup: IncomeCategory
+//            newCategoryGroup = income.incomeCategory
+//            if income.incomeCategory
+//        }
+//        // check if income.catogry  name ==> Create newCategory
+        
+        //
+        
+        
     }
+    
+    
+    
+    
     
     // UPDATE
     func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){

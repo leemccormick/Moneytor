@@ -34,6 +34,10 @@ class IncomeCategoryController {
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomeCategories = fetchAllIncomeCatagories
+        
+//        for incomeCategory in incomeCategories {
+//            incomeCategory.
+//        }
     }
     
     // UPDATE

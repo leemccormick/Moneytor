@@ -17,8 +17,8 @@ extension Income {
     }
 }
 
-extension Income {
-    
+extension Income: SearchableRecordDelegate {
+ 
     var incomeNameString: String {
         name ?? ""
     }
@@ -41,4 +41,13 @@ extension Income {
         let newFormatAmount = AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
         return "$ \(newFormatAmount)"
     }
+    
+   
+//    //May be not need this 
+//    func isMatchingIncomeName(searchTerm: String) {
+//      
+//        self.matches(searchTerm: searchTerm, name: self.incomeNameString)
+//    }
+//     
 }
+

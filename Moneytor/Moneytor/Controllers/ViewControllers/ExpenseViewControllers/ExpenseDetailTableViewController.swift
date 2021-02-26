@@ -27,6 +27,8 @@ class ExpenseDetailTableViewController: UITableViewController {
         view.addGestureRecognizer(tap)
         expenseCategoryPicker.delegate = self
         expenseCategoryPicker.dataSource = self
+        expenseNameTextField.delegate = self
+        expenseAmountTextField.delegate = self
         updateView()
     }
 
@@ -120,3 +122,17 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
 }
+
+extension ExpenseDetailTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        return true
+    }
+}
+
+

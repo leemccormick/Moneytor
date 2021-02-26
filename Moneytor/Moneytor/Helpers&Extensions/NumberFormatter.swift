@@ -77,10 +77,18 @@ struct AmountFormatter {
         return formatter
     }()
     
-//    static func doubleToStringInCurrency(amount: Double) {
-//        self.numberFormatterIn2DecimalPlaces.string(from: NSNumber(value: ?? 0)) ?? ""
+//    func doubleToStringInCurrency(amount: Double) {
+//        self.numberFormatterIn2DecimalPlaces.string(from: NSNumber(value: ?? 0.0)) ?? ""
 //    }
-        
+    static func percentInString(num: Double) -> String {
+      let numberStringInPercent =  self.numberInPercent.string(for: num)
+        return numberStringInPercent ?? "0 %"
+    }
+    
+    static func currencyInString(num: Double) -> String {
+        let numberStringInCurrency = self.numberInEachCurrency.string(from: NSNumber(value: num))
+        return numberStringInCurrency ?? "$ 00.00"
+    }
 }
 
 
