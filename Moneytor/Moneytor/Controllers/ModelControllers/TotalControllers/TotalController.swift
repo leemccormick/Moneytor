@@ -13,8 +13,10 @@ class TotalController {
     var totalIncome: Double = 0.0
     var totalExpense: Double = 0.0
     var totalBalanceString: String = "$00.00"
-    var totalIncomeString: String = "00.00"
-    var totalExpenseString: String = "00.00"
+    var totalIncomeString: String = "$00.00"
+    var totalExpenseString: String = "$00.00"
+    var totalIncomeSearchResults: Double = 0.0
+    var totalIncomeSearchResultsInString: String = "$00.00"
     
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
@@ -52,6 +54,20 @@ class TotalController {
         totalBalanceString =  AmountFormatter.currencyInString(num: totalBalance)
 
         print("\n ::: TOTAL Balance : \(totalBalance)")
+    }
+    
+    func calculateTotalForSearchTermIncome(searchArrayResults: [Income]) {
+        IncomeController.shared.fetchAllIncomes()
+        var sum = 0.0
+        let results =  searchArrayResults
+        for result in results {
+            let amount = result.amount as? Double ?? 0.0
+            sum += amount
+        }
+        totalIncomeSearchResults = sum
+        totalIncomeSearchResultsInString =  AmountFormatter.currencyInString(num: totalIncomeSearchResults)
+
+        print("\n ::: TOTAL SEARCHRESULT : \(totalIncomeSearchResults)")
     }
     
     

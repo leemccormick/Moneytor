@@ -9,12 +9,14 @@ import Foundation
 
 // MARK: - Protocol
 protocol SearchableRecordDelegate {
-    func matches(searchTerm: String, name: String) -> Bool
+    func matches(searchTerm: String, name: String, category: String) -> Bool
 }
 
 extension SearchableRecordDelegate {
-    func matches(searchTerm: String, name: String) -> Bool {
+    func matches(searchTerm: String, name: String, category: String) -> Bool {
         if name.lowercased().contains(searchTerm.lowercased()) {
+            return true
+        } else if category.lowercased().contains(searchTerm.lowercased()){
             return true
         } else {
             return false

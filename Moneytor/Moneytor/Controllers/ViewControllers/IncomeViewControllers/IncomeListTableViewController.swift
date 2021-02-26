@@ -18,7 +18,14 @@ class IncomeListTableViewController: UITableViewController {
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
     var isSearching: Bool = false
     var dataSource: [SearchableRecordDelegate] {
+       // guard let dataSource = self.dataSource as? Income else {return IncomeController.shared.incomes}
+        //TotalController.shared.calculateTotalForSearchTermIncome(searchArrayResults: dataSource)
         return isSearching ? resultsIncomeFromSearching : IncomeController.shared.incomes
+    }
+    var totalIncomeSearching: Double = TotalController.shared.totalIncome {
+        didSet{
+            updateFooter(total: totalIncomeSearching)
+        }
     }
     
 
@@ -28,7 +35,7 @@ class IncomeListTableViewController: UITableViewController {
         incomeSearchBar.delegate = self
         
         TotalController.shared.calculateTotalIncome()
-        
+        print("\n ====================totalIncomeSearching ::: \(totalIncomeSearching) \n\n=====================")
        // resultsIncomeFromSearching = IncomeController.shared.incomes
         //incomeSearchBar.isUserInteractionEnabled = false
         //incomeSearchBar.isFirstResponder = true
@@ -39,8 +46,9 @@ class IncomeListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         resultsIncomeFromSearching = IncomeController.shared.incomes
-
         fetchAllIncome()
+        TotalController.shared.calculateTotalIncome()
+        updateFooter(total: TotalController.shared.totalIncome)
     }
     
     
@@ -61,6 +69,20 @@ class IncomeListTableViewController: UITableViewController {
     func fetchAllIncome() {
         IncomeController.shared.fetchAllIncomes()
         tableView.reloadData()
+    }
+    
+    func updateFooter(total: Double) {
+        let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
+        footer.backgroundColor = .mtDarkYellow
+        
+        let lable = UILabel(frame:footer.bounds)
+        let totalString = AmountFormatter.currencyInString(num: total)
+        lable.text = "TOTAL INCOMES : \(totalString)  "
+        lable.textAlignment = .center
+        lable.textColor = .mtTextDarkBrown
+        lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+        footer.addSubview(lable)
+        tableView.tableFooterView = footer
     }
     
     
@@ -94,7 +116,7 @@ class IncomeListTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let income = IncomeController.shared.incomes[indexPath.row]
+            guard let income = dataSource[indexPath.row] as? Income else {return}
             IncomeController.shared.deleteIncome(income)
             tableView.reloadData()
         }
@@ -107,7 +129,7 @@ class IncomeListTableViewController: UITableViewController {
         if segue.identifier == "toIncomeDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-            let income = IncomeController.shared.incomes[indexPath.row]
+            guard let income = dataSource[indexPath.row] as? Income else {return}
             destinationVC.income = income
         }
     }
@@ -119,10 +141,21 @@ class IncomeListTableViewController: UITableViewController {
 extension IncomeListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
            if !searchText.isEmpty {
-            resultsIncomeFromSearching = IncomeController.shared.incomes.filter { $0.matches(searchTerm: searchText, name: $0.incomeNameString) }
+            resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "")}
+            
+            guard let results = resultsIncomeFromSearching as? [Income] else {return}
+            TotalController.shared.calculateTotalForSearchTermIncome(searchArrayResults: results)
+            
+            totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
+            print("\n totalIncomeSearching IN SEARCH BAR TEXTDIDCHANGE::: \(totalIncomeSearching)")
+            
+            //{ $0.matches(searchTerm: searchText, name: $0.incomeNameString, catagory: $0.incomeCategory?.name) }
                self.tableView.reloadData()
            } else {
             resultsIncomeFromSearching = IncomeController.shared.incomes
+            guard let results = resultsIncomeFromSearching as? [Income] else {return}
+            TotalController.shared.calculateTotalForSearchTermIncome(searchArrayResults: results)
+            totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
                self.tableView.reloadData()
            }
        }
@@ -160,7 +193,7 @@ extension IncomeListTableViewController: UISearchBarDelegate {
 /* NOTE NEED Help
  
  - Keyboard need to be hide after done searching on searchbar
- - The table view need to be load view data when first start!!
+ 
  
  
  //______________________________________________________________________________________

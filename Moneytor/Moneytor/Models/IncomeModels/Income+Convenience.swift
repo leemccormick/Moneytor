@@ -38,8 +38,9 @@ extension Income: SearchableRecordDelegate {
    
     
     var incomeAmountString: String {
-        let newFormatAmount = AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
-        return "$ \(newFormatAmount)"
+        AmountFormatter.currencyInString(num: amount as? Double ?? 0.0)
+//        let newFormatAmount = AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+//        return "$ \(newFormatAmount)"
     }
     
    
