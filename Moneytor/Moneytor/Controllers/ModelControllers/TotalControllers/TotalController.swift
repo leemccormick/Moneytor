@@ -28,7 +28,6 @@ class TotalController {
         }
         totalIncome = sumIncome
         totalIncomeString =  AmountFormatter.currencyInString(num: totalIncome)
-
         print("\n ::: TOTAL INCOME : \(totalIncome)")
     }
     
@@ -52,11 +51,10 @@ class TotalController {
         calculateTotalExpense()
         totalBalance = totalIncome - totalExpense
         totalBalanceString =  AmountFormatter.currencyInString(num: totalBalance)
-
         print("\n ::: TOTAL Balance : \(totalBalance)")
     }
     
-    func calculateTotalForSearchTermIncome(searchArrayResults: [Income]) {
+    func calculateTotalIncomeFrom(searchArrayResults: [Income]) {
         IncomeController.shared.fetchAllIncomes()
         var sum = 0.0
         let results =  searchArrayResults
@@ -70,5 +68,18 @@ class TotalController {
         print("\n ::: TOTAL SEARCHRESULT : \(totalIncomeSearchResults)")
     }
     
+//    func calculateTotalIncomeCatagory() {
+//        IncomeController.shared.fetchAllIncomes()
+//        var sumIncomeCategory = [String:Double]()
+//      let incomes =  IncomeController.shared.incomes
+//        for income in incomes {
+//            IncomeCategoryController.shared.fetchAllIncomeCategories()
+//            let incomeCategories = IncomeCategoryController.shared.incomeCategories
+//            for incomeCategory in incomeCategories {
+//                
+//            }
+//        }
+//    }
+//    
     
 }

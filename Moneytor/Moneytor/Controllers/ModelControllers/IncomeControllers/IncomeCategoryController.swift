@@ -15,6 +15,9 @@ class IncomeCategoryController {
     IncomeCategory(name: "checking", emoji: "🏧"),
     IncomeCategory(name: "other", emoji: "💵")
 ]
+    
+    var categorySections: [[Income]] = []
+    
     private lazy var fetchRequest: NSFetchRequest<IncomeCategory> = {
         let request = NSFetchRequest<IncomeCategory>(entityName: "IncomeCategory")
         request.predicate = NSPredicate(value: true)
@@ -23,9 +26,27 @@ class IncomeCategoryController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createIncomeCategories(name: String = "other", emoji: String = "💵"){
+    func createIncomeCategories(name: String, emoji: String) {
         let newIncomeCategory = IncomeCategory(name: name, emoji: emoji)
-        incomeCategories.append(newIncomeCategory)
+        
+        for incomeCategory in incomeCategories {
+            if newIncomeCategory == incomeCategory {
+                print("==================\n :: NEW INCOME CATEGORY IS DUPICATED. \(newIncomeCategory.name)\n=======================")
+//                
+//                let newIncategories = incomeCategories.removeDuplicates()
+//                        incomeCategories = newIncategories
+
+            } else {
+                
+            incomeCategories.append(newIncomeCategory)
+            }
+        }
+        
+        
+       
+        
+        
+        
        // incomeCategories.removeDuplicates()
         CoreDataStack.shared.saveContext()
     }
@@ -33,12 +54,26 @@ class IncomeCategoryController {
     // READ
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
+        
+       // let newIncategories =
         incomeCategories = fetchAllIncomeCatagories
         
-//        for incomeCategory in incomeCategories {
-//            incomeCategory.
-//        }
+      
     }
+    
+    func generateIncomeCategories() {
+        fetchAllIncomeCategories()
+        let newIncomeCategory = incomeCategories.removeDuplicates()
+        //var newIncomeCategory: [IncomeCategory] = []
+        for incomeCategory in newIncomeCategory {
+            let incomesCategory = incomeCategory.incomes
+            let newIncomesCategory = incomesCategory?.compactMap {$0 as? Income} ?? []
+            //newIncomeCategory.removeDuplicates()
+            categorySections.append(newIncomesCategory)
+        }
+    }
+    
+    
     
     // UPDATE
     

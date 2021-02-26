@@ -139,7 +139,7 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print(IncomeCategoryController.shared.incomeCategories.count)
+        print(":::::::::::IncomeCategoryController.shared.incomeCategories.count::::::::::::\(IncomeCategoryController.shared.incomeCategories.count)")
         return IncomeCategoryController.shared.incomeCategories.count
     }
     
