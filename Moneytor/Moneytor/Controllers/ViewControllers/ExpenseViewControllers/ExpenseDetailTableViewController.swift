@@ -57,6 +57,28 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         // For  and PickerView Update HERE.....
         
+        switch expense.expenseCategory?.name {
+        case "food":
+            expenseCategoryPicker.selectRow(1, inComponent: 0, animated: true)
+        case "utility":
+            expenseCategoryPicker.selectRow(2, inComponent: 0, animated: true)
+        case "health":
+            expenseCategoryPicker.selectRow(3, inComponent: 0, animated: true)
+        case "grocery":
+            expenseCategoryPicker.selectRow(4, inComponent: 0, animated: true)
+        case "shopping":
+            expenseCategoryPicker.selectRow(5, inComponent: 0, animated: true)
+        case "entertainment":
+            expenseCategoryPicker.selectRow(6, inComponent: 0, animated: true)
+        case "transportation":
+            expenseCategoryPicker.selectRow(7, inComponent: 0, animated: true)
+            
+        default:
+            expenseCategoryPicker.selectRow(0, inComponent: 0, animated: true)
+        }
+    
+        
+        
         
         
         

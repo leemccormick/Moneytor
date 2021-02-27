@@ -10,10 +10,11 @@ import CoreData
 class IncomeCategoryController {
     static let shared = IncomeCategoryController()
     var incomeCategories: [IncomeCategory] = [
+        IncomeCategory(name: "other", emoji: "💵"),
     IncomeCategory(name: "salary", emoji: "💳"),
     IncomeCategory(name: "saving", emoji: "💰"),
-    IncomeCategory(name: "checking", emoji: "🏧"),
-    IncomeCategory(name: "other", emoji: "💵")
+    IncomeCategory(name: "checking", emoji: "🏧")
+   
 ]
     
     var categorySections: [[Income]] = []

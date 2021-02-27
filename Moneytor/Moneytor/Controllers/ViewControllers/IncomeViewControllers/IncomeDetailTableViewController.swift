@@ -65,7 +65,17 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeAmountTextField.text = income.incomeAmountStringToUpdate
         
         //TO DO UPDATE :: PickerView?? Selected Income
-        // incomeCategoryPicker.selectRow(income.incomeCategory.hashValue, inComponent: 1, animated: true)
+        switch income.incomeCategory?.name {
+        case "salary":
+            incomeCategoryPicker.selectRow(1, inComponent: 0, animated: true)
+        case "saving":
+            incomeCategoryPicker.selectRow(2, inComponent: 0, animated: true)
+        case "checking":
+            incomeCategoryPicker.selectRow(3, inComponent: 0, animated: true)
+        default:
+            incomeCategoryPicker.selectRow(0, inComponent: 0, animated: true)
+        }
+    
         
         incomeDatePicker.date = income.date ?? Date()
         // incomeCategoryPicker.
