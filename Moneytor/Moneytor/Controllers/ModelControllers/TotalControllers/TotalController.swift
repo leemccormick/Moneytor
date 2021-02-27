@@ -84,19 +84,27 @@ class TotalController {
         print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
     
-    func calculateTotalExpenseFromEachCatagory() {
-print("==================\n :: calculateTotalExpenseFromEachCatagory\\n=======================")
-        let expensesCategories = ExpenseCategoryController.shared.expenseCategories
-        for category in expensesCategories {
-            print("==================\n :: Test \(category.name))\n=======================")
-            print(category.name)
-            print(category.expenses?.count)
-            print("==================\n :_\n=======================")
-        }
-        
-        print("\(#file)\(#line)")
+//    func calculateTotalExpenseFromEachCatagory() {
+//print("==================\n :: calculateTotalExpenseFromEachCatagory\\n=======================")
+//      // ExpenseCategoryController.shared.fetchAllExpenseCategory()
+//        ExpenseController.shared.fetchAllExpenses()
+//        let expensesCategories = ExpenseCategoryController.shared.expenseCategories
+//        for category in expensesCategories {
+//           // print("==================\n :: Test \(category.name))")
+//           // print(category.name)
+//           // print(category.expenses?.count)
+//           // print(category.expenses?.allObjects.count)
+//            let expenseArray = category.expenses?.allObjects as! [Expense]
+//            var sum = 0.0
+//            for expense in expenseArray {
+//                sum += expense.amount as! Double
+//            }
+//            print("-------------------\n \(category.name): total ::: \(sum) count :::\(category.expenses?.count)")
+//         
+//        }
+//        
 
-    }
+ //   }
     
     
 }

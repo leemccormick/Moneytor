@@ -20,14 +20,15 @@ class ExpenseController {
     // MARK: - CRUD Methods
     // CREATE
     func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
-        //let category = ExpenseCategory(name: category.name ?? <#default value#>, emoji: category.emoji)
-        
-        let newCategory = ExpenseCategory(name: category.name ?? "", emoji: category.emoji ?? "", id: category.id ?? "")
+    
+        let newCategory = category
         
         guard let newCategoryID = newCategory.id else {return}
        
         let newExpense = Expense(name: name, amount: amount, date: date, id: newCategoryID, expenseCategory: newCategory)
+        
         expenses.append(newExpense)
+        category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
     }
     

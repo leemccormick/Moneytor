@@ -18,6 +18,8 @@ extension Expense {
        
     }
 }
+
+
 extension Expense: SearchableRecordDelegate {
     
     var expenseNameString: String {

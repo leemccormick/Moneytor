@@ -17,10 +17,11 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedCategory: ExpenseCategory = ExpenseCategory(name: "other", emoji: "💸")
-    
+    var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
+//
     
     // MARK: - Life Cycle Methods
+       
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -40,6 +41,7 @@ class ExpenseDetailTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         updateView()
         //self.navigationItem.title = "Add Expense"
+        ExpenseCategoryController.shared.fetchAllExpenseCategory()
     }
     
     // MARK: - Actions
@@ -55,7 +57,7 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
-        TotalController.shared.calculateTotalExpenseFromEachCatagory()
+        ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
     }
     
     @IBAction func expensesDatePickerValueChange(_ sender: Any) {
@@ -91,19 +93,11 @@ class ExpenseDetailTableViewController: UITableViewController {
         default:
             expenseCategoryPicker.selectRow(0, inComponent: 0, animated: true)
         }
-    
-        
-        
-        
-        
-        
         expenseDatePicker.date = expense.date ?? Date()
         
     }
     
     func saveExpense() {
-        
-        
         guard let name = expenseNameTextField.text, !name.isEmpty else {
             if expenseAmountTextField.text?.isEmpty == true  {
                 presentErrorToUser(titleAlert: "EXPENSE'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
@@ -115,8 +109,6 @@ class ExpenseDetailTableViewController: UITableViewController {
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
             presentErrorToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
-        
-        
         
         if let expense = expense {
            // navigationController?.title = "Update Expense"
