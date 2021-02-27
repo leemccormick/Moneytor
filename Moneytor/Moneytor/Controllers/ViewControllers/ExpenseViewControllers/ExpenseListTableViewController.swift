@@ -11,7 +11,7 @@ class ExpenseListTableViewController: UITableViewController {
 
     
     // MARK: - Outlets
-    @IBOutlet weak var expenseSearchBar: UISearchBar!
+    @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -24,26 +24,51 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     
+    var totalExpenseSearching: Double = TotalController.shared.totalExpense {
+        didSet{
+            updateFooter(total: totalExpenseSearching)
+        }
+    }
+    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
-//        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-//        view.addGestureRecognizer(tap)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ExpenseController.shared.fetchAllExpenses()
-        tableView.reloadData()
+        fetchAllExpenses()
     }
 
     
     // MARK: - Actions
-    
     @IBAction func calendarButtonTapped(_ sender: Any) {
     }
+    
+    func fetchAllExpenses(){
+        ExpenseController.shared.fetchAllExpenses()
+        resultsExpenseFromSearching = ExpenseController.shared.expenses
+        TotalController.shared.calculateTotalExpense()
+        updateFooter(total: TotalController.shared.totalExpense)
+        tableView.reloadData()
+    }
+    
+    func updateFooter(total: Double) {
+        let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
+        footer.backgroundColor = .mtDarkYellow
+        let lable = UILabel(frame:footer.bounds)
+        let totalString = AmountFormatter.currencyInString(num: total)
+        lable.text = "TOTAL EXPENSES : \(totalString)  "
+        lable.textAlignment = .center
+        lable.textColor = .mtTextDarkBrown
+        lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+        footer.addSubview(lable)
+        tableView.tableFooterView = footer
+    }
+    
     
     // MARK: - Table view data source
 
@@ -92,21 +117,28 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
 
 func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
        if !searchText.isEmpty {
+        
+        
         resultsExpenseFromSearching = ExpenseController.shared.expenses.filter {$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
+        
+        guard let results = resultsExpenseFromSearching as? [Expense] else {return}
+        TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
+        self.tableView.reloadData()
         
         //{ $0.matches(searchTerm: searchText, name: $0.incomeNameString, catagory: $0.incomeCategory?.name) }
            self.tableView.reloadData()
        } else {
         resultsExpenseFromSearching = ExpenseController.shared.expenses
-           self.tableView.reloadData()
+        guard let results = resultsExpenseFromSearching as? [Expense] else {return}
+        TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
+        self.tableView.reloadData()
        }
    }
 
    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder() //Resign the keyboard when user done.
+    searchBar.resignFirstResponder()
     searchBar.text = ""
      isSearching = false
-//           resultsArray = ContactController.shared.contacts
     resultsExpenseFromSearching = ExpenseController.shared.expenses
     self.tableView.reloadData()
    }
@@ -122,7 +154,6 @@ func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
    
    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
-    //self.incomeSearchBar.endEditing(true)
      isSearching = false
    }
 

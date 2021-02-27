@@ -17,6 +17,8 @@ class TotalController {
     var totalExpenseString: String = "$00.00"
     var totalIncomeSearchResults: Double = 0.0
     var totalIncomeSearchResultsInString: String = "$00.00"
+    var totalExpenseSearchResults: Double = 0.0
+    var totalExpenseSearchResultsInString: String = "$00.00"
     
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
@@ -65,20 +67,21 @@ class TotalController {
         totalIncomeSearchResults = sum
         totalIncomeSearchResultsInString =  AmountFormatter.currencyInString(num: totalIncomeSearchResults)
 
-        print("\n ::: TOTAL SEARCHRESULT : \(totalIncomeSearchResults)")
+        print("\n ::: TOTAL INCOME SEARCHRESULT : \(totalIncomeSearchResults)")
     }
     
-    func calculateTotalIncomeCatagory() {
-        IncomeController.shared.fetchAllIncomes()
-        var sumIncomeCategory = [String:Double]()
-      let incomes =  IncomeController.shared.incomes
-        for income in incomes {
-            IncomeCategoryController.shared.fetchAllIncomeCategories()
-            let incomeCategories = IncomeCategoryController.shared.incomeCategories
-            for incomeCategory in incomeCategories {
-                
-            }
+    func calculateTotalExpenseFrom(searchArrayResults: [Expense]) {
+        ExpenseController.shared.fetchAllExpenses()
+        var sum = 0.0
+        let results =  searchArrayResults
+        for result in results {
+            let amount = result.amount as? Double ?? 0.0
+            sum += amount
         }
+        totalExpenseSearchResults = sum
+        totalExpenseSearchResultsInString =  AmountFormatter.currencyInString(num: totalExpenseSearchResults)
+
+        print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
     
     

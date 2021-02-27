@@ -40,24 +40,7 @@ class IncomeController {
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomes = fetchIncomes
-        
-        // create section
-        // section 1
-        // iterate to each income
-//        for income in incomes {
-//            var newCategoryGroup: IncomeCategory
-//            newCategoryGroup = income.incomeCategory
-//            if income.incomeCategory
-//        }
-//        // check if income.catogry  name ==> Create newCategory
-        
-        //
-        
-        
     }
-    
-    
-    
     
     
     // UPDATE
@@ -72,6 +55,7 @@ class IncomeController {
     // DELETE
     func deleteIncome(_ income: Income){
         CoreDataStack.shared.context.delete(income)
+        fetchAllIncomes()
         CoreDataStack.shared.saveContext()
     }
 

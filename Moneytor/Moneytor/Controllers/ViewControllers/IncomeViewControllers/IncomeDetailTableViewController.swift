@@ -72,7 +72,9 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     func saveIncome() {
-        guard let name = incomeNameTextField.text, !name.isEmpty else {return}
+        guard let name = incomeNameTextField.text, !name.isEmpty else {
+            
+            return }
         guard let amount = incomeAmount.text, !amount.isEmpty else {return}
         
         if let income = income {
@@ -97,38 +99,6 @@ class IncomeDetailTableViewController: UITableViewController {
             return CGFloat(40.0)
         }
     }
-    
-    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//    if section == 3 {
-//    let button = UIButton(type: .system)
-//    button.setTitle("close", for: .normal)
-//    button.setTitleColor(.systemBlue, for: .normal)
-//    button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
-//    return button
-//    }
-//    return nil
-//    }
-//
-//    @objc func handleExpandClose(button: UIButton) {
-//    let section = 3
-//    var indexPaths = [IndexPath]()
-//    button.setTitle(isExpanded ? "open" : "close", for: .normal)
-//    if isExpanded {
-//    for row in inactiveContacts {
-//    let indexPath = IndexPath(row: inactiveContacts.index(of: row), section: section)
-//    IndexPaths.append(indexPath)
-//    }
-//    inactiveContacts.removeAllObjects()
-//    tableView.deleteRows(at: indexPaths, with: .fade)
-//    isExpanded = false
-//    } else {
-//    self.loadAllPartnerContacts()
-//    isExpanded = true
-//    }
-//    }
-    
-    
 }
 
 

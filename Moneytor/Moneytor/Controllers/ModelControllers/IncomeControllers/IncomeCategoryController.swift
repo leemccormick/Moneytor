@@ -32,9 +32,6 @@ class IncomeCategoryController {
         for incomeCategory in incomeCategories {
             if newIncomeCategory == incomeCategory {
                 print("==================\n :: NEW INCOME CATEGORY IS DUPICATED. \(newIncomeCategory.name)\n=======================")
-//                
-//                let newIncategories = incomeCategories.removeDuplicates()
-//                        incomeCategories = newIncategories
 
             } else {
                 
