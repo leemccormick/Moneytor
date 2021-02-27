@@ -68,18 +68,18 @@ class TotalController {
         print("\n ::: TOTAL SEARCHRESULT : \(totalIncomeSearchResults)")
     }
     
-//    func calculateTotalIncomeCatagory() {
-//        IncomeController.shared.fetchAllIncomes()
-//        var sumIncomeCategory = [String:Double]()
-//      let incomes =  IncomeController.shared.incomes
-//        for income in incomes {
-//            IncomeCategoryController.shared.fetchAllIncomeCategories()
-//            let incomeCategories = IncomeCategoryController.shared.incomeCategories
-//            for incomeCategory in incomeCategories {
-//                
-//            }
-//        }
-//    }
-//    
+    func calculateTotalIncomeCatagory() {
+        IncomeController.shared.fetchAllIncomes()
+        var sumIncomeCategory = [String:Double]()
+      let incomes =  IncomeController.shared.incomes
+        for income in incomes {
+            IncomeCategoryController.shared.fetchAllIncomeCategories()
+            let incomeCategories = IncomeCategoryController.shared.incomeCategories
+            for incomeCategory in incomeCategories {
+                
+            }
+        }
+    }
+    
     
 }
