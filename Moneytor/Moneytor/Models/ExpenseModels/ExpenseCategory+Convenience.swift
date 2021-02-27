@@ -33,6 +33,32 @@ extension ExpenseCategory {
         id ?? ""
     }
     
+    
+//   func insert(at id: String?, into category: String?) -> Self? {
+//        //unwrap managed object context and id
+//       // let  context = CoreDataStack.shared.context
+//
+//        guard let context = context, let id = id else {return nil}
+//        
+//        guard let context = context, let id = id else { return nil }
+//        let categoryName = category ?? self.entityName //the table name in CoreData
+//        let request: NSFetchRequest<Self> = NSFetchRequest(entityName: categoryName)
+//        request.predicate = NSPredicate(format: "id == %@", id) //filter only results matching 'id'
+//        if let result = try? context.fetch(request), let object = result.first
+//        {
+//            //return the existing object
+//            return object
+//        }
+//        else if let entity = NSEntityDescription.entity(forEntityName: tableName, in: context)
+//        {
+//            //initialize and return a new object
+//            return self.init(entity: entity, insertInto: context)
+//        }
+//        return nil
+//    }
+    
+    
+    
 //    func removeExpenseDuplicates() -> [ExpenseCategory] {
 //        var results = [ExpenseCategory]()
 //        

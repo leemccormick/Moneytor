@@ -29,42 +29,38 @@ class ExpenseCategoryController {
     // MARK: - CRUD Methods
     // CREATE
     func createExpenseCategories(name: String, emoji: String){
-        let newExpenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
-fetchAllExpenseCategory()
+        let expenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
         
-        if expenseCategories.count > 0 {
-         for x in expenseCategories {
-            if x.name == newExpenseCategory.name {
-                 print("Unable to create new ExpenseCategory because The Category' Name Already exist !! ")
-                 //mainManagedObjectContext.deleteObject(x)
-               }
-             }
-          }
-        expenseCategories.append(newExpenseCategory)
-        CoreDataStack.shared.saveContext()
-    }
-    
+        let newExpenseCategory = insertExpenseCategoryWith(at: expenseCategory.name)
+        guard let category = newExpenseCategory else {return}
+        expenseCategories.append(category)
+               
+               CoreDataStack.shared.saveContext()
+           }
+           
+
     // READ
     func fetchAllExpenseCategory(){
         
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
-//         if fetchAllExpenseCatagories.count > 0 {
-//            expenseCategories = fetchAllExpenseCatagories
-//          for x in fetchAllExpenseCatagories {
-//            for j in expenseCategories {
-//                if x.name == j.name {
-//                  print("already exist")
-//                CoreDataStack.shared.context.delete(x)
-//                }
-//              }
-//          }
-//        }
+
+        var newfetch: [ExpenseCategory] = []
         
-        expenseCategories = fetchAllExpenseCatagories.removeDuplicates()
-        //expenseCategories.removeDuplicates()
-        CoreDataStack.shared.saveContext()
+        for expense in fetchAllExpenseCatagories {
+            let newInsertCategory = insertExpenseCategoryWith(at: expense.name)
+            
+            guard let newInsert = newInsertCategory else {return}
+            
+            newfetch.append(newInsert)
+          //  CoreDataStack.shared.saveContext()
+        }
+        
+        
+        expenseCategories = newfetch
+        
+  CoreDataStack.shared.saveContext()
         print(expenseCategories.count)
-        print("==================\n :: expenseCategories.count \(expenseCategories.count)\n=======================")
+        print("==================\n :: expenseCategories.countn \(expenseCategories.count)\n=======================")
     }
     
     // READ
@@ -74,6 +70,10 @@ fetchAllExpenseCategory()
 //       
        fetchAllExpenseCategory()
            for category in expenseCategories {
+            
+            
+            
+            
                let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
                var sum = 0.0
                for expense in expenseArray {
@@ -84,36 +84,35 @@ fetchAllExpenseCategory()
            }
         
     }
-           
+    
+    func insertExpenseCategoryWith(at name: String?) -> ExpenseCategory? {
+      
+        //unwrap managed object context and id
+        let  context = CoreDataStack.shared.context
 
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Card")
-//                var resultsArr:[Card] = []
-//                do {
-//                    resultsArr = try (mainManagedObjectContext!.fetch(fetchRequest) as! [Card])
-//                } catch {
-//                    let fetchError = error as NSError
-//                    print(fetchError)
-//                }
-//
-//         if resultsArr.count > 0 {
-//          for x in resultsArr {
-//            if x.id == id {
-//                  print("already exist")
-//                  mainManagedObjectContext.deleteObject(x)
-//                }
-//              }
-//           }
-//
+        //guard let context = context, let id,
+        
+        guard let id = name else { return nil }
+        let categoryName = "ExpenseCategory" //the table name in CoreData
+        let request: NSFetchRequest<ExpenseCategory> = NSFetchRequest(entityName: categoryName)
         
         
-//        func isExist(id: Int) -> Bool {
-//            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ExpenseCategory")
-//            fetchRequest.predicate = NSPredicate(format: "id = %d", argumentArray: name)
-//
-//            let res = try! theContext.fetch(fetchRequest)
-//            return res.count > 0 ? true : false
-//        }
-//
-//       }
+        request.predicate = NSPredicate(format: "id == %@", id) //filter only results matching 'id'
+        
+        
+        if let result = try? context.fetch(request), let object = result.first
+        {
+            //return the existing object
+            return object
+        }
+        else if let entity = NSEntityDescription.entity(forEntityName: categoryName, in: context)
+        {
+            //initialize and return a new object
+            return ExpenseCategory.init(entity: entity, insertInto: context)
+                
+//                self.init(entity: entity, insertInto: context)
+        }
+        return nil
+    }
 }
 

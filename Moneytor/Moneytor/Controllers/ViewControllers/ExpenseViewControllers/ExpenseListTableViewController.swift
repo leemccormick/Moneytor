@@ -49,6 +49,8 @@ class ExpenseListTableViewController: UITableViewController {
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
 //        TotalController.shared.calculateTotalExpenseFromEachCatagory()
         ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
+        
+        ExpenseCategoryController.shared.fetchAllExpenseCategory()
     }
     
     func fetchAllExpenses(){
