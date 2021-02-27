@@ -29,9 +29,18 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseCategoryPicker.dataSource = self
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
-        updateView()
+//        updateView()
+       // self.navigationItem.title = "Add Expense"
+
+        
+        print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateView()
+        //self.navigationItem.title = "Add Expense"
+    }
     
     // MARK: - Actions
     
@@ -45,6 +54,8 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
+        print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
+        TotalController.shared.calculateTotalExpenseFromEachCatagory()
     }
     
     @IBAction func expensesDatePickerValueChange(_ sender: Any) {
@@ -52,7 +63,11 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Helper Fuctions
     func updateView() {
-        guard let expense = expense else {return}
+        guard let expense = expense else {
+            self.navigationItem.title = "Add Expense"
+            return
+        }
+        self.navigationItem.title = "Update Expense"
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         // For  and PickerView Update HERE.....
@@ -104,8 +119,10 @@ class ExpenseDetailTableViewController: UITableViewController {
         
         
         if let expense = expense {
+           // navigationController?.title = "Update Expense"
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
+            //navigationController?.title = "Update Expense"
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         }
         
@@ -133,7 +150,7 @@ class ExpenseDetailTableViewController: UITableViewController {
    }
 }
 
-// MARK: - Picker
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
    
@@ -164,6 +181,7 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
     
 }
 
+// MARK: - UITextFieldDelegate
 extension ExpenseDetailTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = ""

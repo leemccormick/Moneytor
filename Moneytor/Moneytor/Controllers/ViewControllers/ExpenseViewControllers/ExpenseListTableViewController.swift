@@ -98,6 +98,8 @@ class ExpenseListTableViewController: UITableViewController {
         if editingStyle == .delete {
             guard let expense = dataSource[indexPath.row] as? Expense else {return}
             ExpenseController.shared.deleteExpense(expense)
+            TotalController.shared.calculateTotalExpense()
+            updateFooter(total: TotalController.shared.totalExpense)
             tableView.reloadData()
         }
     }

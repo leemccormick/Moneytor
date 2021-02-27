@@ -34,9 +34,11 @@ class ExpenseCategoryController {
     }
     
     // READ
-    func fetchAllIncomeCategories(){
-        let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
-        expenseCategories = fetchAllIncomeCatagories
+    func fetchAllExpenseCategory(){
+        let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
+        expenseCategories = fetchAllExpenseCatagories
+        print(expenseCategories.count)
+        print("==================\n :: expenseCategories.count \(expenseCategories.count)\n=======================")
     }
     
     // UPDATE

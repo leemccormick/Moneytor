@@ -8,12 +8,13 @@
 import CoreData
 
 extension Expense {
-    @discardableResult convenience init(name: String, amount: Double, date: Date, expensesCategory: ExpenseCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String, amount: Double, date: Date, id: String, expenseCategory: ExpenseCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.amount = NSDecimalNumber(value: amount)
         self.date = date
-        self.expenseCategory = expensesCategory
+        self.id = id
+        self.expenseCategory = expenseCategory
        
     }
 }

@@ -20,7 +20,13 @@ class ExpenseController {
     // MARK: - CRUD Methods
     // CREATE
     func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
-        let newExpense = Expense(name: name, amount: amount, date: date, expensesCategory: category)
+        //let category = ExpenseCategory(name: category.name ?? <#default value#>, emoji: category.emoji)
+        
+        let newCategory = ExpenseCategory(name: category.name ?? "", emoji: category.emoji ?? "", id: category.id ?? "")
+        
+        guard let newCategoryID = newCategory.id else {return}
+       
+        let newExpense = Expense(name: name, amount: amount, date: date, id: newCategoryID, expenseCategory: newCategory)
         expenses.append(newExpense)
         CoreDataStack.shared.saveContext()
     }
@@ -43,7 +49,7 @@ class ExpenseController {
     // DELETE
     func deleteExpense(_ expense: Expense){
         CoreDataStack.shared.context.delete(expense)
-        fetchAllExpenses()
         CoreDataStack.shared.saveContext()
+        fetchAllExpenses()
     }
 }

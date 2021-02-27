@@ -84,5 +84,19 @@ class TotalController {
         print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
     
+    func calculateTotalExpenseFromEachCatagory() {
+print("==================\n :: calculateTotalExpenseFromEachCatagory\\n=======================")
+        let expensesCategories = ExpenseCategoryController.shared.expenseCategories
+        for category in expensesCategories {
+            print("==================\n :: Test \(category.name))\n=======================")
+            print(category.name)
+            print(category.expenses?.count)
+            print("==================\n :_\n=======================")
+        }
+        
+        print("\(#file)\(#line)")
+
+    }
+    
     
 }

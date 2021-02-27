@@ -30,9 +30,14 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeCategoryPicker.dataSource = self
         incomeNameTextField.delegate = self
         incomeAmountTextField.delegate = self
-        updateViews()
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateViews()
+    }
     
     
     
@@ -60,7 +65,11 @@ class IncomeDetailTableViewController: UITableViewController {
     
     // MARK: - Helper Fuctions
     func updateViews() {
-        guard let income = income else {return}
+        guard let income = income else {
+            self.navigationItem.title = "Add Income"
+            return
+        }
+        self.navigationItem.title = "Update Income"
         incomeNameTextField.text = income.name
         incomeAmountTextField.text = income.incomeAmountStringToUpdate
         

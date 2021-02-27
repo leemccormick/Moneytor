@@ -114,6 +114,9 @@ class IncomeListTableViewController: UITableViewController {
         if editingStyle == .delete {
             guard let income = dataSource[indexPath.row] as? Income else {return}
             IncomeController.shared.deleteIncome(income)
+         //   updateFooter(total: totalIncomeSearching)
+            TotalController.shared.calculateTotalIncome()
+            updateFooter(total: TotalController.shared.totalIncome)
             tableView.reloadData()
         }
     }

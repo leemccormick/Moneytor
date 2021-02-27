@@ -55,8 +55,8 @@ class IncomeController {
     // DELETE
     func deleteIncome(_ income: Income){
         CoreDataStack.shared.context.delete(income)
-        fetchAllIncomes()
         CoreDataStack.shared.saveContext()
+        fetchAllIncomes()
     }
 
 // MARK: - Subscribe For Romote Notifications
