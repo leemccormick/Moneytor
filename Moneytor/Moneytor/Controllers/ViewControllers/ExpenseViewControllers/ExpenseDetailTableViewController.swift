@@ -56,18 +56,37 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         // For  and PickerView Update HERE.....
+        
+        
+        
+        
         expenseDatePicker.date = expense.date ?? Date()
         
     }
     
     func saveExpense() {
-        guard let name = expenseNameTextField.text, !name.isEmpty else {return}
-        guard let amount = expenseAmountTextField.text, !amount.isEmpty else {return}
+        
+        
+        guard let name = expenseNameTextField.text, !name.isEmpty else {
+            if expenseAmountTextField.text?.isEmpty == true  {
+                presentErrorToUser(titleAlert: "EXPENSE'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
+            } else {
+                presentErrorToUser(titleAlert: "EXPENSE'S NAME!", messageAlert: "Don't forget to name your expense!")
+            }
+            return
+        }
+        guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
+            presentErrorToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
+            return}
+        
+        
+        
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         }
+        
         navigationController?.popViewController(animated: true)
     }
     

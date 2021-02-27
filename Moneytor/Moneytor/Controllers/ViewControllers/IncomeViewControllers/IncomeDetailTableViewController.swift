@@ -11,7 +11,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var incomeNameTextField: MoneytorTextField!
-    @IBOutlet weak var incomeAmount: MoneytorTextField!
+    @IBOutlet weak var incomeAmountTextField: MoneytorTextField!
     @IBOutlet weak var incomeCategoryPicker: UIPickerView!
     @IBOutlet weak var incomeDatePicker: UIDatePicker!
     
@@ -29,7 +29,7 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeCategoryPicker.delegate = self
         incomeCategoryPicker.dataSource = self
         incomeNameTextField.delegate = self
-        incomeAmount.delegate = self
+        incomeAmountTextField.delegate = self
         updateViews()
     }
     
@@ -62,7 +62,7 @@ class IncomeDetailTableViewController: UITableViewController {
     func updateViews() {
         guard let income = income else {return}
         incomeNameTextField.text = income.name
-        incomeAmount.text = income.incomeAmountStringToUpdate
+        incomeAmountTextField.text = income.incomeAmountStringToUpdate
         
         //TO DO UPDATE :: PickerView?? Selected Income
         // incomeCategoryPicker.selectRow(income.incomeCategory.hashValue, inComponent: 1, animated: true)
@@ -73,9 +73,18 @@ class IncomeDetailTableViewController: UITableViewController {
     
     func saveIncome() {
         guard let name = incomeNameTextField.text, !name.isEmpty else {
+            if incomeAmountTextField.text?.isEmpty == true  {
+                presentErrorToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
+            } else {
+                presentErrorToUser(titleAlert: "INCOME'S NAME!", messageAlert: "Don't forget to name your income!")
+            }
+            return
             
-            return }
-        guard let amount = incomeAmount.text, !amount.isEmpty else {return}
+        }
+        guard let amount = incomeAmountTextField.text, !amount.isEmpty else {
+            presentErrorToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
+            return
+        }
         
         if let income = income {
             IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date)
