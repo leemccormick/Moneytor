@@ -46,7 +46,11 @@ class ExpenseController {
     
     // DELETE
     func deleteExpense(_ expense: Expense){
+        
+        //guard let expenseCategory = expense.expenseCategory else {return}
+        expense.expenseCategory?.removeFromExpenses(expense)
         CoreDataStack.shared.context.delete(expense)
+       
         CoreDataStack.shared.saveContext()
         fetchAllExpenses()
     }
