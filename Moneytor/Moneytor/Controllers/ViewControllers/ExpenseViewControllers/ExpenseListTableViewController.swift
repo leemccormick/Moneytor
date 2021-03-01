@@ -35,6 +35,7 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
+        fetchAllExpenses()
 
     }
     

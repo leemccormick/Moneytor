@@ -17,8 +17,12 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
+    //let defaultCategory = ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
+// var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
 //
+    var selectedCategory: ExpenseCategory?
+    
+   // var selectedCategory: [Expense]?
     
     // MARK: - Life Cycle Methods
        
@@ -32,6 +36,7 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseAmountTextField.delegate = self
 //        updateView()
        // self.navigationItem.title = "Add Expense"
+        ExpenseCategoryController.shared.fetchAllExpenseCategory()
 
         
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
@@ -110,8 +115,11 @@ class ExpenseDetailTableViewController: UITableViewController {
             presentErrorToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
         
+        guard let selectedCategory = selectedCategory else {return}
+
         if let expense = expense {
            // navigationController?.title = "Update Expense"
+           
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
             //navigationController?.title = "Update Expense"

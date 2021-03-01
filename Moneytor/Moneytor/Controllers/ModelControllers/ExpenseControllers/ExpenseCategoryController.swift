@@ -9,16 +9,18 @@ import CoreData
 
 class ExpenseCategoryController {
     static let shared = ExpenseCategoryController()
-    var expenseCategories: [ExpenseCategory] = [
-    ExpenseCategory(name: "other", emoji: "💸",expenses: nil),
-                ExpenseCategory(name: "food", emoji: "🍔",expenses: nil),
-                ExpenseCategory(name: "utility", emoji: "📞",expenses: nil),
-                ExpenseCategory(name: "health", emoji: "💪",expenses: nil),
-                ExpenseCategory(name: "grocery", emoji: "🛒",expenses: nil),
-                ExpenseCategory(name: "shopping", emoji: "🛍",expenses: nil),
-                ExpenseCategory(name: "entertainment", emoji: "🎬",expenses: nil),
-                ExpenseCategory(name: "transportation", emoji: "🚘",expenses: nil)
-    ]
+//    var expenseCategoriesDefaultForFirstLunch: [ExpenseCategory] = [
+//        ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
+//                ExpenseCategory(name: "food", emoji: "🍔", id: "598DEBF2-E017-4536-AF32-E9BEDF0A3D81", expenses: nil),
+//                ExpenseCategory(name: "utility", emoji: "📞", id: "EFD4377B-161B-4563-A312-F7013BE7E0F7", expenses: nil),
+//                ExpenseCategory(name: "health", emoji: "💪",  id: "EF566A40-6A34-477F-BCDD-71FB9CBA8CED", expenses: nil),
+//                ExpenseCategory(name: "grocery", emoji: "🛒",  id: "0E435DAB-E1E0-43FF-84B6-5B14BF18C541", expenses: nil),
+//                ExpenseCategory(name: "shopping", emoji: "🛍",  id: "162E5287-35CA-4DDC-BE58-1784534FBA70", expenses: nil),
+//                ExpenseCategory(name: "entertainment", emoji: "🎬",  id: "36FE22EE-A735-4612-BFED-C4587FA8CD62", expenses: nil),
+//                ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
+//    ]
+    
+    var expenseCategories: [ExpenseCategory] = []
 
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
@@ -43,24 +45,25 @@ class ExpenseCategoryController {
     func fetchAllExpenseCategory(){
         
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
-
-        var newfetch: [ExpenseCategory] = []
-        
-        for expense in fetchAllExpenseCatagories {
-            let newInsertCategory = insertExpenseCategoryWith(at: expense.name)
-            
-            guard let newInsert = newInsertCategory else {return}
-            
-            newfetch.append(newInsert)
-           CoreDataStack.shared.saveContext()
-        }
-        
-        
-        expenseCategories = newfetch
-        
- CoreDataStack.shared.saveContext()
-        print(expenseCategories.count)
-        print("==================\n :: expenseCategories.countn \(expenseCategories.count)\n=======================")
+        expenseCategories = fetchAllExpenseCatagories
+//
+//        var newfetch: [ExpenseCategory] = []
+//
+//        for expense in fetchAllExpenseCatagories {
+//            let newInsertCategory = insertExpenseCategoryWith(at: expense.name)
+//
+//            guard let newInsert = newInsertCategory else {return}
+//
+//            newfetch.append(newInsert)
+//           CoreDataStack.shared.saveContext()
+//        }
+//
+//
+//        expenseCategories = newfetch
+//
+// CoreDataStack.shared.saveContext()
+//        print(expenseCategories.count)
+//        print("==================\n :: expenseCategories.countn \(expenseCategories.count)\n=======================")
     }
     
     // READ
