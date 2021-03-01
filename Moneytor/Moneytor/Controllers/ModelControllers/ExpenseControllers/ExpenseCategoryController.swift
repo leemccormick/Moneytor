@@ -52,13 +52,13 @@ class ExpenseCategoryController {
             guard let newInsert = newInsertCategory else {return}
             
             newfetch.append(newInsert)
-          //  CoreDataStack.shared.saveContext()
+           CoreDataStack.shared.saveContext()
         }
         
         
         expenseCategories = newfetch
         
-  CoreDataStack.shared.saveContext()
+ CoreDataStack.shared.saveContext()
         print(expenseCategories.count)
         print("==================\n :: expenseCategories.countn \(expenseCategories.count)\n=======================")
     }
@@ -70,9 +70,6 @@ class ExpenseCategoryController {
 //       
        fetchAllExpenseCategory()
            for category in expenseCategories {
-            
-            
-            
             
                let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
                var sum = 0.0
