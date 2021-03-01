@@ -43,6 +43,8 @@ extension Expense: SearchableRecordDelegate {
         self.date?.dateToString(format: .monthDayTimestamp) ?? Date().dateToString(format: .monthDayTimestamp)
     }
     
+
+    
 //
 //
 //    var incomeAmountTextInDecimal: String {

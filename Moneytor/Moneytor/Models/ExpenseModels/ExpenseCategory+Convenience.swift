@@ -33,6 +33,11 @@ extension ExpenseCategory {
         id ?? ""
     }
     
+//    var expenseArray: [Expense] {
+//        let set = expenses as? Set<Expense> ?? []
+//        return set
+//    }
+    
     
 //   func insert(at id: String?, into category: String?) -> Self? {
 //        //unwrap managed object context and id

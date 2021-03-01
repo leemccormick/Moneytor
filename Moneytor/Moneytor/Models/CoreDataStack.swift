@@ -24,7 +24,9 @@ class CoreDataStack {
     
     var context: NSManagedObjectContext {
         let context = CoreDataStack.shared.persistentContainer.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.automaticallyMergesChangesFromParent = true
+       // context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }
     

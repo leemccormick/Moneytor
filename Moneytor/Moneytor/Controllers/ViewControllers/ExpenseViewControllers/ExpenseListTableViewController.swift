@@ -46,6 +46,7 @@ class ExpenseListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
+        print("================calendarButtonTapped========================")
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
 //        TotalController.shared.calculateTotalExpenseFromEachCatagory()
         ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
@@ -165,3 +166,4 @@ func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
    }
 
 }
+
