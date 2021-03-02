@@ -132,7 +132,6 @@ class ExpenseListTableViewController: UITableViewController {
             let totalInEachSection = Array(expenseDict)[index].value
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
             return "\(sectionName)  \(totalInEachSectionInString)"
-            
         }
         
     }
