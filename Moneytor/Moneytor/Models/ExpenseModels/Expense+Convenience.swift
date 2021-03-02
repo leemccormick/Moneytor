@@ -34,19 +34,7 @@ extension Expense: SearchableRecordDelegate {
  AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
     }
     
-    
-//    var expenseCategoryString: IncomeCategory {
-//          IncomeCategory(rawValue: category ?? "") ?? .other
-//      }
-//    
     var expenseDateText: String {
         self.date?.dateToString(format: .monthDayTimestamp) ?? Date().dateToString(format: .monthDayTimestamp)
     }
-    
-
-    
-//
-//
-//    var incomeAmountTextInDecimal: String {
-//        Formatter.numberFormatterIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""    }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ExpenseDetailTableViewController: UITableViewController {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var expenseNameTextField: MoneytorTextField!
     @IBOutlet weak var expenseAmountTextField: MoneytorTextField!
@@ -18,14 +18,14 @@ class ExpenseDetailTableViewController: UITableViewController {
     // MARK: - Properties
     var expense: Expense?
     //let defaultCategory = ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
-// var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
-//
+    // var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
+    //
     var selectedCategory: ExpenseCategory?
     
-   // var selectedCategory: [Expense]?
+    // var selectedCategory: [Expense]?
     
     // MARK: - Life Cycle Methods
-       
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -34,14 +34,14 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseCategoryPicker.dataSource = self
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
-//        updateView()
-       // self.navigationItem.title = "Add Expense"
+        //        updateView()
+        // self.navigationItem.title = "Add Expense"
         ExpenseCategoryController.shared.fetchAllExpenseCategory()
-
+        
         
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateView()
@@ -62,7 +62,7 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
-        ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
     }
     
     @IBAction func expensesDatePickerValueChange(_ sender: Any) {
@@ -116,10 +116,10 @@ class ExpenseDetailTableViewController: UITableViewController {
             return}
         
         guard let selectedCategory = selectedCategory else {return}
-
+        
         if let expense = expense {
-           // navigationController?.title = "Update Expense"
-           
+            // navigationController?.title = "Update Expense"
+            
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
             //navigationController?.title = "Update Expense"
@@ -129,31 +129,31 @@ class ExpenseDetailTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-   // MARK: - Table View
+    // MARK: - Table View
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtBgGolder
-          let header = view as! UITableViewHeaderFooterView
+        let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
-      }
+    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 4 {
             return CGFloat(0.0)
         } else {
             return CGFloat(40.0)
         }
-      }
-
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // toScannerVC
-   }
+    }
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-   
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }

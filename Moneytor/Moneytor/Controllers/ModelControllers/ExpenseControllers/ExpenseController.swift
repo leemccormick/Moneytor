@@ -20,8 +20,6 @@ class ExpenseController {
     // MARK: - CRUD Methods
     // CREATE
     func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
-        //let newCategory = category
-        
         guard let categoryID = category.id else {return}
         let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
         expenses.append(newExpense)
@@ -46,11 +44,8 @@ class ExpenseController {
     
     // DELETE
     func deleteExpense(_ expense: Expense){
-        
-        //guard let expenseCategory = expense.expenseCategory else {return}
         expense.expenseCategory?.removeFromExpenses(expense)
         CoreDataStack.shared.context.delete(expense)
-       
         CoreDataStack.shared.saveContext()
         fetchAllExpenses()
     }

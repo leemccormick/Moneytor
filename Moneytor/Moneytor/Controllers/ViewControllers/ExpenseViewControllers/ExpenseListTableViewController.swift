@@ -19,14 +19,13 @@ class ExpenseListTableViewController: UITableViewController {
     var isSearching: Bool = false
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
     var categoriesSections: [[Expense]] {
-        return ExpenseCategoryController.shared.categoriesSections
+        return ExpenseCategoryController.shared.expenseCategoriesSections
     }
     var totalExpenseSearching: Double = TotalController.shared.totalExpense {
         didSet{
             updateFooter(total: totalExpenseSearching)
         }
     }
-    var sectionName: [String] = []
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -45,7 +44,7 @@ class ExpenseListTableViewController: UITableViewController {
         print("================calendarButtonTapped========================")
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
         //        TotalController.shared.calculateTotalExpenseFromEachCatagory()
-        ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         ExpenseCategoryController.shared.fetchAllExpenseCategory()
     }
     
@@ -53,7 +52,7 @@ class ExpenseListTableViewController: UITableViewController {
     func fetchAllExpenses(){
         ExpenseController.shared.fetchAllExpenses()
         resultsExpenseFromSearching = ExpenseController.shared.expenses
-        ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         TotalController.shared.calculateTotalExpense()
         updateFooter(total: TotalController.shared.totalExpense)
         tableView.reloadData()
@@ -72,22 +71,6 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    //    func generateSectionNameArray()-> [String]{
-    //        var expenseCategoryNames: [String] = []
-    //        fetchAllExpenses()
-    //        for section in categoriesSections {
-    //            for expense in section {
-    //                let categoryName = expense.expenseCategory?.name ?? ""
-    //                expenseCategoryNames.append(categoryName)
-    //            }
-    //        }
-    //        print("-----------------expenseCategoryNames :: \(expenseCategoryNames.count)-----------------")
-    //        let returnExpenseCategoryNames = expenseCategoryNames.removeDuplicates()
-    //        print("-----------------returnExpenseCategoryNames :: \(returnExpenseCategoryNames.count)-----------------")
-    //        return returnExpenseCategoryNames
-    //    }
-    
-    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isSearching {
@@ -104,7 +87,6 @@ class ExpenseListTableViewController: UITableViewController {
             return categoriesSections[section].count
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
@@ -131,7 +113,6 @@ class ExpenseListTableViewController: UITableViewController {
                 let expense = categoriesSections[indexPath.section][indexPath.row]
                 ExpenseController.shared.deleteExpense(expense)
                 fetchAllExpenses()
-                
             }
             tableView.reloadData()
         }
@@ -142,25 +123,19 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        // var newSectionName: [String]?
         if isSearching {
             return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
         } else {
-        
             let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
-            print("----------------- expenseDict:: \(expenseDict)-----------------")
-            
-            let index = section // Int Value
+            let index = section
             let sectionName = Array(expenseDict)[index].key.uppercased()
             let totalInEachSection = Array(expenseDict)[index].value
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
             return "\(sectionName)  \(totalInEachSectionInString)"
-
+            
         }
         
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
@@ -168,17 +143,13 @@ class ExpenseListTableViewController: UITableViewController {
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
         header.textLabel?.textAlignment = .center
-       // header.detailTextLabel?.textAlignment = .right
     }
-    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.identifier ==  "toExpenseDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
-            
             if isSearching {
                 guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
                 destinationVC.expense = expense
@@ -199,7 +170,6 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
             TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
             totalExpenseSearching = TotalController.shared.totalExpenseSearchResults
-            print("\n totalExpenseSearching IN SEARCH BAR TEXTDIDCHANGE::: \(totalExpenseSearching)")
             self.tableView.reloadData()
         } else {
             fetchAllExpenses()

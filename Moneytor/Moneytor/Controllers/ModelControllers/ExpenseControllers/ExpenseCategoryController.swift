@@ -8,31 +8,19 @@
 import CoreData
 
 class ExpenseCategoryController {
-    static let shared = ExpenseCategoryController()
-    //    var expenseCategoriesDefaultForFirstLunch: [ExpenseCategory] = [
-    //        ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
-    //                ExpenseCategory(name: "food", emoji: "🍔", id: "598DEBF2-E017-4536-AF32-E9BEDF0A3D81", expenses: nil),
-    //                ExpenseCategory(name: "utility", emoji: "📞", id: "EFD4377B-161B-4563-A312-F7013BE7E0F7", expenses: nil),
-    //                ExpenseCategory(name: "health", emoji: "💪",  id: "EF566A40-6A34-477F-BCDD-71FB9CBA8CED", expenses: nil),
-    //                ExpenseCategory(name: "grocery", emoji: "🛒",  id: "0E435DAB-E1E0-43FF-84B6-5B14BF18C541", expenses: nil),
-    //                ExpenseCategory(name: "shopping", emoji: "🛍",  id: "162E5287-35CA-4DDC-BE58-1784534FBA70", expenses: nil),
-    //                ExpenseCategory(name: "entertainment", emoji: "🎬",  id: "36FE22EE-A735-4612-BFED-C4587FA8CD62", expenses: nil),
-    //                ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
-    //    ]
     
+    // MARK: - Properties
+    static let shared = ExpenseCategoryController()
     var expenseCategories: [ExpenseCategory] = []
-    var categoriesSections: [[Expense]] = []
-    var categoriesSearchingSections: [[Expense]] = []
+    var expenseCategoriesSections: [[Expense]] = []
     var expenseCategoriesTotalDict = [Dictionary<String, Double>.Element]()
     
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
         request.predicate = NSPredicate(value: true)
-        
         let sectionSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         let sortDescriptors = [sectionSortDescriptor]
         request.sortDescriptors = sortDescriptors
-        
         return request
     }()
     
@@ -51,22 +39,17 @@ class ExpenseCategoryController {
     
     // READ
     func fetchAllExpenseCategory(){
-        
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenseCategories = fetchAllExpenseCatagories
     }
     
-    // READ
-    
-    func calculateTotalExpenseFromEachCatagory() {
-        print("\n=========== calculateTotalExpenseFromEachCatagory In EXpensesCategoryController ================")
-        categoriesSections = []
-        
+    // UPDATE
+    func generateSectionsAndSumEachExpenseCategory() {
+        fetchAllExpenseCategory()
+        expenseCategoriesSections = []
         var section: [Expense] = []
         var categoryNames: [String] = []
         var totalExpensesEachCategory: [Double] = []
-        
-        fetchAllExpenseCategory()
         
         for category in expenseCategories {
             let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
@@ -75,63 +58,17 @@ class ExpenseCategoryController {
                 sum += expense.amount as! Double
                 section.append(expense)
             }
-            
-            categoriesSections.append(section)
-           // print("================== calculateTotalExpenseFromEachCatagory() :: \(section.count) After append categoriesSections.append(section)=======================")
-            //print(section.count)
+            expenseCategoriesSections.append(section)
             section = []
-            //print("================== calculateTotalExpenseFromEachCatagory() :: \(section.count) After Emtry Section categoriesSections.append(section)=======================")
-            
-          //  print("------------------- \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
-            
-//categoryNames.append(category.name ?? "")
             categoryNames.append(category.name ?? "")
             totalExpensesEachCategory.append(sum)
-            
-           // totalExpensesEachCategory.append(sum)
-            //print(categoryNames)
-            //print(totalExpensesEachCategory)
-            
-         
-//            let dict = Dictionary(grouping: category, by: {}
-            }
-        //let newCategoryName = categoryNames.removeDuplicates()
+        }
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
-        
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        
         expenseCategoriesTotalDict = sortedDictionary
-     //   let keysArraySorted = Array(expenseCategoriesTotalDict.map({ $0.key }))
-        //let newDict = expenseCategoriesTotalDict.keys.sorted(by: {$0.localizedStandardCompare($1) == .orderedAscending})
-        
-//        let newDict = expenseCategoriesTotalDict.keys.sorted() as? [String:Double]
-//       // expenseCategories.append(newDict)
-//       // print(sortedKeysAndValues)
-//        expenseCategoriesTotalDict = newDict
-        
-        print("\n----------------- expenseCategoriesTotalDict:: \(expenseCategoriesTotalDict)-----------------")
-        
-        print("----------------- newDict:: \(sortedDictionary)-----------------")
-
-        // categoriesSections.count
-        print("==================Before Get Out  categoriesSections.count :: \(categoriesSections.count)=======================")
-        
     }
 }
-
-
-// Sort inputted dictionary with keys alphabetically.
-func sortWithKeys(_ dict: [String: Double]) -> [String: Double] {
-    let sorted = dict.sorted(by: { $0.key < $1.key })
-    var newDict: [String: Double] = [:]
-    for sortedDict in sorted {
-        newDict[sortedDict.key] = sortedDict.value
-    }
-    return newDict
-}
-
-
 
 
 //    func generateSectionsfromResultsOfExpenseArray(searchTerm: String) -> [[Expense]] {
@@ -208,3 +145,20 @@ func sortWithKeys(_ dict: [String: Double]) -> [String: Double] {
 //        }
 //        return nil
 //    }
+
+
+/* NOTE ExpenseCategory
+ 
+ 
+ //    var expenseCategoriesDefaultForFirstLunch: [ExpenseCategory] = [
+ //        ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
+ //                ExpenseCategory(name: "food", emoji: "🍔", id: "598DEBF2-E017-4536-AF32-E9BEDF0A3D81", expenses: nil),
+ //                ExpenseCategory(name: "utility", emoji: "📞", id: "EFD4377B-161B-4563-A312-F7013BE7E0F7", expenses: nil),
+ //                ExpenseCategory(name: "health", emoji: "💪",  id: "EF566A40-6A34-477F-BCDD-71FB9CBA8CED", expenses: nil),
+ //                ExpenseCategory(name: "grocery", emoji: "🛒",  id: "0E435DAB-E1E0-43FF-84B6-5B14BF18C541", expenses: nil),
+ //                ExpenseCategory(name: "shopping", emoji: "🛍",  id: "162E5287-35CA-4DDC-BE58-1784534FBA70", expenses: nil),
+ //                ExpenseCategory(name: "entertainment", emoji: "🎬",  id: "36FE22EE-A735-4612-BFED-C4587FA8CD62", expenses: nil),
+ //                ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
+ //    ]
+ //______________________________________________________________________________________
+ */

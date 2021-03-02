@@ -84,6 +84,7 @@ class TotalController {
         print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
     
+}
     
 //    func calculateTotalExpenseFromCategoryName(CategoryName: [Expense]) {
 //        ExpenseController.shared.fetchAllExpenses()
@@ -130,4 +131,4 @@ class TotalController {
  //   }
     
     
-}
+
