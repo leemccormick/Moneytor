@@ -23,11 +23,16 @@ class ExpenseCategoryController {
     var expenseCategories: [ExpenseCategory] = []
     var categoriesSections: [[Expense]] = []
     var categoriesSearchingSections: [[Expense]] = []
-    var expenseCategoriesTotalDict = [String:Double]()
+    var expenseCategoriesTotalDict = [Dictionary<String, Double>.Element]()
     
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
         request.predicate = NSPredicate(value: true)
+        
+        let sectionSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptors = [sectionSortDescriptor]
+        request.sortDescriptors = sortDescriptors
+        
         return request
     }()
     
@@ -92,16 +97,43 @@ class ExpenseCategoryController {
             }
         //let newCategoryName = categoryNames.removeDuplicates()
         
-        expenseCategoriesTotalDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
-
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
+        
+        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+        
+        expenseCategoriesTotalDict = sortedDictionary
+     //   let keysArraySorted = Array(expenseCategoriesTotalDict.map({ $0.key }))
+        //let newDict = expenseCategoriesTotalDict.keys.sorted(by: {$0.localizedStandardCompare($1) == .orderedAscending})
+        
+//        let newDict = expenseCategoriesTotalDict.keys.sorted() as? [String:Double]
+//       // expenseCategories.append(newDict)
+//       // print(sortedKeysAndValues)
+//        expenseCategoriesTotalDict = newDict
+        
         print("\n----------------- expenseCategoriesTotalDict:: \(expenseCategoriesTotalDict)-----------------")
+        
+        print("----------------- newDict:: \(sortedDictionary)-----------------")
 
         // categoriesSections.count
         print("==================Before Get Out  categoriesSections.count :: \(categoriesSections.count)=======================")
         
     }
 }
-    
+
+
+// Sort inputted dictionary with keys alphabetically.
+func sortWithKeys(_ dict: [String: Double]) -> [String: Double] {
+    let sorted = dict.sorted(by: { $0.key < $1.key })
+    var newDict: [String: Double] = [:]
+    for sortedDict in sorted {
+        newDict[sortedDict.key] = sortedDict.value
+    }
+    return newDict
+}
+
+
+
+
 //    func generateSectionsfromResultsOfExpenseArray(searchTerm: String) -> [[Expense]] {
 //        var newCategoriesSection: [[Expense]] = []
 //        // categoriesSearchingSections = []

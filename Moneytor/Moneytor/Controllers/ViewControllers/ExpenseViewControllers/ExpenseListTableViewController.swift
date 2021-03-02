@@ -9,7 +9,6 @@ import UIKit
 
 class ExpenseListTableViewController: UITableViewController {
     
-    
     // MARK: - Outlets
     @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
     @IBOutlet weak var activityView: UIView!
@@ -147,9 +146,16 @@ class ExpenseListTableViewController: UITableViewController {
         if isSearching {
             return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
         } else {
-            //            let categoryNames = generateSectionNameArray()
-            //            return categoryNames[section]
-            return "section \(section)"
+        
+            let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
+            print("----------------- expenseDict:: \(expenseDict)-----------------")
+            
+            let index = section // Int Value
+            let sectionName = Array(expenseDict)[index].key.uppercased()
+            let totalInEachSection = Array(expenseDict)[index].value
+            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+            return "\(sectionName)  \(totalInEachSectionInString)"
+
         }
         
     }
@@ -161,6 +167,8 @@ class ExpenseListTableViewController: UITableViewController {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
+        header.textLabel?.textAlignment = .center
+       // header.detailTextLabel?.textAlignment = .right
     }
     
     
