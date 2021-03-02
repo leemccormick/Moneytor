@@ -84,6 +84,29 @@ class TotalController {
         print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
     
+    
+//    func calculateTotalExpenseFromCategoryName(CategoryName: [Expense]) {
+//        ExpenseController.shared.fetchAllExpenses()
+//        var sum = 0.0
+//        let results =  searchArrayResults
+//        for result in results {
+//            let amount = result.amount as? Double ?? 0.0
+//            sum += amount
+//        }
+//        totalExpenseSearchResults = sum
+//        totalExpenseSearchResultsInString =  AmountFormatter.currencyInString(num: totalExpenseSearchResults)
+//
+//        print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
+//    }
+//    
+//    
+//    
+    
+    
+    
+    
+    
+    
 //    func calculateTotalExpenseFromEachCatagory() {
 //print("==================\n :: calculateTotalExpenseFromEachCatagory\\n=======================")
 //      // ExpenseCategoryController.shared.fetchAllExpenseCategory()

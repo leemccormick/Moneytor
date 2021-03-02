@@ -54,7 +54,7 @@ class ExpenseCategoryController {
     // READ
     
     func calculateTotalExpenseFromEachCatagory() {
-        print("==================\n :: calculateTotalExpenseFromEachCatagory In EXpensesCategoryController\\n=======================")
+        print("\n=========== calculateTotalExpenseFromEachCatagory In EXpensesCategoryController ================")
         categoriesSections = []
         
         var section: [Expense] = []
@@ -62,6 +62,7 @@ class ExpenseCategoryController {
         var totalExpensesEachCategory: [Double] = []
         
         fetchAllExpenseCategory()
+        
         for category in expenseCategories {
             let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
             var sum = 0.0
@@ -71,59 +72,79 @@ class ExpenseCategoryController {
             }
             
             categoriesSections.append(section)
-            print("==================\n I calculateTotalExpenseFromEachCatagory() :: \(section.count) After append categoriesSections.append(section)\n=======================")
-            print(section.count)
+           // print("================== calculateTotalExpenseFromEachCatagory() :: \(section.count) After append categoriesSections.append(section)=======================")
+            //print(section.count)
             section = []
-            print("==================\n I calculateTotalExpenseFromEachCatagory() :: \(section.count) After Emtry Section categoriesSections.append(section)\n=======================")
+            //print("================== calculateTotalExpenseFromEachCatagory() :: \(section.count) After Emtry Section categoriesSections.append(section)=======================")
             
-            print("-------------------\n \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
+          //  print("------------------- \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
+            
+//categoryNames.append(category.name ?? "")
             categoryNames.append(category.name ?? "")
             totalExpensesEachCategory.append(sum)
             
+           // totalExpensesEachCategory.append(sum)
+            //print(categoryNames)
+            //print(totalExpensesEachCategory)
+            
+         
 //            let dict = Dictionary(grouping: category, by: {}
-            
-            
-        }
-        // categoriesSections.count
-        print("==================\n Before Get Out calculate Funtion categoriesSections.count :: \(categoriesSections.count)\n=======================")
-        
-    }
-    
-    func generateSectionsfromResultsOfExpenseArray(searchTerm: String) -> [[Expense]] {
-        var newCategoriesSection: [[Expense]] = []
-        // categoriesSearchingSections = []
-        var section: [Expense] = []
-        //var allExpenseCategories = resultArrayExpenseFromSearching
-        fetchAllExpenseCategory()
-        
-        for category in expenseCategories {
-            let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
-            var sum = 0.0
-            let matchedResults = expenseArray.filter {$0.matches(searchTerm: searchTerm, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
-            
-            for expense in matchedResults {
-                sum += expense.amount as! Double
-                section.append(expense)
             }
-            newCategoriesSection.append(section)
-            
-            print("==================\n generateSectionsfromResultsOfExpenseArray :: \(section.count) After append categoriesSearchingSections.append(section)\n=======================")
-            print(section.count)
-            
-            section = []
-            print("==================\n generateSectionsfromResultsOfExpenseArray() :: \(section.count) After Empty Section categoriesSearchingSections.append(section)\n=======================")
-            print("-------------------\n \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
-            
-            
-        }
+        //let newCategoryName = categoryNames.removeDuplicates()
         
-        
-        //  newCategoriesSection = categoriesSearchingSections
-        print("==================\n generateSectionsfromResultsOfExpenseArray ::newCategoriesSection.count \(newCategoriesSection.count)\n=======================")
-        return newCategoriesSection
+        expenseCategoriesTotalDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
+
+        print("\n----------------- expenseCategoriesTotalDict:: \(expenseCategoriesTotalDict)-----------------")
+
+        // categoriesSections.count
+        print("==================Before Get Out  categoriesSections.count :: \(categoriesSections.count)=======================")
         
     }
 }
+    
+//    func generateSectionsfromResultsOfExpenseArray(searchTerm: String) -> [[Expense]] {
+//        var newCategoriesSection: [[Expense]] = []
+//        // categoriesSearchingSections = []
+//        var section: [Expense] = []
+//        //var allExpenseCategories = resultArrayExpenseFromSearching
+//        fetchAllExpenseCategory()
+//
+//        var categoryNames: [String] = []
+//        var categoryTotal: [Double] = []
+//
+//
+//        for category in expenseCategories {
+//            let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
+//            var sum = 0.0
+//            let matchedResults = expenseArray.filter {$0.matches(searchTerm: searchTerm, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
+//
+//            for expense in matchedResults {
+//                sum += expense.amount as! Double
+//                section.append(expense)
+//            }
+//            newCategoriesSection.append(section)
+//
+//            print("==================\n generateSectionsfromResultsOfExpenseArray :: \(section.count) After append categoriesSearchingSections.append(section)\n=======================")
+//            print(section.count)
+//
+//            section = []
+//            print("==================\n generateSectionsfromResultsOfExpenseArray() :: \(section.count) After Empty Section categoriesSearchingSections.append(section)\n=======================")
+//            print("-------------------\n \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
+//
+//            categoryNames.append(category.name ?? "")
+//            categoryTotal.append(sum)
+//            //print(categoryNames)
+//            //print(categoryTotal)
+//        }
+//
+//        expenseCategoriesTotalDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, categoryTotal))
+//        print("----------------- expenseCategoriesTotalDict:: \(expenseCategoriesTotalDict)-----------------")
+//        //  newCategoriesSection = categoriesSearchingSections
+//        print("==================\n generateSectionsfromResultsOfExpenseArray ::newCategoriesSection.count \(newCategoriesSection.count)\n=======================")
+//        return newCategoriesSection
+//
+//    }
+//}
 
 
 //func insertExpenseCategoryWith(at name: String?) -> ExpenseCategory? {

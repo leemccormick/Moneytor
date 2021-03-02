@@ -321,7 +321,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="373" height="26.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="309.5" height="26.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="26.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
                                                                 </constraints>
@@ -330,7 +330,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="314.5" y="0.0" width="58.5" height="26.5"/>
+                                                                <rect key="frame" x="105" y="0.0" width="268" height="26.5"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
                                                                 <nil key="highlightedColor"/>
@@ -341,7 +341,7 @@
                                                         <rect key="frame" x="0.0" y="66.5" width="373" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="309.5" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
                                                                 </constraints>
@@ -350,7 +350,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="314.5" y="0.0" width="58.5" height="32"/>
+                                                                <rect key="frame" x="105" y="0.0" width="268" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -366,7 +366,7 @@
                                                         <rect key="frame" x="0.0" y="138.5" width="373" height="33"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
                                                                 </constraints>
@@ -375,7 +375,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="312" y="0.0" width="61" height="33"/>
+                                                                <rect key="frame" x="105" y="0.0" width="268" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
