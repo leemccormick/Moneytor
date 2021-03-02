@@ -27,6 +27,7 @@ class ExpenseListTableViewController: UITableViewController {
             updateFooter(total: totalExpenseSearching)
         }
     }
+    var sectionName: [String] = []
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -72,6 +73,21 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
+    //    func generateSectionNameArray()-> [String]{
+    //        var expenseCategoryNames: [String] = []
+    //        fetchAllExpenses()
+    //        for section in categoriesSections {
+    //            for expense in section {
+    //                let categoryName = expense.expenseCategory?.name ?? ""
+    //                expenseCategoryNames.append(categoryName)
+    //            }
+    //        }
+    //        print("-----------------expenseCategoryNames :: \(expenseCategoryNames.count)-----------------")
+    //        let returnExpenseCategoryNames = expenseCategoryNames.removeDuplicates()
+    //        print("-----------------returnExpenseCategoryNames :: \(returnExpenseCategoryNames.count)-----------------")
+    //        return returnExpenseCategoryNames
+    //    }
+    
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -99,7 +115,7 @@ class ExpenseListTableViewController: UITableViewController {
             cell.detailTextLabel?.text = expense.expenseAmountString
             
         } else {
-           let expense = categoriesSections[indexPath.section][indexPath.row]
+            let expense = categoriesSections[indexPath.section][indexPath.row]
             cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
             cell.detailTextLabel?.text = expense.expenseAmountString
         }
@@ -123,55 +139,30 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-           return CGFloat(30.0)
-       }
-       
-       override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-//        let numberOfSection = categoriesSections.count
-//        
-       
-        
+        return CGFloat(30.0)
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // var newSectionName: [String]?
         if isSearching {
             return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
         } else {
-            
-            var sectionName = ""
-            var sectionIntTag: Int = 0
-            for category in categoriesSections {
-                if section == sectionIntTag {
-                 sectionName = category[section].expenseCategory?.name ?? "Category Name Not Found"
-                }
-                sectionIntTag += 1
-            }
-
-            
-            return sectionName + TotalController.shared.totalExpenseSearchResultsInString
-
+            //            let categoryNames = generateSectionNameArray()
+            //            return categoryNames[section]
+            return "section \(section)"
         }
-//           if section == 0 {
-//               if EventController.shared.attendingEvents.count == 0 {
-//                   return ""
-//               }
-//               return "ATTENDING EVENTS"
-//           } else if section == 1 {
-//               if EventController.shared.notAttendingEvents.count == 0 {
-//                   return ""
-//               }
-//               return "NOT ATTENDING EVENTS"
-//           } else {
-//               return nil
-//           }
-           
-       }
-       
-       override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
-           let header = view as! UITableViewHeaderFooterView
-           header.textLabel?.textColor = UIColor.mtTextLightBrown
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
-       }
-       
+    }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -184,7 +175,7 @@ class ExpenseListTableViewController: UITableViewController {
                 guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
                 destinationVC.expense = expense
             } else {
-               let expense = categoriesSections[indexPath.section][indexPath.row] 
+                let expense = categoriesSections[indexPath.section][indexPath.row]
                 destinationVC.expense = expense
             }
         }

@@ -23,6 +23,7 @@ class ExpenseCategoryController {
     var expenseCategories: [ExpenseCategory] = []
     var categoriesSections: [[Expense]] = []
     var categoriesSearchingSections: [[Expense]] = []
+    var expenseCategoriesTotalDict = [String:Double]()
     
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
@@ -57,12 +58,11 @@ class ExpenseCategoryController {
         categoriesSections = []
         
         var section: [Expense] = []
+        var categoryNames: [String] = []
+        var totalExpensesEachCategory: [Double] = []
         
         fetchAllExpenseCategory()
         for category in expenseCategories {
-            
-            
-            
             let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
             var sum = 0.0
             for expense in expenseArray {
@@ -76,8 +76,12 @@ class ExpenseCategoryController {
             section = []
             print("==================\n I calculateTotalExpenseFromEachCatagory() :: \(section.count) After Emtry Section categoriesSections.append(section)\n=======================")
             
-            
             print("-------------------\n \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
+            categoryNames.append(category.name ?? "")
+            totalExpensesEachCategory.append(sum)
+            
+//            let dict = Dictionary(grouping: category, by: {}
+            
             
         }
         // categoriesSections.count
@@ -109,6 +113,8 @@ class ExpenseCategoryController {
             section = []
             print("==================\n generateSectionsfromResultsOfExpenseArray() :: \(section.count) After Empty Section categoriesSearchingSections.append(section)\n=======================")
             print("-------------------\n \(String(describing: category.name)): total ::: \(sum) count :::\(String(describing: category.expenses?.count))")
+            
+            
         }
         
         
