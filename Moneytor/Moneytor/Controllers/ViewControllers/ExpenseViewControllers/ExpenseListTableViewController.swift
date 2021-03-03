@@ -119,13 +119,25 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(30.0)
+        if categoriesSections[section].count <= 0 {
+            return CGFloat(0.01)
+            } else {
+                return CGFloat(30.0)
+                
+            
+            }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isSearching {
             return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
         } else {
+            
+            
+            if tableView.numberOfRows(inSection: section) == 0 {
+                        return nil
+                    }
+            
             let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
             let index = section
             let sectionName = Array(expenseDict)[index].key.uppercased()
@@ -143,7 +155,9 @@ class ExpenseListTableViewController: UITableViewController {
         header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
         header.textLabel?.textAlignment = .center
     }
-    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return categoriesSections[section].headerViewModel?.makeView(bindImmediately: true)
+//    }
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  "toExpenseDetailVC" {
