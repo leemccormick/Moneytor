@@ -72,7 +72,6 @@ class ExpenseDetailTableViewController: UITableViewController {
                 expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
             }
         }
-       
     }
     
     func saveExpense() {
