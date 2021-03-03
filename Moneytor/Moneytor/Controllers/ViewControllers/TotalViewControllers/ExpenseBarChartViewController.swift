@@ -18,13 +18,37 @@ class ExpenseBarChartViewController: UIViewController {
     
     // MARK: - Properties
     var expenseCategoriesSum = [2,3,4,5,6,73,12,5]
+    var expenseDictionary: [Dictionary<String, Double>.Element] = ExpenseCategoryController.shared.expenseCategoriesTotalDict {
+        didSet {
+            
+            setupBarChart(expenseDict: expenseDictionary)
+            //loadViewIfNeeded()
+
+        }
+    }
     
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         barChartView.delegate = self
-        setupBarChart()
+        setupBarChart(expenseDict: expenseDictionary)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ExpenseCategoryController.shared.fetchAllExpenseCategories()
+       // Income
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+        expenseDictionary = ExpenseCategoryController.shared.expenseCategoriesTotalDict
+        setupBarChart(expenseDict: expenseDictionary)
+        print("----------------- :: viewWillAppear-----------------")
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.popViewController(animated: true)
     }
     
 
@@ -32,25 +56,26 @@ class ExpenseBarChartViewController: UIViewController {
 
 extension ExpenseBarChartViewController:  ChartViewDelegate {
     
-    func setupBarChart() {
+    func setupBarChart(expenseDict: [Dictionary<String, Double>.Element]){
         
         //setup data
         barChartView.noDataText = "No Expense Data available for Chart."
        // var labels: [String] = []
         var dataEntries: [BarChartDataEntry] = []
         
-        let i = 0
-        for expenseSum in expenseCategoriesSum {
-            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseSum), data: nil)
+        var i = 0
+        for expenseCategory in expenseDict {
+            let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: nil)
                         dataEntries.append(dataEntry)
                         let chartDataSet = BarChartDataSet(entries: dataEntries, label: nil)
-                        chartDataSet.colors = ChartColorTemplates.colorful()
+            chartDataSet.colors = ChartColorTemplates.pastel()
                         chartDataSet.drawValuesEnabled = true
             
                         let charData = BarChartData(dataSet: chartDataSet)
                         charData.setDrawValues(true)
                         charData.setValueFont(.boldSystemFont(ofSize: 10))
                         barChartView.data = charData
+            i += 1
             
         }
         

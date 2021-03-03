@@ -40,6 +40,11 @@ class IncomeListTableViewController: UITableViewController {
         fetchAllIncomes()
     }
     
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        fetchAllIncomes()
+//    }
+    
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
         TotalController.shared.calculateTotalIncome()

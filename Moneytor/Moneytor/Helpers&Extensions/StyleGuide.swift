@@ -28,6 +28,8 @@ extension UIColor {
     static let mtLightYellow = UIColor(named: "mtLightYellow")!
     static let mtDarkYellow = UIColor(named: "mtDarkYellow")!
     static let mtDarkOrage = UIColor(named: "mtDarkOrage")!
+    static let mtDarkBlue = UIColor(named: "mtDarkBlue")!
+    static let mtGreen = UIColor(named: "mtGreen")!
 }
 
 extension UIView {
