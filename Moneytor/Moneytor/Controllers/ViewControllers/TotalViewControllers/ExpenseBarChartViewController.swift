@@ -13,9 +13,6 @@ class ExpenseBarChartViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet var barChartView: BarChartView!
     
-    
-    
-    
     // MARK: - Properties
     var expenseCategoriesSum = [2,3,4,5,6,73,12,5]
     var expenseDictionary: [Dictionary<String, Double>.Element] = ExpenseCategoryController.shared.expenseCategoriesTotalDict {
