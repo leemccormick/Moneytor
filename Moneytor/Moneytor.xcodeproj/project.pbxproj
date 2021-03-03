@@ -136,10 +136,10 @@
 			isa = PBXGroup;
 			children = (
 				36274E4625E4CCDD0063DE28 /* TotalBalanceViewController.swift */,
-				36274E6125E4D8690063DE28 /* IncomeLineChartViewController.swift */,
-				36274E6425E4D8910063DE28 /* ExpenseBarChartViewController.swift */,
 				367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */,
 				367BBEA725F036D600C11E59 /* TotalExpenseViewController.swift */,
+				36274E6125E4D8690063DE28 /* IncomeLineChartViewController.swift */,
+				36274E6425E4D8910063DE28 /* ExpenseBarChartViewController.swift */,
 			);
 			path = TotalViewControllers;
 			sourceTree = "<group>";

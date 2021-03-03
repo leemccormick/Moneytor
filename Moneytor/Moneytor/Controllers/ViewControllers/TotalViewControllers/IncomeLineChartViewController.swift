@@ -35,7 +35,7 @@ class IncomeLineChartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IncomeCategoryController.shared.fetchAllIncomeCategories()
+       // IncomeCategoryController.shared.fetchAllIncomeCategories()
        // Income
         IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         incomeDictionary = IncomeCategoryController.shared.incomeCategoriesTotalDict
