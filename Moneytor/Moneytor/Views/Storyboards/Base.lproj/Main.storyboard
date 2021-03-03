@@ -288,13 +288,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
-                                                <rect key="frame" x="20.5" y="30" width="373" height="372.5"/>
+                                                <rect key="frame" x="10.5" y="30" width="393" height="393.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
-                                                        <rect key="frame" x="8" y="8" width="357" height="356.5"/>
+                                                        <rect key="frame" x="8" y="8" width="377" height="377.5"/>
                                                         <subviews>
                                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
-                                                                <rect key="frame" x="8" y="8" width="341" height="340.5"/>
+                                                                <rect key="frame" x="8" y="8" width="361" height="361.5"/>
                                                             </activityIndicatorView>
                                                         </subviews>
                                                         <constraints>
@@ -315,13 +315,13 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-h3-1Xj">
-                                                <rect key="frame" x="20.5" y="452.5" width="373" height="171.5"/>
+                                                <rect key="frame" x="20.5" y="473.5" width="373" height="171.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DUV-uF-JCI">
                                                         <rect key="frame" x="0.0" y="0.0" width="373" height="26.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="26.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="309.5" height="26.5"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
                                                                 </constraints>
@@ -330,7 +330,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="268" height="26.5"/>
+                                                                <rect key="frame" x="314.5" y="0.0" width="58.5" height="26.5"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
                                                                 <nil key="highlightedColor"/>
@@ -341,7 +341,7 @@
                                                         <rect key="frame" x="0.0" y="66.5" width="373" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="309.5" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
                                                                 </constraints>
@@ -350,7 +350,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="268" height="32"/>
+                                                                <rect key="frame" x="314.5" y="0.0" width="58.5" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -366,7 +366,7 @@
                                                         <rect key="frame" x="0.0" y="138.5" width="373" height="33"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="307" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
                                                                 </constraints>
@@ -375,7 +375,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="268" height="33"/>
+                                                                <rect key="frame" x="312" y="0.0" width="61" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -396,7 +396,7 @@
                                             <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="50" id="ER3-jm-opv"/>
                                             <constraint firstItem="MX9-h3-1Xj" firstAttribute="centerX" secondItem="Nma-1h-9Ow" secondAttribute="centerX" id="POF-jj-tKp"/>
                                             <constraint firstItem="Sdg-WR-LzE" firstAttribute="top" secondItem="Nma-1h-9Ow" secondAttribute="top" constant="30" id="ejj-Eb-Ou5"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="fOL-00-QnM"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.95" id="fOL-00-QnM"/>
                                             <constraint firstItem="MX9-h3-1Xj" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="ie6-72-fxz"/>
                                             <constraint firstItem="Sdg-WR-LzE" firstAttribute="centerX" secondItem="MX9-h3-1Xj" secondAttribute="centerX" id="pyp-VR-I1I"/>
                                         </constraints>
@@ -458,8 +458,11 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVK-Ca-XXL" customClass="LineChartView" customModule="Charts">
-                                                    <rect key="frame" x="20" y="10" width="374" height="363"/>
+                                                    <rect key="frame" x="20.5" y="15" width="373" height="372.5"/>
                                                     <color key="backgroundColor" name="darkGolder"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="YVK-Ca-XXL" secondAttribute="height" multiplier="1:1" id="svQ-Pt-pdm"/>
+                                                    </constraints>
                                                     <connections>
                                                         <segue destination="ydG-qX-6lb" kind="embed" identifier="toIncomeLineChartVC" id="mO5-yl-CQC"/>
                                                     </connections>
@@ -467,10 +470,9 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="YVK-Ca-XXL" secondAttribute="trailing" constant="20" id="98h-7S-Q1D"/>
-                                                <constraint firstItem="YVK-Ca-XXL" firstAttribute="top" secondItem="CLa-mW-ehz" secondAttribute="top" constant="10" id="9ye-QM-uzj"/>
-                                                <constraint firstAttribute="bottom" secondItem="YVK-Ca-XXL" secondAttribute="bottom" constant="10" id="YkX-lx-39J"/>
-                                                <constraint firstItem="YVK-Ca-XXL" firstAttribute="leading" secondItem="CLa-mW-ehz" secondAttribute="leading" constant="20" id="wjy-fr-WBR"/>
+                                                <constraint firstItem="YVK-Ca-XXL" firstAttribute="top" secondItem="CLa-mW-ehz" secondAttribute="top" constant="15" id="9ye-QM-uzj"/>
+                                                <constraint firstItem="YVK-Ca-XXL" firstAttribute="width" secondItem="CLa-mW-ehz" secondAttribute="width" multiplier="0.9" id="CTg-HK-Nif"/>
+                                                <constraint firstItem="YVK-Ca-XXL" firstAttribute="centerX" secondItem="CLa-mW-ehz" secondAttribute="centerX" id="H6s-b1-ERq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1093,7 +1095,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-sv-oly" customClass="BarChartView" customModule="Charts">
-                                                    <rect key="frame" x="10" y="10" width="394" height="348"/>
+                                                    <rect key="frame" x="20.5" y="15" width="373" height="372.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="1Bg-sv-oly" secondAttribute="height" multiplier="1:1" id="0O7-dx-FAI"/>
+                                                    </constraints>
                                                     <connections>
                                                         <segue destination="FRP-sB-1LR" kind="embed" identifier="toExpenseBarChartVC" id="DG0-rH-IsW"/>
                                                     </connections>
@@ -1101,10 +1106,9 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="1Bg-sv-oly" firstAttribute="top" secondItem="qsW-ZT-sdH" secondAttribute="top" constant="10" id="2rX-jF-4Ta"/>
-                                                <constraint firstAttribute="bottom" secondItem="1Bg-sv-oly" secondAttribute="bottom" constant="10" id="T3g-7E-egD"/>
-                                                <constraint firstAttribute="trailing" secondItem="1Bg-sv-oly" secondAttribute="trailing" constant="10" id="gS4-fh-ebA"/>
-                                                <constraint firstItem="1Bg-sv-oly" firstAttribute="leading" secondItem="qsW-ZT-sdH" secondAttribute="leading" constant="10" id="jXo-dl-qxJ"/>
+                                                <constraint firstItem="1Bg-sv-oly" firstAttribute="centerX" secondItem="qsW-ZT-sdH" secondAttribute="centerX" id="Aze-mZ-abv"/>
+                                                <constraint firstItem="1Bg-sv-oly" firstAttribute="width" secondItem="qsW-ZT-sdH" secondAttribute="width" multiplier="0.9" id="UKR-09-hOB"/>
+                                                <constraint firstItem="1Bg-sv-oly" firstAttribute="top" secondItem="qsW-ZT-sdH" secondAttribute="top" constant="15" id="VNw-Yq-yg5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1351,7 +1355,7 @@
             <objects>
                 <viewController id="FRP-sB-1LR" customClass="ExpenseBarChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6ld-rh-l7I" customClass="BarChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="394" height="348"/>
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="372.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="EuW-GE-G86"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>

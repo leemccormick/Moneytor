@@ -90,19 +90,11 @@ extension IncomeLineChartViewController: ChartViewDelegate {
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
         
-      
-        
- 
-        
         lineChartView.isUserInteractionEnabled = true
         lineChartView.pinchZoomEnabled = false
         lineChartView.doubleTapToZoomEnabled = false
         lineChartView.dragEnabled = true
-        
-        
         lineChartView.dragDecelerationEnabled = true
-        
-        
         lineChartView.xAxis.granularityEnabled = true
         lineChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0, easingOption: .easeInOutBounce)
         lineChartView.chartDescription?.text = "Growth Income"
@@ -111,10 +103,8 @@ extension IncomeLineChartViewController: ChartViewDelegate {
         lineChartView.leftAxis.drawGridLinesEnabled = true
         lineChartView.rightAxis.drawGridLinesEnabled = true
         lineChartView.xAxis.drawGridLinesEnabled = false
-        
         lineChartView.rightAxis.enabled = false
         lineChartView.rightAxis.axisLineColor = .mtDarkBlue
-        
         lineChartView.drawGridBackgroundEnabled = true
         lineChartView.xAxis.drawLabelsEnabled = false
        // lineChartView.backgroundColor =
