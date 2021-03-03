@@ -17,35 +17,9 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    //let defaultCategory = ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
-     var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
-    
-   // let otherCategory = findIndex()
-  //  var selectedCategory: ExpenseCategory?
-    
-    
-//    func findIndex() -> ExpenseCategory {
-//        let expenseCategories = ExpenseCategoryController.shared.expenseCategories
-//        let defaultExpenseCategory = ExpenseCategory(name: "other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil)
-//
-//        let index = expenseCategories.firstIndex(where: {$0 === defaultExpenseCategory})
-//
-//          // let indexOfPerson1 = expenseCategories.firstIndex(where: {$0 === defaultExpenseCategory})
-//
-//    //var location = expenseCategories.indexOf(defaultExpenseCategory)
-//           let otherCategory: ExpenseCategory = expenseCategories[index ?? 0]
-//        selectedCategory = otherCategory
-//        return otherCategory
-//    }
-//
-    
-    
-    
-    
-    // var selectedCategory: [Expense]?
+    var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
     
     // MARK: - Life Cycle Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -55,7 +29,6 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
         ExpenseCategoryController.shared.fetchAllExpenseCategory()
-        //selectedCategory = findIndex()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +38,6 @@ class ExpenseDetailTableViewController: UITableViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func saveButtonTapped(_ sender: Any) {
         saveExpense()
     }
@@ -73,7 +45,6 @@ class ExpenseDetailTableViewController: UITableViewController {
     @IBAction func saveExpenseButtonTapped(_ sender: Any) {
         saveExpense()
     }
-    
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
@@ -90,53 +61,18 @@ class ExpenseDetailTableViewController: UITableViewController {
             return
         }
         self.navigationItem.title = "Update Expense"
+        selectedCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
         
-        
-        // For  and PickerView Update HERE.....
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
-        
-        //if let pickerViewRow = expense.expenseCategory?.stringForKey("pickerViewRow") {
-//            expenseCategoryPicker.selectRow(pickerViewRow, inComponent: 0, animated: true)
-//        }
-        
         for row in 0..<numberOfRows {
-       // print(row)
             if expense.expenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
-            expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+                expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
             }
         }
-        
-//        for 0 in nu
-//
-//        let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
-//        let index = section
-//        let sectionName = Array(expenseDict)[index].key.uppercased()
-        
-        
-//        switch expense.expenseCategory?.name {
-//        case "food":
-//            expenseCategoryPicker.selectRow(1, inComponent: 0, animated: true)
-//        case "utility":
-//            expenseCategoryPicker.selectRow(2, inComponent: 0, animated: true)
-//        case "health":
-//            expenseCategoryPicker.selectRow(3, inComponent: 0, animated: true)
-//        case "grocery":
-//            expenseCategoryPicker.selectRow(4, inComponent: 0, animated: true)
-//        case "shopping":
-//            expenseCategoryPicker.selectRow(5, inComponent: 0, animated: true)
-//        case "entertainment":
-//            expenseCategoryPicker.selectRow(6, inComponent: 0, animated: true)
-//        case "transportation":
-//            expenseCategoryPicker.selectRow(7, inComponent: 0, animated: true)
-//
-//        default:
-//            expenseCategoryPicker.selectRow(0, inComponent: 0, animated: true)
-//        }
        
-        
     }
     
     func saveExpense() {
@@ -152,23 +88,12 @@ class ExpenseDetailTableViewController: UITableViewController {
             presentErrorToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
         
-       // guard let selectedCategory = selectedCategory else {return}
-       // let otherCategory = findIndex()
+        
         if let expense = expense {
-            // navigationController?.title = "Update Expense"
-            
-            //let newSelectedCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
-            //picjker not select use own one
-            
-            
-            
-            
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         } else {
-            //navigationController?.title = "Update Expense"
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
         }
-        
         navigationController?.popViewController(animated: true)
     }
     
@@ -179,6 +104,7 @@ class ExpenseDetailTableViewController: UITableViewController {
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 4 {
             return CGFloat(0.0)
@@ -221,7 +147,6 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }
-    
 }
 
 // MARK: - UITextFieldDelegate
