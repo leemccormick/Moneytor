@@ -16,18 +16,20 @@
     <entity name="Income" representedClassName="Income" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="incomeCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IncomeCategory" inverseName="incomes" inverseEntity="IncomeCategory"/>
     </entity>
     <entity name="IncomeCategory" representedClassName="IncomeCategory" syncable="YES" codeGenerationType="class">
         <attribute name="emoji" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="incomes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Income" inverseName="incomeCategory" inverseEntity="Income"/>
     </entity>
     <elements>
         <element name="Expense" positionX="-811.1640625" positionY="91.03125" width="128" height="118"/>
         <element name="ExpenseCategory" positionX="-609.02734375" positionY="105.31640625" width="128" height="103"/>
-        <element name="Income" positionX="-1237.83203125" positionY="121.328125" width="128" height="103"/>
-        <element name="IncomeCategory" positionX="-994.734375" positionY="144.45703125" width="128" height="88"/>
+        <element name="Income" positionX="-1237.83203125" positionY="121.328125" width="128" height="118"/>
+        <element name="IncomeCategory" positionX="-994.734375" positionY="144.45703125" width="128" height="103"/>
     </elements>
 </model>

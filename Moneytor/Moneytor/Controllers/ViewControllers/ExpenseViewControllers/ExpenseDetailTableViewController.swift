@@ -28,13 +28,13 @@ class ExpenseDetailTableViewController: UITableViewController {
         expenseCategoryPicker.dataSource = self
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
-        ExpenseCategoryController.shared.fetchAllExpenseCategory()
+        ExpenseCategoryController.shared.fetchAllExpenseCategories()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        ExpenseCategoryController.shared.fetchAllExpenseCategories()
         updateView()
-        ExpenseCategoryController.shared.fetchAllExpenseCategory()
     }
     
     // MARK: - Actions
@@ -119,7 +119,6 @@ class ExpenseDetailTableViewController: UITableViewController {
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

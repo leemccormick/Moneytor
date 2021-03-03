@@ -9,13 +9,9 @@ import CoreData
 
 class IncomeController {
     
-    
     // MARK: - Properties
     static let shared = IncomeController()
-    var incomes:[Income] = []
-   
-    var sections: [[IncomeCategory]] = []
-    var numberOfSection: Int = 0
+    var incomes: [Income] = []
     
     private lazy var fetchRequest: NSFetchRequest<Income> = {
         let request = NSFetchRequest<Income>(entityName: "Income")
@@ -23,25 +19,22 @@ class IncomeController {
         return request
     }()
     
-    
-    
-    
     // MARK: - CRUD Methods
     // CREATE
     func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
-        let newIncome = Income(name: name, amount: amount, date: date, incomeCategory: category)
+        
+        guard let categoryID = category.id else {return}
+        let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
         incomes.append(newIncome)
+        category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
     }
-    
-    
     
     // READ
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomes = fetchIncomes
     }
-    
     
     // UPDATE
     func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
@@ -54,29 +47,30 @@ class IncomeController {
     
     // DELETE
     func deleteIncome(_ income: Income){
+        income.incomeCategory?.removeFromIncomes(income)
         CoreDataStack.shared.context.delete(income)
         CoreDataStack.shared.saveContext()
         fetchAllIncomes()
     }
-
-// MARK: - Subscribe For Romote Notifications
-func subscribeForRomoteNotifications(completion: @escaping (Bool) -> Void ) {
     
-    let allIncomesPredicate = NSPredicate(value: true)
-    let subscription = CKQuerySubscription(recordType: "CD_Income", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
-    let notificationInfo = CKSubscription.NotificationInfo()
-    notificationInfo.title = "MONEYTOR!"
-    notificationInfo.alertBody = "INCOME is updating from somewhere."
-    notificationInfo.soundName = "default"
-    notificationInfo.shouldBadge = true
-    subscription.notificationInfo = notificationInfo
-    
-    CKContainer.default().privateCloudDatabase.save(subscription) { (_, error) in
-        if let error = error {
-            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-            return completion(false)
+    // MARK: - Subscribe For Romote Notifications
+    func subscribeForRomoteNotifications(completion: @escaping (Bool) -> Void ) {
+        
+        let allIncomesPredicate = NSPredicate(value: true)
+        let subscription = CKQuerySubscription(recordType: "CD_Income", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
+        let notificationInfo = CKSubscription.NotificationInfo()
+        notificationInfo.title = "MONEYTOR!"
+        notificationInfo.alertBody = "INCOME is updating from somewhere."
+        notificationInfo.soundName = "default"
+        notificationInfo.shouldBadge = true
+        subscription.notificationInfo = notificationInfo
+        
+        CKContainer.default().privateCloudDatabase.save(subscription) { (_, error) in
+            if let error = error {
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                return completion(false)
+            }
+            completion(true)
         }
-        completion(true)
-    }
     }
 }

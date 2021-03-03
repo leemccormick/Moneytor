@@ -8,9 +8,11 @@
 import CoreData
 
 class ExpenseController {
+    
     // MARK: - Properties
     static let shared = ExpenseController()
-    var expenses:[Expense] = []
+    var expenses: [Expense] = []
+    
     private lazy var fetchRequest: NSFetchRequest<Expense> = {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
         request.predicate = NSPredicate(value: true)
@@ -20,6 +22,7 @@ class ExpenseController {
     // MARK: - CRUD Methods
     // CREATE
     func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
+        
         guard let categoryID = category.id else {return}
         let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
         expenses.append(newExpense)

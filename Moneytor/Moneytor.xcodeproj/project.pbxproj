@@ -40,9 +40,9 @@
 		3671BA3F25E5B6C900811F21 /* Expense+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA3E25E5B6C900811F21 /* Expense+Convenience.swift */; };
 		3671BA4225E5BD0300811F21 /* IncomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA4125E5BD0300811F21 /* IncomeController.swift */; };
 		3671BA4525E5C20100811F21 /* ExpenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA4425E5C20100811F21 /* ExpenseController.swift */; };
-		3671BA5025E5D9A900811F21 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA4F25E5D9A900811F21 /* Date+Extension.swift */; };
+		3671BA5025E5D9A900811F21 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA4F25E5D9A900811F21 /* Extensions.swift */; };
 		3671BA5325E5D9E300811F21 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5225E5D9E300811F21 /* UIViewController+Extension.swift */; };
-		3671BA5625E5ECC300811F21 /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5525E5ECC300811F21 /* NumberFormatter.swift */; };
+		3671BA5625E5ECC300811F21 /* AmountFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5525E5ECC300811F21 /* AmountFormatter.swift */; };
 		3671BA5A25E622B000811F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5925E622AF00811F21 /* User.swift */; };
 		3671BA5D25E62AA000811F21 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5C25E62AA000811F21 /* UserController.swift */; };
 		3671BA6025E62B0400811F21 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5F25E62B0400811F21 /* UserError.swift */; };
@@ -95,9 +95,9 @@
 		3671BA3E25E5B6C900811F21 /* Expense+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Expense+Convenience.swift"; sourceTree = "<group>"; };
 		3671BA4125E5BD0300811F21 /* IncomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeController.swift; sourceTree = "<group>"; };
 		3671BA4425E5C20100811F21 /* ExpenseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseController.swift; sourceTree = "<group>"; };
-		3671BA4F25E5D9A900811F21 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		3671BA4F25E5D9A900811F21 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3671BA5225E5D9E300811F21 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		3671BA5525E5ECC300811F21 /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
+		3671BA5525E5ECC300811F21 /* AmountFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountFormatter.swift; sourceTree = "<group>"; };
 		3671BA5925E622AF00811F21 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3671BA5C25E62AA000811F21 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		3671BA5F25E62B0400811F21 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
@@ -197,9 +197,9 @@
 			children = (
 				3676599D25E83EC600F63F0C /* SearchableRecordDelegate.swift */,
 				36682D0225E438490075C03D /* StyleGuide.swift */,
-				3671BA4F25E5D9A900811F21 /* Date+Extension.swift */,
+				3671BA4F25E5D9A900811F21 /* Extensions.swift */,
 				3671BA5225E5D9E300811F21 /* UIViewController+Extension.swift */,
-				3671BA5525E5ECC300811F21 /* NumberFormatter.swift */,
+				3671BA5525E5ECC300811F21 /* AmountFormatter.swift */,
 				3671BA5F25E62B0400811F21 /* UserError.swift */,
 			);
 			path = "Helpers&Extensions";
@@ -538,7 +538,7 @@
 				36D0435825E9DE720034BCFC /* MoneytorSearchBar.swift in Sources */,
 				3676599E25E83EC600F63F0C /* SearchableRecordDelegate.swift in Sources */,
 				36274E5C25E4CDDF0063DE28 /* ExpenseScannerViewController.swift in Sources */,
-				3671BA5625E5ECC300811F21 /* NumberFormatter.swift in Sources */,
+				3671BA5625E5ECC300811F21 /* AmountFormatter.swift in Sources */,
 				36AFBC9225E41C7E00B559DB /* AppDelegate.swift in Sources */,
 				3671BA3F25E5B6C900811F21 /* Expense+Convenience.swift in Sources */,
 				36AFBC9C25E41C7E00B559DB /* Moneytor.xcdatamodeld in Sources */,
@@ -546,7 +546,7 @@
 				36274E5625E4CD890063DE28 /* ExpenseListTableViewController.swift in Sources */,
 				36274E4725E4CCDD0063DE28 /* TotalBalanceViewController.swift in Sources */,
 				36274E6225E4D8690063DE28 /* IncomeLineChartViewController.swift in Sources */,
-				3671BA5025E5D9A900811F21 /* Date+Extension.swift in Sources */,
+				3671BA5025E5D9A900811F21 /* Extensions.swift in Sources */,
 				36AFBC9425E41C7E00B559DB /* SceneDelegate.swift in Sources */,
 				3671BA5325E5D9E300811F21 /* UIViewController+Extension.swift in Sources */,
 				3628331525E7498200381731 /* ExpenseCategoryController.swift in Sources */,

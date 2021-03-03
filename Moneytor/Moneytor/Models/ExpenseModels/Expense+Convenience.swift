@@ -15,10 +15,8 @@ extension Expense {
         self.date = date
         self.id = id
         self.expenseCategory = expenseCategory
-       
     }
 }
-
 
 extension Expense: SearchableRecordDelegate {
     
@@ -31,7 +29,7 @@ extension Expense: SearchableRecordDelegate {
     }
     
     var expenseAmountToUpdate: String {
- AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+        AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
     }
     
     var expenseDateText: String {

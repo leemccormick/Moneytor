@@ -5,7 +5,6 @@
 //  Created by Lee McCormick on 2/24/21.
 //
 
-
 import CoreData
 
 extension ExpenseCategory {
@@ -19,7 +18,6 @@ extension ExpenseCategory {
     }
 }
 
-
 extension ExpenseCategory {
     var nameString: String {
         name ?? "other"
@@ -32,13 +30,14 @@ extension ExpenseCategory {
     var idString: String {
         id ?? ""
     }
-    
+}
+
 //    var expenseArray: [Expense] {
 //        let set = expenses as? Set<Expense> ?? []
 //        return set
 //    }
-    
-    
+
+
 //   func insert(at id: String?, into category: String?) -> Self? {
 //        //unwrap managed object context and id
 //       // let  context = CoreDataStack.shared.context
@@ -61,9 +60,9 @@ extension ExpenseCategory {
 //        }
 //        return nil
 //    }
-    
-    
-    
+
+
+
 //    func removeExpenseDuplicates() -> [ExpenseCategory] {
 //        var results = [ExpenseCategory]()
 //        
@@ -74,4 +73,4 @@ extension ExpenseCategory {
 //        }
 //        return results
 //    }
-}
+//}

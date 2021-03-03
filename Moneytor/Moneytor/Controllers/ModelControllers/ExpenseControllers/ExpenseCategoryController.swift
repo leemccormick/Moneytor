@@ -25,27 +25,15 @@ class ExpenseCategoryController {
     }()
     
     // MARK: - CRUD Methods
-    // CREATE
-    //    func createExpenseCategories(name: String, emoji: String){
-    //        let expenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
-    //
-    //        let newExpenseCategory = insertExpenseCategoryWith(at: expenseCategory.name)
-    //        guard let category = newExpenseCategory else {return}
-    //        expenseCategories.append(category)
-    //
-    //               CoreDataStack.shared.saveContext()
-    //           }
-    
-    
     // READ
-    func fetchAllExpenseCategory(){
+    func fetchAllExpenseCategories(){
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenseCategories = fetchAllExpenseCatagories
     }
     
     // UPDATE
     func generateSectionsAndSumEachExpenseCategory() {
-        fetchAllExpenseCategory()
+        fetchAllExpenseCategories()
         expenseCategoriesSections = []
         var section: [Expense] = []
         var categoryNames: [String] = []
@@ -70,6 +58,16 @@ class ExpenseCategoryController {
     }
 }
 
+// CREATE
+//    func createExpenseCategories(name: String, emoji: String){
+//        let expenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
+//
+//        let newExpenseCategory = insertExpenseCategoryWith(at: expenseCategory.name)
+//        guard let category = newExpenseCategory else {return}
+//        expenseCategories.append(category)
+//
+//               CoreDataStack.shared.saveContext()
+//           }
 
 //    func generateSectionsfromResultsOfExpenseArray(searchTerm: String) -> [[Expense]] {
 //        var newCategoriesSection: [[Expense]] = []
