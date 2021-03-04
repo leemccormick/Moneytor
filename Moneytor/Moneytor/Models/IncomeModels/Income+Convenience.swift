@@ -8,6 +8,7 @@
 import CoreData
 
 extension Income {
+    
     @discardableResult convenience init(name: String, amount: Double, date: Date, id: String, incomeCategory: IncomeCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name

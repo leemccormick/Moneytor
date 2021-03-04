@@ -139,7 +139,6 @@ extension TotalExpenseViewController: ChartViewDelegate {
         
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
         newExpenseCategoryEmojiToDisplay = []
-        //barChartView.xAxis.granularityEnabled = true
 
         barChartView.xAxis.granularityEnabled = true
              barChartView.xAxis.granularity = 1.0

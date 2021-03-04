@@ -34,7 +34,6 @@ extension UIColor {
 
 extension UIView {
     func addCornerRadius(radius: CGFloat = 6) {
-        // self is any UIView that call this function
         self.layer.cornerRadius = radius
     }
     

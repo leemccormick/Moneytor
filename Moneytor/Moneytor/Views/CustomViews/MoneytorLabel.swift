@@ -10,9 +10,7 @@ import UIKit
 class MoneytorLabel: UILabel {
     override  func awakeFromNib() {
         super.awakeFromNib()
-        // update the font
         updateFont(fontName: FontNames.textMoneytor)
-        // set the text color
         self.textColor = .mtTextDarkBrown
     }
     func updateFont(fontName: String) {
@@ -22,27 +20,18 @@ class MoneytorLabel: UILabel {
 }
 
 class MoneytorGoodLetterLabel: UILabel {
+    
     override func awakeFromNib() {
-        super.awakeFromNib() //.awakeFromNib() from HypeLabel
-       // super.updateFont(fontName: FontNames.latoBold)
-       // updateFontGoodLetter(fontName: String)
+        super.awakeFromNib()
         self.textColor = .mtTextDarkBrown
         self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
-
     }
-    
-//    func updateFontGoodLetter(fontName: String) {
-//    ///let size = self.font.pointSize
-//        self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
-//    }
 }
 
 class MoneytorTitleFontWhiteLabel: UILabel {
     override  func awakeFromNib() {
         super.awakeFromNib()
-        // update the font
         updateFont(fontName: FontNames.textMoneytorMoneyFont)
-        // set the text color
         self.textColor = .mtWhiteText
     }
     func updateFont(fontName: String) {
@@ -58,7 +47,7 @@ class MoneytorTitleFontBrownLabel: UILabel {
         self.font = UIFont(name: FontNames.textMoneytorMoneyFont, size: size)
         self.textColor = .mtTextDarkBrown
     }
-  
+    
 }
 
 

@@ -51,8 +51,6 @@ class ExpenseCategoryController {
             expenseCategoriesSections.append(section)
             section = []
             
-    
-            
              let nameEmoji = "\(category.nameString) \(category.emojoString)"
             
             categoryNames.append(nameEmoji)

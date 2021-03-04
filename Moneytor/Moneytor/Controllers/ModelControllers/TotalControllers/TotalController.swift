@@ -8,6 +8,7 @@
 import Foundation
 
 class TotalController {
+    
     static let shared = TotalController()
     var totalBalance: Double = 0.0
     var totalIncome: Double = 0.0
@@ -30,7 +31,6 @@ class TotalController {
         }
         totalIncome = sumIncome
         totalIncomeString =  AmountFormatter.currencyInString(num: totalIncome)
-        print("\n ::: TOTAL INCOME : \(totalIncome)")
     }
     
     
@@ -44,8 +44,6 @@ class TotalController {
         }
         totalExpense = sumExpense
         totalExpenseString =  AmountFormatter.currencyInString(num: totalExpense)
-
-        print("\n ::: TOTAL Expense : \(totalExpense)")
     }
     
     func calculateTotalBalance() {
@@ -53,7 +51,6 @@ class TotalController {
         calculateTotalExpense()
         totalBalance = totalIncome - totalExpense
         totalBalanceString =  AmountFormatter.currencyInString(num: totalBalance)
-        print("\n ::: TOTAL Balance : \(totalBalance)")
     }
     
     func calculateTotalIncomeFrom(searchArrayResults: [Income]) {
@@ -66,8 +63,6 @@ class TotalController {
         }
         totalIncomeSearchResults = sum
         totalIncomeSearchResultsInString =  AmountFormatter.currencyInString(num: totalIncomeSearchResults)
-
-        print("\n ::: TOTAL INCOME SEARCHRESULT : \(totalIncomeSearchResults)")
     }
     
     func calculateTotalExpenseFrom(searchArrayResults: [Expense]) {
@@ -80,55 +75,6 @@ class TotalController {
         }
         totalExpenseSearchResults = sum
         totalExpenseSearchResultsInString =  AmountFormatter.currencyInString(num: totalExpenseSearchResults)
-
-        print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
     }
-    
 }
     
-//    func calculateTotalExpenseFromCategoryName(CategoryName: [Expense]) {
-//        ExpenseController.shared.fetchAllExpenses()
-//        var sum = 0.0
-//        let results =  searchArrayResults
-//        for result in results {
-//            let amount = result.amount as? Double ?? 0.0
-//            sum += amount
-//        }
-//        totalExpenseSearchResults = sum
-//        totalExpenseSearchResultsInString =  AmountFormatter.currencyInString(num: totalExpenseSearchResults)
-//
-//        print("\n ::: TOTAL EXPENSSE SEARCHRESULT : \(totalExpenseSearchResults)")
-//    }
-//    
-//    
-//    
-    
-    
-    
-    
-    
-    
-//    func calculateTotalExpenseFromEachCatagory() {
-//print("==================\n :: calculateTotalExpenseFromEachCatagory\\n=======================")
-//      // ExpenseCategoryController.shared.fetchAllExpenseCategory()
-//        ExpenseController.shared.fetchAllExpenses()
-//        let expensesCategories = ExpenseCategoryController.shared.expenseCategories
-//        for category in expensesCategories {
-//           // print("==================\n :: Test \(category.name))")
-//           // print(category.name)
-//           // print(category.expenses?.count)
-//           // print(category.expenses?.allObjects.count)
-//            let expenseArray = category.expenses?.allObjects as! [Expense]
-//            var sum = 0.0
-//            for expense in expenseArray {
-//                sum += expense.amount as! Double
-//            }
-//            print("-------------------\n \(category.name): total ::: \(sum) count :::\(category.expenses?.count)")
-//         
-//        }
-//        
-
- //   }
-    
-    
-

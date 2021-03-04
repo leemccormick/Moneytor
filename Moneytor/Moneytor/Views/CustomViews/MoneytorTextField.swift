@@ -9,7 +9,6 @@ import UIKit
 
 class MoneytorTextField: UITextField {
     
-    // awakeFromNib() ===> once the HypeTextField load in the memory then go setupView()
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -23,12 +22,11 @@ class MoneytorTextField: UITextField {
         self.backgroundColor = .mtDarkOrage
         self.layer.borderWidth = 2.5
         self.layer.borderColor = UIColor.mtLightYellow.cgColor
-        self.layer.masksToBounds = true //Add masksToBounds to invisible to the past we don't need to see.
-        
+        self.layer.masksToBounds = true
     }
     
     func setupPlaceholderText() {
-        let currentPlaceholder = self.placeholder ?? "" //?? because placeholder is an optional
+        let currentPlaceholder = self.placeholder ?? ""
         self.attributedPlaceholder = NSAttributedString(string: currentPlaceholder, attributes: [
             NSAttributedString.Key.foregroundColor : UIColor.mtWhiteText,
             NSAttributedString.Key.font : UIFont(name: FontNames.textMoneytor, size: 16)!
@@ -36,7 +34,6 @@ class MoneytorTextField: UITextField {
     }
     
     func updateFont(){
-//        guard let size = self.font?.pointSize else {return} //Get the size that already exist in the textFiled
         self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
 }

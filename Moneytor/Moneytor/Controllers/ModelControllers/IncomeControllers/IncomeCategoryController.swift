@@ -67,43 +67,6 @@ class IncomeCategoryController {
     }
 }
     
-    
-//    func createAnotherSectionByFetchingIncome() -> [[Income]]{
-//
-//        fetchAllIncomeCategories()
-//        var sections: [[Income]] = []
-//        var incomeCategoriesNameArray: [String] = []
-//        var incomeEmojiArray: [String] = []
-//
-//        for category in incomeCategories {
-//            let newIncomeGroup = IncomeController.shared.fetchIncomesByCategory(category: category)
-//            sections.append(newIncomeGroup)
-//
-//            guard let incomeName = category.name,
-//                  let incomeEmoji = category.emoji else {return [[]]}
-//            incomeCategoriesNameArray.append(incomeName)
-//            incomeEmojiArray.append(incomeEmoji)
-//
-//        }
-//
-//        var index = 0
-//        var totalIncomesArray: [Double] = []
-//        for income in sections {
-//            var totalIncomeOfEachCategory = 0.0
-//            totalIncomeOfEachCategory += income[index].amount as! Double
-//            totalIncomesArray.append(totalIncomeOfEachCategory)
-//            index += 1
-//        }
-//
-//        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(incomeCategoriesNameArray, totalIncomesArray))
-//        print("----------------- newCategoryDict:: \(newCategoryDict)-----------------")
-//
-//        return sections
-//    }
-//
-//
-    
-//}
 
 /* NOTE
  

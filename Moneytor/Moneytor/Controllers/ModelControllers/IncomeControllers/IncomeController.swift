@@ -19,13 +19,6 @@ class IncomeController {
         return request
     }()
     
-  
-    
-   
-
-
-
-
 
     // MARK: - CRUD Methods
     // CREATE
