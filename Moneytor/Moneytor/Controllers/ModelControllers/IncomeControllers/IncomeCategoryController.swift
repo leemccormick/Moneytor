@@ -15,6 +15,7 @@ class IncomeCategoryController {
     
     var incomeCategoriesSections: [[Income]] = []
     var incomeCategoriesTotalDict = [Dictionary<String, Double>.Element]()
+    var incomeCategoriesEmoji: [String] = []
     
     private lazy var fetchRequest: NSFetchRequest<IncomeCategory> = {
         let request = NSFetchRequest<IncomeCategory>(entityName: "IncomeCategory")
@@ -34,12 +35,48 @@ class IncomeCategoryController {
     
     // UPDATE
     func generateSectionsAndSumEachIncomeCategory() {
+        
         fetchAllIncomeCategories()
         incomeCategoriesSections = []
-        var section: [Income] = []
-        var categoryNames: [String] = []
-        var totalIncomesEachCategory: [Double] = []
+        incomeCategoriesEmoji = []
         
+        var categoryNames: [String] = []
+        
+        
+//        var incomes: [Income] = []
+//        for  category in incomeCategories {
+//            let incomeArray = category.incomes?.allObjects as? [Income] ?? []
+//            incomes.append(contentsOf: incomeArray)
+//
+//            guard let categoryEmoji = category.emoji,
+//                  let categoryName = category.name else {return}
+//
+//            categoryNames.append(categoryName)
+//            incomeCategoriesEmoji.append(categoryEmoji)
+//        }
+//var newIncome: Income?
+        
+        
+        var section: [Income] = []
+        var totalIncomesEachCategory: [Double] = []
+       
+//        for income in incomes {
+//            var totalIncomeCategory: Double = 0.0
+//            if newIncome?.incomeCategory == income.incomeCategory {
+//                totalIncomeCategory += newIncome?.amount as! Double
+//                section.append(income)
+//            } else {
+//                incomeCategoriesSections.append(section)
+//                totalIncomesEachCategory.append(totalIncomeCategory)
+//                section = []
+//                totalIncomeCategory = 0.0
+//            }
+//            newIncome = nil
+//            newIncome = income
+//        }
+////
+        
+   
         for category in incomeCategories {
             let incomeArray = category.incomes?.allObjects as? [Income] ?? []
             var sum = 0.0
@@ -49,14 +86,65 @@ class IncomeCategoryController {
             }
             incomeCategoriesSections.append(section)
             section = []
-            categoryNames.append(category.name ?? "")
+            
+            
+            guard let categoryEmoji = category.emoji,
+                  let categoryName = category.name else {return}
+           
+        
+            categoryNames.append(categoryName)
+            incomeCategoriesEmoji.append(categoryEmoji)
+           
+            
+            
             totalIncomesEachCategory.append(sum)
         }
+        
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
         incomeCategoriesTotalDict = sortedDictionary
+        print("-----------------incomeCategoriesTotalDict:: \(incomeCategoriesTotalDict)-----------------")
     }
+    
+    
+    
+    
+//    func createAnotherSectionByFetchingIncome() -> [[Income]]{
+//
+//        fetchAllIncomeCategories()
+//        var sections: [[Income]] = []
+//        var incomeCategoriesNameArray: [String] = []
+//        var incomeEmojiArray: [String] = []
+//
+//        for category in incomeCategories {
+//            let newIncomeGroup = IncomeController.shared.fetchIncomesByCategory(category: category)
+//            sections.append(newIncomeGroup)
+//
+//            guard let incomeName = category.name,
+//                  let incomeEmoji = category.emoji else {return [[]]}
+//            incomeCategoriesNameArray.append(incomeName)
+//            incomeEmojiArray.append(incomeEmoji)
+//
+//        }
+//
+//        var index = 0
+//        var totalIncomesArray: [Double] = []
+//        for income in sections {
+//            var totalIncomeOfEachCategory = 0.0
+//            totalIncomeOfEachCategory += income[index].amount as! Double
+//            totalIncomesArray.append(totalIncomeOfEachCategory)
+//            index += 1
+//        }
+//
+//        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(incomeCategoriesNameArray, totalIncomesArray))
+//        print("----------------- newCategoryDict:: \(newCategoryDict)-----------------")
+//
+//        return sections
+//    }
+//
+//
+    
 }
 
 /* NOTE

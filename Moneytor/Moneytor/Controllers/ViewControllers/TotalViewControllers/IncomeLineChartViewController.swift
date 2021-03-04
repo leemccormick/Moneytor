@@ -89,7 +89,7 @@ extension IncomeLineChartViewController: ChartViewDelegate {
         yAxis.labelPosition = .outsideChart
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
-        
+        lineChartView.leftAxis.axisMinimum = 0
         lineChartView.isUserInteractionEnabled = true
         lineChartView.pinchZoomEnabled = false
         lineChartView.doubleTapToZoomEnabled = false

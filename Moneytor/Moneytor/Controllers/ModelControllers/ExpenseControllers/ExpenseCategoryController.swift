@@ -14,6 +14,7 @@ class ExpenseCategoryController {
     var expenseCategories: [ExpenseCategory] = []
     var expenseCategoriesSections: [[Expense]] = []
     var expenseCategoriesTotalDict = [Dictionary<String, Double>.Element]()
+    var expenseCategoriesEmojis: [String] = []
     
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
@@ -35,6 +36,7 @@ class ExpenseCategoryController {
     func generateSectionsAndSumEachExpenseCategory() {
         fetchAllExpenseCategories()
         expenseCategoriesSections = []
+        expenseCategoriesEmojis = []
         var section: [Expense] = []
         var categoryNames: [String] = []
         var totalExpensesEachCategory: [Double] = []
@@ -48,8 +50,9 @@ class ExpenseCategoryController {
             }
             expenseCategoriesSections.append(section)
             section = []
-            categoryNames.append(category.name ?? "")
+            categoryNames.append(category.nameString)
             totalExpensesEachCategory.append(sum)
+            expenseCategoriesEmojis.append(category.emojoString)
         }
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))

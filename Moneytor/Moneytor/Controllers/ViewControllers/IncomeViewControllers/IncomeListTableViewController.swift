@@ -47,11 +47,14 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
-        TotalController.shared.calculateTotalIncome()
-        TotalController.shared.calculateTotalExpense()
-        TotalController.shared.calculateTotalBalance()
-        let totalBalance = TotalController.shared.totalBalance
-        print("\n TOTAL BALANCE ::: \(totalBalance)")
+//        TotalController.shared.calculateTotalIncome()
+//        TotalController.shared.calculateTotalExpense()
+//        TotalController.shared.calculateTotalBalance()
+//        let totalBalance = TotalController.shared.totalBalance
+//        print("\n TOTAL BALANCE ::: \(totalBalance)")
+//let sections = IncomeCategoryController.shared.createAnotherSectionByFetchingIncome()
+        //print("----------------- sections:: \(sections)-----------------")
+        //let income = IncomeController.shared.fetchIncomesByCategory(category: )
     }
     
     // MARK: - Helper Fuctions
@@ -149,6 +152,8 @@ class IncomeListTableViewController: UITableViewController {
             let sectionName = Array(incomeDict)[index].key.uppercased()
             let totalInEachSection = Array(incomeDict)[index].value
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+            
+            
             return "\(sectionName)  \(totalInEachSectionInString)"
         }
     }

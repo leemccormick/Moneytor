@@ -19,6 +19,14 @@ class IncomeController {
         return request
     }()
     
+  
+    
+   
+
+
+
+
+
     // MARK: - CRUD Methods
     // CREATE
     func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
@@ -36,6 +44,20 @@ class IncomeController {
         incomes = fetchIncomes
     }
     
+    
+    func fetchIncomesByCategory(category: IncomeCategory ) -> [Income]{
+
+            let fetchRequest: NSFetchRequest<Income> = {
+                let request = NSFetchRequest <Income>(entityName: "Income")
+                request.predicate = NSPredicate(format: "id == %@", argumentArray: [category.id ?? ""])
+
+                return request
+            }()
+        
+        let fetchIncomesByCategories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
+        return fetchIncomesByCategories
+    }
+            
     // UPDATE
     func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
         income.name = name

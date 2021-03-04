@@ -16,6 +16,7 @@ class TotalExpenseViewController: UIViewController {
     // MARK: - Properties
     var expenseCategoryDict: [Dictionary<String, Double>.Element] = ExpenseCategoryController.shared.expenseCategoriesTotalDict
     var totalExpenseString = TotalController.shared.totalExpenseString
+    var expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
     
     
     // MARK: - Life Cycle Methods
@@ -29,6 +30,7 @@ class TotalExpenseViewController: UIViewController {
         super.viewWillAppear(animated)
         ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         expenseCategoryDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
+        expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
     }
 }
 
@@ -42,7 +44,7 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCategoryCell", for: indexPath)
-        cell.textLabel?.text = expenseCategoryDict[indexPath.row].key.capitalized
+        cell.textLabel?.text = "\(expenseCategoryEmoji[indexPath.row]) \(expenseCategoryDict[indexPath.row].key.capitalized)"
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: expenseCategoryDict[indexPath.row].value)
         return cell
     }

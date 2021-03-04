@@ -16,6 +16,7 @@ class TotalIncomeViewController: UIViewController {
     // MARK: - Properties
     var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict
     var totalIncomeString = TotalController.shared.totalIncomeString
+    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -24,13 +25,16 @@ class TotalIncomeViewController: UIViewController {
         incomeTableView.dataSource = self
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-       
+        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+        print(incomeCategoriesEmoji)
+       // incomeTableView.selectRowAtIndexPath(2, animated: true, scrollPosition: .Middle)
+        
+//        incomeTableView.selectionFollowsFocus
+//        incomeTableView.selectRow(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UITableView.ScrollPosition#>)
     }
 }
 
@@ -45,7 +49,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
         
-        cell.textLabel?.text = incomeCategoryDict[indexPath.row].key.capitalized
+        cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized)"
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategoryDict[indexPath.row].value)
         return cell
     }
