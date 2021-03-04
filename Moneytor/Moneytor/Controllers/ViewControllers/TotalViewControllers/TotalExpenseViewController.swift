@@ -139,6 +139,13 @@ extension TotalExpenseViewController: ChartViewDelegate {
         
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
         newExpenseCategoryEmojiToDisplay = []
+        //barChartView.xAxis.granularityEnabled = true
+
+        barChartView.xAxis.granularityEnabled = true
+             barChartView.xAxis.granularity = 1.0
+        barChartView.xAxis.drawGridLinesEnabled = false
+        barChartView.xAxis.drawLabelsEnabled = true
+        barChartView.xAxis.labelFont = .boldSystemFont(ofSize: 16)
         
         let yAxis = barChartView.leftAxis
         yAxis.labelFont = UIFont(name: FontNames.textMoneytorGoodLetter, size: 14) ?? .boldSystemFont(ofSize: 12)
@@ -155,17 +162,16 @@ extension TotalExpenseViewController: ChartViewDelegate {
         barChartView.doubleTapToZoomEnabled = false
         barChartView.dragEnabled = false
         barChartView.dragDecelerationEnabled = false
-        barChartView.xAxis.granularityEnabled = true
-        barChartView.xAxis.granularity = 1.0
+     
         barChartView.leftAxis.forceLabelsEnabled = true
-        barChartView.xAxis.granularityEnabled = true
+        
         barChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0, easingOption: .easeInOutBounce)
         barChartView.leftAxis.drawGridLinesEnabled = true
         barChartView.rightAxis.drawGridLinesEnabled = true
-        barChartView.xAxis.drawGridLinesEnabled = false
+       
         barChartView.rightAxis.enabled = false
         barChartView.drawGridBackgroundEnabled = true
-        barChartView.xAxis.drawLabelsEnabled = true
+       
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

@@ -118,21 +118,42 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center
         lineChartView.noDataTextColor = .mtTextLightBrown
+        
         var yValues: [ChartDataEntry] = []
         var i = 0
         var sumIncome = 0.0
+        var newIncomeCategoryEmojiToDisplay: [String] = []
+        
         for incomeCatagory in incomeDict {
-            sumIncome += incomeCatagory.value
-            i += 1
+            if incomeCatagory.value != 0 {
+            
+                sumIncome += incomeCatagory.value
             yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
-            print("-----------------incomeCatagory.value :: \(incomeCatagory.value)-----------------")
-            print("----------------- incomeCatagory.key:: \(incomeCatagory.key)-----------------")
+                
+                newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
+                i += 1
+            }
         }
         
-        let dataSet = LineChartDataSet(entries: yValues)
         
+        lineChartView.leftAxis.axisMinimum = 0
+        
+        lineChartView.leftAxis.axisMaximum = sumIncome + (sumIncome * 0.1)
+        
+//        lineChartView.xAxis.axisMaximum = 0
+//        lineChartView.xAxis.axisMaximum = sumIncome + 20.0
+        
+        
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newIncomeCategoryEmojiToDisplay)
+        newIncomeCategoryEmojiToDisplay = []
+        lineChartView.xAxis.granularityEnabled = true
+        lineChartView.xAxis.drawGridLinesEnabled = false
+        lineChartView.xAxis.drawLabelsEnabled = true
+        lineChartView.xAxis.labelFont = .boldSystemFont(ofSize: 20)
+        
+        let dataSet = LineChartDataSet(entries: yValues)
         dataSet.drawCirclesEnabled = true
-        dataSet.mode = .stepped
+        dataSet.mode = .linear
         dataSet.lineWidth = 4
         dataSet.setColor(.mtTextLightBrown)
         dataSet.fill = Fill(color: .mtDarkBlue)
@@ -146,9 +167,7 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartData.setValueFont(UIFont(name: FontNames.textMoneytorGoodLetter, size: 12) ?? .boldSystemFont(ofSize: 12))
         lineChartData.setValueTextColor(.mtDarkBlue)
         lineChartView.data = lineChartData
-        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: incomeCategoriesEmoji)
-        
-        
+       
         let yAxis = lineChartView.leftAxis
         yAxis.labelFont = UIFont(name: FontNames.textMoneytorGoodLetter, size: 14) ?? .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(5, force: true)
@@ -157,24 +176,28 @@ extension TotalIncomeViewController: ChartViewDelegate {
         yAxis.labelPosition = .outsideChart
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
-        lineChartView.leftAxis.axisMinimum = 0
+        
+        
+        
+        
+        
         lineChartView.isUserInteractionEnabled = true
         lineChartView.pinchZoomEnabled = false
         lineChartView.doubleTapToZoomEnabled = false
         lineChartView.dragEnabled = true
         lineChartView.dragDecelerationEnabled = true
-        lineChartView.xAxis.granularityEnabled = true
+        
         lineChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0, easingOption: .easeInOutBounce)
         lineChartView.chartDescription?.text = "Growth Income"
         lineChartView.chartDescription?.textColor = .mtLightYellow
         lineChartView.chartDescription?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 14) ?? .boldSystemFont(ofSize: 12)
         lineChartView.leftAxis.drawGridLinesEnabled = true
         lineChartView.rightAxis.drawGridLinesEnabled = true
-        lineChartView.xAxis.drawGridLinesEnabled = false
+        
         lineChartView.rightAxis.enabled = false
         lineChartView.rightAxis.axisLineColor = .mtDarkBlue
         lineChartView.drawGridBackgroundEnabled = true
-        lineChartView.xAxis.drawLabelsEnabled = false
+        
         // lineChartView.backgroundColor =
         //lineChartView.drawEntryLabelsEnabled = true
         
@@ -193,6 +216,15 @@ extension TotalIncomeViewController: ChartViewDelegate {
         let valueString = AmountFormatter.currencyInString(num: value)
         
         selectedCategory = "\(data.capitalized)  \(valueString)"
+        
+        for income in incomeCategoryDict {
+            let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
+            
+            if income.key == data {
+                selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
+            }
+        }
+        
         //        switch data {
         //        case "cash":
         //            lableBackgroundSetUp(lableSelected:  totalCash)
