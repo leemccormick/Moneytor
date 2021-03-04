@@ -24,6 +24,8 @@ class ExpenseBarChartViewController: UIViewController {
         }
     }
     
+    var expenseCategoriesEmojis = ExpenseCategoryController.shared.expenseCategoriesEmojis
+    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -38,7 +40,10 @@ class ExpenseBarChartViewController: UIViewController {
         // Income
         ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         expenseDictionary = ExpenseCategoryController.shared.expenseCategoriesTotalDict
+        
+        expenseCategoriesEmojis =  ExpenseCategoryController.shared.expenseCategoriesEmojis
         setupBarChart(expenseDict: expenseDictionary)
+        
         print("----------------- :: viewWillAppear-----------------")
         
     }
@@ -59,28 +64,37 @@ extension ExpenseBarChartViewController:  ChartViewDelegate {
         barChartView.noDataText = "No Expense Data available for Chart."
         // var labels: [String] = []
         var dataEntries: [BarChartDataEntry] = []
+        let labels: [String] = []
+       
         
+      
         var i = 0
+
         for expenseCategory in expenseDict {
             
             if expenseCategory.value != 0.0 {
                 let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: expenseCategory.key)
                     dataEntries.append(dataEntry)
+                let chartDataSet = BarChartDataSet(entries: dataEntries)
+                chartDataSet.colors = ChartColorTemplates.pastel()
+                        chartDataSet.drawValuesEnabled = false
+                let charData = BarChartData(dataSet: chartDataSet)
+                        charData.setDrawValues(true)
+                        charData.setValueFont(UIFont(name: FontNames.textMoneytorGoodLetter, size: 12) ?? .boldSystemFont(ofSize: 12))
+                charData.setValueTextColor(.mtDarkBlue)
+                           barChartView.data = charData
+                i += 1
             }
             
-            i += 1
+          
         }
         
-        let chartDataSet = BarChartDataSet(entries: dataEntries)
-        chartDataSet.colors = ChartColorTemplates.pastel()
-        chartDataSet.drawValuesEnabled = false
+      
         
-        let charData = BarChartData(dataSet: chartDataSet)
-        charData.setDrawValues(true)
-        charData.setValueFont(UIFont(name: FontNames.textMoneytorGoodLetter, size: 12) ?? .boldSystemFont(ofSize: 12))
         
-        charData.setValueTextColor(.mtDarkBlue)
-        barChartView.data = charData
+        
+        
+       
         
         
         //setup BarChartView
@@ -112,7 +126,7 @@ extension ExpenseBarChartViewController:  ChartViewDelegate {
         
         //for emiji
         
-        //barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:["one","two","three"])
+        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values:expenseCategoriesEmojis)
        
         
         
