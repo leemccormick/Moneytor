@@ -18,7 +18,8 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
+    var isIncome: Bool = false
+    var tag = 0
 //    // MARK: - Properties
 //    var totalBalance: Double = TotalController.shared.totalBalance {
 //        didSet {
@@ -138,8 +139,10 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         
         
         var entries: [PieChartDataEntry] = Array()
-        entries.append(PieChartDataEntry(value: incomePercent, label: "Income \(incomePercentString)"))
-        entries.append(PieChartDataEntry(value: expensePercent, label: "Expense \(expensePercentString)"))
+        entries.append(PieChartDataEntry(value: incomePercent, label: "Income \(incomePercentString)", data: "income"))
+        entries.append(PieChartDataEntry(value: expensePercent, label: "Expense \(expensePercentString)", data: "expense"))
+        //entries.append(PieChartDataEntry(value: incomePercent, label: , data: <#T##Any?#>))
+       // entries.append(PieChartDataEntry(value: expensePercent, label: <#T##String?#>, data: <#T##Any?#>))
         
         let dataSet = PieChartDataSet(entries: entries, label: "")
         dataSet.colors = ChartColorTemplates.pastel()
@@ -147,6 +150,40 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         
         pieChartView.data = PieChartData(dataSet: dataSet)
     }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let data: String  = entry.data! as! String
+        print("\(data)")
+        
+        if data == "income" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let totalIncomeVC = storyboard.instantiateViewController(identifier: "totalIncomeVCStoryBoardId")
+            totalIncomeVC.modalPresentationStyle = .popover
+            self.present(totalIncomeVC, animated: true, completion: nil)
+            
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let totalIncomeVC = storyboard.instantiateViewController(identifier: "totalExpenseVCStoryBoardId")
+            totalIncomeVC.modalPresentationStyle = .popover
+            self.present(totalIncomeVC, animated: true, completion: nil)
+        }
+        
+//        print("----------------- :: chartValueSelected-----------------")
+//        let totalIncome = TotalController.shared.totalIncome
+//        let totalExpense = TotalController.shared.totalExpense
+//        //set up data for pieView
+//        let incomePercent: Double = totalIncome / (totalIncome + totalExpense)
+//       // print("\n INCOME PERCENT ::: \(incomePercent)")
+//        let expensePercent: Double = totalExpense / (totalIncome + totalExpense)
+//        //print("\n EXPENSE PERCENT ::: \(expensePercent)")
+//        let incomePercentString = AmountFormatter.percentInString(num: incomePercent)
+//        let expensePercentString = AmountFormatter.percentInString(num: expensePercent)
+//
+//        if entry.isEqual(PieChartDataEntry(value: incomePercent, label: "Income \(incomePercentString)")) {
+//            print("income")
+//        } else {
+//            print("expense")
+//        }
+    }
+
 }
-
-

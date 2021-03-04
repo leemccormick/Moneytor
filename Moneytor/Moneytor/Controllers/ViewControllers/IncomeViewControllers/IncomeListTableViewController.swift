@@ -115,7 +115,7 @@ class IncomeListTableViewController: UITableViewController {
         
         if isSearching {
             guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return UITableViewCell()}
-            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.dropLast())"
+            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString)"
             cell.detailTextLabel?.text = income.incomeAmountString
         } else {
             let income = categoriesSections[indexPath.section][indexPath.row]
@@ -168,7 +168,7 @@ class IncomeListTableViewController: UITableViewController {
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
             
             
-            return "\(sectionName)  \(totalInEachSectionInString)"
+            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
         }
     }
     

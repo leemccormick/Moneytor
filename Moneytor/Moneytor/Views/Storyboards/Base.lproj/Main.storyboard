@@ -870,7 +870,7 @@
         <!--TOTAL INCOME-->
         <scene sceneID="yfc-hL-MXO">
             <objects>
-                <viewController id="mPo-6Z-NEi" customClass="TotalIncomeViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="totalIncomeVCStoryBoardId" id="mPo-6Z-NEi" customClass="TotalIncomeViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iJh-3f-BfW">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1176,7 +1176,7 @@
         <!--TOTAL EXPENSE-->
         <scene sceneID="ng9-qJ-0ha">
             <objects>
-                <viewController id="89d-OU-bUb" customClass="TotalExpenseViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="totalExpenseVCStoryBoardId" id="89d-OU-bUb" customClass="TotalExpenseViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o01-Le-aa7">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
