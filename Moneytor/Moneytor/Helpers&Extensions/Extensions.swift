@@ -1,5 +1,5 @@
 //
-//  Date+Extension.swift
+//  Extensions.swift
 //  Moneytor
 //
 //  Created by Lee McCormick on 2/23/21.
@@ -38,10 +38,8 @@ extension Array where Element:Equatable {
                 result.append(value)
             }
         }
-        
         return result
     }
-    
 }
 
 
@@ -78,3 +76,32 @@ extension BidirectionalCollection where Iterator.Element: Equatable {
         return nil
     }
 }
+
+extension Array {
+    public func toDictionary<Key: Hashable>(with selectKey: (Element) -> Key) -> [Key:Element] {
+        var dict = [Key:Element]()
+        for element in self {
+            dict[selectKey(element)] = element
+        }
+        return dict
+    }
+}
+
+
+extension String {
+  var firstCharacterAsString : String {
+    return self.startIndex == self.endIndex
+      ? ""
+      : String(self[self.startIndex])
+  }
+    
+    
+    func lastCharacterAsString() -> String {
+        guard let lastChar = self.last else {
+            return ""
+        }
+        return String(lastChar)
+    }
+        
+        
+    }

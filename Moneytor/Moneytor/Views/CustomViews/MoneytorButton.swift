@@ -17,7 +17,7 @@ class MoneytorButton: UIButton {
     func setupView() {
         self.backgroundColor = .mtBgBrownHeader
         self.setTitleColor(.mtWhiteText, for: .normal)
-        self.addCornerRadius() //from extension UIView
+        self.addCornerRadius()
         self.titleLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 22)
     }
 }
@@ -30,9 +30,8 @@ class MoneytorTotalButton: UIButton {
     }
     
     func setupView() {
-       // self.backgroundColor = .mtBgBrownHeader
         self.setTitleColor(.mtTextDarkBrown, for: .normal)
-        self.addCornerRadius() //from extension UIView
+        self.addCornerRadius() 
         self.titleLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
     }
 }

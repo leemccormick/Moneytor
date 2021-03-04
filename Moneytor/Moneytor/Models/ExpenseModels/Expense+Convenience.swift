@@ -15,10 +15,8 @@ extension Expense {
         self.date = date
         self.id = id
         self.expenseCategory = expenseCategory
-       
     }
 }
-
 
 extension Expense: SearchableRecordDelegate {
     
@@ -31,22 +29,10 @@ extension Expense: SearchableRecordDelegate {
     }
     
     var expenseAmountToUpdate: String {
- AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+        AmountFormatter.numberIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
     }
     
-    
-//    var expenseCategoryString: IncomeCategory {
-//          IncomeCategory(rawValue: category ?? "") ?? .other
-//      }
-//    
     var expenseDateText: String {
         self.date?.dateToString(format: .monthDayTimestamp) ?? Date().dateToString(format: .monthDayTimestamp)
     }
-    
-
-    
-//
-//
-//    var incomeAmountTextInDecimal: String {
-//        Formatter.numberFormatterIn2DecimalPlaces.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""    }
 }

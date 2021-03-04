@@ -8,7 +8,6 @@
 import UIKit
 
 class ExpenseListTableViewController: UITableViewController {
-
     
     // MARK: - Outlets
     @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
@@ -17,46 +16,45 @@ class ExpenseListTableViewController: UITableViewController {
     
     
     // MARK: - Properties
-    var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
     var isSearching: Bool = false
-    var dataSource: [SearchableRecordDelegate] {
-        return isSearching ? resultsExpenseFromSearching : ExpenseController.shared.expenses
+    var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
+    var categoriesSections: [[Expense]] {
+        return ExpenseCategoryController.shared.expenseCategoriesSections
     }
-    
-    
     var totalExpenseSearching: Double = TotalController.shared.totalExpense {
         didSet{
             updateFooter(total: totalExpenseSearching)
         }
     }
     
-    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
-
+        fetchAllExpenses()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAllExpenses()
+        setupSearchBar()
     }
-
+    
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
         print("================calendarButtonTapped========================")
         print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
-//        TotalController.shared.calculateTotalExpenseFromEachCatagory()
-        ExpenseCategoryController.shared.calculateTotalExpenseFromEachCatagory()
-        
-        ExpenseCategoryController.shared.fetchAllExpenseCategory()
+        //        TotalController.shared.calculateTotalExpenseFromEachCatagory()
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+        ExpenseCategoryController.shared.fetchAllExpenseCategories()
     }
     
+    // MARK: - Helper Fuctions
     func fetchAllExpenses(){
         ExpenseController.shared.fetchAllExpenses()
         resultsExpenseFromSearching = ExpenseController.shared.expenses
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         TotalController.shared.calculateTotalExpense()
         updateFooter(total: TotalController.shared.totalExpense)
         tableView.reloadData()
@@ -64,7 +62,7 @@ class ExpenseListTableViewController: UITableViewController {
     
     func updateFooter(total: Double) {
         let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
-        footer.backgroundColor = .mtDarkYellow
+        footer.backgroundColor = .mtLightYellow
         let lable = UILabel(frame:footer.bounds)
         let totalString = AmountFormatter.currencyInString(num: total)
         lable.text = "TOTAL EXPENSES : \(totalString)  "
@@ -75,95 +73,156 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
+    func setupSearchBar() {
+    if ExpenseController.shared.expenses.count == 0 {
+    expenseSearchBar.isUserInteractionEnabled = false
+        expenseSearchBar.placeholder = "Add New Expense..."
+} else {
+    expenseSearchBar.isUserInteractionEnabled = true
+    expenseSearchBar.placeholder = "Search by name or category..."
+}
+}
     
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
-        //return ExpenseController.shared.expenses.count
+    // MARK: - Table view data source and Table view delegate
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if isSearching {
+            return 1
+        } else {
+            return categoriesSections.count
+        }
     }
-
-
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching {
+            return resultsExpenseFromSearching.count
+        } else {
+            return categoriesSections[section].count
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
-        guard let expense = dataSource[indexPath.row] as? Expense else {return UITableViewCell()}
-        cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
-        cell.detailTextLabel?.text = expense.expenseAmountString
+        
+        if isSearching {
+            guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return UITableViewCell()}
+            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
+            cell.detailTextLabel?.text = expense.expenseAmountString
+            
+        } else {
+            let expense = categoriesSections[indexPath.section][indexPath.row]
+            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
+            cell.detailTextLabel?.text = expense.expenseAmountString
+        }
         return cell
     }
-  
     
-   
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let expense = dataSource[indexPath.row] as? Expense else {return}
-            ExpenseController.shared.deleteExpense(expense)
-            TotalController.shared.calculateTotalExpense()
-            updateFooter(total: TotalController.shared.totalExpense)
+            
+            if isSearching {
+                guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
+                ExpenseController.shared.deleteExpense(expense)
+                fetchAllExpenses()
+                setupSearchBar()
+            } else {
+                let expense = categoriesSections[indexPath.section][indexPath.row]
+                ExpenseController.shared.deleteExpense(expense)
+                fetchAllExpenses()
+                setupSearchBar()
+            }
             tableView.reloadData()
         }
     }
-   
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if categoriesSections[section].count <= 0 {
+            return CGFloat(0.01)
+        } else {
+            return CGFloat(30.0)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        if isSearching {
+            return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
+        } else {
+            if tableView.numberOfRows(inSection: section) == 0 {
+                return nil
+            }
+            
+            let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
+            let index = section
+            let sectionName = Array(expenseDict)[index].key.uppercased()
+            let totalInEachSection = Array(expenseDict)[index].value
+            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.mtDarkYellow
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.mtTextLightBrown
+        header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
+        header.textLabel?.textAlignment = .center
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  "toExpenseDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
-            guard let expense = dataSource[indexPath.row] as? Expense else {return}
-            destinationVC.expense = expense
+            if isSearching {
+                guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
+                destinationVC.expense = expense
+            } else {
+                let expense = categoriesSections[indexPath.section][indexPath.row]
+                destinationVC.expense = expense
+            }
         }
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension ExpenseListTableViewController: UISearchBarDelegate {
-
-func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       if !searchText.isEmpty {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        
-        resultsExpenseFromSearching = ExpenseController.shared.expenses.filter {$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
-        
-        guard let results = resultsExpenseFromSearching as? [Expense] else {return}
-        TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
+        if !searchText.isEmpty {
+            resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
+            
+            guard let results = resultsExpenseFromSearching as? [Expense] else {return}
+            
+            TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
+            totalExpenseSearching = TotalController.shared.totalExpenseSearchResults
+            self.tableView.reloadData()
+        } else {
+            fetchAllExpenses()
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+        isSearching = false
         self.tableView.reloadData()
-        
-        //{ $0.matches(searchTerm: searchText, name: $0.incomeNameString, catagory: $0.incomeCategory?.name) }
-           self.tableView.reloadData()
-       } else {
-        resultsExpenseFromSearching = ExpenseController.shared.expenses
-        guard let results = resultsExpenseFromSearching as? [Expense] else {return}
-        TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
-        self.tableView.reloadData()
-       }
-   }
-
-   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
-    searchBar.text = ""
-     isSearching = false
-    resultsExpenseFromSearching = ExpenseController.shared.expenses
-    self.tableView.reloadData()
-   }
-   
-   func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-      isSearching = true
-   }
-   
-   func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
-    isSearching = false
-   }
-   
-   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
-     isSearching = false
-   }
-
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        isSearching = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        isSearching = false
+    }
 }
 

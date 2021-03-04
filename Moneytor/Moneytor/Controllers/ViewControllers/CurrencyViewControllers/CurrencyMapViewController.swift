@@ -28,6 +28,4 @@ class CurrencyMapViewController: UIViewController {
     @IBAction func logoutButtonTapped(_ sender: Any) {
     }
     
-    
-
 }

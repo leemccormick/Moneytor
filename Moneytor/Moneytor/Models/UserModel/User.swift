@@ -14,10 +14,7 @@ struct UserStrings {
     fileprivate static let usernameKey = "username"
     fileprivate static let emailKey = "email"
     fileprivate static let passwordKey = "password"
-   // fileprivate static let usernameKey = "username"
-    //fileprivate static let bioKey = "bio"
     static let appleUserRefKey = "appleUserRef"
-    //fileprivate static let photoAssetKey = "photoAsset"
 }
 
 class User {

@@ -8,73 +8,96 @@
 import CoreData
 
 class IncomeCategoryController {
-    static let shared = IncomeCategoryController()
-    var incomeCategories: [IncomeCategory] = [
-        IncomeCategory(name: "other", emoji: "💵"),
-    IncomeCategory(name: "salary", emoji: "💳"),
-    IncomeCategory(name: "saving", emoji: "💰"),
-    IncomeCategory(name: "checking", emoji: "🏧")
-   
-]
     
-    var categorySections: [[Income]] = []
+    // MARK: - Properties
+    static let shared = IncomeCategoryController()
+    var incomeCategories: [IncomeCategory] = []
+    var incomeCategoriesSections: [[Income]] = []
+    var incomeCategoriesTotalDict = [Dictionary<String, Double>.Element]()
+    var incomeCategoriesEmoji: [String] = []
     
     private lazy var fetchRequest: NSFetchRequest<IncomeCategory> = {
         let request = NSFetchRequest<IncomeCategory>(entityName: "IncomeCategory")
         request.predicate = NSPredicate(value: true)
+        let sectionSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptors = [sectionSortDescriptor]
+        request.sortDescriptors = sortDescriptors
         return request
     }()
     
     // MARK: - CRUD Methods
-    // CREATE
-    func createIncomeCategories(name: String, emoji: String) {
-        let newIncomeCategory = IncomeCategory(name: name, emoji: emoji)
-        
-        for incomeCategory in incomeCategories {
-            if newIncomeCategory == incomeCategory {
-                print("==================\n :: NEW INCOME CATEGORY IS DUPICATED. \(newIncomeCategory.name)\n=======================")
-
-            } else {
-                
-            incomeCategories.append(newIncomeCategory)
-            }
-        }
-        
-        
-       
-        
-        
-        
-       // incomeCategories.removeDuplicates()
-        CoreDataStack.shared.saveContext()
-    }
-    
     // READ
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
-        
-       // let newIncategories =
         incomeCategories = fetchAllIncomeCatagories
-        
-      
     }
-    
-    func generateIncomeCategories() {
-        fetchAllIncomeCategories()
-        let newIncomeCategory = incomeCategories.removeDuplicates()
-        //var newIncomeCategory: [IncomeCategory] = []
-        for incomeCategory in newIncomeCategory {
-            let incomesCategory = incomeCategory.incomes
-            let newIncomesCategory = incomesCategory?.compactMap {$0 as? Income} ?? []
-            //newIncomeCategory.removeDuplicates()
-            categorySections.append(newIncomesCategory)
-        }
-    }
-    
-    
     
     // UPDATE
-    
-    // DELETE
-    
+    func generateSectionsAndSumEachIncomeCategory() {
+        
+        fetchAllIncomeCategories()
+        incomeCategoriesSections = []
+        incomeCategoriesEmoji = []
+        
+        var categoryNames: [String] = []
+        var section: [Income] = []
+        var totalIncomesEachCategory: [Double] = []
+        
+        for category in incomeCategories {
+            let incomeArray = category.incomes?.allObjects as? [Income] ?? []
+            var sum = 0.0
+            for income in incomeArray {
+                sum += income.amount as! Double
+                section.append(income)
+            }
+            incomeCategoriesSections.append(section)
+            section = []
+            
+            
+            let nameEmoji = "\(category.nameString) \(category.emojiString)"
+           
+            categoryNames.append(nameEmoji)
+            incomeCategoriesEmoji.append(category.emojiString)
+            totalIncomesEachCategory.append(sum)
+        }
+
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
+        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+        incomeCategoriesTotalDict = sortedDictionary
+    }
 }
+    
+
+/* NOTE
+ 
+ 
+ // CREATE
+ func createIncomeCategories(name: String, emoji: String) {
+ let newIncomeCategory = IncomeCategory(name: name, emoji: emoji)
+ 
+ for incomeCategory in incomeCategories {
+ if newIncomeCategory == incomeCategory {
+ print("==================\n :: NEW INCOME CATEGORY IS DUPICATED. \(newIncomeCategory.name)\n=======================")
+ 
+ } else {
+ 
+ incomeCategories.append(newIncomeCategory)
+ }
+ }
+ 
+
+ // incomeCategories.removeDuplicates()
+ CoreDataStack.shared.saveContext()
+ }
+ 
+ 
+ 
+ 
+ var incomeCategories: [IncomeCategory] = [
+     IncomeCategory(name: "_other", emoji: "💵", incomes: nil, id: "E46573D3-C3C3-48B0-99F5-1DF6B1D8FFF1"),
+     IncomeCategory(name: "salary", emoji: "💳", incomes: nil, id: "A5577198-7298-4E8A-BBDC-6CFA07BB4271"),
+     IncomeCategory(name: "saving account", emoji: "💰", incomes: nil, id: "961F3F7E-E03E-4D26-B36C-B7928466F403"),
+     IncomeCategory(name: "checking account", emoji: "🏧", incomes: nil, id: "9758F6A5-90F4-454A-8B8E-DFF6E6379AC0")
+ ]
+ //______________________________________________________________________________________
+ */

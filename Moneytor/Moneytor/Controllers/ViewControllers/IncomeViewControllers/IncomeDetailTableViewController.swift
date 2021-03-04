@@ -17,9 +17,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var income: Income?
-    // var selectedIncomeCategory: IncomeCategory
-    var selectedIncomeCategory: IncomeCategory = IncomeCategory(name: "other", emoji: "💵")
-    
+    var selectedIncomeCategory: IncomeCategory = IncomeCategoryController.shared.incomeCategories[0]
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -30,19 +28,16 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeCategoryPicker.dataSource = self
         incomeNameTextField.delegate = self
         incomeAmountTextField.delegate = self
-        
+        IncomeCategoryController.shared.fetchAllIncomeCategories()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        IncomeCategoryController.shared.fetchAllIncomeCategories()
         updateViews()
     }
     
-    
-    
     // MARK: - Actions
-    
     @IBAction func saveButtonTapped(_ sender: Any) {
         saveIncome()
     }
@@ -53,14 +48,11 @@ class IncomeDetailTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
         saveIncome()
     }
     
-    
     @IBAction func incomeDatePickerValueChange(_ sender: Any) {
-        
     }
     
     // MARK: - Helper Fuctions
@@ -70,24 +62,17 @@ class IncomeDetailTableViewController: UITableViewController {
             return
         }
         self.navigationItem.title = "Update Income"
+        selectedIncomeCategory = income.incomeCategory ?? IncomeCategoryController.shared.incomeCategories[0]
         incomeNameTextField.text = income.name
         incomeAmountTextField.text = income.incomeAmountStringToUpdate
-        
-        //TO DO UPDATE :: PickerView?? Selected Income
-        switch income.incomeCategory?.name {
-        case "salary":
-            incomeCategoryPicker.selectRow(1, inComponent: 0, animated: true)
-        case "saving":
-            incomeCategoryPicker.selectRow(2, inComponent: 0, animated: true)
-        case "checking":
-            incomeCategoryPicker.selectRow(3, inComponent: 0, animated: true)
-        default:
-            incomeCategoryPicker.selectRow(0, inComponent: 0, animated: true)
-        }
-    
-        
         incomeDatePicker.date = income.date ?? Date()
-        // incomeCategoryPicker.
+        
+        let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
+        for row in 0..<numberOfRows {
+            if income.incomeCategory == IncomeCategoryController.shared.incomeCategories[row] {
+                incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+            }
+        }
     }
     
     func saveIncome() {
@@ -156,7 +141,7 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
         }
         
         let incomeCategory = IncomeCategoryController.shared.incomeCategories[row]
-        pickerLabel?.text = "\(incomeCategory.emoji ?? "💵")  \(incomeCategory.name ?? "other")"
+        pickerLabel?.text = "\(incomeCategory.emoji ?? "💵")  \(incomeCategory.name?.capitalized ?? "other")"
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }
