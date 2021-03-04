@@ -38,8 +38,20 @@ class IncomeListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAllIncomes()
+        setupSearchBar()
     }
     
+    
+    
+    func setupSearchBar() {
+        if IncomeController.shared.incomes.count == 0 {
+            incomeSearchBar.isUserInteractionEnabled = false
+            incomeSearchBar.placeholder = "Add New Income..."
+        } else {
+            incomeSearchBar.isUserInteractionEnabled = true
+            incomeSearchBar.placeholder = "Search by name or category..."
+        }
+    }
 //    override func viewWillDisappear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        fetchAllIncomes()
@@ -120,10 +132,12 @@ class IncomeListTableViewController: UITableViewController {
                 guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
                 IncomeController.shared.deleteIncome(income)
                 fetchAllIncomes()
+                setupSearchBar()
             } else {
                 let income = categoriesSections[indexPath.section][indexPath.row]
                 IncomeController.shared.deleteIncome(income)
                 fetchAllIncomes()
+                setupSearchBar() 
             }
             tableView.reloadData()
         }

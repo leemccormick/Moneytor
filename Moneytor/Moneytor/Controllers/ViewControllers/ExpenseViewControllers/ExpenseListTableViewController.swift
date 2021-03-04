@@ -37,7 +37,9 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchAllExpenses()
+        setupSearchBar()
     }
+    
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
@@ -70,6 +72,16 @@ class ExpenseListTableViewController: UITableViewController {
         footer.addSubview(lable)
         tableView.tableFooterView = footer
     }
+    
+    func setupSearchBar() {
+    if ExpenseController.shared.expenses.count == 0 {
+    expenseSearchBar.isUserInteractionEnabled = false
+        expenseSearchBar.placeholder = "Add New Expense..."
+} else {
+    expenseSearchBar.isUserInteractionEnabled = true
+    expenseSearchBar.placeholder = "Search by name or category..."
+}
+}
     
     // MARK: - Table view data source and Table view delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -112,10 +124,12 @@ class ExpenseListTableViewController: UITableViewController {
                 guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
                 ExpenseController.shared.deleteExpense(expense)
                 fetchAllExpenses()
+                setupSearchBar()
             } else {
                 let expense = categoriesSections[indexPath.section][indexPath.row]
                 ExpenseController.shared.deleteExpense(expense)
                 fetchAllExpenses()
+                setupSearchBar()
             }
             tableView.reloadData()
         }
@@ -144,7 +158,7 @@ class ExpenseListTableViewController: UITableViewController {
             let sectionName = Array(expenseDict)[index].key.uppercased()
             let totalInEachSection = Array(expenseDict)[index].value
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
-            return "\(sectionName)  \(totalInEachSectionInString)"
+            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
         }
     }
     

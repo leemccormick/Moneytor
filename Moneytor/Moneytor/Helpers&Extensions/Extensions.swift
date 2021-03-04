@@ -86,3 +86,22 @@ extension Array {
         return dict
     }
 }
+
+
+extension String {
+  var firstCharacterAsString : String {
+    return self.startIndex == self.endIndex
+      ? ""
+      : String(self[self.startIndex])
+  }
+    
+    
+    func lastCharacterAsString() -> String {
+        guard let lastChar = self.last else {
+            return ""
+        }
+        return String(lastChar)
+    }
+        
+        
+    }

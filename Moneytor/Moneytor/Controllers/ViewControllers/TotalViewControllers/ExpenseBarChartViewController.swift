@@ -24,6 +24,8 @@ class ExpenseBarChartViewController: UIViewController {
         }
     }
     
+    var selectedCatagory: String = ""
+    
     var expenseCategoriesEmojis = ExpenseCategoryController.shared.expenseCategoriesEmojis
     
     
@@ -53,6 +55,18 @@ class ExpenseBarChartViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toTotalExpenseVC" {
+            guard let destinationVC = segue.destination as? TotalExpenseViewController else {return}
+            let selectedCategory = selectedCatagory
+                   destinationVC.selectedCategory = selectedCategory
+        }
+      
+       
+    }
+    
+   
     
 }
 
@@ -64,7 +78,7 @@ extension ExpenseBarChartViewController:  ChartViewDelegate {
         barChartView.noDataText = "No Expense Data available for Chart."
         // var labels: [String] = []
         var dataEntries: [BarChartDataEntry] = []
-        let labels: [String] = []
+        //let labels: [String] = []
        
         
       
@@ -154,7 +168,25 @@ extension ExpenseBarChartViewController:  ChartViewDelegate {
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
-        //        let data: String  = entry.data! as! String
+                let data: String  = entry.data! as! String
+        
+        
+        print(data)
+        
+        selectedCatagory = data
+        print("----------------- ::data \(data)-----------------")
+        print("----------------- ::selectedCatagory \(selectedCatagory)-----------------")
+       
+        
+        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil) // HAVE TO MATCH The NAME of Storyboard, this case Main.storyboard. Mostly! Strict with main.
+//        let totalExpenseVC = storyboard.instantiateViewController(identifier: "totalExpenseStoryBoard") //HAVE TO match the Storyboard ID in storyboard
+//        // The style of presenting
+//        totalExpenseVC.modalPresentationStyle = .pageSheet //You can choose the style of presenting
+//        
+//        // Now Presenting the next VC
+//        self.present(totalExpenseVC, animated: true, completion: nil)
+        
         //        switch data {
         //        case "🍔":
         //            lableBackgroundSetUp(lableSelected:  totalFood)
