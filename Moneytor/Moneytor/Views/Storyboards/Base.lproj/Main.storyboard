@@ -875,15 +875,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmB-Je-Meh" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="-446" y="1000.9999999999999" width="402.33333333333331" height="402.66666666666663"/>
-                                <color key="backgroundColor" name="darkGolder"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="mmB-Je-Meh" secondAttribute="height" multiplier="1:1" id="PIC-RQ-R3l"/>
-                                </constraints>
-                            </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MtF-f3-BoW">
-                                <rect key="frame" x="0.0" y="508.33333333333326" width="428" height="334.66666666666674"/>
+                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="incomeCategoryCell" textLabel="JkK-2x-aNb" detailTextLabel="Fh6-fH-qgv" style="IBUITableViewCellStyleValue1" id="4PA-TV-768">
@@ -914,47 +907,45 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-R2-JWw">
-                                <rect key="frame" x="0.0" y="87.999999999999972" width="428" height="420.33333333333326"/>
-                            </activityIndicatorView>
-                            <containerView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="wwd-gV-cnT" customClass="LineChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsy-Ug-uW1" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="21.333333333333343" y="102.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-R2-JWw">
+                                        <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="385.33333333333331"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="wwd-gV-cnT" secondAttribute="height" multiplier="1:1" id="YPP-px-dht"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="qsy-Ug-uW1" secondAttribute="leading" id="14D-Fr-WEz"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="top" id="GGj-HM-ebZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="fCa-Oz-n7h"/>
+                                    <constraint firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="lBm-zV-wKT"/>
+                                    <constraint firstAttribute="width" secondItem="qsy-Ug-uW1" secondAttribute="height" multiplier="1:1" id="qJI-A4-MPk"/>
                                 </constraints>
-                                <connections>
-                                    <segue destination="bhn-WA-lOe" kind="embed" id="QM7-v7-QLx"/>
-                                </connections>
-                            </containerView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jzV-cO-Ikz"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="wwd-gV-cnT" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="DDu-ng-VaH"/>
-                            <constraint firstItem="jzV-cO-Ikz" firstAttribute="bottom" secondItem="MtF-f3-BoW" secondAttribute="bottom" id="EjG-3L-Qfm"/>
-                            <constraint firstItem="MtF-f3-BoW" firstAttribute="top" secondItem="wwd-gV-cnT" secondAttribute="bottom" constant="20" id="HKM-2V-c3l"/>
-                            <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" id="ahc-Jl-srC"/>
-                            <constraint firstItem="MtF-f3-BoW" firstAttribute="leading" secondItem="jzV-cO-Ikz" secondAttribute="leading" id="ao3-6t-wgE"/>
-                            <constraint firstItem="wwd-gV-cnT" firstAttribute="centerX" secondItem="jzV-cO-Ikz" secondAttribute="centerX" id="e0Q-WD-fJ0"/>
-                            <constraint firstAttribute="bottom" secondItem="mmB-Je-Meh" secondAttribute="bottom" constant="-477.5" id="fA8-i5-uLY"/>
-                            <constraint firstItem="mmB-Je-Meh" firstAttribute="leading" secondItem="iJh-3f-BfW" secondAttribute="leading" constant="-446" id="ks6-Fb-3k9"/>
-                            <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="jzV-cO-Ikz" secondAttribute="leading" id="mPW-ya-xc1"/>
-                            <constraint firstItem="jzV-cO-Ikz" firstAttribute="trailing" secondItem="MtF-f3-BoW" secondAttribute="trailing" id="q06-Vf-e2o"/>
-                            <constraint firstItem="wwd-gV-cnT" firstAttribute="width" secondItem="iJh-3f-BfW" secondAttribute="width" multiplier="0.9" id="sYR-4G-w8O"/>
-                            <constraint firstItem="mmB-Je-Meh" firstAttribute="top" secondItem="iJh-3f-BfW" secondAttribute="top" constant="1001" id="tek-zU-Xgi"/>
-                            <constraint firstItem="jzV-cO-Ikz" firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="wvg-ZE-Yka"/>
-                            <constraint firstItem="MtF-f3-BoW" firstAttribute="top" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="yCC-vI-mci"/>
+                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="centerX" secondItem="jzV-cO-Ikz" secondAttribute="centerX" id="AdD-sd-PD6"/>
+                            <constraint firstItem="MtF-f3-BoW" firstAttribute="trailing" secondItem="jzV-cO-Ikz" secondAttribute="trailing" id="KwO-H6-srN"/>
+                            <constraint firstItem="MtF-f3-BoW" firstAttribute="leading" secondItem="jzV-cO-Ikz" secondAttribute="leading" id="OBl-bW-bTV"/>
+                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="width" secondItem="iJh-3f-BfW" secondAttribute="width" multiplier="0.9" id="Rva-mm-6QM"/>
+                            <constraint firstItem="MtF-f3-BoW" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="bottom" constant="15" id="dRl-B1-QqU"/>
+                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="dyf-2v-uar"/>
+                            <constraint firstItem="MtF-f3-BoW" firstAttribute="bottom" secondItem="jzV-cO-Ikz" secondAttribute="bottom" id="pPP-oH-niy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOTAL INCOME" id="Ux4-K2-mrM"/>
                     <connections>
                         <outlet property="activityIndicator" destination="mQ2-R2-JWw" id="94s-Qm-m4i"/>
                         <outlet property="incomeTableView" destination="MtF-f3-BoW" id="nWQ-pX-eM6"/>
+                        <outlet property="lineChartView" destination="qsy-Ug-uW1" id="xYm-qi-Vbf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0U-WR-Tku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1975" y="-1565"/>
+            <point key="canvasLocation" x="1973.8317757009345" y="-1565.4427645788337"/>
         </scene>
         <!--Expense Detail Table View Controller-->
         <scene sceneID="hTT-Jw-bwP">
@@ -1182,24 +1173,6 @@
             </objects>
             <point key="canvasLocation" x="3374" y="746"/>
         </scene>
-        <!--Income Line Chart View Controller-->
-        <scene sceneID="LAi-hn-2WR">
-            <objects>
-                <viewController id="bhn-WA-lOe" customClass="IncomeLineChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nwY-Cn-0Yh" customClass="LineChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="385.33333333333326" height="385.33333333333331"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Rxy-el-aIV"/>
-                        <color key="backgroundColor" name="mtDarkGolder"/>
-                    </view>
-                    <connections>
-                        <outlet property="lineChartView" destination="nwY-Cn-0Yh" id="3jF-7P-fta"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V7T-6u-bFB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3049" y="-1617"/>
-        </scene>
         <!--TOTAL EXPENSE-->
         <scene sceneID="ng9-qJ-0ha">
             <objects>
@@ -1220,7 +1193,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-KX-jit">
-                                <rect key="frame" x="0.0" y="508.33333333333326" width="428" height="334.66666666666674"/>
+                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="I2M-di-aHQ" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
@@ -1265,7 +1238,7 @@
                             <constraint firstItem="Fvk-KX-jit" firstAttribute="leading" secondItem="dyY-DZ-9z1" secondAttribute="leading" id="UtM-XN-kxk"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="bottom" secondItem="Fvk-KX-jit" secondAttribute="bottom" id="VK9-Yz-LPO"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="trailing" secondItem="Fvk-KX-jit" secondAttribute="trailing" id="k3U-vF-nvc"/>
-                            <constraint firstItem="Fvk-KX-jit" firstAttribute="top" secondItem="gJd-d9-Eml" secondAttribute="bottom" constant="20" id="wpu-gW-V63"/>
+                            <constraint firstItem="Fvk-KX-jit" firstAttribute="top" secondItem="gJd-d9-Eml" secondAttribute="bottom" constant="15" id="wpu-gW-V63"/>
                             <constraint firstItem="gJd-d9-Eml" firstAttribute="width" secondItem="o01-Le-aa7" secondAttribute="width" multiplier="0.9" id="z18-vy-PlT"/>
                         </constraints>
                     </view>
@@ -1273,31 +1246,12 @@
                     <connections>
                         <outlet property="activityIndicator" destination="qWQ-Wc-2lf" id="swg-IJ-zIx"/>
                         <outlet property="barChartView" destination="gJd-d9-Eml" id="TOL-lk-NbL"/>
-                        <outlet property="expenseCatagorySearchBar" destination="I2M-di-aHQ" id="wbx-jC-UAK"/>
                         <outlet property="expenseTableView" destination="Fvk-KX-jit" id="8XA-SC-Wix"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGm-k0-Kvx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1973.8317757009345" y="-828.07775377969767"/>
-        </scene>
-        <!--Expense Bar Chart View Controller-->
-        <scene sceneID="0a7-c8-MBR">
-            <objects>
-                <viewController id="EGl-V3-JP5" customClass="ExpenseBarChartViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ltp-wX-Yn8" customClass="BarChartView" customModule="Charts">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="OVH-76-Hfz"/>
-                        <color key="backgroundColor" name="mtDarkGolder"/>
-                    </view>
-                    <connections>
-                        <outlet property="barChartView" destination="Ltp-wX-Yn8" id="IoV-Ju-Kph"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rpd-Zn-UMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3049" y="-1111"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -12,7 +12,6 @@ class IncomeCategoryController {
     // MARK: - Properties
     static let shared = IncomeCategoryController()
     var incomeCategories: [IncomeCategory] = []
-    
     var incomeCategoriesSections: [[Income]] = []
     var incomeCategoriesTotalDict = [Dictionary<String, Double>.Element]()
     var incomeCategoriesEmoji: [String] = []
@@ -41,42 +40,9 @@ class IncomeCategoryController {
         incomeCategoriesEmoji = []
         
         var categoryNames: [String] = []
-        
-        
-//        var incomes: [Income] = []
-//        for  category in incomeCategories {
-//            let incomeArray = category.incomes?.allObjects as? [Income] ?? []
-//            incomes.append(contentsOf: incomeArray)
-//
-//            guard let categoryEmoji = category.emoji,
-//                  let categoryName = category.name else {return}
-//
-//            categoryNames.append(categoryName)
-//            incomeCategoriesEmoji.append(categoryEmoji)
-//        }
-//var newIncome: Income?
-        
-        
         var section: [Income] = []
         var totalIncomesEachCategory: [Double] = []
-       
-//        for income in incomes {
-//            var totalIncomeCategory: Double = 0.0
-//            if newIncome?.incomeCategory == income.incomeCategory {
-//                totalIncomeCategory += newIncome?.amount as! Double
-//                section.append(income)
-//            } else {
-//                incomeCategoriesSections.append(section)
-//                totalIncomesEachCategory.append(totalIncomeCategory)
-//                section = []
-//                totalIncomeCategory = 0.0
-//            }
-//            newIncome = nil
-//            newIncome = income
-//        }
-////
         
-   
         for category in incomeCategories {
             let incomeArray = category.incomes?.allObjects as? [Income] ?? []
             var sum = 0.0
@@ -88,26 +54,18 @@ class IncomeCategoryController {
             section = []
             
             
-            guard let categoryEmoji = category.emoji,
-                  let categoryName = category.name else {return}
+            let nameEmoji = "\(category.nameString) \(category.emojiString)"
            
-        
-            categoryNames.append(categoryName)
-            incomeCategoriesEmoji.append(categoryEmoji)
-           
-            
-            
+            categoryNames.append(nameEmoji)
+            incomeCategoriesEmoji.append(category.emojiString)
             totalIncomesEachCategory.append(sum)
         }
-        
-        
+
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
         incomeCategoriesTotalDict = sortedDictionary
-        print("-----------------incomeCategoriesTotalDict:: \(incomeCategoriesTotalDict)-----------------")
     }
-    
-    
+}
     
     
 //    func createAnotherSectionByFetchingIncome() -> [[Income]]{
@@ -145,7 +103,7 @@ class IncomeCategoryController {
 //
 //
     
-}
+//}
 
 /* NOTE
  

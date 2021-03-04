@@ -23,7 +23,7 @@ extension IncomeCategory {
         name ?? "other"
     }
     
-    var emojoString: String {
+    var emojiString: String {
         emoji ?? "💸"
     }
     
