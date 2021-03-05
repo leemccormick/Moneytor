@@ -39,42 +39,51 @@ class IncomeListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         fetchAllIncomes()
         setupSearchBar()
-
+        
     }
     
     
     
-    func setupSearchBar() {
-        if IncomeController.shared.incomes.count == 0 {
-            incomeSearchBar.isUserInteractionEnabled = false
-            incomeSearchBar.placeholder = "Add New Income..."
-        } else {
-            incomeSearchBar.isUserInteractionEnabled = true
-            incomeSearchBar.placeholder = "Search by name or category..."
-        }
-    }
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        fetchAllIncomes()
-//    }
+    
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
-      
+        
         IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         
-//        print("=========================================")
-//        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
-//        print("----------------- :: \(newCateTestFetch)-----------------")
-//        
-//        TotalController.shared.calculateTotalIncome()
-//        TotalController.shared.calculateTotalExpense()
-//        TotalController.shared.calculateTotalBalance()
-//        let totalBalance = TotalController.shared.totalBalance
-//        print("\n TOTAL BALANCE ::: \(totalBalance)")
-//let sections = IncomeCategoryController.shared.createAnotherSectionByFetchingIncome()
+        //        print("=========================================")
+        //        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
+        //        print("----------------- :: \(newCateTestFetch)-----------------")
+        //
+        //        TotalController.shared.calculateTotalIncome()
+        //        TotalController.shared.calculateTotalExpense()
+        //        TotalController.shared.calculateTotalBalance()
+        //        let totalBalance = TotalController.shared.totalBalance
+        //        print("\n TOTAL BALANCE ::: \(totalBalance)")
+        //let sections = IncomeCategoryController.shared.createAnotherSectionByFetchingIncome()
         //print("----------------- sections:: \(sections)-----------------")
-        //let income = IncomeController.shared.fetchIncomesByCategory(category: )
+//        let fectchIncomes = IncomeController.shared.fetchAllIncomeCategories()
+//        print("---------------------fectchIncomes\(fectchIncomes.count)-------------------------")
+//
+//        let fectchIncomes = IncomeController.shared.fetchIncomesWeekly()
+//        print("---------------------fectchIncomes\(fectchIncomes.count)-------------------------")
+//
+        
+        let oneDayAgoDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+        let oneMonthAgoDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+        let oneYearAgoDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+        
+        let incomesFromSometime = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneDayAgoDate)
+        print("---------------------fectchIncomes incomesFromSometime.count\(incomesFromSometime.count)-------------------------")
+        let incomesFromoneWeekAgoDate = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneWeekAgoDate)
+        print("---------------------fectchIncomes incomesFromoneWeekAgoDate.count\(incomesFromoneWeekAgoDate.count)-------------------------")
+        
+        let oneMonthAgoDateIncomes = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneMonthAgoDate)
+        print("---------------------fectchIncomes oneMonthAgoDate.count\(oneMonthAgoDateIncomes.count)-------------------------")
+        
+        let incomesFromoneYearAgoDate = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneYearAgoDate)
+        print("---------------------fectchIncomes oneYearAgoDatet\(incomesFromoneYearAgoDate.count)-------------------------")
         
         
     }
@@ -101,6 +110,16 @@ class IncomeListTableViewController: UITableViewController {
         lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
         footer.addSubview(lable)
         tableView.tableFooterView = footer
+    }
+    
+    func setupSearchBar() {
+        if IncomeController.shared.incomes.count == 0 {
+            incomeSearchBar.isUserInteractionEnabled = false
+            incomeSearchBar.placeholder = "Add New Income..."
+        } else {
+            incomeSearchBar.isUserInteractionEnabled = true
+            incomeSearchBar.placeholder = "Search by name or category..."
+        }
     }
     
     // MARK: - Table view data source and Table view delegate
