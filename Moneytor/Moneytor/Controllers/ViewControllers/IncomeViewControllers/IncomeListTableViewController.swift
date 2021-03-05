@@ -17,9 +17,7 @@ class IncomeListTableViewController: UITableViewController {
     // MARK: - Properties
     var isSearching: Bool = false
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
-    var categoriesSections: [[Income]] {
-        return IncomeCategoryController.shared.incomeCategoriesSections
-    }
+    var categoriesSections: [[Income]] =  IncomeCategoryController.shared.incomeCategoriesSections
     
     var totalIncomeSearching: Double = TotalController.shared.totalIncome {
         didSet{
@@ -56,7 +54,7 @@ class IncomeListTableViewController: UITableViewController {
         
         //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         
-        IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
+       categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
         
         //        print("=========================================")
         //        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
@@ -103,8 +101,8 @@ class IncomeListTableViewController: UITableViewController {
         resultsIncomeFromSearching = IncomeController.shared.incomes
         
         //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
-
+        //categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
+        categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
         TotalController.shared.calculateTotalIncome()
         updateFooter(total: TotalController.shared.totalIncome)
         tableView.reloadData()
@@ -248,6 +246,7 @@ extension IncomeListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if !searchText.isEmpty {
+            //searchBar.showsScopeBar = true
             resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "")}
             
             guard let results = resultsIncomeFromSearching
@@ -255,11 +254,52 @@ extension IncomeListTableViewController: UISearchBarDelegate {
             
             TotalController.shared.calculateTotalIncomeFrom(searchArrayResults: results)
             totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
+        
             self.tableView.reloadData()
+        } else if searchText == "" {
+           // searchBar.setShowsScope(false, animated: true)
+           // searchBar.showsScopeBar = false
+            resultsIncomeFromSearching = []
+            self.tableView.reloadData()
+        }
+        
+    
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        print(selectedScope)
+        
+        if selectedScope == 0 {
+            //daily
+            categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
+            tableView.reloadData()
+           // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
+        } else if selectedScope == 2 {
+            // mounthly
+            categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(monthly)
+            tableView.reloadData()
+           // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
+            
         } else {
-            fetchAllIncomes()
+            // weekly
+            categoriesSections =  IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
+            tableView.reloadData()
         }
     }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsScopeBar = false
+        return true
+    }
+    
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsScopeBar = true
+       
+        return true
+    }
+    
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -270,6 +310,8 @@ extension IncomeListTableViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isSearching = true
+        resultsIncomeFromSearching = []
+        tableView.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {

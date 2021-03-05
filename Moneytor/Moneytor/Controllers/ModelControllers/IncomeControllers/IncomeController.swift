@@ -16,7 +16,7 @@ class IncomeController {
     private lazy var fetchRequest: NSFetchRequest<Income> = {
         let request = NSFetchRequest<Income>(entityName: "Income")
         request.predicate = NSPredicate(value: true)
-        let dateSortDescriptor = NSSortDescriptor(key: #keyPath(Income.date), ascending: true)
+        let dateSortDescriptor = NSSortDescriptor(key: #keyPath(Income.date), ascending: false)
         request.sortDescriptors = [dateSortDescriptor]
         return request
     }()

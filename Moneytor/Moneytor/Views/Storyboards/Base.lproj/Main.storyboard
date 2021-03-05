@@ -287,35 +287,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nma-1h-9Ow" userLabel="ScrollViewContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="800"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
-                                                <rect key="frame" x="10.666666666666657" y="30" width="406.66666666666674" height="406.66666666666669"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
-                                                        <rect key="frame" x="8" y="8" width="390.66666666666669" height="390.66666666666669"/>
-                                                        <subviews>
-                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
-                                                                <rect key="frame" x="8" y="8" width="374.66666666666669" height="374.66666666666669"/>
-                                                            </activityIndicatorView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="cOS-K8-ftc" secondAttribute="trailing" constant="8" id="XFE-xa-fEH"/>
-                                                            <constraint firstAttribute="bottom" secondItem="cOS-K8-ftc" secondAttribute="bottom" constant="8" id="kLu-u2-xAZ"/>
-                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="leading" secondItem="jQu-IG-UqO" secondAttribute="leading" constant="8" id="knR-Jq-ydZ"/>
-                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="top" secondItem="jQu-IG-UqO" secondAttribute="top" constant="8" id="ved-98-Gw0"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" name="mtDarkGolder"/>
-                                                <constraints>
-                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="top" constant="8" id="6cu-Rf-bMR"/>
-                                                    <constraint firstAttribute="bottom" secondItem="jQu-IG-UqO" secondAttribute="bottom" constant="8" id="ggf-Pl-E5W"/>
-                                                    <constraint firstAttribute="width" secondItem="Sdg-WR-LzE" secondAttribute="height" multiplier="1:1" id="mUg-Ad-gTH"/>
-                                                    <constraint firstAttribute="trailing" secondItem="jQu-IG-UqO" secondAttribute="trailing" constant="8" id="vgb-y2-fJF"/>
-                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="leading" secondItem="Sdg-WR-LzE" secondAttribute="leading" constant="8" id="vnv-Gp-9AB"/>
-                                                </constraints>
-                                            </view>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dF7-Jz-B8w">
+                                                <rect key="frame" x="42.666666666666657" y="15" width="342.66666666666674" height="32"/>
+                                                <segments>
+                                                    <segment title="Weekly"/>
+                                                    <segment title="Monthly"/>
+                                                    <segment title="Yearly"/>
+                                                </segments>
+                                            </segmentedControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-h3-1Xj">
-                                                <rect key="frame" x="21.333333333333343" y="486.66666666666657" width="385.33333333333326" height="171.33333333333331"/>
+                                                <rect key="frame" x="21.333333333333343" y="482.66666666666657" width="385.33333333333326" height="171.33333333333331"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DUV-uF-JCI">
                                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="26.333333333333332"/>
@@ -389,36 +370,66 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
+                                                <rect key="frame" x="10.666666666666657" y="61.000000000000028" width="406.66666666666674" height="406.66666666666674"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="406.66666666666669" height="406.66666666666669"/>
+                                                        <subviews>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
+                                                                <rect key="frame" x="8" y="8" width="390.66666666666669" height="390.66666666666669"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="cOS-K8-ftc" secondAttribute="trailing" constant="8" id="XFE-xa-fEH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="cOS-K8-ftc" secondAttribute="bottom" constant="8" id="kLu-u2-xAZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="leading" secondItem="jQu-IG-UqO" secondAttribute="leading" constant="8" id="knR-Jq-ydZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="top" secondItem="jQu-IG-UqO" secondAttribute="top" constant="8" id="ved-98-Gw0"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" name="mtDarkGolder"/>
+                                                <constraints>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="leading" secondItem="Sdg-WR-LzE" secondAttribute="leading" id="GdT-5P-mch"/>
+                                                    <constraint firstAttribute="width" secondItem="Sdg-WR-LzE" secondAttribute="height" multiplier="1:1" id="La9-O2-10F"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jQu-IG-UqO" secondAttribute="trailing" id="mYk-IL-nCu"/>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="top" id="mYw-Cl-sR0"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jQu-IG-UqO" secondAttribute="bottom" id="z98-YR-6gV"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="800" id="24y-y7-uZ8"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="50" id="ER3-jm-opv"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="centerX" secondItem="Nma-1h-9Ow" secondAttribute="centerX" id="POF-jj-tKp"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="top" secondItem="Nma-1h-9Ow" secondAttribute="top" constant="30" id="ejj-Eb-Ou5"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.95" id="fOL-00-QnM"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="ie6-72-fxz"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="centerX" secondItem="MX9-h3-1Xj" secondAttribute="centerX" id="pyp-VR-I1I"/>
+                                            <constraint firstItem="dF7-Jz-B8w" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.8" id="Hfu-eS-qqF"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="centerX" secondItem="cOS-K8-ftc" secondAttribute="centerX" id="LC1-fE-A70"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.95" id="LlA-Ks-bYN"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="top" secondItem="dF7-Jz-B8w" secondAttribute="bottom" constant="15" id="Shu-Em-uco"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="15" id="XTa-1m-l62"/>
+                                            <constraint firstAttribute="height" constant="800" id="bYN-Pt-UqJ"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="centerX" secondItem="Nma-1h-9Ow" secondAttribute="centerX" id="nO4-qM-uSW"/>
+                                            <constraint firstItem="dF7-Jz-B8w" firstAttribute="top" secondItem="Nma-1h-9Ow" secondAttribute="top" constant="15" id="ncO-LK-HdV"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="vud-z5-kQZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="width" secondItem="oW6-I8-qZC" secondAttribute="width" id="F1P-i8-tFl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nma-1h-9Ow" secondAttribute="bottom" id="GTK-2I-jld"/>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="leading" secondItem="oW6-I8-qZC" secondAttribute="leading" id="LOx-D2-LWA"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nma-1h-9Ow" secondAttribute="trailing" id="N0k-EC-1lx"/>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="top" secondItem="oW6-I8-qZC" secondAttribute="top" id="Rva-hm-IDe"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="centerX" secondItem="oW6-I8-qZC" secondAttribute="centerX" id="JrQ-25-7Sl"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="top" secondItem="oW6-I8-qZC" secondAttribute="top" id="O7u-qn-Z67"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nma-1h-9Ow" secondAttribute="bottom" id="Pfx-dW-uOY"/>
+                                    <constraint firstItem="dF7-Jz-B8w" firstAttribute="centerX" secondItem="oW6-I8-qZC" secondAttribute="centerX" id="RWi-2H-H8I"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nma-1h-9Ow" secondAttribute="trailing" id="TAG-XY-OOs"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="leading" secondItem="oW6-I8-qZC" secondAttribute="leading" id="cAZ-W1-KlO"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eyX-dE-3A7"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="eyX-dE-3A7" firstAttribute="bottom" secondItem="oW6-I8-qZC" secondAttribute="bottom" id="7AP-Xc-Vsd"/>
-                            <constraint firstItem="oW6-I8-qZC" firstAttribute="leading" secondItem="eyX-dE-3A7" secondAttribute="leading" id="FLG-U4-rBb"/>
-                            <constraint firstItem="oW6-I8-qZC" firstAttribute="top" secondItem="eyX-dE-3A7" secondAttribute="top" id="ciI-Ad-oVH"/>
-                            <constraint firstItem="eyX-dE-3A7" firstAttribute="trailing" secondItem="oW6-I8-qZC" secondAttribute="trailing" id="jGm-ET-Zvw"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="bottom" secondItem="eyX-dE-3A7" secondAttribute="bottom" id="V0z-SI-uNV"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="top" secondItem="eyX-dE-3A7" secondAttribute="top" id="f32-pI-3A3"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="trailing" secondItem="eyX-dE-3A7" secondAttribute="trailing" id="q5a-3O-k0h"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="leading" secondItem="eyX-dE-3A7" secondAttribute="leading" id="qIp-rL-3WH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOTAL" id="UYf-tg-049">
@@ -446,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF6-Dn-xYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="-1045"/>
+            <point key="canvasLocation" x="1021.9626168224298" y="-1045.1403887688987"/>
         </scene>
         <!--EXPENSE-->
         <scene sceneID="9NE-NA-q7c">
@@ -881,7 +892,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MtF-f3-BoW">
-                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
+                                <rect key="frame" x="0.0" y="549.33333333333337" width="428" height="293.66666666666663"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="incomeCategoryCell" textLabel="JkK-2x-aNb" detailTextLabel="Fh6-fH-qgv" style="IBUITableViewCellStyleValue1" id="4PA-TV-768">
@@ -912,8 +923,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GOm-QE-80K">
+                                <rect key="frame" x="60" y="103" width="308" height="32"/>
+                                <segments>
+                                    <segment title="Weekly"/>
+                                    <segment title="Monthy"/>
+                                    <segment title="Yearly"/>
+                                </segments>
+                            </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsy-Ug-uW1" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="21.333333333333343" y="102.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
+                                <rect key="frame" x="21.333333333333343" y="148.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-R2-JWw">
                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="385.33333333333331"/>
@@ -921,10 +940,10 @@
                                 </subviews>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
-                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="qsy-Ug-uW1" secondAttribute="leading" id="14D-Fr-WEz"/>
-                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="top" id="GGj-HM-ebZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="fCa-Oz-n7h"/>
-                                    <constraint firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="lBm-zV-wKT"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="top" id="Kz6-1B-u6C"/>
+                                    <constraint firstAttribute="bottom" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="YKK-Cd-NW9"/>
+                                    <constraint firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="fdT-Qt-h2e"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="qsy-Ug-uW1" secondAttribute="leading" id="fq8-I0-3Y2"/>
                                     <constraint firstAttribute="width" secondItem="qsy-Ug-uW1" secondAttribute="height" multiplier="1:1" id="qJI-A4-MPk"/>
                                 </constraints>
                             </view>
@@ -936,8 +955,11 @@
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="trailing" secondItem="jzV-cO-Ikz" secondAttribute="trailing" id="KwO-H6-srN"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="leading" secondItem="jzV-cO-Ikz" secondAttribute="leading" id="OBl-bW-bTV"/>
                             <constraint firstItem="qsy-Ug-uW1" firstAttribute="width" secondItem="iJh-3f-BfW" secondAttribute="width" multiplier="0.9" id="Rva-mm-6QM"/>
+                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="top" secondItem="GOm-QE-80K" secondAttribute="bottom" constant="15" id="b5m-WC-S3m"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="width" secondItem="qsy-Ug-uW1" secondAttribute="width" multiplier="0.8" id="bLf-0S-XhO"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="centerX" secondItem="qsy-Ug-uW1" secondAttribute="centerX" id="cJT-lF-RUT"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="bottom" constant="15" id="dRl-B1-QqU"/>
-                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="dyf-2v-uar"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="hEp-vs-RIB"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="bottom" secondItem="jzV-cO-Ikz" secondAttribute="bottom" id="pPP-oH-niy"/>
                         </constraints>
                     </view>
@@ -1187,7 +1209,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-d9-Eml" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="21.333333333333343" y="102.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
+                                <rect key="frame" x="21.333333333333343" y="141.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gJd-d9-Eml" secondAttribute="height" multiplier="1:1" id="H1J-9G-n8A"/>
@@ -1198,7 +1220,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-KX-jit">
-                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
+                                <rect key="frame" x="0.0" y="542.33333333333337" width="428" height="300.66666666666663"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="I2M-di-aHQ" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
@@ -1234,15 +1256,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oZO-NF-iRs">
+                                <rect key="frame" x="60" y="103" width="308" height="32"/>
+                                <segments>
+                                    <segment title="Weekly"/>
+                                    <segment title="Monthly"/>
+                                    <segment title="Yearly"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dyY-DZ-9z1"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="gJd-d9-Eml" firstAttribute="top" secondItem="dyY-DZ-9z1" secondAttribute="top" constant="15" id="3Ex-IJ-YG1"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="centerX" secondItem="gJd-d9-Eml" secondAttribute="centerX" id="FSE-ri-gy4"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="top" secondItem="dyY-DZ-9z1" secondAttribute="top" constant="15" id="FiA-Xs-bd6"/>
                             <constraint firstItem="gJd-d9-Eml" firstAttribute="centerX" secondItem="dyY-DZ-9z1" secondAttribute="centerX" id="Mhe-In-p3G"/>
                             <constraint firstItem="Fvk-KX-jit" firstAttribute="leading" secondItem="dyY-DZ-9z1" secondAttribute="leading" id="UtM-XN-kxk"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="bottom" secondItem="Fvk-KX-jit" secondAttribute="bottom" id="VK9-Yz-LPO"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="width" secondItem="gJd-d9-Eml" secondAttribute="width" multiplier="0.8" id="foa-8Q-FgD"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="trailing" secondItem="Fvk-KX-jit" secondAttribute="trailing" id="k3U-vF-nvc"/>
+                            <constraint firstItem="gJd-d9-Eml" firstAttribute="top" secondItem="oZO-NF-iRs" secondAttribute="bottom" constant="8" id="tsS-Ck-2ff"/>
                             <constraint firstItem="Fvk-KX-jit" firstAttribute="top" secondItem="gJd-d9-Eml" secondAttribute="bottom" constant="15" id="wpu-gW-V63"/>
                             <constraint firstItem="gJd-d9-Eml" firstAttribute="width" secondItem="o01-Le-aa7" secondAttribute="width" multiplier="0.9" id="z18-vy-PlT"/>
                         </constraints>
@@ -1260,7 +1293,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Egk-Ry-loT"/>
+        <segue reference="Lzo-yo-PhL"/>
         <segue reference="wuN-aR-Pod"/>
         <segue reference="kO8-9M-xwH"/>
         <segue reference="sdv-pE-Ro6"/>

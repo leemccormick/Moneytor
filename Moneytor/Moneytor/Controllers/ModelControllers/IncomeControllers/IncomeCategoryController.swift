@@ -19,7 +19,7 @@ class IncomeCategoryController {
 
     
    // var incomeCategoriesTotalDict = [String: Double]()
-    var incomeCategoriesEmoji: [String] = []
+    var incomeCategoriesEmoji: [String] = []//= ["_other 💵"]
     
     private lazy var fetchRequest: NSFetchRequest<IncomeCategory> = {
         let request = NSFetchRequest<IncomeCategory>(entityName: "IncomeCategory")
@@ -73,52 +73,60 @@ class IncomeCategoryController {
 
     
     
-    func generateSectionsAndSumCategoiesByTimePeriod(_ time: Date) {
+   
+    
+    func generateSectionsAndSumCategoiesByTimePeriod(_ time: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
         incomeCategoriesSections = []
         incomeCategoriesEmoji = []
         
-        var categoryNames: [String] = []
-       // var section: [Income] = []
-        var totalIncomesEachCategory: [Double] = []
-        
         for incomeCategory in incomeCategories {
-            guard let incomeCategoryName = incomeCategory.name else {return}
+           if let incomeCategoryName = incomeCategory.name {
             let newCategorySection = IncomeController.shared.fetchIncomesFromTimePeriodAndCategory(time, categoryName: incomeCategoryName)
-            
-            let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
-           
-            incomeCategoriesSections.append(sortedCategory)
-            incomeCategoriesEmoji.append(incomeCategory.emojiString)
-
+                       
+                       let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
+                      
+                       incomeCategoriesSections.append(sortedCategory)
+                       incomeCategoriesEmoji.append(incomeCategory.emojiString)
+           }
+            generateCategoryDictionaryBy(sections: incomeCategoriesSections)
         }
+        return incomeCategoriesSections
         
-        for incomes in incomeCategoriesSections {
-    
-            let incomeCategorySum = incomes.map({$0.amount as! Double}).reduce(0.0){$0 + $1}
-            totalIncomesEachCategory.append(incomeCategorySum)
-           
-            let incomeCategoryName = incomes.map({$0.incomeCategory?.name ?? ""}).removeDuplicates()
-            
-            let incomeCategoryEmoji = incomes.map({$0.incomeCategory?.emojiString ?? ""}).removeDuplicates()
-            
-
-            let nameEmoji = "\(incomeCategoryName[0]) \(incomeCategoryEmoji[0])"
-            
-            categoryNames.append(nameEmoji)
-           
-        }
-        
-   
-        
-        
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
-        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        incomeCategoriesTotalDict = sortedDictionary
         
     }
     
     
+    func generateCategoryDictionaryBy(sections: [[Income]]) {
+        var categoryNames: [String] = []
+        var totalIncomesEachCategory: [Double] = []
+        
+        for incomes in sections {
+            
+            let incomeCategorySum = incomes.map({$0.amount as! Double}).reduce(0.0){$0 + $1}
+            totalIncomesEachCategory.append(incomeCategorySum)
+            let incomeCategoryName = incomes.map({$0.incomeCategory?.name ?? ""}).removeDuplicates()
+            let incomeCategoryEmoji = incomes.map({$0.incomeCategory?.emojiString ?? ""}).removeDuplicates()
+
+            guard let categoryNameArray = incomeCategoryName.first, !categoryNameArray.isEmpty,
+                  let categoryEmojiArray = incomeCategoryEmoji.first, !categoryEmojiArray.isEmpty else {return}
+           // if !incomeCategoryName.isEmpty {
+                let nameEmoji = "\(categoryNameArray) \(categoryEmojiArray)"
+                categoryNames.append(nameEmoji)
+           // }
+        }
+
+        
+    print("\n-------------------- categoryNames: \(categoryNames) :: totalIncomesEachCategory:: \(totalIncomesEachCategory)in \(#function) : ----------------------------\n)")
+       // print("----------------- totalIncomesEachCategory:: \(totalIncomesEachCategory)-----------------")
+        
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
+        
+        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+        print("--------------------sortedDictionary : \(sortedDictionary) in \(#function) : ----------------------------\n)")
+
+        incomeCategoriesTotalDict = sortedDictionary
+    }
 }
 
     
