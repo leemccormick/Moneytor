@@ -28,6 +28,11 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     
+    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+    let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    let yearly = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +54,9 @@ class IncomeListTableViewController: UITableViewController {
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
         
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        
+        IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
         
         //        print("=========================================")
         //        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
@@ -68,23 +75,25 @@ class IncomeListTableViewController: UITableViewController {
 //        let fectchIncomes = IncomeController.shared.fetchIncomesWeekly()
 //        print("---------------------fectchIncomes\(fectchIncomes.count)-------------------------")
 //
+//
+//        let oneDayAgoDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+//        let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+//        let oneMonthAgoDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+//        let oneYearAgoDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
+//
+//        let incomesFromSometime = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneDayAgoDate)
+//        print("---------------------fectchIncomes incomesFromSometime.count\(incomesFromSometime.count)-------------------------")
+//        let incomesFromoneWeekAgoDate = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneWeekAgoDate)
+//        print("---------------------fectchIncomes incomesFromoneWeekAgoDate.count\(incomesFromoneWeekAgoDate.count)-------------------------")
+//
+//        let oneMonthAgoDateIncomes = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneMonthAgoDate)
+//        print("---------------------fectchIncomes oneMonthAgoDate.count\(oneMonthAgoDateIncomes.count)-------------------------")
+//
+//        let incomesFromoneYearAgoDate = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneYearAgoDate)
+//        print("---------------------fectchIncomes oneYearAgoDatet\(incomesFromoneYearAgoDate.count)-------------------------")
+//
         
-        let oneDayAgoDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-        let oneMonthAgoDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-        let oneYearAgoDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
-        
-        let incomesFromSometime = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneDayAgoDate)
-        print("---------------------fectchIncomes incomesFromSometime.count\(incomesFromSometime.count)-------------------------")
-        let incomesFromoneWeekAgoDate = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneWeekAgoDate)
-        print("---------------------fectchIncomes incomesFromoneWeekAgoDate.count\(incomesFromoneWeekAgoDate.count)-------------------------")
-        
-        let oneMonthAgoDateIncomes = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneMonthAgoDate)
-        print("---------------------fectchIncomes oneMonthAgoDate.count\(oneMonthAgoDateIncomes.count)-------------------------")
-        
-        let incomesFromoneYearAgoDate = IncomeController.shared.fetchIncomesFromSomeTimeToNow(timestamp: oneYearAgoDate)
-        print("---------------------fectchIncomes oneYearAgoDatet\(incomesFromoneYearAgoDate.count)-------------------------")
-        
+        //IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(oneWeekAgoDate)
         
     }
     
@@ -92,7 +101,10 @@ class IncomeListTableViewController: UITableViewController {
     func fetchAllIncomes() {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        
+        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
+
         TotalController.shared.calculateTotalIncome()
         updateFooter(total: TotalController.shared.totalIncome)
         tableView.reloadData()
@@ -189,15 +201,18 @@ class IncomeListTableViewController: UITableViewController {
             if tableView.numberOfRows(inSection: section) == 0 {
                 return nil
             }
+//            
+//            let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
+//            let index = section
+////
+//            let sectionName = IncomeCategoryController.shared.incomeCategoriesTotalDict[index].key
+////            let totalInEachSection = incomeDict[index].value
+//           let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+//
+//
+//            return "\(sectionName.dropLast())  \(totalInEachSectionInString)" ?? ""
             
-            let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-            let index = section
-            let sectionName = Array(incomeDict)[index].key.uppercased()
-            let totalInEachSection = Array(incomeDict)[index].value
-            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
-            
-            
-            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
+            return ""
         }
     }
     

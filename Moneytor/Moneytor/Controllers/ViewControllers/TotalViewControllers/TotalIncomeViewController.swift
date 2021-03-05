@@ -18,7 +18,7 @@ class TotalIncomeViewController: UIViewController {
     // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
     var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-    var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+    var incomeCategoryDict: [String: Double] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
@@ -108,7 +108,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension TotalIncomeViewController: ChartViewDelegate {
     
-    func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
+    func setupLineChart(incomeDict: [String : Double]) {
         
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center
