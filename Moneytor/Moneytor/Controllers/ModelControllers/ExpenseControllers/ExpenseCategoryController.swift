@@ -43,8 +43,10 @@ class ExpenseCategoryController {
         
         for category in expenseCategories {
             let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
+            
+             let newExpenseArray = expenseArray.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
             var sum = 0.0
-            for expense in expenseArray {
+            for expense in newExpenseArray {
                 sum += expense.amount as! Double
                 section.append(expense)
             }

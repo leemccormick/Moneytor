@@ -12,7 +12,7 @@ extension Date {
     enum DateFormatType: String {
         case full = "EEEE, MMM d, yyyy"
         case fullNumeric = "MM/dd/yyyy"
-        case fullNumericTimestamp = "MM-dd-yyyy HH:mm"
+        case fullNumericTimestamp = "yyyy-MM-dd HH:mm"
         case monthDayTimestamp = "MMM d, h:mm a"
         case monthYear = "MMMM yyyy"
         case monthDayYear = "MMM d, yyyy"

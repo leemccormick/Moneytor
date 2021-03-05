@@ -39,6 +39,7 @@ class IncomeListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         fetchAllIncomes()
         setupSearchBar()
+
     }
     
     
@@ -59,6 +60,13 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
+      
+        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        
+//        print("=========================================")
+//        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
+//        print("----------------- :: \(newCateTestFetch)-----------------")
+//        
 //        TotalController.shared.calculateTotalIncome()
 //        TotalController.shared.calculateTotalExpense()
 //        TotalController.shared.calculateTotalBalance()
@@ -67,6 +75,8 @@ class IncomeListTableViewController: UITableViewController {
 //let sections = IncomeCategoryController.shared.createAnotherSectionByFetchingIncome()
         //print("----------------- sections:: \(sections)-----------------")
         //let income = IncomeController.shared.fetchIncomesByCategory(category: )
+        
+        
     }
     
     // MARK: - Helper Fuctions
