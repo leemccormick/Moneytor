@@ -18,7 +18,7 @@ class TotalIncomeViewController: UIViewController {
     // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
     var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-    var incomeCategoryDict: [String: Double] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+    var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
@@ -76,8 +76,11 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
         
-        cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
-        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategoryDict[indexPath.row].value)
+//        cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
+//        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategoryDict[indexPath.row].value)
+       // cell.textLabel?.text = incomeCategoryDict[indexPath.row].key
+        cell.textLabel?.text = "Fix total Income here.."
+
         return cell
     }
     
@@ -108,7 +111,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension TotalIncomeViewController: ChartViewDelegate {
     
-    func setupLineChart(incomeDict: [String : Double]) {
+    func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
         
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center

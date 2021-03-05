@@ -15,16 +15,7 @@ class IncomeLineChartViewController: UIViewController {
 
     // MARK: - Properties
     var incomeCategoriesSum = [123.00,1246, 3300,467676]
-//    var incomeDictionary: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
-//        didSet {
-//            
-//            setupLineChart(incomeDict: incomeDictionary)
-//            //loadViewIfNeeded()
-//
-//        }
-//    }
-    
-    var incomeDictionary: [String : Double] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+    var incomeDictionary: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
         didSet {
             
             setupLineChart(incomeDict: incomeDictionary)
@@ -32,6 +23,15 @@ class IncomeLineChartViewController: UIViewController {
 
         }
     }
+    
+//    var incomeDictionary: [String : Double] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+//        didSet {
+//
+//            setupLineChart(incomeDict: incomeDictionary)
+//            //loadViewIfNeeded()
+//
+//        }
+//    }
     
     var yValues: [ChartDataEntry] = []
     
@@ -85,7 +85,7 @@ extension IncomeLineChartViewController: ChartViewDelegate {
 //        }
     }
     
-    func setupLineChart(incomeDict: [String:Double]) {
+    func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
         
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center

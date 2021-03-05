@@ -201,18 +201,20 @@ class IncomeListTableViewController: UITableViewController {
             if tableView.numberOfRows(inSection: section) == 0 {
                 return nil
             }
-//            
-//            let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-//            let index = section
-////
-//            let sectionName = IncomeCategoryController.shared.incomeCategoriesTotalDict[index].key
-////            let totalInEachSection = incomeDict[index].value
-//           let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
-//
-//
-//            return "\(sectionName.dropLast())  \(totalInEachSectionInString)" ?? ""
             
-            return ""
+            let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
+            let index = section
+
+            let sectionName = Array(incomeDict)[index].key.uppercased()
+             
+            let totalInEachSection = incomeDict[index].value
+            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+
+
+            print("\n\n\n----------------- sectionName :: \(sectionName)-----------------")
+            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
+            
+           // return ""
         }
     }
     
