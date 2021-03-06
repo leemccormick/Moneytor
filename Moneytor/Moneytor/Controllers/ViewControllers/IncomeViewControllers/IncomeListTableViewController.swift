@@ -38,7 +38,7 @@ class IncomeListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         incomeSearchBar.selectedScopeButtonIndex = 1
         fetchIncomesBySpecificTime(time: weekly)
-        setupSearchBar()
+         
        
         //tableView.reloadData()
     }
@@ -52,18 +52,19 @@ class IncomeListTableViewController: UITableViewController {
     func fetchAllIncomes() {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
-        
+        setupSearchBar(incomeCount: resultsIncomeFromSearching.count)
        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
         TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
         updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
+        
         tableView.reloadData()
     }
     
     func fetchIncomesBySpecificTime(time: Date) {
-        _ = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
        // resultsIncomeFromSearching = IncomeController.shared.incomes
-        
+        setupSearchBar(incomeCount: incomes.count)
        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
@@ -87,8 +88,8 @@ class IncomeListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    func setupSearchBar() {
-        if IncomeController.shared.incomes.count == 0 {
+    func setupSearchBar(incomeCount: Int) {
+        if incomeCount == 0 {
             incomeSearchBar.isUserInteractionEnabled = false
             incomeSearchBar.placeholder = "Add New Income..."
         } else {
@@ -136,12 +137,21 @@ class IncomeListTableViewController: UITableViewController {
                 guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
                 IncomeController.shared.deleteIncome(income)
                 fetchAllIncomes()
-                setupSearchBar()
+               
             } else {
                 let income = categoriesSections[indexPath.section][indexPath.row]
                 IncomeController.shared.deleteIncome(income)
-                fetchIncomesBySpecificTime(time: weekly)
-                setupSearchBar() 
+                
+                if incomeSearchBar.selectedScopeButtonIndex == 0 {
+                    fetchIncomesBySpecificTime(time: daily)
+                } else if  incomeSearchBar.selectedScopeButtonIndex == 2 {
+                    fetchIncomesBySpecificTime(time: monthly)
+                } else {
+                    fetchIncomesBySpecificTime(time: weekly)
+                }
+                
+               
+              
             }
             tableView.reloadData()
         }
