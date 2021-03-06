@@ -294,6 +294,9 @@
                                                     <segment title="Monthly"/>
                                                     <segment title="Yearly"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="timeSegmentedControlValuedChanged:" destination="I7L-hC-o0h" eventType="valueChanged" id="FEn-GU-onx"/>
+                                                </connections>
                                             </segmentedControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-h3-1Xj">
                                                 <rect key="frame" x="21.333333333333343" y="482.66666666666657" width="385.33333333333326" height="171.33333333333331"/>
@@ -450,6 +453,7 @@
                         <outlet property="activityIndicator" destination="cOS-K8-ftc" id="yO4-RX-1JN"/>
                         <outlet property="activityView" destination="jQu-IG-UqO" id="NMH-tu-eoa"/>
                         <outlet property="pieChartView" destination="Sdg-WR-LzE" id="Kd2-oC-X9m"/>
+                        <outlet property="timeSegmentedControl" destination="dF7-Jz-B8w" id="8I7-Zj-TeU"/>
                         <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
                         <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
                         <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
@@ -930,6 +934,9 @@
                                     <segment title="Monthy"/>
                                     <segment title="Yearly"/>
                                 </segments>
+                                <connections>
+                                    <action selector="timeSegmentedControlValuedChanged:" destination="mPo-6Z-NEi" eventType="valueChanged" id="AhK-gR-T7j"/>
+                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsy-Ug-uW1" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="21.333333333333343" y="148.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
@@ -968,6 +975,7 @@
                         <outlet property="activityIndicator" destination="mQ2-R2-JWw" id="94s-Qm-m4i"/>
                         <outlet property="incomeTableView" destination="MtF-f3-BoW" id="nWQ-pX-eM6"/>
                         <outlet property="lineChartView" destination="qsy-Ug-uW1" id="xYm-qi-Vbf"/>
+                        <outlet property="timeSegmentedControl" destination="GOm-QE-80K" id="Z9R-Es-uHP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0U-WR-Tku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1263,6 +1271,9 @@
                                     <segment title="Monthly"/>
                                     <segment title="Yearly"/>
                                 </segments>
+                                <connections>
+                                    <action selector="timeSegmentedControlValuedChanged:" destination="89d-OU-bUb" eventType="valueChanged" id="QLZ-Yc-lRE"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dyY-DZ-9z1"/>
@@ -1285,6 +1296,7 @@
                         <outlet property="activityIndicator" destination="qWQ-Wc-2lf" id="swg-IJ-zIx"/>
                         <outlet property="barChartView" destination="gJd-d9-Eml" id="TOL-lk-NbL"/>
                         <outlet property="expenseTableView" destination="Fvk-KX-jit" id="8XA-SC-Wix"/>
+                        <outlet property="timeSegmentedControl" destination="oZO-NF-iRs" id="vpp-H2-iuH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGm-k0-Kvx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

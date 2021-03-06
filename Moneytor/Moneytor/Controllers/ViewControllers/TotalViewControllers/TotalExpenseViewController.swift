@@ -15,6 +15,8 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var barChartView: BarChartView!
     
+    
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     // MARK: - Properties
     var totalExpenseString = TotalController.shared.totalExpenseString
     var expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
@@ -46,6 +48,13 @@ class TotalExpenseViewController: UIViewController {
         expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSection(selectdCategory: selectedCategory)
+    }
+    
+    
+    // MARK: - Actions
+    
+    
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
     }
     
     // MARK: - Helper Fuctions

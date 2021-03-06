@@ -18,6 +18,7 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,11 @@ class TotalBalanceViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        
+    }
     @IBAction func totalIncomeButtonTapped(_ sender: Any) {
     }
     

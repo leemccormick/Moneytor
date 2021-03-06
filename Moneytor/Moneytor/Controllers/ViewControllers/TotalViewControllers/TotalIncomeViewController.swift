@@ -15,6 +15,9 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var lineChartView: LineChartView!
     
+    
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    
     // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
     var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
@@ -28,6 +31,11 @@ class TotalIncomeViewController: UIViewController {
             updateSection(selectdCategory: selectedCategory)
         }
     }
+    var weekly = IncomeCategoryController.shared.weekly
+    var monthly = IncomeCategoryController.shared.monthly
+    var yearly = IncomeCategoryController.shared.yearly
+    
+    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -46,6 +54,22 @@ class TotalIncomeViewController: UIViewController {
         incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSection(selectdCategory: selectedCategory)
+    }
+    
+    func updateViewWithtime(time: Date) {
+//        IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod
+//        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
+//        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+//        setupLineChart(incomeDict: incomeCategoryDict)
+//        updateSection(selectdCategory: selectedCategory)
+    }
+    
+    
+    // MARK: - Actions
+    
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        
+        
     }
     
     // MARK: - Helper Fuctions
