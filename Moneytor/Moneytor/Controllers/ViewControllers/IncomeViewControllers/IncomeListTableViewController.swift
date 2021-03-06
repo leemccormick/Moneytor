@@ -18,81 +18,34 @@ class IncomeListTableViewController: UITableViewController {
     var isSearching: Bool = false
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
     var categoriesSections: [[Income]] =  IncomeCategoryController.shared.incomeCategoriesSections
-    
     var totalIncomeSearching: Double = TotalController.shared.totalIncome {
         didSet{
             updateFooter(total: totalIncomeSearching)
         }
     }
-    
-    
     let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
     let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-    let yearly = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
-        fetchAllIncomes()
+        //fetchAllIncomes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchAllIncomes()
+        incomeSearchBar.selectedScopeButtonIndex = 1
+        fetchIncomesBySpecificTime(time: weekly)
         setupSearchBar()
-        
+       
+        //tableView.reloadData()
     }
-    
-    
-    
-    
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
-        
-        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        
-       categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
-        
-        //        print("=========================================")
-        //        let newCateTestFetch = IncomeController.shared.fetchAllIncomeCategories()
-        //        print("----------------- :: \(newCateTestFetch)-----------------")
-        //
-        //        TotalController.shared.calculateTotalIncome()
-        //        TotalController.shared.calculateTotalExpense()
-        //        TotalController.shared.calculateTotalBalance()
-        //        let totalBalance = TotalController.shared.totalBalance
-        //        print("\n TOTAL BALANCE ::: \(totalBalance)")
-        //let sections = IncomeCategoryController.shared.createAnotherSectionByFetchingIncome()
-        //print("----------------- sections:: \(sections)-----------------")
-//        let fectchIncomes = IncomeController.shared.fetchAllIncomeCategories()
-//        print("---------------------fectchIncomes\(fectchIncomes.count)-------------------------")
-//
-//        let fectchIncomes = IncomeController.shared.fetchIncomesWeekly()
-//        print("---------------------fectchIncomes\(fectchIncomes.count)-------------------------")
-//
-//
-//        let oneDayAgoDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-//        let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-//        let oneMonthAgoDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
-//        let oneYearAgoDate = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
-//
-//        let incomesFromSometime = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneDayAgoDate)
-//        print("---------------------fectchIncomes incomesFromSometime.count\(incomesFromSometime.count)-------------------------")
-//        let incomesFromoneWeekAgoDate = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneWeekAgoDate)
-//        print("---------------------fectchIncomes incomesFromoneWeekAgoDate.count\(incomesFromoneWeekAgoDate.count)-------------------------")
-//
-//        let oneMonthAgoDateIncomes = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneMonthAgoDate)
-//        print("---------------------fectchIncomes oneMonthAgoDate.count\(oneMonthAgoDateIncomes.count)-------------------------")
-//
-//        let incomesFromoneYearAgoDate = IncomeController.shared.fetchIncomesFromTimePeriod(_ time: oneYearAgoDate)
-//        print("---------------------fectchIncomes oneYearAgoDatet\(incomesFromoneYearAgoDate.count)-------------------------")
-//
-        
-        //IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(oneWeekAgoDate)
-        
+        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
     }
     
     // MARK: - Helper Fuctions
@@ -100,13 +53,25 @@ class IncomeListTableViewController: UITableViewController {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
         
-        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        //categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
-        categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
-        TotalController.shared.calculateTotalIncome()
-        updateFooter(total: TotalController.shared.totalIncome)
+       IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
+        updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
         tableView.reloadData()
     }
+    
+    func fetchIncomesBySpecificTime(time: Date) {
+        _ = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+       // resultsIncomeFromSearching = IncomeController.shared.incomes
+        
+       IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        
+        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(time)
+        updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
+        tableView.reloadData()
+    }
+    
     
     func updateFooter(total: Double) {
         let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
@@ -175,7 +140,7 @@ class IncomeListTableViewController: UITableViewController {
             } else {
                 let income = categoriesSections[indexPath.section][indexPath.row]
                 IncomeController.shared.deleteIncome(income)
-                fetchAllIncomes()
+                fetchIncomesBySpecificTime(time: weekly)
                 setupSearchBar() 
             }
             tableView.reloadData()
@@ -202,17 +167,17 @@ class IncomeListTableViewController: UITableViewController {
             
             let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
             let index = section
-
+            
             let sectionName = Array(incomeDict)[index].key.uppercased()
-             
+            
             let totalInEachSection = incomeDict[index].value
             let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
-
-
+            
+            
             print("\n\n\n----------------- sectionName :: \(sectionName)-----------------")
             return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
             
-           // return ""
+            // return ""
         }
     }
     
@@ -247,23 +212,24 @@ extension IncomeListTableViewController: UISearchBarDelegate {
         
         if !searchText.isEmpty {
             //searchBar.showsScopeBar = true
-            resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "")}
+            resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.nameString ?? "")}
             
             guard let results = resultsIncomeFromSearching
                     as? [Income] else {return}
             
-            TotalController.shared.calculateTotalIncomeFrom(searchArrayResults: results)
-            totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
-        
+            if !results.isEmpty {
+                
+                TotalController.shared.calculateTotalIncomeFrom(searchArrayResults: results)
+                totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
+            } else {
+                totalIncomeSearching = 0.0
+            }
+            
             self.tableView.reloadData()
         } else if searchText == "" {
-           // searchBar.setShowsScope(false, animated: true)
-           // searchBar.showsScopeBar = false
             resultsIncomeFromSearching = []
             self.tableView.reloadData()
         }
-        
-    
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -271,35 +237,33 @@ extension IncomeListTableViewController: UISearchBarDelegate {
         
         if selectedScope == 0 {
             //daily
-            categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(daily)
-            tableView.reloadData()
-           // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
+            categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
+            fetchIncomesBySpecificTime(time: daily)
+            // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
         } else if selectedScope == 2 {
             // mounthly
-            categoriesSections = IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(monthly)
-            tableView.reloadData()
-           // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
+            categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(monthly)
+            fetchIncomesBySpecificTime(time: monthly)
+            // categoriesSections = IncomeCategoryController.shared.incomeCategoriesSections
             
         } else {
             // weekly
-            categoriesSections =  IncomeCategoryController.shared.generateSectionsAndSumCategoiesByTimePeriod(weekly)
-            tableView.reloadData()
+            categoriesSections =  IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+            fetchIncomesBySpecificTime(time: weekly)
         }
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = false
+        // totalIncomeSearching = 0.0
         return true
     }
-    
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = true
-       
+        //totalIncomeSearching = 0.0
         return true
     }
-    
-    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()

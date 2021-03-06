@@ -20,6 +20,8 @@ class TotalController {
     var totalIncomeSearchResultsInString: String = "$00.00"
     var totalExpenseSearchResults: Double = 0.0
     var totalExpenseSearchResultsInString: String = "$00.00"
+    var totalIncomeBySpecificTime: Double = 00.00
+    var totalIncomeBySpecificTimeString: String = "$00.00"
     
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
@@ -32,6 +34,19 @@ class TotalController {
         totalIncome = sumIncome
         totalIncomeString =  AmountFormatter.currencyInString(num: totalIncome)
     }
+    
+    func calculateTotalIncomesBySpecificTime(_ time: Date) {
+        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+        var sumIncome = 0.0
+    //  let incomes =  IncomeController.shared.incomes
+        for income in incomes {
+            let incomeAmount = income.amount as? Double ?? 0.0
+            sumIncome += incomeAmount
+        }
+        totalIncomeBySpecificTime = sumIncome
+        totalIncomeBySpecificTimeString =  AmountFormatter.currencyInString(num: totalIncome)
+    }
+    
     
     
     func calculateTotalExpense() {

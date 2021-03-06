@@ -144,29 +144,29 @@ class IncomeController {
     
     
     
-    func fetchIncomesFromTimePeriod(_ time: Date) -> [Income]{
-        var incomes: [Income] = []
-        let now = Date()
-       // let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: now)!
-        let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
-        
-        let predicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
-        fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "incomeCategory.name", ascending: true)]
-        do {
-            let fetchIncomes = try(CoreDataStack.shared.context.fetch(fetchRequest))
-            incomes.append(contentsOf: fetchIncomes)
-        } catch {
-            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-        }
-        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
-        for income in incomes {
-            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
-        }
-        return incomes
-    }
-    
+//    func fetchIncomesFromTimePeriod(_ time: Date) -> [Income]{
+//        var incomes: [Income] = []
+//        let now = Date()
+//       // let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+//        let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
+//        
+//        let predicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+//        fetchRequest.predicate = predicate
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "incomeCategory.name", ascending: true)]
+//        do {
+//            let fetchIncomes = try(CoreDataStack.shared.context.fetch(fetchRequest))
+//            incomes.append(contentsOf: fetchIncomes)
+//        } catch {
+//            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+//        }
+//        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
+//        for income in incomes {
+//            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
+//        }
+//        return incomes
+//    }
+//    
     
     func fetchIncomesFromTimePeriodAndCategory(_ time: Date, categoryName: String) -> [Income]{
         var incomes: [Income] = []
@@ -195,6 +195,31 @@ class IncomeController {
     }
     
     
+    func fetchIncomesFromTimePeriod(_ time: Date) -> [Income]{
+        var incomes: [Income] = []
+        let now = Date()
+       // let oneWeekAgoDate = Calendar.current.date(byAdding: .day, value: -7, to: now)!
+        let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
+        
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+        //let categoryPredicate = NSPredicate(format: "incomeCategory.name == %@", categoryName)
+        
+        //let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, categoryPredicate])
+        fetchRequest.predicate = datePredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        //fetchRequest.sortDescriptors = [NSSortDescriptor(key: "incomeCategory.name", ascending: true)]
+        do {
+            let fetchIncomes = try(CoreDataStack.shared.context.fetch(fetchRequest))
+            incomes.append(contentsOf: fetchIncomes)
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+        }
+//        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
+//        for income in incomes {
+//            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
+//        }
+        return incomes
+    }
     
     
     

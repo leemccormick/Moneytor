@@ -72,10 +72,7 @@ class IncomeCategoryController {
     }
 
     
-    
-   
-    
-    func generateSectionsAndSumCategoiesByTimePeriod(_ time: Date) -> [[Income]]  {
+    func generateSectionsCategoiesByTimePeriod(_ time: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
         incomeCategoriesSections = []
         incomeCategoriesEmoji = []
@@ -89,7 +86,7 @@ class IncomeCategoryController {
                        incomeCategoriesSections.append(sortedCategory)
                        incomeCategoriesEmoji.append(incomeCategory.emojiString)
            }
-            generateCategoryDictionaryBy(sections: incomeCategoriesSections)
+            //generateCategoryDictionaryBy(sections: incomeCategoriesSections)
         }
         return incomeCategoriesSections
         
@@ -124,9 +121,11 @@ class IncomeCategoryController {
         
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
         print("--------------------sortedDictionary : \(sortedDictionary) in \(#function) : ----------------------------\n)")
-
         incomeCategoriesTotalDict = sortedDictionary
     }
+    
+    
+    
 }
 
     
