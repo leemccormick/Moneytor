@@ -104,11 +104,11 @@ class IncomeController {
         
         incomes = incomes.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
         //print(incomes.count)
-        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
-        
-        for income in incomes {
-            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
-        }
+//        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
+//        
+//        for income in incomes {
+//            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
+//        }
         
         
         return incomeCategories
@@ -135,10 +135,10 @@ class IncomeController {
         } catch {
             print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
         }
-        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
-        for income in incomes {
-            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
-        }
+//        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
+//        for income in incomes {
+//            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
+//        }
         return incomes
     }
     
@@ -187,10 +187,10 @@ class IncomeController {
         } catch {
             print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
         }
-        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
-        for income in incomes {
-            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
-        }
+//        print("----------------- incomes.countincomes.count: \(incomes.count)-----------------")
+//        for income in incomes {
+//            print("-----In incomes.count------------ \(income.incomeCategory?.emoji):: \(income.incomeDateText)-----------------")
+//        }
         return incomes
     }
     

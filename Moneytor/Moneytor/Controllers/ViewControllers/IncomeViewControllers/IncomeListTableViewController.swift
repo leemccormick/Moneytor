@@ -15,23 +15,29 @@ class IncomeListTableViewController: UITableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
+    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+        let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    
     var isSearching: Bool = false
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
-    var categoriesSections: [[Income]] =  IncomeCategoryController.shared.incomeCategoriesSections
+    var categoriesSections: [[Income]] =  IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(IncomeCategoryController.shared.weekly)
+
     var totalIncomeSearching: Double = TotalController.shared.totalIncome {
         didSet{
             updateFooter(total: totalIncomeSearching)
         }
     }
-    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
-    let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
     
+   
+    var sectionsIncomeDict = [Dictionary<String, Double>.Element]()
+   
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
         //fetchAllIncomes()
+        fetchIncomesBySpecificTime(time: weekly)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +51,36 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
-        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
+        
+        print("==================+++++++++++++++++++++++++++++++++++++++=======================")
+        
+        let categoriesSectionsDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
+        print("-------------------- categoriesSectionsDay count: \(categoriesSectionsDay.count) in \(#function) : ----------------------------\n)")
+        let sectionsDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSectionsDay)
+        print("--------------------sectionsDict Daily : \(sectionsDict) in \(#function) : ----------------------------)")
+        print("----------------- sectionsDict.count Daily:: \(sectionsDict.count) in \(#function) -----------------\n\n")
+        /*
+        let categoriesSectionsWeek = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+                let sectionsDictWeek = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSectionsWeek)
+        print("-------------------- categoriesSectionsWeek count: \(categoriesSectionsWeek.count) in \(#function) : ----------------------------\n)")
+                print("--------------------sectionsDict Week : \(sectionsDictWeek) in \(#function) : ----------------------------)")
+                print("----------------- sectionsDict.count WEek:: \(sectionsDictWeek.count) in \(#function) -----------------\n\n")
+       
+        
+    
+        
+        
+    
+
+        
+        let categoriesSectionsMonth = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(monthly)
+        let sectionsDictMonth  = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSectionsMonth)
+        print("--------------------sectionsDictMonth : \(sectionsDictMonth) in \(#function) : ----------------------------)")
+        print("----------------- sectionsDict.count Month: \(sectionsDictMonth.count) in \(#function) -----------------\n\n")
+        
+
+         */
+
     }
     
     // MARK: - Helper Fuctions
@@ -70,6 +105,11 @@ class IncomeListTableViewController: UITableViewController {
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalIncomesBySpecificTime(time)
         updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
+        
+        //Create Dictionary
+        sectionsIncomeDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSections)
+        
+        
         tableView.reloadData()
     }
     
@@ -120,11 +160,14 @@ class IncomeListTableViewController: UITableViewController {
         
         if isSearching {
             guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return UITableViewCell()}
-            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString)"
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString) \n\(income.incomeDateText)"
+
             cell.detailTextLabel?.text = income.incomeAmountString
         } else {
             let income = categoriesSections[indexPath.section][indexPath.row]
-            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString)"
+            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString) \n\(income.incomeDateText)"
+          //  cell.textLabel?.text = "\(income.incomeDateText)"
             cell.detailTextLabel?.text = income.incomeAmountString
         }
         return cell
@@ -172,22 +215,34 @@ class IncomeListTableViewController: UITableViewController {
             return "🔍 SEARCHING INCOMES \t\t\t" + TotalController.shared.totalIncomeSearchResultsInString
         } else {
             if tableView.numberOfRows(inSection: section) == 0 {
-                return nil
+                return ""
             }
             
+             let index = section
             let incomeDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-            let index = section
+           
             
-            let sectionName = Array(incomeDict)[index].key.uppercased()
-            
+            if section < sectionsIncomeDict.count {
+                
+                let sectionName = Array(incomeDict)[index].key.uppercased()
+
             let totalInEachSection = incomeDict[index].value
-            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+        let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
+                return "\(sectionName.dropLast()) \(totalInEachSectionInString)"
+            } else {
+                return ""
+            }
+      
+           
+
+
+
             
-            
-            print("\n\n\n----------------- sectionName :: \(sectionName)-----------------")
-            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
-            
-            // return ""
+         
+
+       //return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
+         //return name
+          // return ""
         }
     }
     

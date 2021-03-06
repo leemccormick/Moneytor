@@ -20,6 +20,12 @@ class IncomeCategoryController {
     
    // var incomeCategoriesTotalDict = [String: Double]()
     var incomeCategoriesEmoji: [String] = []//= ["_other 💵"]
+    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+        let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    
+    
+    
     
     private lazy var fetchRequest: NSFetchRequest<IncomeCategory> = {
         let request = NSFetchRequest<IncomeCategory>(entityName: "IncomeCategory")
@@ -104,7 +110,7 @@ class IncomeCategoryController {
             totalIncomesEachCategory.append(incomeCategorySum)
             let incomeCategoryName = incomes.map({$0.incomeCategory?.name ?? ""}).removeDuplicates()
             let incomeCategoryEmoji = incomes.map({$0.incomeCategory?.emojiString ?? ""}).removeDuplicates()
-
+            
             guard let categoryNameArray = incomeCategoryName.first, !categoryNameArray.isEmpty,
                   let categoryEmojiArray = incomeCategoryEmoji.first, !categoryEmojiArray.isEmpty else {return}
            // if !incomeCategoryName.isEmpty {
@@ -123,6 +129,55 @@ class IncomeCategoryController {
         print("--------------------sortedDictionary : \(sortedDictionary) in \(#function) : ----------------------------\n)")
         incomeCategoriesTotalDict = sortedDictionary
     }
+    
+    
+    
+    
+    func generateCategoryDictionaryByIncomesAndReturnDict(sections: [[Income]]) -> [Dictionary<String, Double>.Element] {
+      incomeCategoriesTotalDict = []
+        var categoryNames: [String] = []
+        var totalIncomesEachCategory: [Double] = []
+        
+        for incomes in sections {
+           // print("----------------- :: \()-----------------")
+            let incomeCategorySum = incomes.map({$0.amount as! Double}).reduce(0.0){$0 + $1}
+            totalIncomesEachCategory.append(incomeCategorySum)
+            let incomeCategoryName = incomes.map({$0.incomeCategory?.name ?? ""}).removeDuplicates()
+            let incomeCategoryEmoji = incomes.map({$0.incomeCategory?.emojiString ?? ""}).removeDuplicates()
+
+            print("--------------------incomeCategoryName Count : \(incomeCategoryName.count) in \(#function) : ----------------------------\n)")
+            print("--------------------incomeCategoryName : \(incomeCategoryName) in \(#function) : ----------------------------\n)")
+            print("--------------------incomeCategoryEmoji : \(incomeCategoryEmoji) in \(#function) : ----------------------------\n)")
+            
+            if let categoryNameArray = incomeCategoryName.first, !categoryNameArray.isEmpty,
+                  let categoryEmojiArray = incomeCategoryEmoji.first, !categoryEmojiArray.isEmpty {
+                let nameEmoji = "\(categoryNameArray) \(categoryEmojiArray)"
+                               categoryNames.append(nameEmoji)
+
+            }
+        }
+
+        
+        print("-------------------- totalIncomesEachCategory: \(totalIncomesEachCategory) in \(#function) : ----------------------------\n)")
+        
+        for total in totalIncomesEachCategory {
+            if total == 0.0 {
+                let totalToDelete = totalIncomesEachCategory.firstIndex(of: total)
+                totalIncomesEachCategory.remove(at: totalToDelete!)
+            }
+        }
+        
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
+        
+        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+        print("--------------------sortedDictionary : \(sortedDictionary)  count\(sortedDictionary.count)in \(#function) : ----------------------------\n)")
+       incomeCategoriesTotalDict = sortedDictionary
+        print("-------------------- :incomeCategoriesTotalDict\(incomeCategoriesTotalDict) in \(#function) : ----------------------------\n)")
+        return sortedDictionary
+    }
+    
+    
+    
     
     
     
