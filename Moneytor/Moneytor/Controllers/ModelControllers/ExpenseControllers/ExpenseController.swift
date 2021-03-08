@@ -16,6 +16,8 @@ class ExpenseController {
     private lazy var fetchRequest: NSFetchRequest<Expense> = {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
         request.predicate = NSPredicate(value: true)
+        let dateSortDescriptor = NSSortDescriptor(key: #keyPath(Income.date), ascending: false)
+        request.sortDescriptors = [dateSortDescriptor]
         return request
     }()
     
@@ -35,6 +37,46 @@ class ExpenseController {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenses = fetchIncomes
     }
+    
+    func fetchExpensesFromTimePeriod(_ time: Date) -> [Expense]{
+           var expenses: [Expense] = []
+           let now = Date()
+           let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
+           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+           fetchRequest.predicate = datePredicate
+           fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+           do {
+               let fetchExpenses = try(CoreDataStack.shared.context.fetch(fetchRequest))
+               expenses.append(contentsOf: fetchExpenses)
+           } catch {
+               print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+           }
+           return expenses
+       }
+       
+
+    func fetchExpensesFromTimePeriodAndCategory(_ time: Date, categoryName: String) -> [Expense]{
+        var expenses: [Expense] = []
+        let now = Date()
+        let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
+    
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+        let categoryPredicate = NSPredicate(format: "expenseCategory.name == %@", categoryName)
+        
+        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, categoryPredicate])
+        fetchRequest.predicate = finalPredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "expenseCategory.name", ascending: true)]
+        do {
+            let fetchIncomes = try(CoreDataStack.shared.context.fetch(fetchRequest))
+            expenses.append(contentsOf: fetchIncomes)
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+        }
+        return expenses
+    }
+    
+    
     
     // UPDATE
     func updateWith(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){

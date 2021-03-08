@@ -22,6 +22,8 @@ class TotalController {
     var totalExpenseSearchResultsInString: String = "$00.00"
     var totalIncomeBySpecificTime: Double = 00.00
     var totalIncomeBySpecificTimeString: String = "$00.00"
+    var totalExpenseBySpecificTime: Double = 00.00
+    var totalExpensesBySpecificTimeString: String = "$00.00"
     var totalIncomeDict = [Dictionary<String, Double>.Element]()
     var totalExpenseDict = [Dictionary<String, Double>.Element]()
 
@@ -48,7 +50,21 @@ class TotalController {
             sumIncome += incomeAmount
         }
         totalIncomeBySpecificTime = sumIncome
-        totalIncomeBySpecificTimeString =  AmountFormatter.currencyInString(num: totalIncome)
+        totalIncomeBySpecificTimeString =  AmountFormatter.currencyInString(num: totalIncomeBySpecificTime)
+    }
+    
+    func calculateTotalExpensesBySpecificTime(_ time: Date) {
+        let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
+
+        var sumExpenses = 0.0
+    //  let incomes =  IncomeController.shared.incomes
+        for expense in expenses {
+            let expenseAmount = expense.amount as? Double ?? 0.0
+            sumExpenses += expenseAmount
+        }
+        
+        totalExpenseBySpecificTime = sumExpenses
+        totalExpensesBySpecificTimeString =  AmountFormatter.currencyInString(num: totalExpenseBySpecificTime)
     }
     
     
@@ -101,9 +117,18 @@ class TotalController {
         totalIncomeDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
     }
     
-    
-    func calculateTotalIncomeByTime(_ time: Date) {
-        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+    func generateTotalExpenseDictByMonthly(){
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.monthly)
+        
+        totalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
     }
+    
+   
 }
     
+/* NOTE
+ func calculateTotalIncomeByTime(_ time: Date) {
+        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+    }
+ //______________________________________________________________________________________
+ */

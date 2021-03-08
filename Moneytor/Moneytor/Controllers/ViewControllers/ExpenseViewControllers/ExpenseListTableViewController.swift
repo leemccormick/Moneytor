@@ -14,13 +14,14 @@ class ExpenseListTableViewController: UITableViewController {
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     // MARK: - Properties
+    let daily = ExpenseCategoryController.shared.daily
+    let weekly = ExpenseCategoryController.shared.weekly
+    let monthly = ExpenseCategoryController.shared.monthly
     var isSearching: Bool = false
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
-    var categoriesSections: [[Expense]] {
-        return ExpenseCategoryController.shared.expenseCategoriesSections
-    }
+    var sectionsExpenseDict = [Dictionary<String, Double>.Element]()
+    var categoriesSections: [[Expense]] =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.weekly)
     var totalExpenseSearching: Double = TotalController.shared.totalExpense {
         didSet{
             updateFooter(total: totalExpenseSearching)
@@ -31,13 +32,13 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
-        fetchAllExpenses()
+        fetchExpensesBySpecificTime(time: weekly)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchAllExpenses()
-        setupSearchBar()
+        expenseSearchBar.selectedScopeButtonIndex = 1
+        fetchExpensesBySpecificTime(time: weekly)
     }
     
     
@@ -54,11 +55,25 @@ class ExpenseListTableViewController: UITableViewController {
     func fetchAllExpenses(){
         ExpenseController.shared.fetchAllExpenses()
         resultsExpenseFromSearching = ExpenseController.shared.expenses
+        setupSearchBar(expenseCount: resultsExpenseFromSearching.count)
         ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
-        TotalController.shared.calculateTotalExpense()
+        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+        TotalController.shared.calculateTotalExpensesBySpecificTime(weekly)
         updateFooter(total: TotalController.shared.totalExpense)
         tableView.reloadData()
     }
+    
+    func fetchExpensesBySpecificTime(time: Date) {
+        let expenses = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+        setupSearchBar(expenseCount: expenses.count)
+        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(time)
+        updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
+        sectionsExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: categoriesSections)
+        tableView.reloadData()
+    }
+
     
     func updateFooter(total: Double) {
         let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
@@ -73,8 +88,8 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    func setupSearchBar() {
-    if ExpenseController.shared.expenses.count == 0 {
+    func setupSearchBar(expenseCount: Int){
+    if expenseCount == 0 {
     expenseSearchBar.isUserInteractionEnabled = false
         expenseSearchBar.placeholder = "Add New Expense..."
 } else {
@@ -106,13 +121,17 @@ class ExpenseListTableViewController: UITableViewController {
         
         if isSearching {
             guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return UITableViewCell()}
-            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
-            cell.detailTextLabel?.text = expense.expenseAmountString
-            
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString) \n\(expense.expenseDateText)"
+            cell.detailTextLabel?.text = expense.expenseNameString
         } else {
-            let expense = categoriesSections[indexPath.section][indexPath.row]
-            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💸") \(expense.name ?? "")"
-            cell.detailTextLabel?.text = expense.expenseAmountString
+            
+            if !categoriesSections[indexPath.section].isEmpty {
+                
+                let expense = categoriesSections[indexPath.section][indexPath.row]
+                cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString) \n\(expense.expenseDateText)"
+                cell.detailTextLabel?.text = expense.expenseAmountString
+            }
         }
         return cell
     }
@@ -124,12 +143,17 @@ class ExpenseListTableViewController: UITableViewController {
                 guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
                 ExpenseController.shared.deleteExpense(expense)
                 fetchAllExpenses()
-                setupSearchBar()
             } else {
                 let expense = categoriesSections[indexPath.section][indexPath.row]
                 ExpenseController.shared.deleteExpense(expense)
-                fetchAllExpenses()
-                setupSearchBar()
+                
+                if expenseSearchBar.selectedScopeButtonIndex == 0 {
+                    fetchExpensesBySpecificTime(time: daily)
+                } else if expenseSearchBar.selectedScopeButtonIndex == 2 {
+                    fetchExpensesBySpecificTime(time: monthly)
+                } else {
+                    fetchExpensesBySpecificTime(time: weekly)
+                }
             }
             tableView.reloadData()
         }
@@ -153,12 +177,26 @@ class ExpenseListTableViewController: UITableViewController {
                 return nil
             }
             
-            let expenseDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
-            let index = section
-            let sectionName = Array(expenseDict)[index].key.uppercased()
-            let totalInEachSection = Array(expenseDict)[index].value
-            let totalInEachSectionInString = AmountFormatter.currencyInString(num: totalInEachSection)
-            return "\(sectionName.dropLast())  \(totalInEachSectionInString)"
+            var total = 0.0
+            var name = ""
+            var totalExpenseInEachSections: [Double] = []
+            var sectionNames: [String] = []
+            for section in categoriesSections {
+                total = 0.0
+                for expense in section {
+                    total += expense.amount as! Double
+                    name = expense.expenseCategory?.nameString ?? ""
+                }
+                
+                totalExpenseInEachSections.append(total)
+                sectionNames.append(name)
+            }
+            
+            let categoryName = sectionNames[section]
+            let categoryTotal = totalExpenseInEachSections[section]
+            let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
+            
+            return "\(categoryName.uppercased()) \(categoryTotalString)"
         }
     }
     
@@ -195,13 +233,42 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
             resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
             
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
-            
+            if results.isEmpty {
             TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
             totalExpenseSearching = TotalController.shared.totalExpenseSearchResults
+            } else {
+                totalExpenseSearching = 0.0
+            }
             self.tableView.reloadData()
-        } else {
-            fetchAllExpenses()
+        } else if searchText == "" {
+            resultsExpenseFromSearching = []
+            self.tableView.reloadData()
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        print(selectedScope)
+        
+        if selectedScope == 0 {
+            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
+            fetchExpensesBySpecificTime(time: daily)
+        } else if selectedScope == 2 {
+            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(monthly)
+            fetchExpensesBySpecificTime(time: daily)
+        } else {
+            categoriesSections =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+            fetchExpensesBySpecificTime(time: weekly)
+        }
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsScopeBar = false
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsScopeBar = true
+        return true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

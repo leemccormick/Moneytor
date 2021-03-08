@@ -17,41 +17,21 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     
     // MARK: - Properties
+    let weekly = IncomeCategoryController.shared.weekly
+    let monthly = IncomeCategoryController.shared.monthly
+    let yearly = IncomeCategoryController.shared.yearly
     var totalIncomeString = TotalController.shared.totalIncomeString
-    /*    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-     var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
-     didSet {
-     setupLineChart(incomeDict: incomeCategoryDict)
-     }
-     }
-     
-     //    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-     
-     */
     var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
     }
     
-    var weekly = IncomeCategoryController.shared.weekly
-    var monthly = IncomeCategoryController.shared.monthly
-    var yearly = IncomeCategoryController.shared.yearly
-    
-    
-    let incomes: [Income] = []
-    //IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
-    
-    //let incomesDicts = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
-    
     var selectedCategory: String = "" {
         didSet {
             updateSectionHeader(selectdCategory: selectedCategory)
         }
     }
-    
-    
-    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -68,30 +48,16 @@ class TotalIncomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         timeSegmentedControl.selectedSegmentIndex = 1
-        
         updateSectionHeader(selectdCategory: selectedCategory)
-        
         updateViewWithtime(time: monthly)
-        
-        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        //        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-        //        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-        
-        //setupLineChart(incomeDict: incomeCategoryDict)
-        
-        
     }
     
     func updateViewWithtime(time: Date) {
-        //        IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod
         let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
-        //        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
-        // return incomesDicts
     }
     
     
@@ -140,73 +106,16 @@ class TotalIncomeViewController: UIViewController {
 extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // print("----------------- :: \()-----------------")
-       // return incomeCategoryDict.count
-        
-//        switch timeSegmentedControl.selectedSegmentIndex {
-//        case 0:
-//            updateViewWithtime(time: weekly)
-//            print("-------------------- case 0: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
-//        case 1:
-//            updateViewWithtime(time: monthly)
-//            print("-------------------- case 1: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
-//        case 2:
-//            updateViewWithtime(time: yearly)
-//            print("-------------------- case 2: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
-//
-//        default:
-//            updateViewWithtime(time: monthly)
-//            print("-------------------- case 3: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
-//        }
-        print("-----------------incomeCategoryDict.count before return :: \(incomeCategoryDict.count) in \(#function) :-----------------")
         return incomeCategoryDict.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
-        /*
-         cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
-         */
-        //
-//        switch timeSegmentedControl.selectedSegmentIndex {
-//        case 0:
-//            updateViewWithtime(time: weekly)
-//        case 1:
-//            updateViewWithtime(time: monthly)
-//        case 2:
-//            updateViewWithtime(time: yearly)
-//
-//        default:
-//            updateViewWithtime(time: monthly)
-//        }
-//
-        //        if timeSegmentedControl.selectedSegmentIndex == 0 {
-        //            updateViewWithtime(time: weekly)
-        //        } else if timeSegmentedControl.selectedSegmentIndex == 2 {
-        //            updateViewWithtime(time: yearly)
-        //        } else {
-        //            updateViewWithtime(time: monthly)
-        //        }
-        //
-//        if indexPath.row < incomeCategoryDict.count {
-//            print("----------------- indexPath.row:: \(indexPath.row)-----------------")
-//
-//            let incomeDict = incomeCategoryDict[indexPath.row]
-//            print("-------------------- incomeDict: \(incomeDict) in \(#function) : ----------------------------\n)")
-//            print("-----------------incomeDict :: \(incomeDict)-----------------")
-//
+       
         let incomeCategory = incomeCategoryDict[indexPath.row]
-        
-        print("--------------------incomeCategoryDict.count : \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
-        print("-------------------- incomeCategory: \(incomeCategory) , indexPath.row ::\(indexPath.row) in \(#function) : ----------------------------\n)")
         cell.textLabel?.text = incomeCategory.key
-            cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
-        
-       // }
-        
-        //  cell.textLabel?.text = incomeCategoryDict[indexPath.row].key
-        // cell.textLabel?.text = "Fix total Income here.."
-        
+        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
+  
         return cell
     }
     
