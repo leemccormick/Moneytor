@@ -121,7 +121,7 @@ class IncomeCategoryController {
         }
 
         
-    print("\n-------------------- categoryNames: \(categoryNames) :: totalIncomesEachCategory:: \(totalIncomesEachCategory)in \(#function) : ----------------------------\n)")
+   // print("\n-------------------- categoryNames: \(categoryNames) :: totalIncomesEachCategory:: \(totalIncomesEachCategory)in \(#function) : ----------------------------\n)")
        // print("----------------- totalIncomesEachCategory:: \(totalIncomesEachCategory)-----------------")
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
@@ -146,9 +146,9 @@ class IncomeCategoryController {
             let incomeCategoryName = incomes.map({$0.incomeCategory?.name ?? ""}).removeDuplicates()
             let incomeCategoryEmoji = incomes.map({$0.incomeCategory?.emojiString ?? ""}).removeDuplicates()
 
-            print("--------------------incomeCategoryName Count : \(incomeCategoryName.count) in \(#function) : ----------------------------\n)")
-            print("--------------------incomeCategoryName : \(incomeCategoryName) in \(#function) : ----------------------------\n)")
-            print("--------------------incomeCategoryEmoji : \(incomeCategoryEmoji) in \(#function) : ----------------------------\n)")
+          //  print("--------------------incomeCategoryName Count : \(incomeCategoryName.count) in \(#function) : ----------------------------\n)")
+          //  print("--------------------incomeCategoryName : \(incomeCategoryName) in \(#function) : ----------------------------\n)")
+          //  print("--------------------incomeCategoryEmoji : \(incomeCategoryEmoji) in \(#function) : ----------------------------\n)")
             
             if let categoryNameArray = incomeCategoryName.first, !categoryNameArray.isEmpty,
                   let categoryEmojiArray = incomeCategoryEmoji.first, !categoryEmojiArray.isEmpty {
@@ -159,7 +159,7 @@ class IncomeCategoryController {
         }
 
         
-        print("-------------------- totalIncomesEachCategory: \(totalIncomesEachCategory) in \(#function) : ----------------------------\n)")
+      //  print("-------------------- totalIncomesEachCategory: \(totalIncomesEachCategory) in \(#function) : ----------------------------\n)")
         
         for total in totalIncomesEachCategory {
             if total == 0.0 {
@@ -171,9 +171,9 @@ class IncomeCategoryController {
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
         
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        print("--------------------sortedDictionary : \(sortedDictionary)  count\(sortedDictionary.count)in \(#function) : ----------------------------\n)")
+      //  print("--------------------sortedDictionary : \(sortedDictionary)  count\(sortedDictionary.count)in \(#function) : ----------------------------\n)")
        incomeCategoriesTotalDict = sortedDictionary
-        print("-------------------- :incomeCategoriesTotalDict\(incomeCategoriesTotalDict) in \(#function) : ----------------------------\n)")
+       // print("-------------------- :incomeCategoriesTotalDict\(incomeCategoriesTotalDict) in \(#function) : ----------------------------\n)")
         return sortedDictionary
     }
     

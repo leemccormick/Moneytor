@@ -102,13 +102,17 @@ class TotalIncomeViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             updateViewWithtime(time: weekly)
+            incomeTableView.reloadData()
         case 1:
             updateViewWithtime(time: monthly)
+            incomeTableView.reloadData()
         case 2:
             updateViewWithtime(time: yearly)
+            incomeTableView.reloadData()
             
         default:
             updateViewWithtime(time: monthly)
+            incomeTableView.reloadData()
         }
         
         
@@ -136,6 +140,25 @@ class TotalIncomeViewController: UIViewController {
 extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       // print("----------------- :: \()-----------------")
+       // return incomeCategoryDict.count
+        
+//        switch timeSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            updateViewWithtime(time: weekly)
+//            print("-------------------- case 0: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
+//        case 1:
+//            updateViewWithtime(time: monthly)
+//            print("-------------------- case 1: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
+//        case 2:
+//            updateViewWithtime(time: yearly)
+//            print("-------------------- case 2: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
+//
+//        default:
+//            updateViewWithtime(time: monthly)
+//            print("-------------------- case 3: \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
+//        }
+        print("-----------------incomeCategoryDict.count before return :: \(incomeCategoryDict.count) in \(#function) :-----------------")
         return incomeCategoryDict.count
     }
     
@@ -145,18 +168,18 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
          cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
          */
         //
-        switch timeSegmentedControl.selectedSegmentIndex {
-        case 0:
-            updateViewWithtime(time: weekly)
-        case 1:
-            updateViewWithtime(time: monthly)
-        case 2:
-            updateViewWithtime(time: yearly)
-            
-        default:
-            updateViewWithtime(time: monthly)
-        }
-        
+//        switch timeSegmentedControl.selectedSegmentIndex {
+//        case 0:
+//            updateViewWithtime(time: weekly)
+//        case 1:
+//            updateViewWithtime(time: monthly)
+//        case 2:
+//            updateViewWithtime(time: yearly)
+//
+//        default:
+//            updateViewWithtime(time: monthly)
+//        }
+//
         //        if timeSegmentedControl.selectedSegmentIndex == 0 {
         //            updateViewWithtime(time: weekly)
         //        } else if timeSegmentedControl.selectedSegmentIndex == 2 {
@@ -165,17 +188,21 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
         //            updateViewWithtime(time: monthly)
         //        }
         //
-        if indexPath.row < incomeCategoryDict.count {
-            print("----------------- indexPath.row:: \(indexPath.row)-----------------")
-            
-            let incomeDict = incomeCategoryDict[indexPath.row]
-            print("-------------------- incomeDict: \(incomeDict) in \(#function) : ----------------------------\n)")
-            print("-----------------incomeDict :: \(incomeDict)-----------------")
-            
-            
-            cell.textLabel?.text = incomeDict.key
-            cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeDict.value)
-        }
+//        if indexPath.row < incomeCategoryDict.count {
+//            print("----------------- indexPath.row:: \(indexPath.row)-----------------")
+//
+//            let incomeDict = incomeCategoryDict[indexPath.row]
+//            print("-------------------- incomeDict: \(incomeDict) in \(#function) : ----------------------------\n)")
+//            print("-----------------incomeDict :: \(incomeDict)-----------------")
+//
+        let incomeCategory = incomeCategoryDict[indexPath.row]
+        
+        print("--------------------incomeCategoryDict.count : \(incomeCategoryDict.count) in \(#function) : ----------------------------\n)")
+        print("-------------------- incomeCategory: \(incomeCategory) , indexPath.row ::\(indexPath.row) in \(#function) : ----------------------------\n)")
+        cell.textLabel?.text = incomeCategory.key
+            cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
+        
+       // }
         
         //  cell.textLabel?.text = incomeCategoryDict[indexPath.row].key
         // cell.textLabel?.text = "Fix total Income here.."
@@ -250,7 +277,7 @@ extension TotalIncomeViewController: ChartViewDelegate {
         }
         
         
-        print("-------------------- : incomeDict\(incomeDict) in \(#function) : ----------------------------\n)")
+        //print("-------------------- : incomeDict\(incomeDict) in \(#function) : ----------------------------\n)")
         let dataSet = LineChartDataSet(entries: yValues)
         dataSet.drawCirclesEnabled = true
         dataSet.mode = .linear
