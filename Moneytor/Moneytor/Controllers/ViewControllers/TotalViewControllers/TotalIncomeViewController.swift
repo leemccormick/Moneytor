@@ -219,7 +219,12 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "TOTAL INCOMES : \(totalIncomeString)"
+        var total = 0.0
+        for incomeCategory in incomeCategoryDict {
+            total += incomeCategory.value
+        }
+        let totalIncomeStr = AmountFormatter.currencyInString(num: total)
+        return "TOTAL INCOMES : \(totalIncomeStr)"
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
