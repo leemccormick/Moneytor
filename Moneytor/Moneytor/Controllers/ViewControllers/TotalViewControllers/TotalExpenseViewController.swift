@@ -14,9 +14,8 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet weak var expenseTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var barChartView: BarChartView!
-    
-    
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+   
     // MARK: - Properties
     var totalExpenseString = TotalController.shared.totalExpenseString
     var expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis

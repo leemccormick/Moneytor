@@ -181,8 +181,7 @@ class IncomeListTableViewController: UITableViewController {
                 } else {
                     fetchIncomesBySpecificTime(time: weekly)
                 }
-                
-               
+
               
             }
             tableView.reloadData()

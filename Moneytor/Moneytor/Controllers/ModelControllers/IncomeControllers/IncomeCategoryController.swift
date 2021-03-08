@@ -115,7 +115,7 @@ class IncomeCategoryController {
             guard let categoryNameArray = incomeCategoryName.first, !categoryNameArray.isEmpty,
                   let categoryEmojiArray = incomeCategoryEmoji.first, !categoryEmojiArray.isEmpty else {return}
            // if !incomeCategoryName.isEmpty {
-                let nameEmoji = "\(categoryNameArray) \(categoryEmojiArray)"
+            let nameEmoji = "\(categoryEmojiArray) \(categoryNameArray.capitalized) "
                 categoryNames.append(nameEmoji)
            // }
         }

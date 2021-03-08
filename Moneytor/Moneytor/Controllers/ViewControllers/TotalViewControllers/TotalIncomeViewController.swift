@@ -14,26 +14,42 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var incomeTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var lineChartView: LineChartView!
-    
-    
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     
     // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
-    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-    var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+    /*    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+     var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+     didSet {
+     setupLineChart(incomeDict: incomeCategoryDict)
+     }
+     }
+     
+     //    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+     
+     */
+    var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
     }
-    var selectedCategory: String = "" {
-        didSet {
-            updateSection(selectdCategory: selectedCategory)
-        }
-    }
+    
     var weekly = IncomeCategoryController.shared.weekly
     var monthly = IncomeCategoryController.shared.monthly
     var yearly = IncomeCategoryController.shared.yearly
+    
+    
+    let incomes: [Income] = []
+    //IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+    
+    //let incomesDicts = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
+    
+    var selectedCategory: String = "" {
+        didSet {
+            updateSectionHeader(selectdCategory: selectedCategory)
+        }
+    }
+    
     
     
     
@@ -43,37 +59,63 @@ class TotalIncomeViewController: UIViewController {
         incomeTableView.delegate = self
         incomeTableView.dataSource = self
         lineChartView.delegate = self
+        TotalController.shared.generateTotalIncomeDictByMonthly()
         setupLineChart(incomeDict: incomeCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(time: monthly)
+        // TotalController.shared.generateTotalIncomeDictByMonthly()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-        setupLineChart(incomeDict: incomeCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        
+        timeSegmentedControl.selectedSegmentIndex = 1
+        
+        updateSectionHeader(selectdCategory: selectedCategory)
+        
+        updateViewWithtime(time: monthly)
+        
+        //IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        //        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
+        //        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+        
+        //setupLineChart(incomeDict: incomeCategoryDict)
+        
+        
     }
     
     func updateViewWithtime(time: Date) {
-//        IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod
-//        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-//        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-//        setupLineChart(incomeDict: incomeCategoryDict)
-//        updateSection(selectdCategory: selectedCategory)
+        //        IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod
+        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+        incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
+        //        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+        setupLineChart(incomeDict: incomeCategoryDict)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        // return incomesDicts
     }
     
     
     // MARK: - Actions
     
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        print("----------------- sender:: \(sender.selectedSegmentIndex)-----------------")
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateViewWithtime(time: weekly)
+        case 1:
+            updateViewWithtime(time: monthly)
+        case 2:
+            updateViewWithtime(time: yearly)
+            
+        default:
+            updateViewWithtime(time: monthly)
+        }
         
         
     }
     
     // MARK: - Helper Fuctions
-    func updateSection(selectdCategory: String) {
+    func updateSectionHeader(selectdCategory: String) {
         let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         if selectdCategory == "" {
             header.backgroundColor = .mtBgDarkGolder
@@ -99,12 +141,45 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
+        /*
+         cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
+         */
+        //
+        switch timeSegmentedControl.selectedSegmentIndex {
+        case 0:
+            updateViewWithtime(time: weekly)
+        case 1:
+            updateViewWithtime(time: monthly)
+        case 2:
+            updateViewWithtime(time: yearly)
+            
+        default:
+            updateViewWithtime(time: monthly)
+        }
         
-//        cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
-//        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategoryDict[indexPath.row].value)
-       // cell.textLabel?.text = incomeCategoryDict[indexPath.row].key
-        cell.textLabel?.text = "Fix total Income here.."
-
+        //        if timeSegmentedControl.selectedSegmentIndex == 0 {
+        //            updateViewWithtime(time: weekly)
+        //        } else if timeSegmentedControl.selectedSegmentIndex == 2 {
+        //            updateViewWithtime(time: yearly)
+        //        } else {
+        //            updateViewWithtime(time: monthly)
+        //        }
+        //
+        if indexPath.row < incomeCategoryDict.count {
+            print("----------------- indexPath.row:: \(indexPath.row)-----------------")
+            
+            let incomeDict = incomeCategoryDict[indexPath.row]
+            print("-------------------- incomeDict: \(incomeDict) in \(#function) : ----------------------------\n)")
+            print("-----------------incomeDict :: \(incomeDict)-----------------")
+            
+            
+            cell.textLabel?.text = incomeDict.key
+            cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeDict.value)
+        }
+        
+        //  cell.textLabel?.text = incomeCategoryDict[indexPath.row].key
+        // cell.textLabel?.text = "Fix total Income here.."
+        
         return cell
     }
     
@@ -146,17 +221,36 @@ extension TotalIncomeViewController: ChartViewDelegate {
         var sumIncome = 0.0
         var newIncomeCategoryEmojiToDisplay: [String] = []
         
-        for incomeCatagory in incomeDict {
-            if incomeCatagory.value != 0 {
+        if incomeDict.count == 1 {
+            yValues.append(ChartDataEntry(x: Double(-1), y: 0, data: ""))
+            for incomeCatagory in incomeDict {
                 
-                sumIncome += incomeCatagory.value
-                yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
-                
-                newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
-                i += 1
+                if incomeCatagory.value != 0 {
+                    
+                    sumIncome += incomeCatagory.value
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
+                    
+                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
+                    i += 1
+                }
+            }
+        } else  {
+            
+            
+            for incomeCatagory in incomeDict {
+                if incomeCatagory.value != 0 {
+                    
+                    sumIncome += incomeCatagory.value
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
+                    
+                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
+                    i += 1
+                }
             }
         }
         
+        
+        print("-------------------- : incomeDict\(incomeDict) in \(#function) : ----------------------------\n)")
         let dataSet = LineChartDataSet(entries: yValues)
         dataSet.drawCirclesEnabled = true
         dataSet.mode = .linear
@@ -206,8 +300,8 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
         
-        
     }
+    
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
@@ -222,5 +316,3 @@ extension TotalIncomeViewController: ChartViewDelegate {
         }
     }
 }
-
-

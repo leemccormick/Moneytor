@@ -22,6 +22,7 @@ class TotalController {
     var totalExpenseSearchResultsInString: String = "$00.00"
     var totalIncomeBySpecificTime: Double = 00.00
     var totalIncomeBySpecificTimeString: String = "$00.00"
+    var totalIncomeDict = [Dictionary<String, Double>.Element]()
     
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
@@ -90,6 +91,11 @@ class TotalController {
         }
         totalExpenseSearchResults = sum
         totalExpenseSearchResultsInString =  AmountFormatter.currencyInString(num: totalExpenseSearchResults)
+    }
+    
+    func generateTotalIncomeDictByMonthly(){
+        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(IncomeCategoryController.shared.monthly)
+        totalIncomeDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
     }
 }
     
