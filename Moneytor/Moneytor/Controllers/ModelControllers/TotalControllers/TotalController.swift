@@ -25,7 +25,7 @@ class TotalController {
     var totalExpenseBySpecificTime: Double = 00.00
     var totalExpensesBySpecificTimeString: String = "$00.00"
     var totalIncomeDict = [Dictionary<String, Double>.Element]()
-    var totalExpenseDict = [Dictionary<String, Double>.Element]()
+    var totalExpenseDictByMonthly = [Dictionary<String, Double>.Element]()
 
     
     
@@ -120,9 +120,18 @@ class TotalController {
     func generateTotalExpenseDictByMonthly(){
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.monthly)
         
-        totalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
+        totalExpenseDictByMonthly = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
     }
     
+    
+    func generateTotalExpenseDictByTime(_ time: Date) -> [Dictionary<String, Double>.Element] {
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+        
+        let newTotalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
+    
+        print("-------------------- newTotalExpenseDict \(newTotalExpenseDict) in \(#function) : ----------------------------\n)")
+        return newTotalExpenseDict
+    }
    
 }
     

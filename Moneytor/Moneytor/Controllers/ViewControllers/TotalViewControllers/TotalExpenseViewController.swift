@@ -21,7 +21,7 @@ class TotalExpenseViewController: UIViewController {
     let monthly = ExpenseCategoryController.shared.monthly
     let yearly = ExpenseCategoryController.shared.yearly
     var totalExpenseString = TotalController.shared.totalExpenseString
-    var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDict {
+    var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly {
             didSet {
                 setupBarChart(expenseDict: expenseCategoryDict)
             }
@@ -153,7 +153,9 @@ extension TotalExpenseViewController: ChartViewDelegate {
         
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
-        var newExpenseCategoryEmojiToDisplay: [String] = []
+        var newExpenseCategoryEmojiToDisplay: [Character] = []
+        
+        print("-------------------- expenseDict: \(expenseDict) in \(#function) : ----------------------------\n)")
         
         for expenseCategory in expenseDict {
             
@@ -171,12 +173,15 @@ extension TotalExpenseViewController: ChartViewDelegate {
                 charData.setValueTextColor(.mtDarkBlue)
                 barChartView.data = charData
                 
-                newExpenseCategoryEmojiToDisplay.append(expenseCategory.key.lastCharacterAsString())
+                guard let firstEmoji = expenseCategory.key.first else {return}
+                newExpenseCategoryEmojiToDisplay.append(firstEmoji)
+                print("-------------------- newExpenseCategoryEmojiToDisplay: \(newExpenseCategoryEmojiToDisplay) in \(#function) : ----------------------------\n)")
+                print("----------------- :: \(expenseDict)-----------------")
                 i += 1
             }
         }
         
-        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
+        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: [String(newExpenseCategoryEmojiToDisplay)])
         newExpenseCategoryEmojiToDisplay = []
 
         barChartView.xAxis.granularityEnabled = true

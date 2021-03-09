@@ -87,7 +87,7 @@ class ExpenseCategoryController {
     }
     
     func generateCategoryDictionaryByExpensesAndReturnDict(sections: [[Expense]]) -> [Dictionary<String, Double>.Element] {
-        expenseCategoriesTotalDict = []
+       // expenseCategoriesTotalDict = []
         var categoryNames: [String] = []
         var totalExpensesEachCategory: [Double] = []
         
@@ -113,7 +113,7 @@ class ExpenseCategoryController {
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        expenseCategoriesTotalDict = sortedDictionary
+       // expenseCategoriesTotalDict = sortedDictionary
         
         return sortedDictionary
     }
