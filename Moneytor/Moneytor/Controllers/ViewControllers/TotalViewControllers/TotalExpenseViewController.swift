@@ -52,6 +52,7 @@ class TotalExpenseViewController: UIViewController {
     
     func updateViewWithtime(time: Date) {
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+        print("----------------- expenses:: \(expenses)-----------------")
         
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         setupBarChart(expenseDict: expenseCategoryDict)

@@ -17,7 +17,7 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedCategory = ExpenseCategoryController.shared.expenseCategories[0]
+    var selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -61,7 +61,7 @@ class ExpenseDetailTableViewController: UITableViewController {
             return
         }
         self.navigationItem.title = "Update Expense"
-        selectedCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
+        selectedExpenseCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
@@ -88,10 +88,11 @@ class ExpenseDetailTableViewController: UITableViewController {
             return}
         
         
+        guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         if let expense = expense {
-            ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
+            ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date)
         } else {
-            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedCategory, date: expenseDatePicker.date)
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -126,11 +127,13 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        print("-------------------- ExpenseCategoryController.shared.expenseCategories.count: \(ExpenseCategoryController.shared.expenseCategories.count) in \(#function) : ----------------------------\n)")
         return ExpenseCategoryController.shared.expenseCategories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCategory = ExpenseCategoryController.shared.expenseCategories[row]
+        print("-----------------print :: \(print)-----------------")
+        selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {

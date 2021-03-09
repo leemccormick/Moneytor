@@ -33,6 +33,7 @@ class ExpenseCategoryController {
     func fetchAllExpenseCategories(){
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenseCategories = fetchAllExpenseCatagories
+        //print("----------------- expenseCategories: \(expenseCategories) in \(#function)-----------------")
     }
     
     // UPDATE
@@ -62,24 +63,27 @@ class ExpenseCategoryController {
             totalExpensesEachCategory.append(sum)
         }
         
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalExpensesEachCategory.removeDuplicates()))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
         expenseCategoriesTotalDict = sortedDictionary
     }
     
     func generateSectionsCategoiesByTimePeriod(_ time: Date) -> [[Expense]]  {
         fetchAllExpenseCategories()
-        expenseCategories = []
-        
+       // expenseCategories = []
+        var newExpenseCategoriesSections: [[Expense]] = []
         for expenseCategory in expenseCategories {
-            if let expenseCategory = expenseCategory.name {
-                let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(time, categoryName: expenseCategory)
+            if let expenseCategoryName = expenseCategory.name {
+                let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(time, categoryName: expenseCategoryName)
                 let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
-                expenseCategoriesSections.append(sortedCategory)
+                newExpenseCategoriesSections.append(sortedCategory)
                 
             }
         }
-        return expenseCategoriesSections
+        
+        print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
+        print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections.count) in \(#function) : ----------------------------\n)")
+        return newExpenseCategoriesSections
     }
     
     func generateCategoryDictionaryByExpensesAndReturnDict(sections: [[Expense]]) -> [Dictionary<String, Double>.Element] {
