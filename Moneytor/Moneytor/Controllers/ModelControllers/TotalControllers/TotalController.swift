@@ -16,17 +16,26 @@ class TotalController {
     var totalBalanceString: String = "$00.00"
     var totalIncomeString: String = "$00.00"
     var totalExpenseString: String = "$00.00"
+    
     var totalIncomeSearchResults: Double = 0.0
     var totalIncomeSearchResultsInString: String = "$00.00"
     var totalExpenseSearchResults: Double = 0.0
     var totalExpenseSearchResultsInString: String = "$00.00"
+    
     var totalIncomeBySpecificTime: Double = 00.00
     var totalIncomeBySpecificTimeString: String = "$00.00"
     var totalExpenseBySpecificTime: Double = 00.00
     var totalExpensesBySpecificTimeString: String = "$00.00"
+    var totalBalanceBySpecificTime: Double = 00.00
+    var totalBalanceBySpecificTimeString: String = "$00.00"
+    
     var totalIncomeDict = [Dictionary<String, Double>.Element]()
     var totalExpenseDictByMonthly = [Dictionary<String, Double>.Element]()
 
+    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+    let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    let yearly = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
     
     
     func calculateTotalIncome() {
@@ -67,6 +76,13 @@ class TotalController {
         totalExpensesBySpecificTimeString =  AmountFormatter.currencyInString(num: totalExpenseBySpecificTime)
     }
     
+    func calculateTotalBalanceBySpecificTime(_ time: Date) {
+        calculateTotalIncomesBySpecificTime(time)
+        calculateTotalExpensesBySpecificTime(time)
+        
+        totalBalanceBySpecificTime = totalIncomeBySpecificTime - totalExpenseBySpecificTime
+        totalBalanceBySpecificTimeString =  AmountFormatter.currencyInString(num: totalBalanceBySpecificTime)
+    }
     
     
     func calculateTotalExpense() {

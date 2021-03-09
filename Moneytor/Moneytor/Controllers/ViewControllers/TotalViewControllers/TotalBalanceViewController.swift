@@ -19,6 +19,12 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    
+    // MARK: - Properties
+    let weekly = TotalController.shared.weekly
+    let monthly = TotalController.shared.monthly
+    let yearly = TotalController.shared.yearly
+   
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,16 +33,33 @@ class TotalBalanceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TotalController.shared.calculateTotalBalance()
-        updateViews()
+        timeSegmentedControl.selectedSegmentIndex = 1
+        TotalController.shared.calculateTotalBalanceBySpecificTime(monthly)
+        updateViewsByTime(monthly)
     }
     
     // MARK: - Actions
     
     
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateViewsByTime(weekly)
+        case 1:
+            updateViewsByTime(monthly)
+        case 2:
+            updateViewsByTime(yearly)
+        default:
+            updateViewsByTime(monthly)
+        }
         
     }
+    
+    
+    @IBAction func calendarButtonTapped(_ sender: Any) {
+       // presentAlertForSpecificDateToDisplayTotalBalance()
+    }
+    
     @IBAction func totalIncomeButtonTapped(_ sender: Any) {
     }
     
@@ -45,12 +68,15 @@ class TotalBalanceViewController: UIViewController {
     }
     
     // MARK: - Helper Fuctions
-    func updateViews() {
-        let totalIncome = TotalController.shared.totalIncome
-        let totalExpense = TotalController.shared.totalExpense
-        let totalBalanceStr = TotalController.shared.totalBalanceString
-        let totalIncomeCurrencyStr = TotalController.shared.totalIncomeString
-        let totalExpenseCurrencyStr = TotalController.shared.totalExpenseString
+    func updateViewsByTime(_ time: Date) {
+        TotalController.shared.calculateTotalExpensesBySpecificTime(time)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(time)
+        let totalIncome = TotalController.shared.totalIncomeBySpecificTime
+        let totalExpense = TotalController.shared.totalExpenseBySpecificTime
+       
+        let totalBalanceStr = TotalController.shared.totalIncomeBySpecificTimeString
+        let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
+        let totalExpenseCurrencyStr = TotalController.shared.totalExpensesBySpecificTimeString
         totalBalanceLabel.text = totalBalanceStr
         totalIncomeButton.setTitle(totalIncomeCurrencyStr, for: .normal)
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
@@ -112,3 +138,4 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         }
     }
 }
+
