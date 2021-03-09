@@ -58,6 +58,7 @@ class TotalIncomeViewController: UIViewController {
         incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
+        incomeTableView.reloadData()
     }
     
     

@@ -15,6 +15,11 @@ class MoneytorSearchBar: UISearchBar {
     }
     
     func setupView() {
+        let titleFont : UIFont = UIFont(name: FontNames.textMoneytorGoodLetter, size: 18)!
+               let attributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.mtTextLightBrown,
+                   NSAttributedString.Key.font : titleFont
+               ]
         self.addCornerRadius()
         self.searchTextField.textColor = .mtTextLightBrown
         self.backgroundColor = .mtLightYellow
@@ -24,5 +29,14 @@ class MoneytorSearchBar: UISearchBar {
         self.showsCancelButton = true
         self.showsSearchResultsButton = true
         self.tintColor = .mtTextDarkBrown
+        self.searchTextField.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)!
+        self.scopeBarButtonTitleTextAttributes(for: .highlighted)
+        self.setScopeBarButtonTitleTextAttributes(attributes, for: .normal)
+        //self.setScopeBarButtonBackgroundImage(<#T##backgroundImage: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+        //self.searchS
+//        //scopeBarBackgroundImage = .
+//        self.isSearchResultsButtonSelected = true
     }
+    
+    
 }

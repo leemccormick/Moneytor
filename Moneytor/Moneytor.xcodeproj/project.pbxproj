@@ -42,6 +42,7 @@
 		3671BA5A25E622B000811F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5925E622AF00811F21 /* User.swift */; };
 		3671BA5D25E62AA000811F21 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5C25E62AA000811F21 /* UserController.swift */; };
 		3671BA6025E62B0400811F21 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3671BA5F25E62B0400811F21 /* UserError.swift */; };
+		36744A2025F75AD900BA60C9 /* MoneytorSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36744A1F25F75AD900BA60C9 /* MoneytorSegmentedControl.swift */; };
 		3676599E25E83EC600F63F0C /* SearchableRecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3676599D25E83EC600F63F0C /* SearchableRecordDelegate.swift */; };
 		367659A425E85A6800F63F0C /* TotalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367659A325E85A6700F63F0C /* TotalController.swift */; };
 		367BBEA525F0325000C11E59 /* TotalIncomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */; };
@@ -95,6 +96,7 @@
 		3671BA5925E622AF00811F21 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3671BA5C25E62AA000811F21 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		3671BA5F25E62B0400811F21 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		36744A1F25F75AD900BA60C9 /* MoneytorSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorSegmentedControl.swift; sourceTree = "<group>"; };
 		3676599D25E83EC600F63F0C /* SearchableRecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableRecordDelegate.swift; sourceTree = "<group>"; };
 		367659A325E85A6700F63F0C /* TotalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalController.swift; sourceTree = "<group>"; };
 		367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalIncomeViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				36682D1025E43EFD0075C03D /* MoneytorNavigationAndTabBar.swift */,
 				36274E6725E4F4410063DE28 /* MoneytorPickerView.swift */,
 				36D0435725E9DE720034BCFC /* MoneytorSearchBar.swift */,
+				36744A1F25F75AD900BA60C9 /* MoneytorSegmentedControl.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				3628330B25E721C400381731 /* ExpenseCategory+Convenience.swift in Sources */,
 				369D786C25E718C7005BD032 /* IncomeCategory+Convienience.swift in Sources */,
 				367659A425E85A6800F63F0C /* TotalController.swift in Sources */,
+				36744A2025F75AD900BA60C9 /* MoneytorSegmentedControl.swift in Sources */,
 				36682D0E25E43D830075C03D /* MoneytorTextField.swift in Sources */,
 				3671BA5D25E62AA000811F21 /* UserController.swift in Sources */,
 				36274E5925E4CDA20063DE28 /* ExpenseDetailTableViewController.swift in Sources */,

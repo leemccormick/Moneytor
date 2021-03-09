@@ -29,6 +29,7 @@ class TotalBalanceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pieChartView.delegate = self
+        updateViewsByTime(monthly)
     }
     
     override func viewWillAppear(_ animated: Bool) {

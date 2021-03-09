@@ -45,6 +45,7 @@ class TotalExpenseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(time: monthly)
@@ -57,6 +58,7 @@ class TotalExpenseViewController: UIViewController {
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
+        expenseTableView.reloadData()
     }
     
     // MARK: - Actions

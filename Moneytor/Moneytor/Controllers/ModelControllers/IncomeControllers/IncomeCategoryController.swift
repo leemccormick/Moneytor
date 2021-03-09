@@ -60,7 +60,7 @@ class IncomeCategoryController {
             totalIncomesEachCategory.append(sum)
         }
         
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalIncomesEachCategory.removeDuplicates()))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
         incomeCategoriesTotalDict = sortedDictionary
     }
