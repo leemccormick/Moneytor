@@ -153,7 +153,7 @@ extension TotalExpenseViewController: ChartViewDelegate {
         
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
-        var newExpenseCategoryEmojiToDisplay: [Character] = []
+        var newExpenseCategoryEmojiToDisplay: [String] = []
         
         print("-------------------- expenseDict: \(expenseDict) in \(#function) : ----------------------------\n)")
         
@@ -173,16 +173,17 @@ extension TotalExpenseViewController: ChartViewDelegate {
                 charData.setValueTextColor(.mtDarkBlue)
                 barChartView.data = charData
                 
-                guard let firstEmoji = expenseCategory.key.first else {return}
-                newExpenseCategoryEmojiToDisplay.append(firstEmoji)
+                //guard let firstEmoji = expenseCategory.key.first else {return}
+                newExpenseCategoryEmojiToDisplay.append(expenseCategory.key.firstCharacterAsString)
                 print("-------------------- newExpenseCategoryEmojiToDisplay: \(newExpenseCategoryEmojiToDisplay) in \(#function) : ----------------------------\n)")
                 print("----------------- :: \(expenseDict)-----------------")
                 i += 1
             }
         }
         
-        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: [String(newExpenseCategoryEmojiToDisplay)])
-        newExpenseCategoryEmojiToDisplay = []
+       // let stringOfEmojiArray = [String(newExpenseCategoryEmojiToDisplay)]
+        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
+        //newExpenseCategoryEmojiToDisplay = []
 
         barChartView.xAxis.granularityEnabled = true
              barChartView.xAxis.granularity = 1.0

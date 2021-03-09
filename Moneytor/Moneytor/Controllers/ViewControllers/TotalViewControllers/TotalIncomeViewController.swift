@@ -184,7 +184,7 @@ extension TotalIncomeViewController: ChartViewDelegate {
                     sumIncome += incomeCatagory.value
                     yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
                     
-                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
+                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.firstCharacterAsString)
                     i += 1
                 }
             }
@@ -219,7 +219,7 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.leftAxis.axisMinimum = 0
         lineChartView.leftAxis.axisMaximum = sumIncome + (sumIncome * 0.1)
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newIncomeCategoryEmojiToDisplay)
-        newIncomeCategoryEmojiToDisplay = []
+        //newIncomeCategoryEmojiToDisplay = []
         lineChartView.xAxis.granularityEnabled = true
         lineChartView.xAxis.drawGridLinesEnabled = false
         lineChartView.xAxis.drawLabelsEnabled = true
