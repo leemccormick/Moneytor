@@ -55,6 +55,16 @@ class IncomeDetailTableViewController: UITableViewController {
     @IBAction func incomeDatePickerValueChange(_ sender: Any) {
     }
     
+    
+    
+    @IBAction func addCategoryButtonTapped(_ sender: Any) {
+    }
+    
+    
+    
+    @IBAction func addNotifincationButtonTapped(_ sender: Any) {
+    }
+    
     // MARK: - Helper Fuctions
     func updateViews() {
         guard let income = income else {
@@ -106,9 +116,13 @@ class IncomeDetailTableViewController: UITableViewController {
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 4 {
+        if section == 2 {
             return CGFloat(0.0)
-        } else {
+        } else if section == 3 {
+            return CGFloat(0.0)
+        } else if section == 4{
+            return CGFloat(0.0)
+        }else {
             return CGFloat(40.0)
         }
     }

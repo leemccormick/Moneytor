@@ -51,6 +51,17 @@ class ExpenseDetailTableViewController: UITableViewController {
         ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
     }
     
+    
+    
+    @IBAction func addCategoryButtonTapped(_ sender: Any) {
+    }
+    
+    
+    
+    @IBAction func addNotifincationButtonTapped(_ sender: Any) {
+    }
+    
+    
     @IBAction func expensesDatePickerValueChange(_ sender: Any) {
     }
     
@@ -106,9 +117,13 @@ class ExpenseDetailTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 4 {
+        if section == 2 {
             return CGFloat(0.0)
-        } else {
+        } else if section == 3 {
+            return CGFloat(0.0)
+        } else if section == 4{
+            return CGFloat(0.0)
+        }else {
             return CGFloat(40.0)
         }
     }
