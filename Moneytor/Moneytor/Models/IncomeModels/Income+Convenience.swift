@@ -34,7 +34,7 @@ extension Income: SearchableRecordDelegate {
     }
     
     var incomeDateText: String {
-        self.date?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .short)
+        self.date?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
     }
 }
 

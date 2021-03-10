@@ -111,7 +111,7 @@ class ExpenseCategoryController {
             }
         }
         
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalExpensesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
        // expenseCategoriesTotalDict = sortedDictionary
         

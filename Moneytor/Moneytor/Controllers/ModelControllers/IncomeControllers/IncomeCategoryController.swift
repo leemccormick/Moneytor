@@ -80,7 +80,7 @@ class IncomeCategoryController {
     }
     
     func generateCategoryDictionaryByIncomesAndReturnDict(sections: [[Income]]) -> [Dictionary<String, Double>.Element] {
-        incomeCategoriesTotalDict = []
+        //incomeCategoriesTotalDict = []
         var categoryNames: [String] = []
         var totalIncomesEachCategory: [Double] = []
         
@@ -104,9 +104,9 @@ class IncomeCategoryController {
             }
         }
         
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalIncomesEachCategory))
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalIncomesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        incomeCategoriesTotalDict = sortedDictionary
+       // incomeCategoriesTotalDict = sortedDictionary
         
         return sortedDictionary
     }
