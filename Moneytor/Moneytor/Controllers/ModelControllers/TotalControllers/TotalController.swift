@@ -117,7 +117,7 @@ class TotalController {
     }
     
     func calculateTotalExpenseFrom(searchArrayResults: [Expense]) {
-        ExpenseController.shared.fetchAllExpenses()
+       // ExpenseController.shared.fetchAllExpenses()
         var sum = 0.0
         let results =  searchArrayResults
         for result in results {

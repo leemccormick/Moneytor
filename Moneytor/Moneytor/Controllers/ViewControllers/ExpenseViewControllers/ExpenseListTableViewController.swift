@@ -22,7 +22,7 @@ class ExpenseListTableViewController: UITableViewController {
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
     var sectionsExpenseDict = [Dictionary<String, Double>.Element]()
     var categoriesSections: [[Expense]] =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.weekly)
-    var totalExpenseSearching: Double = TotalController.shared.totalExpense {
+    var totalExpenseSearching: Double = 0.0 {
         didSet{
             updateFooter(total: totalExpenseSearching)
         }
@@ -32,7 +32,7 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
-        fetchExpensesBySpecificTime(time: weekly)
+//fetchExpensesBySpecificTime(time: weekly)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,10 +56,10 @@ class ExpenseListTableViewController: UITableViewController {
         ExpenseController.shared.fetchAllExpenses()
         resultsExpenseFromSearching = ExpenseController.shared.expenses
         setupSearchBar(expenseCount: resultsExpenseFromSearching.count)
-        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+       // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
 //        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
 //        TotalController.shared.calculateTotalExpensesBySpecificTime(weekly)
-        updateFooter(total: TotalController.shared.totalExpense)
+        updateFooter(total: TotalController.shared.totalExpenseSearchResults)
         tableView.reloadData()
     }
     
@@ -122,15 +122,15 @@ class ExpenseListTableViewController: UITableViewController {
         if isSearching {
             guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return UITableViewCell()}
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString) \n\(expense.expenseDateText)"
-            cell.detailTextLabel?.text = expense.expenseNameString
+            cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString.capitalized) \n\(expense.expenseDateText)"
+            cell.detailTextLabel?.text = expense.expenseAmountString
         } else {
             
             if !categoriesSections[indexPath.section].isEmpty {
                 let expense = categoriesSections[indexPath.section][indexPath.row]
                 cell.textLabel?.numberOfLines = 0
                 
-                cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString) \n\(expense.expenseDateText)"
+                cell.textLabel?.text = "\(expense.expenseCategory?.emoji ?? "💵") \(expense.expenseNameString.capitalized) \n\(expense.expenseDateText)"
                 cell.detailTextLabel?.text = expense.expenseAmountString
             }
         }
@@ -172,7 +172,9 @@ class ExpenseListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if isSearching {
-            return "🔍 SEARCHING EXPENSES \t\t\t" + TotalController.shared.totalExpenseSearchResultsInString
+            
+            tableView.reloadData()
+            return "🔍 SEARCHING EXPENSES \t\t\t" + AmountFormatter.currencyInString(num: totalExpenseSearching)
         } else {
             if tableView.numberOfRows(inSection: section) == 0 {
                 return nil
@@ -229,20 +231,24 @@ class ExpenseListTableViewController: UITableViewController {
 extension ExpenseListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+       
         if !searchText.isEmpty {
+            fetchAllExpenses()
             resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
             
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
-            if results.isEmpty {
+            if !results.isEmpty {
             TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
             totalExpenseSearching = TotalController.shared.totalExpenseSearchResults
+                self.tableView.reloadData()
             } else {
                 totalExpenseSearching = 0.0
+                self.tableView.reloadData()
             }
             self.tableView.reloadData()
         } else if searchText == "" {
             resultsExpenseFromSearching = []
+            totalExpenseSearching = 0.0
             self.tableView.reloadData()
         }
     }

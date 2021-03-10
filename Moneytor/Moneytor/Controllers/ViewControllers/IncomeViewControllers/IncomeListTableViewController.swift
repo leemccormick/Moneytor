@@ -22,7 +22,7 @@ class IncomeListTableViewController: UITableViewController {
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
     var sectionsIncomeDict = [Dictionary<String, Double>.Element]()
     var categoriesSections: [[Income]] =  IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(IncomeCategoryController.shared.weekly)
-    var totalIncomeSearching: Double = TotalController.shared.totalIncome {
+    var totalIncomeSearching: Double = 0.0 {
         didSet{
             updateFooter(total: totalIncomeSearching)
         }
@@ -32,7 +32,7 @@ class IncomeListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
-        fetchIncomesBySpecificTime(time: weekly)
+      //  fetchIncomesBySpecificTime(time: weekly)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,10 +59,10 @@ class IncomeListTableViewController: UITableViewController {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
         setupSearchBar(incomeCount: resultsIncomeFromSearching.count)
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
-        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
-        updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
+//        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+//        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+//        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
+        updateFooter(total: TotalController.shared.totalIncomeSearchResults)
         tableView.reloadData()
     }
     
@@ -126,14 +126,14 @@ class IncomeListTableViewController: UITableViewController {
         if isSearching {
             guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return UITableViewCell()}
             cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString) \n\(income.incomeDateText)"
+            cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
             cell.detailTextLabel?.text = income.incomeAmountString
         } else {
             
             if !categoriesSections[indexPath.section].isEmpty {
                 
                 let income = categoriesSections[indexPath.section][indexPath.row]
-                cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString) \n\(income.incomeDateText)"
+                cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 cell.detailTextLabel?.text = income.incomeAmountString
             }
         }
@@ -175,7 +175,7 @@ class IncomeListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if isSearching {
-            return "🔍 SEARCHING INCOMES \t\t\t" + TotalController.shared.totalIncomeSearchResultsInString
+            return "🔍 SEARCHING INCOMES \t\t\t" + AmountFormatter.currencyInString(num: totalIncomeSearching)
         } else {
             if tableView.numberOfRows(inSection: section) == 0 {
                 return nil
@@ -233,6 +233,7 @@ extension IncomeListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if !searchText.isEmpty {
+            fetchAllIncomes()
             resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.nameString ?? "")}
             
             guard let results = resultsIncomeFromSearching
@@ -242,13 +243,16 @@ extension IncomeListTableViewController: UISearchBarDelegate {
                 
                 TotalController.shared.calculateTotalIncomeFrom(searchArrayResults: results)
                 totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
+                self.tableView.reloadData()
             } else {
                 totalIncomeSearching = 0.0
+                self.tableView.reloadData()
             }
             
             self.tableView.reloadData()
         } else if searchText == "" {
             resultsIncomeFromSearching = []
+            totalIncomeSearching = 0.0
             self.tableView.reloadData()
         }
     }

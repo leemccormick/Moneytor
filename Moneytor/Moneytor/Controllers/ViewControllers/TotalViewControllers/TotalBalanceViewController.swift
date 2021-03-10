@@ -72,12 +72,16 @@ class TotalBalanceViewController: UIViewController {
     func updateViewsByTime(_ time: Date) {
         TotalController.shared.calculateTotalExpensesBySpecificTime(time)
         TotalController.shared.calculateTotalIncomesBySpecificTime(time)
+        TotalController.shared.calculateTotalBalanceBySpecificTime(time)
+       
         let totalIncome = TotalController.shared.totalIncomeBySpecificTime
         let totalExpense = TotalController.shared.totalExpenseBySpecificTime
+       // let totalBalance = TotalController.shared.totalBalanceBySpecificTime
        
-        let totalBalanceStr = TotalController.shared.totalIncomeBySpecificTimeString
         let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
         let totalExpenseCurrencyStr = TotalController.shared.totalExpensesBySpecificTimeString
+        
+        let totalBalanceStr = TotalController.shared.totalBalanceBySpecificTimeString
         totalBalanceLabel.text = totalBalanceStr
         totalIncomeButton.setTitle(totalIncomeCurrencyStr, for: .normal)
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
