@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3606B1A825F9F444005F375F /* LocationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1A725F9F444005F375F /* LocationPin.swift */; };
+		3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */; };
+		3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AF25F9F651005F375F /* LocationPinController.swift */; };
 		36274E3825E4C6C10063DE28 /* Letters for Learners.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36274E3725E4C6C10063DE28 /* Letters for Learners.ttf */; };
 		36274E3F25E4CBF40063DE28 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36274E3E25E4CBF40063DE28 /* LoginViewController.swift */; };
 		36274E4725E4CCDD0063DE28 /* TotalBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36274E4625E4CCDD0063DE28 /* TotalBalanceViewController.swift */; };
@@ -62,6 +65,9 @@
 
 /* Begin PBXFileReference section */
 		1B0E68A1C9643499C8D81A76 /* Pods-Moneytor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneytor.release.xcconfig"; path = "Target Support Files/Pods-Moneytor/Pods-Moneytor.release.xcconfig"; sourceTree = "<group>"; };
+		3606B1A725F9F444005F375F /* LocationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPin.swift; sourceTree = "<group>"; };
+		3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLocation+Convenience.swift"; sourceTree = "<group>"; };
+		3606B1AF25F9F651005F375F /* LocationPinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPinController.swift; sourceTree = "<group>"; };
 		36274E3725E4C6C10063DE28 /* Letters for Learners.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Letters for Learners.ttf"; sourceTree = "<group>"; };
 		36274E3E25E4CBF40063DE28 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		36274E4625E4CCDD0063DE28 /* TotalBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalBalanceViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +138,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3606B1AE25F9F62D005F375F /* CurrencyControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3606B1AF25F9F651005F375F /* LocationPinController.swift */,
+			);
+			path = CurrencyControllers;
+			sourceTree = "<group>";
+		};
 		36274E4125E4CC020063DE28 /* TotalViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,10 +348,10 @@
 		36AFBCB425E4254100B559DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				36E19BE325F88F0700BFCDB0 /* CurrencyExchange */,
 				36AFBC9A25E41C7E00B559DB /* Moneytor.xcdatamodeld */,
 				36AFBCA925E41CA800B559DB /* Moneytor.entitlements */,
 				3671BA3825E5B0FE00811F21 /* CoreDataStack.swift */,
+				36E19BE325F88F0700BFCDB0 /* CurrencyExchange */,
 				366D9DD725E76D88002E63FB /* IncomeModels */,
 				366D9DD925E76DA5002E63FB /* ExpenseModels */,
 				36D0435F25E9E0770034BCFC /* UserModel */,
@@ -369,6 +383,7 @@
 		36AFBCB725E4257E00B559DB /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3606B1AE25F9F62D005F375F /* CurrencyControllers */,
 				36D0436025E9E0880034BCFC /* UserController */,
 				367659A225E85A3400F63F0C /* TotalControllers */,
 				366D9DDA25E76DDC002E63FB /* IncomeControllers */,
@@ -397,6 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				36E19BE425F893E100BFCDB0 /* Currency.swift */,
+				3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */,
+				3606B1A725F9F444005F375F /* LocationPin.swift */,
 			);
 			path = CurrencyExchange;
 			sourceTree = "<group>";
@@ -541,9 +558,11 @@
 				3671BA5D25E62AA000811F21 /* UserController.swift in Sources */,
 				36274E5925E4CDA20063DE28 /* ExpenseDetailTableViewController.swift in Sources */,
 				3671BA5A25E622B000811F21 /* User.swift in Sources */,
+				3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */,
 				3671BA3C25E5B41000811F21 /* Income+Convenience.swift in Sources */,
 				36274E5F25E4CDF60063DE28 /* CurrencyMapViewController.swift in Sources */,
 				3671BA4525E5C20100811F21 /* ExpenseController.swift in Sources */,
+				3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */,
 				36D0435825E9DE720034BCFC /* MoneytorSearchBar.swift in Sources */,
 				3676599E25E83EC600F63F0C /* SearchableRecordDelegate.swift in Sources */,
 				36274E5C25E4CDDF0063DE28 /* ExpenseScannerViewController.swift in Sources */,
@@ -567,6 +586,7 @@
 				36682D0725E43B690075C03D /* MoneytorLabel.swift in Sources */,
 				3628331225E7440C00381731 /* IncomeCategoryController.swift in Sources */,
 				3671BA6025E62B0400811F21 /* UserError.swift in Sources */,
+				3606B1A825F9F444005F375F /* LocationPin.swift in Sources */,
 				36274E5325E4CD650063DE28 /* IncomeDetailTableViewController.swift in Sources */,
 				36274E6825E4F4410063DE28 /* MoneytorPickerView.swift in Sources */,
 				367BBEA525F0325000C11E59 /* TotalIncomeViewController.swift in Sources */,

@@ -399,7 +399,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="26.333333333333332"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="26.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
                                                                 </constraints>
@@ -408,7 +408,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="26.333333333333332"/>
+                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="26.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
                                                                 <nil key="highlightedColor"/>
@@ -419,7 +419,7 @@
                                                         <rect key="frame" x="0.0" y="66.333333333333371" width="385.33333333333331" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
                                                                 </constraints>
@@ -428,7 +428,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="32"/>
+                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -444,7 +444,7 @@
                                                         <rect key="frame" x="0.0" y="138.33333333333337" width="385.33333333333331" height="33"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
                                                                 </constraints>
@@ -453,7 +453,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="33"/>
+                                                                <rect key="frame" x="324" y="0.0" width="61.333333333333314" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -587,51 +587,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-vC-qW2">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="SU3-dK-f97">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                            </activityIndicatorView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3gK-Fx-jr5">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="HX5-eo-zfc" appends="YES" id="pL1-Ws-RLY"/>
+                                </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
-                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="YrB-In-r1O" firstAttribute="top" secondItem="A4h-qJ-EC5" secondAttribute="top" id="55l-up-9XZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="YrB-In-r1O" secondAttribute="trailing" id="TBw-NC-PJm"/>
-                                    <constraint firstItem="YrB-In-r1O" firstAttribute="leading" secondItem="A4h-qJ-EC5" secondAttribute="leading" id="ZkO-1M-o56"/>
-                                    <constraint firstAttribute="bottom" secondItem="YrB-In-r1O" secondAttribute="bottom" id="gYK-FO-UhU"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PmB-I2-UDe"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="EoZ-vC-qW2" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="AUk-Gw-NDL"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="A4h-qJ-EC5" secondAttribute="bottom" id="Qfi-eh-RVQ"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="EoZ-vC-qW2" secondAttribute="bottom" id="SVA-am-xg4"/>
-                            <constraint firstItem="EoZ-vC-qW2" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="WKK-vO-Iao"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="A4h-qJ-EC5" secondAttribute="trailing" id="ez7-B3-cO3"/>
-                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="itE-BA-gfS"/>
-                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="mQV-ow-yzj"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="EoZ-vC-qW2" secondAttribute="trailing" id="ryf-Id-ggM"/>
+                            <constraint firstItem="3gK-Fx-jr5" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="DgP-OH-Wcc"/>
+                            <constraint firstItem="SU3-dK-f97" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="Hsb-0X-U6m"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="3gK-Fx-jr5" secondAttribute="trailing" id="PAI-dY-vMf"/>
+                            <constraint firstItem="3gK-Fx-jr5" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="RAb-Us-eaK"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="3gK-Fx-jr5" secondAttribute="bottom" id="SvW-ce-Njo"/>
+                            <constraint firstItem="SU3-dK-f97" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="f3x-Ac-xfB"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="SU3-dK-f97" secondAttribute="trailing" id="mkw-Lj-ocY"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="SU3-dK-f97" secondAttribute="bottom" id="sWd-7w-ZSO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CURRENCY" id="ONU-uI-NUi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2">
-                            <connections>
-                                <action selector="logoutButtonTapped:" destination="nyT-zm-yWA" id="TgF-Zc-ewa"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="YrB-In-r1O" id="EUX-Iy-C8e"/>
-                        <outlet property="activityView" destination="A4h-qJ-EC5" id="ra6-sT-hPA"/>
-                        <outlet property="currencyMapView" destination="EoZ-vC-qW2" id="vnm-EC-8L9"/>
+                        <outlet property="activityIndicator" destination="SU3-dK-f97" id="CU6-dD-aYK"/>
+                        <outlet property="mapView" destination="3gK-Fx-jr5" id="xHX-zc-AHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkN-bT-LUh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer cancelsTouchesInView="NO" allowableMovement="10" minimumPressDuration="0.5" id="HX5-eo-zfc">
+                    <connections>
+                        <action selector="longPressOnMap:" destination="nyT-zm-yWA" id="xlk-F4-mUa"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1022" y="1503"/>
         </scene>
@@ -979,7 +972,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="nyT-zm-yWA" kind="relationship" relationship="rootViewController" id="WDe-aj-6Z2"/>
+                        <segue destination="nyT-zm-yWA" kind="relationship" relationship="rootViewController" id="qYa-Cw-7RM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ohQ-lr-TxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
