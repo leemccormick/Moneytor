@@ -27,7 +27,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        settingUpDefaultsCategories()
+        ExpenseCategoryController.shared.fetchAllExpenseCategories()
+        print("\n\n\n\n============================================================================================")
+        print("-------------------- ExpenseCategoryController.shared.expenseCategories: \(ExpenseCategoryController.shared.expenseCategories.count) in \(#function) : ----------------------------\n)")
+        if ExpenseCategoryController.shared.expenseCategories == [] {
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "food", emoji: "🍔")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "utility", emoji: "📞")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "health", emoji: "💪")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "grocery", emoji: "🛒")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "shopping", emoji: "🛍")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "entertainment", emoji: "🎬")
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "transportation", emoji: "🚘")
+        }
+        
+        IncomeCategoryController.shared.fetchAllIncomeCategories()
+        print("-------------------- IncomeCategoryController.shared.incomeCategories: \(IncomeCategoryController.shared.incomeCategories.count) in \(#function) : ----------------------------\n)")
+        print("================================================================================\n\n\n\n\n")
+        if IncomeCategoryController.shared.incomeCategories == [] {
+            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "salary", emoji: "💳")
+            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "saving account", emoji: "💰")
+            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "checking account", emoji: "🏧")
+        }
         
         return true
     }
@@ -70,36 +92,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
     
-    func settingUpDefaultsCategories() {
-        ExpenseCategoryController.shared.fetchAllExpenseCategories()
-        if ExpenseCategoryController.shared.expenseCategories.isEmpty {
-            let expenseDefaultCategories = [
-                ExpenseCategory(name: "_other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
-                ExpenseCategory(name: "food", emoji: "🍔", id: "598DEBF2-E017-4536-AF32-E9BEDF0A3D81", expenses: nil),
-                ExpenseCategory(name: "utility", emoji: "📞", id: "EFD4377B-161B-4563-A312-F7013BE7E0F7", expenses: nil),
-                ExpenseCategory(name: "health", emoji: "💪",  id: "EF566A40-6A34-477F-BCDD-71FB9CBA8CED", expenses: nil),
-                ExpenseCategory(name: "grocery", emoji: "🛒",  id: "0E435DAB-E1E0-43FF-84B6-5B14BF18C541", expenses: nil),
-                ExpenseCategory(name: "shopping", emoji: "🛍",  id: "162E5287-35CA-4DDC-BE58-1784534FBA70", expenses: nil),
-                ExpenseCategory(name: "entertainment", emoji: "🎬",  id: "36FE22EE-A735-4612-BFED-C4587FA8CD62", expenses: nil),
-                ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
-            ]
-            
-            let sortedCategories = expenseDefaultCategories.sorted{$0.name?.lowercased() ?? "" < ($1.name?.lowercased()) ?? ""}
-            ExpenseCategoryController.shared.expenseCategories.append(contentsOf: sortedCategories)
-        }
-        
-        IncomeCategoryController.shared.fetchAllIncomeCategories()
-        if IncomeCategoryController.shared.incomeCategories.isEmpty {
-            let incomeDefaultCategories: [IncomeCategory] = [
-                IncomeCategory(name: "_other", emoji: "💵", incomes: nil, id: "E46573D3-C3C3-48B0-99F5-1DF6B1D8FFF1"),
-                IncomeCategory(name: "salary", emoji: "💳", incomes: nil, id: "A5577198-7298-4E8A-BBDC-6CFA07BB4271"),
-                IncomeCategory(name: "saving account", emoji: "💰", incomes: nil, id: "961F3F7E-E03E-4D26-B36C-B7928466F403"),
-                IncomeCategory(name: "checking account", emoji: "🏧", incomes: nil, id: "9758F6A5-90F4-454A-8B8E-DFF6E6379AC0")
-            ]
-            let sortedCategories = incomeDefaultCategories.sorted{$0.name?.lowercased() ?? "" < ($1.name?.lowercased()) ?? ""}
-            IncomeCategoryController.shared.incomeCategories.append(contentsOf: sortedCategories)
-        }
-    }
+   
+//    func settingUpDefaultsCategories() {
+//        ExpenseCategoryController.shared.fetchAllExpenseCategories()
+//        IncomeCategoryController.shared.fetchAllIncomeCategories()
+//        
+//        if ExpenseCategoryController.shared.expenseCategories == [] {
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "food", emoji: "🍔")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "utility", emoji: "📞")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "health", emoji: "💪")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "grocery", emoji: "🛒")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "shopping", emoji: "🛍")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "entertainment", emoji: "🎬")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "transportation", emoji: "🚘")
+//        }
+//        
+//       
+//        if IncomeCategoryController.shared.incomeCategories == [] {
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "salary", emoji: "💳")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "saving account", emoji: "💰")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "checking account", emoji: "🏧")
+//        }
+//    }
+
 }
 
+/*
 
+let expenseCategoryDefaults = [
+    ExpenseCategory(name: "_other", emoji: "💸", id: "1F1EFA62-7ED2-4325-8A52-210B14384BCB", expenses: nil),
+    ExpenseCategory(name: "food", emoji: "🍔", id: "598DEBF2-E017-4536-AF32-E9BEDF0A3D81", expenses: nil),
+    ExpenseCategory(name: "utility", emoji: "📞", id: "EFD4377B-161B-4563-A312-F7013BE7E0F7", expenses: nil),
+    ExpenseCategory(name: "health", emoji: "💪",  id: "EF566A40-6A34-477F-BCDD-71FB9CBA8CED", expenses: nil),
+    ExpenseCategory(name: "grocery", emoji: "🛒",  id: "0E435DAB-E1E0-43FF-84B6-5B14BF18C541", expenses: nil),
+    ExpenseCategory(name: "shopping", emoji: "🛍",  id: "162E5287-35CA-4DDC-BE58-1784534FBA70", expenses: nil),
+    ExpenseCategory(name: "entertainment", emoji: "🎬",  id: "36FE22EE-A735-4612-BFED-C4587FA8CD62", expenses: nil),
+    ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
+]
+ 
+ 
+ let incomeCategoryDefaults = [
+     IncomeCategory(name: "_other", emoji: "💵", incomes: nil, id: "E46573D3-C3C3-48B0-99F5-1DF6B1D8FFF1"),
+     IncomeCategory(name: "salary", emoji: "💳", incomes: nil, id: "A5577198-7298-4E8A-BBDC-6CFA07BB4271"),
+     IncomeCategory(name: "saving account", emoji: "💰", incomes: nil, id: "961F3F7E-E03E-4D26-B36C-B7928466F403"),
+     IncomeCategory(name: "checking account", emoji: "🏧", incomes: nil, id: "9758F6A5-90F4-454A-8B8E-DFF6E6379AC0")
+ ]
+
+ 
+ 
+ */

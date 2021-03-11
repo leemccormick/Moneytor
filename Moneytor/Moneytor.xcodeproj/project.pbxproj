@@ -56,6 +56,7 @@
 		36AFBCAC25E41CB500B559DB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36AFBCAB25E41CB500B559DB /* CloudKit.framework */; };
 		36D0435825E9DE720034BCFC /* MoneytorSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D0435725E9DE720034BCFC /* MoneytorSearchBar.swift */; };
 		36E19BE025F85B4A00BFCDB0 /* Money Money Plus.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36E19BDF25F85B4A00BFCDB0 /* Money Money Plus.ttf */; };
+		36E19BE525F893E100BFCDB0 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E19BE425F893E100BFCDB0 /* Currency.swift */; };
 		8CD45E7DF95FD6B9D1F697AC /* Pods_Moneytor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D75E69D6D3EBA7493BC3EA7 /* Pods_Moneytor.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,7 @@
 		36AFBCAB25E41CB500B559DB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		36D0435725E9DE720034BCFC /* MoneytorSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorSearchBar.swift; sourceTree = "<group>"; };
 		36E19BDF25F85B4A00BFCDB0 /* Money Money Plus.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Money Money Plus.ttf"; sourceTree = "<group>"; };
+		36E19BE425F893E100BFCDB0 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		425CBF54081CF883C52F2BF0 /* Pods-Moneytor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneytor.debug.xcconfig"; path = "Target Support Files/Pods-Moneytor/Pods-Moneytor.debug.xcconfig"; sourceTree = "<group>"; };
 		7D75E69D6D3EBA7493BC3EA7 /* Pods_Moneytor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moneytor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -332,6 +334,7 @@
 		36AFBCB425E4254100B559DB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				36E19BE325F88F0700BFCDB0 /* CurrencyExchange */,
 				36AFBC9A25E41C7E00B559DB /* Moneytor.xcdatamodeld */,
 				36AFBCA925E41CA800B559DB /* Moneytor.entitlements */,
 				3671BA3825E5B0FE00811F21 /* CoreDataStack.swift */,
@@ -388,6 +391,14 @@
 				3671BA5C25E62AA000811F21 /* UserController.swift */,
 			);
 			path = UserController;
+			sourceTree = "<group>";
+		};
+		36E19BE325F88F0700BFCDB0 /* CurrencyExchange */ = {
+			isa = PBXGroup;
+			children = (
+				36E19BE425F893E100BFCDB0 /* Currency.swift */,
+			);
+			path = CurrencyExchange;
 			sourceTree = "<group>";
 		};
 		A4FB540D3493A2E81FC0506F /* Pods */ = {
@@ -541,6 +552,7 @@
 				3671BA3F25E5B6C900811F21 /* Expense+Convenience.swift in Sources */,
 				36AFBC9C25E41C7E00B559DB /* Moneytor.xcdatamodeld in Sources */,
 				36682D0325E438490075C03D /* StyleGuide.swift in Sources */,
+				36E19BE525F893E100BFCDB0 /* Currency.swift in Sources */,
 				36274E5625E4CD890063DE28 /* ExpenseListTableViewController.swift in Sources */,
 				367BBEA825F036D600C11E59 /* TotalExpenseViewController.swift in Sources */,
 				36274E4725E4CCDD0063DE28 /* TotalBalanceViewController.swift in Sources */,

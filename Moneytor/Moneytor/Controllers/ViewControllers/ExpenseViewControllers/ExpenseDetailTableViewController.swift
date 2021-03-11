@@ -47,8 +47,8 @@ class ExpenseDetailTableViewController: UITableViewController {
     }
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
-        print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
-        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+      //  print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
+       // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
     }
     
     

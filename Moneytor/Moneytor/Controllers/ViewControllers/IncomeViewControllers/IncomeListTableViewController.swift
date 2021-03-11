@@ -69,7 +69,7 @@ class IncomeListTableViewController: UITableViewController {
     func fetchIncomesBySpecificTime(time: Date) {
         let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
         setupSearchBar(incomeCount: incomes.count)
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+       // IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalIncomesBySpecificTime(time)
         updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)

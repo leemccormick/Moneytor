@@ -29,54 +29,34 @@ class IncomeCategoryController {
     }()
     
     // M√ARK: - CRUD Methods
+    func createIncomeDefaultCategories(name: String, emoji: String) {
+    let newIncomeCategory = IncomeCategory(name: name, emoji: emoji, incomes: nil)
+    incomeCategories.append(newIncomeCategory)
+    CoreDataStack.shared.saveContext()
+    }
+    
+    
     // READ
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomeCategories = fetchAllIncomeCatagories
+        print("--------------------incomeCategories : \(incomeCategories.count) in \(#function) : ----------------------------\n)")
     }
     
-    func generateSectionsAndSumEachIncomeCategory() {
-        fetchAllIncomeCategories()
-        incomeCategoriesSections = []
-        
-        var categoryNames: [String] = []
-        var section: [Income] = []
-        var totalIncomesEachCategory: [Double] = []
-        
-        for category in incomeCategories {
-            let incomeArray = category.incomes?.allObjects as? [Income] ?? []
-            let newIncomeArray = incomeArray.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
-            
-            var sum = 0.0
-            for income in newIncomeArray {
-                sum += income.amount as! Double
-                section.append(income)
-            }
-            incomeCategoriesSections.append(section)
-            section = []
-            
-            let nameEmoji = "\(category.nameString) \(category.emojiString)"
-            categoryNames.append(nameEmoji)
-            totalIncomesEachCategory.append(sum)
-        }
-        
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalIncomesEachCategory.removeDuplicates()))
-        let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        incomeCategoriesTotalDict = sortedDictionary
-    }
+    
     
     func generateSectionsCategoiesByTimePeriod(_ time: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
-        incomeCategoriesSections = []
+        var newIncomeCategoriesSections: [[Income]] = []
         
         for incomeCategory in incomeCategories {
             if let incomeCategoryName = incomeCategory.name {
                 let newCategorySection = IncomeController.shared.fetchIncomesFromTimePeriodAndCategory(time, categoryName: incomeCategoryName)
                 let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
-                incomeCategoriesSections.append(sortedCategory)
+                newIncomeCategoriesSections.append(sortedCategory.removeDuplicates())
             }
         }
-        return incomeCategoriesSections
+        return newIncomeCategoriesSections
     }
     
     func generateCategoryDictionaryByIncomesAndReturnDict(sections: [[Income]]) -> [Dictionary<String, Double>.Element] {
@@ -110,11 +90,46 @@ class IncomeCategoryController {
         
         return sortedDictionary
     }
+    
+    
+    
 }
 
 
 
 /* NOTE
+ 
+ func generateSectionsAndSumEachIncomeCategory() {
+         fetchAllIncomeCategories()
+       //  incomeCategoriesSections = []
+         
+         var categoryNames: [String] = []
+         var section: [Income] = []
+         var totalIncomesEachCategory: [Double] = []
+         
+         for category in incomeCategories {
+             let incomeArray = category.incomes?.allObjects as? [Income] ?? []
+             let newIncomeArray = incomeArray.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
+             
+             var sum = 0.0
+             for income in newIncomeArray {
+                 sum += income.amount as! Double
+                 section.append(income)
+             }
+             incomeCategoriesSections.append(section)
+             section = []
+             
+             let nameEmoji = "\(category.nameString) \(category.emojiString)"
+             categoryNames.append(nameEmoji)
+             totalIncomesEachCategory.append(sum)
+         }
+         
+         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalIncomesEachCategory.removeDuplicates()))
+         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+         incomeCategoriesTotalDict = sortedDictionary
+     }
+
+ 
  
  func generateCategoryDictionaryBy(sections: [[Income]]) {
  var categoryNames: [String] = []

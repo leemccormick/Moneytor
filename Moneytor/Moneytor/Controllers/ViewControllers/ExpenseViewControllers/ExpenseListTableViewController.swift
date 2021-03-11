@@ -66,7 +66,7 @@ class ExpenseListTableViewController: UITableViewController {
     func fetchExpensesBySpecificTime(time: Date) {
         let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
         setupSearchBar(expenseCount: expenses.count)
-        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+       // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalExpensesBySpecificTime(time)
         updateFooter(total: TotalController.shared.totalExpenseBySpecificTime)
