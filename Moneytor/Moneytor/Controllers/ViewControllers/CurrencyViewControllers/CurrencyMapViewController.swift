@@ -124,8 +124,21 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         let geoPos = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
         CLGeocoder().reverseGeocodeLocation(geoPos) { (placemarks, error) in
             guard let placemark = placemarks?.first else { return }
-            pinAnnotation.title = "Total Balance in USD : 1000 \nUSD Rate in Thailand : 100 "
-            pinAnnotation.subtitle =  "You have $5780 in \(placemark.country)"
+            guard let countryName = placemark.country else {return}
+            print("----------------- selectedCountryName:: \(countryName)-----------------")
+            let totalString = TotalController.shared.totalBalanceString
+            print("----------------- totalString:: \(totalString)-----------------")
+            
+            
+            CurrencyController.shared.calculatedCurrencyFromSelectedCountry(selectedCountryName: countryName, totalAmountString: totalString)
+            let selectedCode = CurrencyController.shared.selectedCountryCode
+            let resultCovert = CurrencyController.shared.resultConvertString
+            let rate = CurrencyController.shared.rateString
+            let baseCode = CurrencyController.shared.baseCountryCode
+            let selectedCountryName = CurrencyController.shared.selectedCountryName
+            pinAnnotation.title = "Balance in \(selectedCountryName) : \(resultCovert)."
+            pinAnnotation.subtitle =  "Today \(selectedCode) Rate : \(rate) per 1 \(baseCode)."
+            //pinAnnotation.subtitle =  "can I have the thired"
         }
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -135,6 +148,14 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         } else {
             pinView!.annotation = annotation
         }
+        
+        //THIS IS THE GOOD BIT
+//           let subtitleView = UILabel()
+//        subtitleView.font = subtitleView.font.withSize(12)
+//           subtitleView.numberOfLines = 0
+//           subtitleView.text = annotation.subtitle!
+//           pinView!.detailCalloutAccessoryView = subtitleView
+        pinView?.reloadInputViews()
         return pinView
     }
     

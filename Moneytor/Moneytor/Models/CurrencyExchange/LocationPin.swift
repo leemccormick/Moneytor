@@ -16,5 +16,4 @@ class LocationPin: MKPointAnnotation {
         self.coordinate = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
     }
     
-    
 }

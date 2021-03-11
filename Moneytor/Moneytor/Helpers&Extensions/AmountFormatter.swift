@@ -50,6 +50,11 @@ struct AmountFormatter {
         let numberStringInCurrency = self.numberInEachCurrency.string(from: NSNumber(value: num))
         return numberStringInCurrency ?? "$ 00.00"
     }
+    
+    static func twoDecimalPlaces(num: Double) -> String {
+        let numberTwoDecimalPlaces = self.numberIn2DecimalPlaces.string(from: NSNumber(value: num))
+        return numberTwoDecimalPlaces ?? "00.00"
+    }
 }
 
 

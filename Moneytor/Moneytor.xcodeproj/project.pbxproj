@@ -23,6 +23,8 @@
 		3628330B25E721C400381731 /* ExpenseCategory+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628330A25E721C400381731 /* ExpenseCategory+Convenience.swift */; };
 		3628331225E7440C00381731 /* IncomeCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628331125E7440C00381731 /* IncomeCategoryController.swift */; };
 		3628331525E7498200381731 /* ExpenseCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628331425E7498100381731 /* ExpenseCategoryController.swift */; };
+		362DDAB725FA141C005CC4F4 /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB625FA141B005CC4F4 /* CurrencyController.swift */; };
+		362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */; };
 		36682CF225E42FF00075C03D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF125E42FF00075C03D /* Colors.xcassets */; };
 		36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */; };
 		36682CFC25E4376D0075C03D /* Champagne & Limousines Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */; };
@@ -81,6 +83,8 @@
 		3628330A25E721C400381731 /* ExpenseCategory+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpenseCategory+Convenience.swift"; sourceTree = "<group>"; };
 		3628331125E7440C00381731 /* IncomeCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategoryController.swift; sourceTree = "<group>"; };
 		3628331425E7498100381731 /* ExpenseCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryController.swift; sourceTree = "<group>"; };
+		362DDAB625FA141B005CC4F4 /* CurrencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyController.swift; sourceTree = "<group>"; };
+		362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIController.swift; sourceTree = "<group>"; };
 		36682CF125E42FF00075C03D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold Italic.ttf"; sourceTree = "<group>"; };
 		36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Italic.ttf"; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				3606B1AF25F9F651005F375F /* LocationPinController.swift */,
+				362DDAB625FA141B005CC4F4 /* CurrencyController.swift */,
+				362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */,
 			);
 			path = CurrencyControllers;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */,
 				36D0435825E9DE720034BCFC /* MoneytorSearchBar.swift in Sources */,
 				3676599E25E83EC600F63F0C /* SearchableRecordDelegate.swift in Sources */,
+				362DDAB725FA141C005CC4F4 /* CurrencyController.swift in Sources */,
 				36274E5C25E4CDDF0063DE28 /* ExpenseScannerViewController.swift in Sources */,
 				3671BA5625E5ECC300811F21 /* AmountFormatter.swift in Sources */,
 				36AFBC9225E41C7E00B559DB /* AppDelegate.swift in Sources */,
@@ -582,6 +589,7 @@
 				36274E5025E4CD4E0063DE28 /* IncomeListTableViewController.swift in Sources */,
 				36682D0B25E43CAD0075C03D /* MoneytorButton.swift in Sources */,
 				3671BA4225E5BD0300811F21 /* IncomeController.swift in Sources */,
+				362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */,
 				3671BA3925E5B0FE00811F21 /* CoreDataStack.swift in Sources */,
 				36682D0725E43B690075C03D /* MoneytorLabel.swift in Sources */,
 				3628331225E7440C00381731 /* IncomeCategoryController.swift in Sources */,
