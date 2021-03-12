@@ -18,6 +18,16 @@ class CurrencyMapViewController: UIViewController {
     //var pin: PinLocation?
     var locationAnnotation: MKPointAnnotation!
     //var fetchedResultsController: NSFetchedResultsController<PinLocation>!
+    var resultsCurrencyPair: CurrencyPair? //{
+    //        didSet {
+    //            updatePinView(pinAnnotation: <#T##LocationPin#>)
+    //        }
+    //    }
+    var targetCountryName: String?
+    var targetCode: String?
+    var resultCovert: String?
+    var rateInString: String?
+    var baseCode: String?
     
     //MARK : LifeCycles
     
@@ -52,9 +62,22 @@ class CurrencyMapViewController: UIViewController {
         let annotation = MKPointAnnotation()
         CLGeocoder().reverseGeocodeLocation(geoPos) {(placemarks, error) in
             guard let placemark = placemarks?.first else {return}
-            annotation.title = placemark.name ?? "Name Not Known !!"
-            annotation.subtitle = placemark.country
+            
+            
+            guard let targetCountryName = placemark.country else {return}
+            
+            self.calculatePairCurrency(selectedCountryName: targetCountryName)
+            
+            
+            
+            
+            annotation.title = "Balance in \(targetCountryName ) : \(self.resultCovert ?? "")"
+            annotation.subtitle =  "Today Rate :\(self.targetCode ?? "")  \(self.rateInString ?? "")"
             annotation.coordinate = coordinate
+            
+            
+            
+            
             self.locationForPin(annotation)
         }
     }
@@ -64,9 +87,18 @@ class CurrencyMapViewController: UIViewController {
         location.date = Date()
         location.latitude = annotation.coordinate.latitude
         location.longitude = annotation.coordinate.longitude
-        try? CoreDataStack.shared.saveContext()
+        
+        
+        //do {
+        
         let locationPin = LocationPin(pin: location)
         self.mapView.addAnnotation(locationPin)
+        CoreDataStack.shared.saveContext()
+        
+        
+        // } catch {
+        //   print(error.localizedDescription)
+        //}
         
     }
     
@@ -98,6 +130,35 @@ class CurrencyMapViewController: UIViewController {
             mapView.setRegion(MKCoordinateRegion(center: center, span: span), animated: true)
         }
     }
+    
+    func calculatePairCurrency(selectedCountryName: String) {
+        print("-----calculatePairCurrency--------------- selectedCountryName: \(selectedCountryName) in \(#function) : ----------------------------\n\n\n\n\n\n\n)")
+        let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(selectedCountryName)
+        guard let selectedCode = selectedCurrencyCode else {return}
+        TotalController.shared.calculateTotalBalance()
+        let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
+        
+        ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountInString) { (results) in
+            DispatchQueue.main.async {
+                switch results {
+                case .success(let currencyPair):
+                    self.resultsCurrencyPair = currencyPair
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        guard let results = resultsCurrencyPair else {return}
+        
+        targetCode = results.targetCoutryCode
+        resultCovert = AmountFormatter.twoDecimalPlaces(num: results.convertResult)
+        rateInString =  AmountFormatter.twoDecimalPlaces(num:results.rate)
+        baseCode = results.baseCountryCode
+        // let selectedCountryName = CurrencyController.shared.findCountryNameByCurrencyCode(results.targetCoutryCode)//
+        print("-------------------- resultsCurrencyPair: \(resultsCurrencyPair?.targetCoutryCode) in \(#function) : ----------------------------\n)")
+        
+    }
+    
 }
 
 extension CurrencyMapViewController: MKMapViewDelegate {
@@ -125,20 +186,38 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         CLGeocoder().reverseGeocodeLocation(geoPos) { (placemarks, error) in
             guard let placemark = placemarks?.first else { return }
             guard let countryName = placemark.country else {return}
-            print("----------------- selectedCountryName:: \(countryName)-----------------")
-            let totalString = TotalController.shared.totalBalanceString
-            print("----------------- totalString:: \(totalString)-----------------")
+            self.targetCountryName = countryName
+            print("\n\n\ntarget PlackMArk saved \(String(describing: self.targetCountryName)) \n\n\n\n\n\n\n\n")
             
+            let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(countryName)
+            guard let selectedCode = selectedCurrencyCode else {return}
+            TotalController.shared.calculateTotalBalance()
+            let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
             
-            CurrencyController.shared.calculatedCurrencyFromSelectedCountry(selectedCountryName: countryName, totalAmountString: totalString)
-            let selectedCode = CurrencyController.shared.selectedCountryCode
-            let resultCovert = CurrencyController.shared.resultConvertString
-            let rate = CurrencyController.shared.rateString
-            let baseCode = CurrencyController.shared.baseCountryCode
-            let selectedCountryName = CurrencyController.shared.selectedCountryName
-            pinAnnotation.title = "Balance in \(selectedCountryName) : \(resultCovert)."
-            pinAnnotation.subtitle =  "Today \(selectedCode) Rate : \(rate) per 1 \(baseCode)."
-            //pinAnnotation.subtitle =  "can I have the thired"
+            ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountInString) { (results) in
+                DispatchQueue.main.async {
+                    switch results {
+                    case .success(let currencyPair):
+                        self.resultsCurrencyPair = currencyPair
+                        
+                        let targetCode = currencyPair.targetCoutryCode
+                        let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
+                        let rateInString =  AmountFormatter.twoDecimalPlaces(num:currencyPair.rate)
+                        let baseCode = currencyPair.baseCountryCode
+                        
+                        pinAnnotation.title = "Balance in \(countryName) : \(resultCovert)"
+                        pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
+                        
+                    case .failure(let error):
+                        TotalController.shared.calculateTotalBalance()
+                        pinAnnotation.title = "Total Balance : \(TotalController.shared.totalBalance)"
+                        pinAnnotation.subtitle =  "Unable to calculate balance in \(countryName) currency"
+                        
+                        
+                        print(error.localizedDescription)
+                    }
+                }
+            }
         }
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
@@ -146,18 +225,54 @@ extension CurrencyMapViewController: MKMapViewDelegate {
             pinView!.pinTintColor = .blue
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         } else {
+            
             pinView!.annotation = annotation
+            pinView?.reloadInputViews()
         }
         
-        //THIS IS THE GOOD BIT
-//           let subtitleView = UILabel()
-//        subtitleView.font = subtitleView.font.withSize(12)
-//           subtitleView.numberOfLines = 0
-//           subtitleView.text = annotation.subtitle!
-//           pinView!.detailCalloutAccessoryView = subtitleView
-        pinView?.reloadInputViews()
+        
         return pinView
     }
+    //            self.calculatePairCurrency(selectedCountryName: self.targetCountryName ?? "THB")
+    //            if let targetCountryName = self.targetCountryName,
+    //               let resultCovert = self.resultCovert,
+    //               let rateInString = self.rateInString,
+    //               let targetCode = self.targetCode,
+    //               let baseCode = self.baseCode {
+    //
+    //                    pinAnnotation.title = "Balance in \(targetCountryName) : \(resultCovert)"
+    //                    pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
+    //                   } else {
+    //                    self.calculatePairCurrency(selectedCountryName: countryName)
+    ////                    pinAnnotation.title = "Balance in \(self.self.targetCountryName) : \(self.self.resultCovert)"
+    ////                    pinAnnotation.subtitle =  "=========================Today Rate : \(self.rateInString) \(self.targetCode) = 1 \(self.baseCode)"
+    //                   }
+    //                    //
+    //        }
+    //        pinAnnotation.title = "Balance in \(targetCountryName) : \(resultCovert)"
+    //        pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
+    //        //
+    //        pinAnnotation.title = "Balance in \(targetCountryName ?? "") : \(resultCovert ?? "")."
+    //       pinAnnotation.subtitle =  "Today \(targetCode ?? "") Rate : \(rateInString ?? "") per 1 \(baseCode ?? "")."
+    // annotation.title =
+    
+    // calculatePairCurrency(selectedCountryName: targetCountryName ?? "THB")
+    // guard let results = resultsCurrencyPair else {return MKAnnotationView()}
+    //
+    //                     let selectedCode = results.targetCoutryCode
+    //                     let resultCovert = AmountFormatter.twoDecimalPlaces(num: results.convertResult)
+    //                     let rate =  AmountFormatter.twoDecimalPlaces(num:results.rate)
+    //                     let baseCode = results.baseCountryCode
+    //                     let selectedCountryName = CurrencyController.shared.findCountryNameByCurrencyCode(results.targetCoutryCode)
+    //                    guard let targetCountryName = targetCountryName,
+    //                          let resultCovert = resultCovert,
+    //                          let targetCode = targetCode,
+    //                          let rateInString = rateInString,
+    //                          let baseCode = baseCode else {return nil}
+    
+    
+    
+    
     
     //When callout on Pit, save LocationPin and performSegue to PhotoAblumVC
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -167,236 +282,14 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         
         if let annotation = view.annotation as? MKPointAnnotation{
             
-            print("----------------- annotation:: \(annotation)-----------------")
+            
+            print("\n\n\n\n----------------- annotation:: \(annotation)----------------- in \(#function)")
             
         }
         
     }
-
+    
 }
 
 
 
-
-
-/*
- let pressPoint = sender.location(in: mapView)
- //        let pressCooridnate = mapView.convert(pressPoint,toCoordinateFrom: mapView)
- //        let pressPin = MapPin(coordinate: pressCooridnate, title: "press place", subtitle: "here is a subtitle")
- mapView.addAnnotation(pressPin)
- // MARK: - Outlets
- 
- // MARK: - Actions
- @IBAction func logoutButtonTapped(_ sender: Any) {
- }
- 
- let userDefaultRegionKey: String = "saveRegion"
- var locationAnnotation: MKPointAnnotation!
- var canLogin:Bool = true
- var totalExpenses: Double = 0.0
- var totalIncomes: Double = 0.0
- // var totalBalanceInString: Double = 0.0
- var countynameFromPlackMark: String = ""
- var codeCurrencyConvert: String = ""
- var rateCurrencyConvert: Double = 0.0
- var resultCurrencyConvert: Double = 0.0
- 
- 
- 
- //MARK : LifeCycle
- override func viewDidLoad() {
- super.viewDidLoad()
- 
- currencyMapView.delegate = self
- currencyMapView.isZoomEnabled = false
- activityIndicator.isHidden = true
- //totalBalance = fetchTotalSumsAndGetBalance()
- //  CheckUserLoggin()
- //converter.convert(amount: totalBalance, currency: .unitedState, into: .thailand)
- //   converter.convert(amount: 65000.00, currency: .thailand, into: .unitedState)
- 
- }
- 
- 
- override func viewWillAppear(_ animated: Bool) {
- activityIndicator.isHidden = true
- print("----------------- :: viewWillAppear in MApCurrency-----------------")
- //            let result: () = converter.convert(amount: totalBalance, currency: .unitedState, into: .thailand)
- //            print("result:\(result)")
- 
- }
- 
- 
- override func viewDidAppear(_ animated: Bool) {
- activityIndicator.isHidden = true
- 
- }
- 
- @IBAction func longPressGestureOnCurrencyMap(_ sender: UILongPressGestureRecognizer) {
- 
- if sender.state == .ended {
- print("===================tap gesture==============================\(sender.state )")
- let touchPoint = sender.location(in: currencyMapView)
- let touchCoordinate = currencyMapView.convert(touchPoint, toCoordinateFrom: self.currencyMapView)
- let annotation = MKPointAnnotation()
- annotation.coordinate = touchCoordinate
- annotation.title = "THB : 33.67"
- annotation.subtitle = "$00.00"
- 
- }
- }
- }
- 
- //MARK : Extension for MKMapViewDelegate
- 
- extension CurrencyMapViewController: MKMapViewDelegate {
- 
- func saveUserRegion() {
- let mapRegion = [
- "latitude" : currencyMapView.region.center.latitude,
- "longitude" : currencyMapView.region.center.longitude,
- "latitudeDelta" : currencyMapView.region.span.latitudeDelta,
- "longitudeDelta" : currencyMapView.region.span.longitudeDelta
- ]
- UserDefaults.standard.set(mapRegion, forKey: userDefaultRegionKey)
- }
- 
- //When mapView changed, update and save user last region.
- func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
- self.saveUserRegion()
- }
- 
- //When mapView selected, set locationAnnotation
- func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
- guard let _ = view.annotation else {
- return
- }
- self.locationAnnotation = view.annotation as? MKPointAnnotation
- }
- 
- //Using a reused pin to show on the mapView
- func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
- let reuseId = "pin"
- var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
- 
- let geoPos = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
- CLGeocoder().reverseGeocodeLocation(geoPos) { (placemarks, error) in
- }
- if pinView == nil {
- pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
- pinView!.canShowCallout = true
- pinView!.pinTintColor = .brown
- pinView!.rightCalloutAccessoryView = UIButton(type: .close)
- } else {
- pinView!.annotation = annotation
- }
- return pinView
- }
- }
- 
- 
- https://stackoverflow.com/questions/40214778/how-to-show-multiple-lines-in-mkannotation-with-autolayout
- 
- func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
- 
- let identifier = "MyPin"
- 
- if annotation.isKindOfClass(MKUserLocation) {
- return nil
- }
- 
- var annotationView: MKPinAnnotationView? = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
- 
- if annotationView == nil {
- 
- annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
- annotationView?.canShowCallout = true
- 
- let label1 = UILabel(frame: CGRectMake(0, 0, 200, 21))
- label1.text = "Some text1 some text2 some text2 some text2 some text2 some text2 some text2"
- label1.numberOfLines = 0
- annotationView!.detailCalloutAccessoryView = label1;
- 
- let width = NSLayoutConstraint(item: label1, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 200)
- label1.addConstraint(width)
- 
- 
- let height = NSLayoutConstraint(item: label1, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 90)
- label1.addConstraint(height)
- 
- 
- 
- } else {
- annotationView!.annotation = annotation
- }
- return annotationView
- }
- 
- 
- }
- 
- */
-
-
-//}
-
-/* NOTE
- 
- //______________________________________________________________________________________
- 
- let userDefaultRegionKey: String = "saveRegion"
- var locationAnnotation: MKPointAnnotation!
- var canLogin:Bool = true
- var totalExpenses: Double = 0.0
- var totalIncomes: Double = 0.0
- var totalBalance: Double = 0.0
- var countynameFromPlackMark: String = ""
- var codeCurrencyConvert: String = ""
- var rateCurrencyConvert: Double = 0.0
- var resultCurrencyConvert: Double = 0.0
- 
- var keyLat: Float = 49.2888
- var keyLon : Float = -123.111
- override func viewDidLoad() {
- super.viewDidLoad()
- //  let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
- // view.addGestureRecognizer(tap)
- 
- currencyMapView.delegate = self
- // currencyMapView.isZoomEnabled = false
- 
- let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
- longPressRecogniser.minimumPressDuration = 0.2
- currencyMapView.addGestureRecognizer(longPressRecogniser)
- currencyMapView.mapType = MKMapType.standard
- let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(keyLat), longitude: CLLocationDegrees(keyLon))
- let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
- let region = MKCoordinateRegion(center: location, span: span)
- currencyMapView.setRegion(region, animated: true)
- 
- let annotation = MKPointAnnotation()
- annotation.coordinate = location
- annotation.title = "Canada Place"
- annotation.subtitle = "SomeWhere"
- currencyMapView.addAnnotation(annotation)
- }
- 
- @objc func handleTap(_ gesturesReconizer: UILongPressGestureRecognizer) {
- 
- print("-------------------- : Tapped in \(#function) : ----------------------------\n)")
- let location = gesturesReconizer.location(in: currencyMapView)
- let coordinate = currencyMapView.convert(location, toCoordinateFrom: currencyMapView)
- 
- let annototion = MKPointAnnotation()
- annototion.coordinate = coordinate
- annototion.title = "Tap"
- currencyMapView.addAnnotation(annototion)
- }
- 
- func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
- let latVarStr = "\(view.annotation?.coordinate.latitude)"
- let longVarStr = "\(view.annotation?.coordinate.longitude)"
- print("-----------------  latVarStr::  \(latVarStr) ,longVarStr:: \(longVarStr)-----------------")
- }
- 
- */

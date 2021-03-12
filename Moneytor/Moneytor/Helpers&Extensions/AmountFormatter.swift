@@ -41,6 +41,13 @@ struct AmountFormatter {
         return formatter
     }()
     
+    static let numberNone: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .none
+        return formatter
+    }()
+    
     static func percentInString(num: Double) -> String {
         let numberStringInPercent =  self.numberInPercent.string(for: num)
         return numberStringInPercent ?? "0 %"
@@ -52,7 +59,7 @@ struct AmountFormatter {
     }
     
     static func twoDecimalPlaces(num: Double) -> String {
-        let numberTwoDecimalPlaces = self.numberIn2DecimalPlaces.string(from: NSNumber(value: num))
+        let numberTwoDecimalPlaces = self.numberNone.string(from: NSNumber(value: num))
         return numberTwoDecimalPlaces ?? "00.00"
     }
 }

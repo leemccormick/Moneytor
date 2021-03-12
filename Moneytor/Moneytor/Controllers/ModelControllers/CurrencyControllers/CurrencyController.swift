@@ -19,6 +19,7 @@ class CurrencyController {
     var resultConvertString: String = ""
     var baseCountryName: String = ""
     var selectedCountryName: String = ""
+    var currencyPair: CurrencyPair?
     
     let countryCodeDictionary = ["AED" : "United Arab Emirates",
                                  "AFN" : "Afghanistan",
@@ -184,7 +185,7 @@ class CurrencyController {
         
 
     
-   private func findCurrencyCodeByCountyName(_ selectedCountryName: String) -> String?{
+   func findCurrencyCodeByCountyName(_ selectedCountryName: String) -> String?{
         var selectedCurrencyCode = ""
         for country in countryCodeDictionary {
             if country.value == selectedCountryName {
@@ -194,7 +195,7 @@ class CurrencyController {
         return selectedCurrencyCode
     }
 
-    private func findCountryNameByCurrencyCode(_ code: String) -> String {
+     func findCountryNameByCurrencyCode(_ code: String) -> String {
         var countryName = ""
         for country in countryCodeDictionary {
             if country.key == code {
@@ -204,31 +205,42 @@ class CurrencyController {
         return countryName
     }
 
-    func calculatedCurrencyFromSelectedCountry(selectedCountryName: String, totalAmountString: String) {
+    func calculatedCurrencyFromSelectedCountry(selectedCountryName: String, totalAmountString: String) -> Void {
         let selectedCurrencyCode = findCurrencyCodeByCountyName(selectedCountryName)
         guard let selectedCode = selectedCurrencyCode else {return}
-        ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: "200") { (results) in
+        ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountString) { (results) in
             switch results {
             case .success(let currencyPair):
-                self.baseCountryCode = currencyPair.baseCountryCode
-                self.rate = currencyPair.rate
-                self.rateString = AmountFormatter.twoDecimalPlaces(num: self.rate)
-                self.selectedCountryCode = currencyPair.targetCoutryCode
-                self.resultsConvert = currencyPair.convertResult
-                self.resultConvertString = AmountFormatter.twoDecimalPlaces(num: self.resultsConvert)
-                self.baseCountryName = self.findCountryNameByCurrencyCode(self.baseCountryCode)
-                self.selectedCountryName = self.findCountryNameByCurrencyCode(self.selectedCountryCode)
-                
-                print("baseCountryCode : \(currencyPair.baseCountryCode)")
-                print("rate :\(currencyPair.rate)")
-                print("targetCountry : \(currencyPair.targetCoutryCode)")
-                print("results : \(currencyPair.convertResult)")
-                print("----------------- baseCountryName :: \(self.baseCountryName)-----------------")
-                print("-----------------selectedCountryName :: \(selectedCountryName)-----------------")
+                self.currencyPair = currencyPair
+//                self.baseCountryCode = currencyPair.baseCountryCode
+//                self.rate = currencyPair.rate
+//                self.rateString = AmountFormatter.twoDecimalPlaces(num: self.rate)
+//                self.selectedCountryCode = currencyPair.targetCoutryCode
+//                self.resultsConvert = currencyPair.convertResult
+//                self.resultConvertString = AmountFormatter.twoDecimalPlaces(num: self.resultsConvert)
+//                self.baseCountryName = self.findCountryNameByCurrencyCode(self.baseCountryCode)
+//                self.selectedCountryName = self.findCountryNameByCurrencyCode(self.selectedCountryCode)
+//
+//                print("baseCountryCode : \(currencyPair.baseCountryCode)")
+//                print("rate :\(currencyPair.rate)")
+//                print("targetCountry : \(currencyPair.targetCoutryCode)")
+//                print("results : \(currencyPair.convertResult)")
+//                print("----------------- baseCountryName :: \(self.baseCountryName)-----------------")
+//                print("-----------------selectedCountryName :: \(selectedCountryName)-----------------")
             case .failure(let error):
             print(error.localizedDescription)
             }
         }
+//
+//        self.baseCountryCode = self.currencyPair.baseCountryCode
+//                      self.rate = currencyPair.rate
+//                     self.rateString = AmountFormatter.twoDecimalPlaces(num: self.rate)
+//                  self.selectedCountryCode = currencyPair.targetCoutryCode
+//                    self.resultsConvert = currencyPair.convertResult
+//                  self.resultConvertString = AmountFormatter.twoDecimalPlaces(num: self.resultsConvert)
+//        self.baseCountryName = self.findCountryNameByCurrencyCode(self.baseCountryCode)
+//                    self.selectedCountryName = self.findCountryNameByCurrencyCode(self.selectedCountryCode)
+        
     }
 
     
