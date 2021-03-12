@@ -17,18 +17,15 @@ class CurrencyMapViewController: UIViewController {
     let userDefaultRegionKey: String = "saveRegion"
     //var pin: PinLocation?
     var locationAnnotation: MKPointAnnotation!
-    //var fetchedResultsController: NSFetchedResultsController<PinLocation>!
-    var resultsCurrencyPair: CurrencyPair? //{
-    //        didSet {
-    //            updatePinView(pinAnnotation: <#T##LocationPin#>)
-    //        }
-    //    }
-    var targetCountryName: String?
-    var targetCode: String?
-    var resultCovert: String?
-    var rateInString: String?
-    var baseCode: String?
-    
+    //    //var fetchedResultsController: NSFetchedResultsController<PinLocation>!
+    //    var resultsCurrencyPair: CurrencyPair?
+    var targetCountryName: String = ""
+    var targetCode: String = ""
+    var resultCovert: String = ""
+    var rateInString: String = ""
+    var baseCode: String = ""
+    var totalBalanceInString: String = ""
+    //
     //MARK : LifeCycles
     
     override func viewDidLoad() {
@@ -40,7 +37,7 @@ class CurrencyMapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //deleteButton.isEnabled = false
-        // reloadLocation()
+        reloadLocationPins()
     }
     
     
@@ -61,23 +58,9 @@ class CurrencyMapViewController: UIViewController {
         let geoPos = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let annotation = MKPointAnnotation()
         CLGeocoder().reverseGeocodeLocation(geoPos) {(placemarks, error) in
-            guard let placemark = placemarks?.first else {return}
+            guard (placemarks?.first) != nil else {return}
             
-            
-            guard let targetCountryName = placemark.country else {return}
-            
-            self.calculatePairCurrency(selectedCountryName: targetCountryName)
-            
-            
-            
-            
-            annotation.title = "Balance in \(targetCountryName ) : \(self.resultCovert ?? "")"
-            annotation.subtitle =  "Today Rate :\(self.targetCode ?? "")  \(self.rateInString ?? "")"
             annotation.coordinate = coordinate
-            
-            
-            
-            
             self.locationForPin(annotation)
         }
     }
@@ -87,19 +70,9 @@ class CurrencyMapViewController: UIViewController {
         location.date = Date()
         location.latitude = annotation.coordinate.latitude
         location.longitude = annotation.coordinate.longitude
-        
-        
-        //do {
-        
         let locationPin = LocationPin(pin: location)
         self.mapView.addAnnotation(locationPin)
         CoreDataStack.shared.saveContext()
-        
-        
-        // } catch {
-        //   print(error.localizedDescription)
-        //}
-        
     }
     
     
@@ -131,33 +104,69 @@ class CurrencyMapViewController: UIViewController {
         }
     }
     
-    func calculatePairCurrency(selectedCountryName: String) {
-        print("-----calculatePairCurrency--------------- selectedCountryName: \(selectedCountryName) in \(#function) : ----------------------------\n\n\n\n\n\n\n)")
-        let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(selectedCountryName)
-        guard let selectedCode = selectedCurrencyCode else {return}
-        TotalController.shared.calculateTotalBalance()
-        let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
-        
-        ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountInString) { (results) in
-            DispatchQueue.main.async {
-                switch results {
-                case .success(let currencyPair):
-                    self.resultsCurrencyPair = currencyPair
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        guard let results = resultsCurrencyPair else {return}
-        
-        targetCode = results.targetCoutryCode
-        resultCovert = AmountFormatter.twoDecimalPlaces(num: results.convertResult)
-        rateInString =  AmountFormatter.twoDecimalPlaces(num:results.rate)
-        baseCode = results.baseCountryCode
-        // let selectedCountryName = CurrencyController.shared.findCountryNameByCurrencyCode(results.targetCoutryCode)//
-        print("-------------------- resultsCurrencyPair: \(resultsCurrencyPair?.targetCoutryCode) in \(#function) : ----------------------------\n)")
-        
+    
+    
+    
+    func presentConvertResultsToUser(titleAlert: String, messageAlert: String) {
+        let alertController = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
+        alertController.addAction(dismissAction)
+        present(alertController, animated: true)
     }
+    
+    
+    func presentAlertToCalculateCurrency(targetCode: String, baseCode: String, countryName: String, rateInString: String) {
+        
+        // var dict: [String:Double] = [:]
+        let baseCountry = CurrencyController.shared.findCountryNameByCurrencyCode(baseCode)
+        let alertController = UIAlertController(title: "Currency Converter \n\(targetCode) <==> \(baseCode)",
+                                                message: "Let's convert currency \nFrom \(baseCountry) To \(countryName)!", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Convert amount From \(baseCode) to \(targetCode)..."
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .decimalPad
+        }
+        
+        
+        // Calculate here
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let calculationAction = UIAlertAction(title: "Currency Converter", style: .default) { (action) in
+            guard let amount = alertController.textFields?.first?.text,
+                  !amount.isEmpty else {return}
+            let doubleRate = Double(rateInString)
+            let doubleAmount = Double(amount)
+            let totalAmountInBaseCurrency = doubleAmount! / doubleRate!
+            let totalAmountInBaseCurrencyString = AmountFormatter.twoDecimalPlaces(num: totalAmountInBaseCurrency)
+            // dict = [targetCode : amount ?? "0.0",
+            //  baseCode : totalAmountInTargetCurrencyString ?? "0.0"]
+            self.presentConvertResultsToUser(titleAlert: "Currency Converter Results!", messageAlert: "\(amount) \(targetCode) <==> \(totalAmountInBaseCurrencyString) \(baseCode)")
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(calculationAction)
+        present(alertController, animated: true)
+        
+        // return dict
+    }
+    
+    
+    
+    
+    func presentAlertToCurrencyDetail(countryName: String, targetCode: String, resultCovert: String, rateInString: String,baseCode : String, totalString: String) {
+        
+        let alertController = UIAlertController(title: "Currency in \(countryName)",
+                                                message: "Currency Code: \(targetCode) \nRate : \(rateInString) \(targetCode) <==> 1 \(baseCode) \nBalance in \(baseCode): \(totalString) \nBalance in \(targetCode): \(resultCovert)", preferredStyle: .actionSheet)
+        let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
+        let calculationAction = UIAlertAction(title: "Converter", style: .default) { (action) in
+            print("curreny converter")
+            self.presentAlertToCalculateCurrency(targetCode: targetCode, baseCode: baseCode, countryName: countryName, rateInString: rateInString)
+            
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(calculationAction)
+        present(alertController, animated: true)
+    }
+    
     
 }
 
@@ -176,19 +185,18 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         // deleteButton.isEnabled = true
     }
     
+    //______________________________________________________________________________________
+    
+    
     //Using a reused pin to show on the mapView
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        let pinAnnotation = annotation as! LocationPin
+    func mapViewCurrencyConverter(annotation: MKAnnotation) {
         
+        let pinAnnotation = annotation as! LocationPin
         let geoPos = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        
         CLGeocoder().reverseGeocodeLocation(geoPos) { (placemarks, error) in
             guard let placemark = placemarks?.first else { return }
             guard let countryName = placemark.country else {return}
-            self.targetCountryName = countryName
-            print("\n\n\ntarget PlackMArk saved \(String(describing: self.targetCountryName)) \n\n\n\n\n\n\n\n")
-            
             let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(countryName)
             guard let selectedCode = selectedCurrencyCode else {return}
             TotalController.shared.calculateTotalBalance()
@@ -198,7 +206,7 @@ extension CurrencyMapViewController: MKMapViewDelegate {
                 DispatchQueue.main.async {
                     switch results {
                     case .success(let currencyPair):
-                        self.resultsCurrencyPair = currencyPair
+                        
                         
                         let targetCode = currencyPair.targetCoutryCode
                         let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
@@ -206,8 +214,19 @@ extension CurrencyMapViewController: MKMapViewDelegate {
                         let baseCode = currencyPair.baseCountryCode
                         
                         pinAnnotation.title = "Balance in \(countryName) : \(resultCovert)"
-                        pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
+                        pinAnnotation.subtitle =  "Rate : \(rateInString) \(targetCode) <==> 1 \(baseCode)"
                         
+                        
+                        
+                    // self.presentAlertToCurrencyDetail(countryName: self.targetCountryName, targetCode: targetCode, resultCovert: resultCovert, rateInString: rateInString, baseCode: baseCode, totalString: self.totalBalanceInString)
+                    
+                    //                        self.targetCountryName = countryName
+                    //                        self.targetCode = targetCode
+                    //                        self.resultCovert = resultCovert
+                    //                        self.rateInString = rateInString
+                    //                        self.baseCode = baseCode
+                    //                        self.totalBalanceInString = totalAmountInString
+                    //
                     case .failure(let error):
                         TotalController.shared.calculateTotalBalance()
                         pinAnnotation.title = "Total Balance : \(TotalController.shared.totalBalance)"
@@ -219,10 +238,68 @@ extension CurrencyMapViewController: MKMapViewDelegate {
                 }
             }
         }
+        
+    }
+    
+    //______________________________________________________________________________________
+    
+    
+    //Using a reused pin to show on the mapView
+    func mapViewCurrencyConverterAndAlertBy(annotation: MKAnnotation) {
+        
+        let geoPos = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        CLGeocoder().reverseGeocodeLocation(geoPos) { (placemarks, error) in
+            guard let placemark = placemarks?.first else { return }
+            guard let countryName = placemark.country else {return}
+            let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(countryName)
+            guard let selectedCode = selectedCurrencyCode else {return}
+            TotalController.shared.calculateTotalBalance()
+            let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
+            
+            ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountInString) { (results) in
+                DispatchQueue.main.async {
+                    switch results {
+                    case .success(let currencyPair):
+                        
+                        let targetCode = currencyPair.targetCoutryCode
+                        let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
+                        let rateInString =  AmountFormatter.twoDecimalPlaces(num:currencyPair.rate)
+                        let baseCode = currencyPair.baseCountryCode
+                        
+                        self.presentAlertToCurrencyDetail(countryName: countryName, targetCode: targetCode, resultCovert: resultCovert, rateInString: rateInString, baseCode: baseCode, totalString: totalAmountInString)
+                        
+                    //                        self.targetCountryName = countryName
+                    //                        self.targetCode = targetCode
+                    //                        self.resultCovert = resultCovert
+                    //                        self.rateInString = rateInString
+                    //                        self.baseCode = baseCode
+                    //                        self.totalBalanceInString = totalAmountInString
+                    //
+                    case .failure(let error):
+                        TotalController.shared.calculateTotalBalance()
+                        
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    //______________________________________________________________________________________
+    
+    
+    //Using a reused pin to show on the mapView
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        mapViewCurrencyConverter(annotation: annotation)
+        
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            pinView!.pinTintColor = .blue
+            pinView!.pinTintColor = .mtTextLightBrown
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         } else {
             
@@ -233,48 +310,8 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         
         return pinView
     }
-    //            self.calculatePairCurrency(selectedCountryName: self.targetCountryName ?? "THB")
-    //            if let targetCountryName = self.targetCountryName,
-    //               let resultCovert = self.resultCovert,
-    //               let rateInString = self.rateInString,
-    //               let targetCode = self.targetCode,
-    //               let baseCode = self.baseCode {
-    //
-    //                    pinAnnotation.title = "Balance in \(targetCountryName) : \(resultCovert)"
-    //                    pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
-    //                   } else {
-    //                    self.calculatePairCurrency(selectedCountryName: countryName)
-    ////                    pinAnnotation.title = "Balance in \(self.self.targetCountryName) : \(self.self.resultCovert)"
-    ////                    pinAnnotation.subtitle =  "=========================Today Rate : \(self.rateInString) \(self.targetCode) = 1 \(self.baseCode)"
-    //                   }
-    //                    //
-    //        }
-    //        pinAnnotation.title = "Balance in \(targetCountryName) : \(resultCovert)"
-    //        pinAnnotation.subtitle =  "Today Rate : \(rateInString) \(targetCode) = 1 \(baseCode)"
-    //        //
-    //        pinAnnotation.title = "Balance in \(targetCountryName ?? "") : \(resultCovert ?? "")."
-    //       pinAnnotation.subtitle =  "Today \(targetCode ?? "") Rate : \(rateInString ?? "") per 1 \(baseCode ?? "")."
-    // annotation.title =
+   
     
-    // calculatePairCurrency(selectedCountryName: targetCountryName ?? "THB")
-    // guard let results = resultsCurrencyPair else {return MKAnnotationView()}
-    //
-    //                     let selectedCode = results.targetCoutryCode
-    //                     let resultCovert = AmountFormatter.twoDecimalPlaces(num: results.convertResult)
-    //                     let rate =  AmountFormatter.twoDecimalPlaces(num:results.rate)
-    //                     let baseCode = results.baseCountryCode
-    //                     let selectedCountryName = CurrencyController.shared.findCountryNameByCurrencyCode(results.targetCoutryCode)
-    //                    guard let targetCountryName = targetCountryName,
-    //                          let resultCovert = resultCovert,
-    //                          let targetCode = targetCode,
-    //                          let rateInString = rateInString,
-    //                          let baseCode = baseCode else {return nil}
-    
-    
-    
-    
-    
-    //When callout on Pit, save LocationPin and performSegue to PhotoAblumVC
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         mapView.deselectAnnotation(view.annotation, animated: false)
         guard let _ = view.annotation else {return}
@@ -282,8 +319,11 @@ extension CurrencyMapViewController: MKMapViewDelegate {
         
         if let annotation = view.annotation as? MKPointAnnotation{
             
+            mapViewCurrencyConverterAndAlertBy(annotation: annotation)
             
-            print("\n\n\n\n----------------- annotation:: \(annotation)----------------- in \(#function)")
+            
+            
+            
             
         }
         
