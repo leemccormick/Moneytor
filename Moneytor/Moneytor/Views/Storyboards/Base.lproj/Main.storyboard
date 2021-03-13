@@ -613,7 +613,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CURRENCY" id="ONU-uI-NUi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="paperplane.circle" catalog="system" id="XVm-Un-Ga2">
+                            <connections>
+                                <action selector="userLocationButtonTapped:" destination="nyT-zm-yWA" id="eL8-Zd-VAp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="SU3-dK-f97" id="CU6-dD-aYK"/>
@@ -1503,8 +1507,8 @@
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="logo" width="104" height="109"/>
         <image name="network" catalog="system" width="128" height="121"/>
+        <image name="paperplane.circle" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="power" catalog="system" width="128" height="124"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <namedColor name="darkBrownText">

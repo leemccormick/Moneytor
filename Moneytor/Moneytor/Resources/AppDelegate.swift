@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if UserDefaults.standard.value(forKey: "baseCode") == nil {
+            UserDefaults.standard.setValue("USD", forKey: "baseCode")
+        }
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { (userDidAllow, error) in
             if let error = error {

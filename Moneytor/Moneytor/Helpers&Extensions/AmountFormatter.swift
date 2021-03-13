@@ -27,6 +27,16 @@ struct AmountFormatter {
         return formatter
     }()
     
+    static let numberIn2DecimalPlacesAndNoGroupping: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.isLenient = true
+        formatter.numberStyle = .decimal
+        formatter.usesGroupingSeparator = false
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
     static let numberInPercent: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.isLenient = true
@@ -59,7 +69,8 @@ struct AmountFormatter {
     }
     
     static func twoDecimalPlaces(num: Double) -> String {
-        let numberTwoDecimalPlaces = self.numberNone.string(from: NSNumber(value: num))
+        let numberTwoDecimalPlaces = self.numberIn2DecimalPlacesAndNoGroupping.string(from: NSNumber(value: num))
+        
         return numberTwoDecimalPlaces ?? "00.00"
     }
 }

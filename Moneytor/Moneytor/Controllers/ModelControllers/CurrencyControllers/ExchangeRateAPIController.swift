@@ -21,7 +21,8 @@ class ExchangeRateAPIController {
     static let version6 = "v6"
     static let apiKeyValue = "e5589afc2a2c9ee499a9171a"
     static let pair = "pair"
-    var baseCountryCode: String = ""
+    static let baseCountryCode = UserDefaults.standard.string(forKey: "baseCode")
+
     var rateString: String = ""
     var selectedCountryCode: String = ""
     var resultsConvert: Double = 0.0
@@ -30,13 +31,19 @@ class ExchangeRateAPIController {
     var selectedCountryName: String = ""
     
     
-    static func fetchCurrencyPairConverter(baseCode: String, targetCode: String, amount: String, completion: @escaping (Result<CurrencyPair,CurrencyError>) -> Void ) {
+    static func fetchCurrencyPairConverter(targetCode: String, amount: String, completion: @escaping (Result<CurrencyPair,CurrencyError>) -> Void ) {
+        
         
         guard let baseURL = baseURL else {return completion(.failure(.invalidURL))}
         let versionURL = baseURL.appendingPathComponent(version6)
         let apiKeyURL = versionURL.appendingPathComponent(apiKeyValue)
         let pairURL = apiKeyURL.appendingPathComponent(pair)
-        let baseCodeURL = pairURL.appendingPathComponent(baseCode)
+        var baseCodeURL: URL
+        if let baseCountryCode = baseCountryCode {
+       baseCodeURL = pairURL.appendingPathComponent(baseCountryCode)
+        } else {
+        baseCodeURL = pairURL.appendingPathComponent("USD")
+        }
         let targetCodeURL = baseCodeURL.appendingPathComponent(targetCode)
         let amountURL = targetCodeURL.appendingPathComponent(amount)
         

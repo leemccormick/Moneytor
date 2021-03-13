@@ -208,7 +208,7 @@ class CurrencyController {
     func calculatedCurrencyFromSelectedCountry(selectedCountryName: String, totalAmountString: String) -> Void {
         let selectedCurrencyCode = findCurrencyCodeByCountyName(selectedCountryName)
         guard let selectedCode = selectedCurrencyCode else {return}
-        ExchangeRateAPIController.fetchCurrencyPairConverter(baseCode: "USD", targetCode: selectedCode, amount: totalAmountString) { (results) in
+        ExchangeRateAPIController.fetchCurrencyPairConverter(targetCode: selectedCode, amount: totalAmountString) { (results) in
             switch results {
             case .success(let currencyPair):
                 self.currencyPair = currencyPair
