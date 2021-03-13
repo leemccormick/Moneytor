@@ -32,7 +32,7 @@ class IncomeListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
-      //  fetchIncomesBySpecificTime(time: weekly)
+        //  fetchIncomesBySpecificTime(time: weekly)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,14 +43,14 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func calendarButtonTapped(_ sender: Any) {
-//
-//        print("==================+++++++++++++++++++++++++++++++++++++++=======================")
-//
-//        let categoriesSectionsDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
-//        print("-------------------- categoriesSectionsDay count: \(categoriesSectionsDay.count) in \(#function) : ----------------------------\n)")
-//        let sectionsDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSectionsDay)
-//        print("--------------------sectionsDict Daily : \(sectionsDict) in \(#function) : ----------------------------)")
-//        print("----------------- sectionsDict.count Daily:: \(sectionsDict.count) in \(#function) -----------------\n\n")
+        //
+        //        print("==================+++++++++++++++++++++++++++++++++++++++=======================")
+        //
+        //        let categoriesSectionsDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
+        //        print("-------------------- categoriesSectionsDay count: \(categoriesSectionsDay.count) in \(#function) : ----------------------------\n)")
+        //        let sectionsDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: categoriesSectionsDay)
+        //        print("--------------------sectionsDict Daily : \(sectionsDict) in \(#function) : ----------------------------)")
+        //        print("----------------- sectionsDict.count Daily:: \(sectionsDict.count) in \(#function) -----------------\n\n")
         
     }
     
@@ -59,9 +59,9 @@ class IncomeListTableViewController: UITableViewController {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
         setupSearchBar(incomeCount: resultsIncomeFromSearching.count)
-//        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-//        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
-//        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
+        //        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        //        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
+        //        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
         updateFooter(total: TotalController.shared.totalIncomeSearchResults)
         tableView.reloadData()
     }
@@ -69,7 +69,7 @@ class IncomeListTableViewController: UITableViewController {
     func fetchIncomesBySpecificTime(time: Date) {
         let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
         setupSearchBar(incomeCount: incomes.count)
-       // IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
+        // IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalIncomesBySpecificTime(time)
         updateFooter(total: TotalController.shared.totalIncomeBySpecificTime)
@@ -142,26 +142,38 @@ class IncomeListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
-            if isSearching {
-                guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
-                IncomeController.shared.deleteIncome(income)
-                fetchAllIncomes()
+            let income = categoriesSections[indexPath.section][indexPath.row]
+            let alertController = UIAlertController(title: "Are you sure to delete this Income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
+            let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                 
-            } else {
-                let income = categoriesSections[indexPath.section][indexPath.row]
-                IncomeController.shared.deleteIncome(income)
-                
-                if incomeSearchBar.selectedScopeButtonIndex == 0 {
-                    fetchIncomesBySpecificTime(time: daily)
-                } else if  incomeSearchBar.selectedScopeButtonIndex == 2 {
-                    fetchIncomesBySpecificTime(time: monthly)
+                if self.isSearching {
+                    guard let income = self.resultsIncomeFromSearching[indexPath.row] as? Income else {return}
+                   IncomeController.shared.deleteIncome(income)
+                    self.fetchAllIncomes()
+                    
                 } else {
-                    fetchIncomesBySpecificTime(time: weekly)
+                    let income = self.categoriesSections[indexPath.section][indexPath.row]
+                    IncomeController.shared.deleteIncome(income)
+                    
+                    if self.incomeSearchBar.selectedScopeButtonIndex == 0 {
+                        self.fetchIncomesBySpecificTime(time: self.daily)
+                    } else if self.incomeSearchBar.selectedScopeButtonIndex == 2 {
+                        self.fetchIncomesBySpecificTime(time: self.monthly)
+                    } else {
+                        self.fetchIncomesBySpecificTime(time: self.weekly)
+                    }
                 }
+                tableView.reloadData()
             }
-            tableView.reloadData()
+            
+       
+        alertController.addAction(dismissAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true)
+        
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -305,6 +317,7 @@ extension IncomeListTableViewController: UISearchBarDelegate {
         isSearching = false
     }
 }
+
 
 
 /* NOTE NEED Help

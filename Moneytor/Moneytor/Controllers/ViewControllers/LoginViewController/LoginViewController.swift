@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
               let username = usernameTextField.text, !username.isEmpty,
               let password = passwordTextFileld.text, !password.isEmpty,
               let confirmPassword = confirmPasswordTextFiled.text, !confirmPassword.isEmpty else {return
-            presentErrorToUser(titleAlert: "ERROR! SIGN UP OR LOGIN!", messageAlert: "Please! Add your info in all fields!!!")
+            presentAlertToUser(titleAlert: "ERROR! SIGN UP OR LOGIN!", messageAlert: "Please! Add your info in all fields!!!")
         }
         
         if password == confirmPassword {
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
             }
         }
         } else {
-            presentErrorToUser(titleAlert: "PASSWORD NOT MATCHED!", messageAlert: "Please! Make sure your password and confirm password are matched.")
+            presentAlertToUser(titleAlert: "PASSWORD NOT MATCHED!", messageAlert: "Please! Make sure your password and confirm password are matched.")
         }
     }
     
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
                 self.presentMoneytorVC()
             case .failure(let error):
                 print(error.localizedDescription)
-                self.presentErrorToUser(titleAlert: "USER NOT FOUND!", messageAlert: "Please, login with your apple id on the device to monitor your money.")
+                self.presentAlertToUser(titleAlert: "USER NOT FOUND!", messageAlert: "Please, login with your apple id on the device to monitor your money.")
                 //
             }
         })

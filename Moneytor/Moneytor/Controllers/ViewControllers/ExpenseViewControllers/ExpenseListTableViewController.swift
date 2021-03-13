@@ -139,25 +139,37 @@ class ExpenseListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let expense = categoriesSections[indexPath.section][indexPath.row]
+            let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
+            let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
             
-            if isSearching {
-                guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
+            
+            
+                if self.isSearching {
+                    guard let expense = self.resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
                 ExpenseController.shared.deleteExpense(expense)
-                fetchAllExpenses()
+                    self.fetchAllExpenses()
             } else {
-                let expense = categoriesSections[indexPath.section][indexPath.row]
+                let expense = self.categoriesSections[indexPath.section][indexPath.row]
                 ExpenseController.shared.deleteExpense(expense)
                 
-                if expenseSearchBar.selectedScopeButtonIndex == 0 {
-                    fetchExpensesBySpecificTime(time: daily)
-                } else if expenseSearchBar.selectedScopeButtonIndex == 2 {
-                    fetchExpensesBySpecificTime(time: monthly)
+                if self.expenseSearchBar.selectedScopeButtonIndex == 0 {
+                    self.fetchExpensesBySpecificTime(time: self.daily)
+                } else if self.expenseSearchBar.selectedScopeButtonIndex == 2 {
+                    self.fetchExpensesBySpecificTime(time: self.monthly)
                 } else {
-                    fetchExpensesBySpecificTime(time: weekly)
+                    self.fetchExpensesBySpecificTime(time: self.weekly)
                 }
+                
             }
-            tableView.reloadData()
+                tableView.reloadData()
         }
+            alertController.addAction(dismissAction)
+            alertController.addAction(deleteAction)
+            present(alertController, animated: true)
+            
+            }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

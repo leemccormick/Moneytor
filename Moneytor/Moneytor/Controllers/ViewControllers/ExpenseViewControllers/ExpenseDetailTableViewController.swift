@@ -88,14 +88,14 @@ class ExpenseDetailTableViewController: UITableViewController {
     func saveExpense() {
         guard let name = expenseNameTextField.text, !name.isEmpty else {
             if expenseAmountTextField.text?.isEmpty == true  {
-                presentErrorToUser(titleAlert: "EXPENSE'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
+                presentAlertToUser(titleAlert: "EXPENSE'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
             } else {
-                presentErrorToUser(titleAlert: "EXPENSE'S NAME!", messageAlert: "Don't forget to name your expense!")
+                presentAlertToUser(titleAlert: "EXPENSE'S NAME!", messageAlert: "Don't forget to name your expense!")
             }
             return
         }
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
-            presentErrorToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
+            presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
         
         

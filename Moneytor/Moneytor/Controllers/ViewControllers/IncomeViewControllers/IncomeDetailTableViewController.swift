@@ -88,15 +88,15 @@ class IncomeDetailTableViewController: UITableViewController {
     func saveIncome() {
         guard let name = incomeNameTextField.text, !name.isEmpty else {
             if incomeAmountTextField.text?.isEmpty == true  {
-                presentErrorToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
             } else {
-                presentErrorToUser(titleAlert: "INCOME'S NAME!", messageAlert: "Don't forget to name your income!")
+                presentAlertToUser(titleAlert: "INCOME'S NAME!", messageAlert: "Don't forget to name your income!")
             }
             return
             
         }
         guard let amount = incomeAmountTextField.text, !amount.isEmpty else {
-            presentErrorToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
             return
         }
         
