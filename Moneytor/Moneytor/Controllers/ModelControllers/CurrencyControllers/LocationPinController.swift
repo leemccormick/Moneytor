@@ -23,17 +23,13 @@ class LocationPinController {
         return location
     }
     
-    
     func reloadLocationPins()  {
-        //self.mapView.removeAnnotations(self.mapView.annotations)
         let request: NSFetchRequest<PinLocation> = PinLocation.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         request.sortDescriptors = [sortDescriptor]
-        
         CoreDataStack.shared.context.perform {
             do {
                 let pins = try CoreDataStack.shared.context.fetch(request)
-                // self.mapView.addAnnotations(pins.map {pin in LocationPin(pin: pin)})
                 self.loctionPins = pins
             } catch {
                 print("Error fetching Pins: \(error.localizedDescription)")

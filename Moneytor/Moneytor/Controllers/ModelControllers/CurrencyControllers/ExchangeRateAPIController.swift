@@ -22,7 +22,6 @@ class ExchangeRateAPIController {
     static let apiKeyValue = "e5589afc2a2c9ee499a9171a"
     static let pair = "pair"
     static let baseCountryCode = UserDefaults.standard.string(forKey: "baseCode")
-
     var rateString: String = ""
     var selectedCountryCode: String = ""
     var resultsConvert: Double = 0.0
@@ -30,9 +29,7 @@ class ExchangeRateAPIController {
     var baseCountryName: String = ""
     var selectedCountryName: String = ""
     
-    
     static func fetchCurrencyPairConverter(targetCode: String, amount: String, completion: @escaping (Result<CurrencyPair,CurrencyError>) -> Void ) {
-        
         
         guard let baseURL = baseURL else {return completion(.failure(.invalidURL))}
         let versionURL = baseURL.appendingPathComponent(version6)
@@ -40,17 +37,14 @@ class ExchangeRateAPIController {
         let pairURL = apiKeyURL.appendingPathComponent(pair)
         var baseCodeURL: URL
         if let baseCountryCode = baseCountryCode {
-       baseCodeURL = pairURL.appendingPathComponent(baseCountryCode)
+            baseCodeURL = pairURL.appendingPathComponent(baseCountryCode)
         } else {
-        baseCodeURL = pairURL.appendingPathComponent("USD")
+            baseCodeURL = pairURL.appendingPathComponent("USD")
         }
         let targetCodeURL = baseCodeURL.appendingPathComponent(targetCode)
         let amountURL = targetCodeURL.appendingPathComponent(amount)
-        
-        
         let finalURL = amountURL
-        
-        print("----------------- amountURL:: \(finalURL)-----------------")
+        print("\n-----------------\n amountURL:: \(finalURL) \n-----------------\n")
         
         URLSession.shared.dataTask(with: finalURL) { (data, response, error) in
             if let error = error {
@@ -70,7 +64,4 @@ class ExchangeRateAPIController {
             }
         }.resume()
     }
-    
-    
-    
 }
