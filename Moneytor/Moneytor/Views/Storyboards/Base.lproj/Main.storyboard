@@ -286,7 +286,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name or category..." showsSearchResultsButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="5Od-VW-dNd" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name, category, date..." showsSearchResultsButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="5Od-VW-dNd" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" name="darkGolder"/>
@@ -850,7 +850,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name or category..." showsSearchResultsButton="YES" showsBookmarkButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="0YT-BM-9gs" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name, category, date..." showsSearchResultsButton="YES" showsBookmarkButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="0YT-BM-9gs" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" name="mtDarkYellow"/>
@@ -1118,7 +1118,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Expense Amount :" id="ABo-bY-F1g">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="1ZA-fD-xAM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="1ZA-fD-xAM" userLabel="Expense Amount TextField">
                                         <rect key="frame" x="0.0" y="144" width="428" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1ZA-fD-xAM" id="7r7-3j-XEM">
@@ -1141,12 +1141,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="UyL-xS-bbs">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="09x-oc-xqf">
-                                        <rect key="frame" x="0.0" y="262" width="428" height="40"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="09x-oc-xqf" userLabel="Category Header">
+                                        <rect key="frame" x="0.0" y="206" width="428" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="09x-oc-xqf" id="DCg-Ho-lZO">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
@@ -1189,8 +1185,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="92N-tB-NKj">
-                                        <rect key="frame" x="0.0" y="302" width="428" height="132"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="92N-tB-NKj" userLabel="Category Picker">
+                                        <rect key="frame" x="0.0" y="246" width="428" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="92N-tB-NKj" id="urA-B8-nVw">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="132"/>
@@ -1210,12 +1206,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="" id="hM3-99-E3w">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="1pe-lV-iwQ">
-                                        <rect key="frame" x="0.0" y="490" width="428" height="41"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="1pe-lV-iwQ" userLabel="Date Section Header">
+                                        <rect key="frame" x="0.0" y="378" width="428" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1pe-lV-iwQ" id="mpc-Ug-TiH">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="41"/>
@@ -1258,15 +1250,18 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="125" id="FpU-sC-6aH">
-                                        <rect key="frame" x="0.0" y="531" width="428" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="310" id="FpU-sC-6aH" userLabel="Date Picker">
+                                        <rect key="frame" x="0.0" y="419" width="428" height="310"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FpU-sC-6aH" id="d29-YM-tEo">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="310"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="10" width="368" height="105"/>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="43" y="10" width="342" height="290"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="342" id="wir-3r-Mcf"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="expensesDatePickerValueChange:" destination="9tl-Xm-gpl" eventType="valueChanged" id="gsy-px-hak"/>
                                                     </connections>
@@ -1274,20 +1269,17 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="3nX-Q4-gwv"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="Z4k-OG-FfF"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="jGj-28-XXA"/>
-                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="wQv-qj-HuO"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="a2N-Zy-V5h"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="width" secondItem="d29-YM-tEo" secondAttribute="width" multiplier="0.799065" id="c0c-tc-qDm"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="centerY" secondItem="d29-YM-tEo" secondAttribute="centerY" id="ebO-hl-jMO"/>
+                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="mcd-rJ-RxH"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="centerX" secondItem="d29-YM-tEo" secondAttribute="centerX" id="wuP-QY-IEw"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="FkA-4m-f2C">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W">
-                                        <rect key="frame" x="0.0" y="712" width="428" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W" userLabel="SaveButton">
+                                        <rect key="frame" x="0.0" y="729" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ux6-IU-o6W" id="5UP-QF-ZpM">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1311,8 +1303,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL">
-                                        <rect key="frame" x="0.0" y="755.5" width="428" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL" userLabel="ScanButton">
+                                        <rect key="frame" x="0.0" y="772.5" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11q-RA-JiL" id="HUP-5R-rt7">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>

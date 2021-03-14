@@ -63,7 +63,61 @@ class IncomeDetailTableViewController: UITableViewController {
     
     
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
+        presentAlertAskingUserIfRemindedNeeded()
     }
+    
+    func presentAlertAskingUserIfRemindedNeeded(){
+        
+        let alertController = UIAlertController(title: "INCOME REMINDER!", message:"Would you like to get notification when you get paid?", preferredStyle: .alert)
+        let noRemiderAction = UIAlertAction(title: "No", style: .cancel)
+        let yesRemiderAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            self.presentAlertAddIncomeNotification()
+        }
+        alertController.addAction(noRemiderAction)
+        alertController.addAction(yesRemiderAction)
+        
+        present(alertController, animated: true)
+        
+    }
+    
+    func  presentAlertAddIncomeNotification() {
+        
+        guard let name = incomeNameTextField.text, !name.isEmpty else {
+            if incomeAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED FOR NOTIFICATION!", messageAlert: "Add name and amount for remider!")
+            } else {
+                presentAlertToUser(titleAlert: "INCOME'S NAME NEEDED FOR NOTIFICATION!", messageAlert: "Add income's name for your remider!")
+            }
+            return
+            
+        }
+        guard let amount = self.incomeAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT NEEDED FOR NOTIFICATION!!", messageAlert: "Add income's amount for your remider!")
+            return
+        }
+        
+        
+        let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "NAME : \(name.capitalized) \nAMOUNT : \(amount) \nCATEGORY : \(selectedIncomeCategory.nameString.capitalized) \nPAID DATE : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
+        let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .default) { (action) in
+            
+            if let income = self.income {
+                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+            } else {
+                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+            }
+            
+            
+            self.navigationController?.popViewController(animated: true)
+            
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+    
+    
+    
     
     // MARK: - Helper Fuctions
     func updateViews() {

@@ -22,12 +22,14 @@ class ExpenseDetailTableViewController: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self.expenseNameTextField, action: #selector(UITextField.endEditing))
+//        view.addGestureRecognizer(tap)
+        self.setupToHideKeyboardOnTapOnView()
         expenseCategoryPicker.delegate = self
         expenseCategoryPicker.dataSource = self
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
+        expenseDatePicker.isUserInteractionEnabled = true
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
     }
     
@@ -175,6 +177,11 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         textField.text = ""
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        textField.resignFirstResponder()
+        //return true
     }
 }
 

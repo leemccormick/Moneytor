@@ -25,6 +25,7 @@
 		3628331525E7498200381731 /* ExpenseCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3628331425E7498100381731 /* ExpenseCategoryController.swift */; };
 		362DDAB725FA141C005CC4F4 /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB625FA141B005CC4F4 /* CurrencyController.swift */; };
 		362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */; };
+		362FB7D125FE01C40047DB7C /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */; };
 		36682CF225E42FF00075C03D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF125E42FF00075C03D /* Colors.xcassets */; };
 		36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */; };
 		36682CFC25E4376D0075C03D /* Champagne & Limousines Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */; };
@@ -85,6 +86,7 @@
 		3628331425E7498100381731 /* ExpenseCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategoryController.swift; sourceTree = "<group>"; };
 		362DDAB625FA141B005CC4F4 /* CurrencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyController.swift; sourceTree = "<group>"; };
 		362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIController.swift; sourceTree = "<group>"; };
+		362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		36682CF125E42FF00075C03D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold Italic.ttf"; sourceTree = "<group>"; };
 		36682CF825E4376D0075C03D /* Champagne & Limousines Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Italic.ttf"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				367659A225E85A3400F63F0C /* TotalControllers */,
 				366D9DDA25E76DDC002E63FB /* IncomeControllers */,
 				366D9DDC25E76DE9002E63FB /* ExpenseControllers */,
+				362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				3671BA5625E5ECC300811F21 /* AmountFormatter.swift in Sources */,
 				36AFBC9225E41C7E00B559DB /* AppDelegate.swift in Sources */,
 				3671BA3F25E5B6C900811F21 /* Expense+Convenience.swift in Sources */,
+				362FB7D125FE01C40047DB7C /* NotificationScheduler.swift in Sources */,
 				36AFBC9C25E41C7E00B559DB /* Moneytor.xcdatamodeld in Sources */,
 				36682D0325E438490075C03D /* StyleGuide.swift in Sources */,
 				36E19BE525F893E100BFCDB0 /* Currency.swift in Sources */,

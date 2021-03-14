@@ -12,7 +12,8 @@ class IncomeController {
     // MARK: - Properties
     static let shared = IncomeController()
     var incomes: [Income] = []
-    
+    let notificationScheduler = NotificationScheduler()
+
     private lazy var fetchRequest: NSFetchRequest<Income> = {
         let request = NSFetchRequest<Income>(entityName: "Income")
         request.predicate = NSPredicate(value: true)
@@ -31,6 +32,20 @@ class IncomeController {
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
+    }
+    
+    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
+        
+        guard let categoryID = category.id else {return}
+        let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
+        incomes.append(newIncome)
+        category.incomes?.adding(newIncome)
+        CoreDataStack.shared.saveContext()
+        notificationScheduler.scheduleNotifications(income: newIncome)
+    }
+    
+    func createNotificationFor(income: Income){
+        notificationScheduler.scheduleNotifications(income: income)
     }
     
     // READ
@@ -90,12 +105,23 @@ class IncomeController {
         income.incomeCategory = category
         income.date = date
         CoreDataStack.shared.saveContext()
+       
+    }
+    
+    func updateIncomeWithNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
+        income.name = name
+        income.amount = NSDecimalNumber(value: amount)
+        income.incomeCategory = category
+        income.date = date
+        CoreDataStack.shared.saveContext()
+        notificationScheduler.scheduleNotifications(income: income)
     }
     
     // DELETE
     func deleteIncome(_ income: Income){
         income.incomeCategory?.removeFromIncomes(income)
         CoreDataStack.shared.context.delete(income)
+        notificationScheduler.cancelNotification(income: income)
         CoreDataStack.shared.saveContext()
         fetchAllIncomes()
     }
@@ -107,7 +133,7 @@ class IncomeController {
         let subscription = CKQuerySubscription(recordType: "CD_Income", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
         let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.title = "MONEYTOR!"
-        notificationInfo.alertBody = "INCOME is updating from somewhere."
+        notificationInfo.alertBody = "MONEYTOR APP IS USING WITH ANOTHER DEVICE FROM SOMEWHERE."
         notificationInfo.soundName = "default"
         notificationInfo.shouldBadge = true
         subscription.notificationInfo = notificationInfo

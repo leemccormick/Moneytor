@@ -55,7 +55,7 @@ class ExpenseListTableViewController: UITableViewController {
     func fetchAllExpenses(){
         ExpenseController.shared.fetchAllExpenses()
         resultsExpenseFromSearching = ExpenseController.shared.expenses
-        setupSearchBar(expenseCount: resultsExpenseFromSearching.count)
+        //setupSearchBar(expenseCount: resultsExpenseFromSearching.count)
        // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
 //        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
 //        TotalController.shared.calculateTotalExpensesBySpecificTime(weekly)
@@ -64,8 +64,8 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     func fetchExpensesBySpecificTime(time: Date) {
-        let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
-        setupSearchBar(expenseCount: expenses.count)
+       // let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
+       // setupSearchBar(expenseCount: expenses.count)
        // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
         categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalExpensesBySpecificTime(time)
@@ -88,15 +88,15 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    func setupSearchBar(expenseCount: Int){
-    if expenseCount == 0 {
-    expenseSearchBar.isUserInteractionEnabled = false
-        expenseSearchBar.placeholder = "Add New Expense..."
-} else {
-    expenseSearchBar.isUserInteractionEnabled = true
-    expenseSearchBar.placeholder = "Search by name or category..."
-}
-}
+//    func setupSearchBar(expenseCount: Int){
+//    if expenseCount == 0 {
+//    expenseSearchBar.isUserInteractionEnabled = false
+//        expenseSearchBar.placeholder = "Add New Expense..."
+//} else {
+//    expenseSearchBar.isUserInteractionEnabled = true
+//    expenseSearchBar.placeholder = "Search by name or category..."
+//}
+//}
     
     // MARK: - Table view data source and Table view delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -246,7 +246,7 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
        
         if !searchText.isEmpty {
             fetchAllExpenses()
-            resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "")}
+            resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "", date: $0.expenseDateText)}
             
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
             if !results.isEmpty {

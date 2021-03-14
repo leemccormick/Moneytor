@@ -266,9 +266,9 @@ extension CurrencyMapViewController {
         
         let baseCountry = CurrencyController.shared.findCountryNameByCurrencyCode(baseCode)
         let alertController = UIAlertController(title: "Currency Converter \n\(targetCode) <==> \(baseCode)",
-                                                message: "Let's convert currency \nFrom \(countryName) To \(baseCountry)" ,preferredStyle: .alert)
+                                                message: "Let's convert currency \nFrom \(countryName) To \(baseCountry)!" ,preferredStyle: .alert)
         alertController.addTextField { (textField) in
-            textField.placeholder = "Convert amount From \(targetCode) to \(baseCode)..."
+            textField.placeholder = "Enter amount in \(targetCode) to convert..."
             textField.keyboardAppearance = .dark
             textField.keyboardType = .decimalPad
         }

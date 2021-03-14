@@ -32,6 +32,7 @@ class IncomeListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
+        //fetchAllIncomes()
         //  fetchIncomesBySpecificTime(time: weekly)
     }
     
@@ -58,7 +59,7 @@ class IncomeListTableViewController: UITableViewController {
     func fetchAllIncomes() {
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
-        setupSearchBar(incomeCount: resultsIncomeFromSearching.count)
+       // setupSearchBar(incomeCount: resultsIncomeFromSearching.count)
         //        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         //        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
         //        TotalController.shared.calculateTotalIncomesBySpecificTime(weekly)
@@ -67,8 +68,8 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     func fetchIncomesBySpecificTime(time: Date) {
-        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
-        setupSearchBar(incomeCount: incomes.count)
+       // let incomes = IncomeController.shared.fetchIncomesFromTimePeriod()
+       //setupSearchBar(incomeCount: incomes.count)
         // IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
         TotalController.shared.calculateTotalIncomesBySpecificTime(time)
@@ -91,15 +92,15 @@ class IncomeListTableViewController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    func setupSearchBar(incomeCount: Int) {
-        if incomeCount == 0 {
-            incomeSearchBar.isUserInteractionEnabled = false
-            incomeSearchBar.placeholder = "Add New Income..."
-        } else {
-            incomeSearchBar.isUserInteractionEnabled = true
-            incomeSearchBar.placeholder = "Search by name or category..."
-        }
-    }
+//    func setupSearchBar(incomeCount: Int) {
+//        if incomeCount == 0 {
+//         incomeSearchBar.isUserInteractionEnabled = false
+//            incomeSearchBar.placeholder = "Add New Income..."
+//        } else {
+//            incomeSearchBar.isUserInteractionEnabled = true
+//            incomeSearchBar.placeholder = "Search by name or category..."
+//        }
+//    }
     
     // MARK: - Table view data source and Table view delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -246,7 +247,7 @@ extension IncomeListTableViewController: UISearchBarDelegate {
         
         if !searchText.isEmpty {
             fetchAllIncomes()
-            resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.nameString ?? "")}
+            resultsIncomeFromSearching = IncomeController.shared.incomes.filter {$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.nameString ?? "", date: $0.incomeDateText)}
             
             guard let results = resultsIncomeFromSearching
                     as? [Income] else {return}

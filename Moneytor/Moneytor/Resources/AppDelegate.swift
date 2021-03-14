@@ -8,15 +8,31 @@
 import UIKit
 import CoreData
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if UserDefaults.standard.value(forKey: "baseCode") == nil {
             UserDefaults.standard.setValue("USD", forKey: "baseCode")
         }
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (authorized, error) in
+                 
+                 if let error = error {
+                     print("There was an error requesting authorization to use notifications. Error: \(error.localizedDescription)")
+                 }
+                 if authorized {
+                     
+                     //Set delegate to UNUserNotificationCenterDelegate
+                     UNUserNotificationCenter.current().delegate = self
+                     
+                     print("✅ The user authorized notifications.")
+                 } else {
+                     print("❌ The user did not authorized notifications.")
+                 }
+             }
+        
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert, .badge]) { (userDidAllow, error) in
             if let error = error {
@@ -24,9 +40,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             if userDidAllow {
+                UNUserNotificationCenter.current().delegate = self
+                
+                print("✅ The user authorized notifications.")
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+            } else {
+                print("❌ The user did not authorized notifications.")
             }
         }
         
@@ -95,7 +116,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
     
-   
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    // WillPresent
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Notification will present...")
+      
+        completionHandler([.sound, .banner])
+    }
+    
+}
+
+
 //    func settingUpDefaultsCategories() {
 //        ExpenseCategoryController.shared.fetchAllExpenseCategories()
 //        IncomeCategoryController.shared.fetchAllIncomeCategories()
@@ -120,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //    }
 
-}
+
 
 /*
 
