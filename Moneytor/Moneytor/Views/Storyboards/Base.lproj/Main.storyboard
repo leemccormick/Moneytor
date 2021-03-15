@@ -261,7 +261,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="trash" id="zzl-1h-qhm">
                                 <connections>
-                                    <action selector="trashButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
+                                    <action selector="scannerButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

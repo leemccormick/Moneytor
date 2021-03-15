@@ -42,10 +42,8 @@ class IncomeDetailTableViewController: UITableViewController {
         saveIncome()
     }
     
-    @IBAction func trashButtonTapped(_ sender: Any) {
-        guard let income = income else {return}
-        IncomeController.shared.deleteIncome(income)
-        navigationController?.popViewController(animated: true)
+    @IBAction func scannerButtonTapped(_ sender: Any) {
+     
     }
     
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
@@ -64,13 +62,14 @@ class IncomeDetailTableViewController: UITableViewController {
     
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
         presentAlertAskingUserIfRemindedNeeded()
+        navigationController?.popViewController(animated: true)
     }
     
     func presentAlertAskingUserIfRemindedNeeded(){
         
         let alertController = UIAlertController(title: "INCOME REMINDER!", message:"Would you like to get notification when you get paid?", preferredStyle: .alert)
-        let noRemiderAction = UIAlertAction(title: "No", style: .cancel)
-        let yesRemiderAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+        let noRemiderAction = UIAlertAction(title: "NO", style: .cancel)
+        let yesRemiderAction = UIAlertAction(title: "YES", style: .destructive) { (action) in
             self.presentAlertAddIncomeNotification()
         }
         alertController.addAction(noRemiderAction)
@@ -97,9 +96,9 @@ class IncomeDetailTableViewController: UITableViewController {
         }
         
         
-        let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "NAME : \(name.capitalized) \nAMOUNT : \(amount) \nCATEGORY : \(selectedIncomeCategory.nameString.capitalized) \nPAID DATE : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nPaid Date : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
-        let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .default) { (action) in
+        let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
             
             if let income = self.income {
                 IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
@@ -109,11 +108,13 @@ class IncomeDetailTableViewController: UITableViewController {
             
             
             self.navigationController?.popViewController(animated: true)
-            
+
         }
+        
         alertController.addAction(yesAction)
         alertController.addAction(noAction)
         present(alertController, animated: true)
+//
     }
     
     

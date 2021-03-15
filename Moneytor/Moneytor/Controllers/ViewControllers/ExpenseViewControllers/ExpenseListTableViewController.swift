@@ -21,7 +21,7 @@ class ExpenseListTableViewController: UITableViewController {
     var isSearching: Bool = false
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
     var sectionsExpenseDict = [Dictionary<String, Double>.Element]()
-    var categoriesSections: [[Expense]] =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.weekly)
+    var categoriesSections: [[Expense]] =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
     var totalExpenseSearching: Double = 0.0 {
         didSet{
             updateFooter(total: totalExpenseSearching)
@@ -38,7 +38,8 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         expenseSearchBar.selectedScopeButtonIndex = 1
-        fetchExpensesBySpecificTime(time: weekly)
+       // fetchExpensesBySpecificTime(time: weekly)
+        fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endDateOfMonth)
     }
     
     
@@ -63,12 +64,12 @@ class ExpenseListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func fetchExpensesBySpecificTime(time: Date) {
+    func fetchExpensesBySpecificTime(start: Date, end: Date) {
        // let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
        // setupSearchBar(expenseCount: expenses.count)
        // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
-        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
-        TotalController.shared.calculateTotalExpensesBySpecificTime(time)
+        categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: start, endedTime: end)
         updateFooter(total: TotalController.shared.totalExpenseBySpecificTime)
         sectionsExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: categoriesSections)
         tableView.reloadData()
@@ -155,11 +156,13 @@ class ExpenseListTableViewController: UITableViewController {
                 ExpenseController.shared.deleteExpense(expense)
                 
                 if self.expenseSearchBar.selectedScopeButtonIndex == 0 {
-                    self.fetchExpensesBySpecificTime(time: self.daily)
+                    // self.fetchExpensesBySpecificTime(time: self.daily)
+                    self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
                 } else if self.expenseSearchBar.selectedScopeButtonIndex == 2 {
-                    self.fetchExpensesBySpecificTime(time: self.monthly)
+                   // self.fetchExpensesBySpecificTime(time: self.monthly)
+                    self.fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
                 } else {
-                    self.fetchExpensesBySpecificTime(time: self.weekly)
+                   // self.fetchExpensesBySpecificTime(time: self.weekly)
                 }
                 
             }
@@ -267,24 +270,27 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         print(selectedScope)
-        print("-------------------- selectedScope: \(selectedScope) in \(#function) : ----------------------------\n)")
+       // print("-------------------- selectedScope: \(selectedScope) in \(#function) : ----------------------------\n)")
         
         if selectedScope == 0 {
-            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(daily)
-            fetchExpensesBySpecificTime(time: daily)
+            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: self.daily, end: Date())
+            //fetchExpensesBySpecificTime(time: daily)
+            self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
             tableView.reloadData()
-            print("--------------------  selectedScope == 0 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
+           // print("--------------------  selectedScope == 0 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
         } else if selectedScope == 2 {
-            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(monthly)
-            fetchExpensesBySpecificTime(time: monthly)
-            print("--------------------  selectedScope == 2 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
-            print("----------------- :: \(categoriesSections)-----------------")
+            categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+           // fetchExpensesBySpecificTime(time: monthly)
+            self.fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+           // print("--------------------  selectedScope == 2 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
+           // print("----------------- :: \(categoriesSections)-----------------")
             tableView.reloadData()
 
         } else {
-            categoriesSections =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(weekly)
-            fetchExpensesBySpecificTime(time: weekly)
-            print("--------------------  selectedScope == 1 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
+            categoriesSections =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
+           // fetchExpensesBySpecificTime(time: weekly)
+           // print("--------------------  selectedScope == 1 : \(categoriesSections.count) in \(#function) : ----------------------------\n)")
+            self.fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
             tableView.reloadData()
 
         }

@@ -42,7 +42,7 @@ class TotalIncomeViewController: UIViewController {
         TotalController.shared.generateTotalIncomeDictByMonthly()
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(time: monthly)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
         // TotalController.shared.generateTotalIncomeDictByMonthly()
     }
     
@@ -50,11 +50,11 @@ class TotalIncomeViewController: UIViewController {
         super.viewWillAppear(animated)
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(time: monthly)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
     }
     
-    func updateViewWithtime(time: Date) {
-        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+    func updateViewWithtime(start: Date, end: Date) {
+        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
@@ -68,17 +68,17 @@ class TotalIncomeViewController: UIViewController {
         print("----------------- sender:: \(sender.selectedSegmentIndex)-----------------")
         switch sender.selectedSegmentIndex {
         case 0:
-            updateViewWithtime(time: weekly)
+            updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
             incomeTableView.reloadData()
         case 1:
-            updateViewWithtime(time: monthly)
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
             incomeTableView.reloadData()
         case 2:
-            updateViewWithtime(time: yearly)
+            updateViewWithtime(start: self.yearly, end: Date())
             incomeTableView.reloadData()
             
         default:
-            updateViewWithtime(time: monthly)
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
             incomeTableView.reloadData()
         }
         

@@ -34,14 +34,14 @@ class IncomeController {
         CoreDataStack.shared.saveContext()
     }
     
-    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
-        
+    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date)  {
         guard let categoryID = category.id else {return}
         let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
-        notificationScheduler.scheduleNotifications(income: newIncome)
+        //notificationScheduler.scheduleNotifications(income: newIncome)
+       // return newIncome
     }
     
     func createNotificationFor(income: Income){
@@ -56,11 +56,11 @@ class IncomeController {
     
     //______________________________________________________________________________________
     
-    func fetchIncomesFromTimePeriod(_ time: Date) -> [Income]{
+    func fetchIncomesFromTimePeriod(startedTime: Date, endedTime: Date) -> [Income]{
            var incomes: [Income] = []
-           let now = Date()
+           //let now = Date()
            let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
-           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
            fetchRequest.predicate = datePredicate
            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
            do {
@@ -73,12 +73,12 @@ class IncomeController {
        }
        
 
-    func fetchIncomesFromTimePeriodAndCategory(_ time: Date, categoryName: String) -> [Income]{
+    func fetchIncomesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Income]{
         var incomes: [Income] = []
-        let now = Date()
+       // let now = Date()
         let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
         
-        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
         let categoryPredicate = NSPredicate(format: "incomeCategory.name == %@", categoryName)
         
         let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, categoryPredicate])

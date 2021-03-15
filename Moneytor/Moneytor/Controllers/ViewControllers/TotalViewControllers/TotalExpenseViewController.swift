@@ -40,7 +40,7 @@ class TotalExpenseViewController: UIViewController {
         barChartView.delegate = self
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(time: monthly)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,11 +48,12 @@ class TotalExpenseViewController: UIViewController {
         
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(time: monthly)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+
     }
     
-    func updateViewWithtime(time: Date) {
-        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+    func updateViewWithtime(start: Date, end: Date) {
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         print("----------------- expenses:: \(expenses)-----------------")
         
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
@@ -68,17 +69,23 @@ class TotalExpenseViewController: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            updateViewWithtime(time: weekly)
+            //updateViewWithtime(time: weekly)
+            updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
             expenseTableView.reloadData()
         case 1:
-            updateViewWithtime(time: monthly)
+           // updateViewWithtime(time: monthly)
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+
             expenseTableView.reloadData()
         case 2:
-            updateViewWithtime(time: yearly)
+           // updateViewWithtime(time: yearly)
+            
+            updateViewWithtime(start: self.yearly, end: Date())
+
             expenseTableView.reloadData()
             
         default:
-            updateViewWithtime(time: monthly)
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
             expenseTableView.reloadData()
         }
         

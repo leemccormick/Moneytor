@@ -50,8 +50,8 @@ class TotalController {
         totalIncomeString =  AmountFormatter.currencyInString(num: totalIncome)
     }
     
-    func calculateTotalIncomesBySpecificTime(_ time: Date) {
-        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
+    func calculateTotalIncomesBySpecificTime(startedTime: Date, endedTime: Date) {
+        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(startedTime: startedTime, endedTime: endedTime)
         var sumIncome = 0.0
     //  let incomes =  IncomeController.shared.incomes
         for income in incomes {
@@ -62,8 +62,8 @@ class TotalController {
         totalIncomeBySpecificTimeString =  AmountFormatter.currencyInString(num: totalIncomeBySpecificTime)
     }
     
-    func calculateTotalExpensesBySpecificTime(_ time: Date) {
-        let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(time)
+    func calculateTotalExpensesBySpecificTime(startedTime: Date, endedTime: Date) {
+        let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(startedTime: startedTime, endedTime: endedTime)
 
         var sumExpenses = 0.0
     //  let incomes =  IncomeController.shared.incomes
@@ -76,9 +76,9 @@ class TotalController {
         totalExpensesBySpecificTimeString =  AmountFormatter.currencyInString(num: totalExpenseBySpecificTime)
     }
     
-    func calculateTotalBalanceBySpecificTime(_ time: Date) {
-        calculateTotalIncomesBySpecificTime(time)
-        calculateTotalExpensesBySpecificTime(time)
+    func calculateTotalBalanceBySpecificTime(startedTime: Date, endedTime: Date) {
+        calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         
         totalBalanceBySpecificTime = totalIncomeBySpecificTime - totalExpenseBySpecificTime
         totalBalanceBySpecificTimeString =  AmountFormatter.currencyInString(num: totalBalanceBySpecificTime)
@@ -129,19 +129,18 @@ class TotalController {
     }
     
     func generateTotalIncomeDictByMonthly(){
-        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(IncomeCategoryController.shared.monthly)
+        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
         totalIncomeDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
     }
     
     func generateTotalExpenseDictByMonthly(){
-        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(ExpenseCategoryController.shared.monthly)
-        
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
         totalExpenseDictByMonthly = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
     }
     
     
-    func generateTotalExpenseDictByTime(_ time: Date) -> [Dictionary<String, Double>.Element] {
-        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(time)
+    func generateTotalExpenseDictByTime(start: Date, end: Date) -> [Dictionary<String, Double>.Element] {
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         
         let newTotalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
     

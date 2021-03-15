@@ -45,13 +45,13 @@ class IncomeCategoryController {
     
     
     
-    func generateSectionsCategoiesByTimePeriod(_ time: Date) -> [[Income]]  {
+    func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
         var newIncomeCategoriesSections: [[Income]] = []
         
         for incomeCategory in incomeCategories {
             if let incomeCategoryName = incomeCategory.name {
-                let newCategorySection = IncomeController.shared.fetchIncomesFromTimePeriodAndCategory(time, categoryName: incomeCategoryName)
+                let newCategorySection = IncomeController.shared.fetchIncomesFromTimePeriodAndCategory(startedTime: start, endedTime: end, categoryName: incomeCategoryName)
                 let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
                 newIncomeCategoriesSections.append(sortedCategory.removeDuplicates())
             }

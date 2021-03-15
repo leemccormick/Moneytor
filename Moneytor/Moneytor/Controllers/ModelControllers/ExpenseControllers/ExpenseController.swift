@@ -38,11 +38,11 @@ class ExpenseController {
         expenses = fetchIncomes
     }
     
-    func fetchExpensesFromTimePeriod(_ time: Date) -> [Expense]{
+    func fetchExpensesFromTimePeriod(startedTime: Date, endedTime: Date) -> [Expense]{
            var expenses: [Expense] = []
-           let now = Date()
+          // let now = Date()
            let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
-           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
            fetchRequest.predicate = datePredicate
            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
            do {
@@ -55,12 +55,12 @@ class ExpenseController {
        }
        
 
-    func fetchExpensesFromTimePeriodAndCategory(_ time: Date, categoryName: String) -> [Expense]{
+    func fetchExpensesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Expense]{
         var expenses: [Expense] = []
-        let now = Date()
+       // let now = Date()
         let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
     
-        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", time as NSDate, now as NSDate)
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
         let categoryPredicate = NSPredicate(format: "expenseCategory.name == %@", categoryName)
         
         let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, categoryPredicate])

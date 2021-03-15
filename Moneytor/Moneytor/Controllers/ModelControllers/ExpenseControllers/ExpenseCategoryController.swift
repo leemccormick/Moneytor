@@ -43,14 +43,14 @@ class ExpenseCategoryController {
     
     // UPDATE
    
-    func generateSectionsCategoiesByTimePeriod(_ time: Date) -> [[Expense]]  {
+    func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Expense]]  {
         fetchAllExpenseCategories()
        
         var newExpenseCategoriesSections: [[Expense]] = []
         for expenseCategory in expenseCategories {
             print("--------------------expenseCategories : \(expenseCategories.count) in \(#function) : ----------------------------\n)")
             if let expenseCategoryName = expenseCategory.name {
-                let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(time, categoryName: expenseCategoryName)
+                let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(startedTime: start, endedTime: end, categoryName: expenseCategoryName)
                 let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
                 newExpenseCategoriesSections.append(sortedCategory.removeDuplicates())
                 print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")

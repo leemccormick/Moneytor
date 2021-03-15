@@ -29,14 +29,14 @@ class TotalBalanceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pieChartView.delegate = self
-        updateViewsByTime(monthly)
+        updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         timeSegmentedControl.selectedSegmentIndex = 1
-        TotalController.shared.calculateTotalBalanceBySpecificTime(monthly)
-        updateViewsByTime(monthly)
+        TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
     }
     
     // MARK: - Actions
@@ -45,13 +45,20 @@ class TotalBalanceViewController: UIViewController {
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            updateViewsByTime(weekly)
+            //updateViewsByTime(weekly)
+            updateViewsByTime(startedTime: Date().startOfWeek, endedTime: Date().endOfWeek)
         case 1:
-            updateViewsByTime(monthly)
+           // updateViewsByTime(monthly)
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+
         case 2:
-            updateViewsByTime(yearly)
+           // updateViewsByTime(yearly)
+            updateViewsByTime(startedTime: self.yearly, endedTime: Date())
+
         default:
-            updateViewsByTime(monthly)
+           // updateViewsByTime(monthly)
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+
         }
         
     }
@@ -69,10 +76,10 @@ class TotalBalanceViewController: UIViewController {
     }
     
     // MARK: - Helper Fuctions
-    func updateViewsByTime(_ time: Date) {
-        TotalController.shared.calculateTotalExpensesBySpecificTime(time)
-        TotalController.shared.calculateTotalIncomesBySpecificTime(time)
-        TotalController.shared.calculateTotalBalanceBySpecificTime(time)
+    func updateViewsByTime(startedTime: Date, endedTime: Date) {
+        TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: startedTime, endedTime: endedTime)
        
         let totalIncome = TotalController.shared.totalIncomeBySpecificTime
         let totalExpense = TotalController.shared.totalExpenseBySpecificTime

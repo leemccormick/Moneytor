@@ -27,6 +27,50 @@ extension Date {
         formatter.dateFormat = format.rawValue
         return formatter.string(from: self)
     }
+    
+    var startOfWeek: Date {
+                 let gregorian = Calendar(identifier: .gregorian)
+                 let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+                 return gregorian.date(byAdding: .day, value: 0, to: sunday!)!
+      }
+
+      var endOfWeek: Date {
+         let gregorian = Calendar(identifier: .gregorian)
+         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+         return gregorian.date(byAdding: .day, value: 7, to: sunday!)!
+      }
+
+//      var startOfPreviousWeek: Date {
+//         let gregorian = Calendar(identifier: .gregorian)
+//         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+//         return gregorian.date(byAdding: .day, value: -6, to: sunday!)!
+//      }
+//
+//      var endOfPreviousWeek: Date {
+//         let gregorian = Calendar(identifier: .gregorian)
+//         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+//         return gregorian.date(byAdding: .day, value: 0, to: sunday!)!
+//      }
+
+      var startDateOfMonth: Date {
+         return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+      }
+
+      var endDateOfMonth: Date {
+         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startDateOfMonth)!
+      }
+
+      var getPreviousMonthDate: Date {
+         return Calendar.current.date(byAdding: .month, value: -1, to: self)!
+      }
+
+      var startDateOfPreviousMonth: Date {
+         return getPreviousMonthDate.startDateOfMonth
+      }
+
+      var endOfPreviousMonth: Date {
+         return getPreviousMonthDate.endDateOfMonth
+      }
 }
 
 extension Array where Element:Equatable {
