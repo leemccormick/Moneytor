@@ -17,13 +17,11 @@ class ExpenseDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
+    var selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories[0]
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let tap = UITapGestureRecognizer(target: self.expenseNameTextField, action: #selector(UITextField.endEditing))
-//        view.addGestureRecognizer(tap)
         self.setupToHideKeyboardOnTapOnView()
         expenseCategoryPicker.delegate = self
         expenseCategoryPicker.dataSource = self
@@ -49,20 +47,15 @@ class ExpenseDetailTableViewController: UITableViewController {
     }
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
-      //  print("==================\nExpenseCategoryController.shared.expenseCategorie :: \(ExpenseCategoryController.shared.expenseCategories.count)\n=======================")
-       // ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
+      
     }
-    
-    
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
     }
     
-    
-    
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
+        presentAlertAskingUserIfRemindedNeeded()
     }
-    
     
     @IBAction func expensesDatePickerValueChange(_ sender: Any) {
     }
@@ -101,7 +94,7 @@ class ExpenseDetailTableViewController: UITableViewController {
             return}
         
         
-        guard let selectedExpenseCategory = selectedExpenseCategory else {return}
+     //   guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date)
         } else {
@@ -184,5 +177,55 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate {
         //return true
     }
 }
+
+// MARK: - Income Notification
+extension ExpenseDetailTableViewController {
+    
+    func presentAlertAskingUserIfRemindedNeeded(){
+        let alertController = UIAlertController(title: "EXPENSE REMINDER!", message:"Would you like to set reminder for the bill that needed to be paid?", preferredStyle: .alert)
+        let noRemiderAction = UIAlertAction(title: "NO", style: .cancel)
+        let yesRemiderAction = UIAlertAction(title: "YES", style: .destructive) { (action) in
+            self.presentAlertAddIncomeNotification()
+        }
+        alertController.addAction(noRemiderAction)
+        alertController.addAction(yesRemiderAction)
+        present(alertController, animated: true)
+    }
+    
+    func  presentAlertAddIncomeNotification() {
+        guard let name = expenseNameTextField.text, !name.isEmpty else {
+            if expenseAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "EXPENSE'S INPUT NEEDED FOR NOTIFICATION!", messageAlert: "Add name and amount for remider!")
+            } else {
+                presentAlertToUser(titleAlert: "EXPENSE'S NAME NEEDED FOR NOTIFICATION!", messageAlert: "Add expense's name for your remider!")
+            }
+            return
+        }
+        guard let amount = self.expenseAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT NEEDED FOR NOTIFICATION!!", messageAlert: "Add expense's amount for your remider!")
+            return
+        }
+        
+        let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS EXPENSES!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nPaid Date : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
+        let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
+            
+            if let expense = self.expense {
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: self.selectedExpenseCategory, date: self.expenseDatePicker.date)
+            } else {
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedExpenseCategory, date: self.expenseDatePicker.date)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+}
+
+
+
+
+
 
 

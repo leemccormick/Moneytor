@@ -187,16 +187,19 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Income Date :" id="nTQ-2I-zfd">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="125" id="z9K-ye-3jl">
-                                        <rect key="frame" x="0.0" y="530" width="428" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="z9K-ye-3jl">
+                                        <rect key="frame" x="0.0" y="530" width="428" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z9K-ye-3jl" id="2KW-Db-ovK">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="10" width="368" height="105"/>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="368" height="300"/>
                                                     <color key="tintColor" name="darkBrownText"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="300" id="Oax-tL-trH"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="incomeDatePickerValueChange:" destination="9Nz-0l-ico" eventType="valueChanged" id="SVP-Ur-krU"/>
                                                     </connections>
@@ -204,8 +207,8 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="ov6-K4-Idj"/>
-                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="yCz-6G-bEK"/>
+                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="B94-l1-i8g"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="jqM-07-Sq8"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lyb-ou-Rs3" secondAttribute="trailing" constant="30" id="ylj-nb-3R0"/>
                                                 <constraint firstItem="Lyb-ou-Rs3" firstAttribute="leading" secondItem="2KW-Db-ovK" secondAttribute="leading" constant="30" id="z5b-Q9-TFT"/>
                                             </constraints>
@@ -217,7 +220,7 @@
                             <tableViewSection id="MmL-0w-3qC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="kMk-82-eZW">
-                                        <rect key="frame" x="0.0" y="711" width="428" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="906" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kMk-82-eZW" id="9X7-f7-f4c">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1250,18 +1253,15 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="310" id="FpU-sC-6aH" userLabel="Date Picker">
-                                        <rect key="frame" x="0.0" y="419" width="428" height="310"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="FpU-sC-6aH" userLabel="Date Picker">
+                                        <rect key="frame" x="0.0" y="419" width="428" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FpU-sC-6aH" id="d29-YM-tEo">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="310"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="43" y="10" width="342" height="290"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="342" id="wir-3r-Mcf"/>
-                                                    </constraints>
+                                                <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="368" height="300"/>
                                                     <connections>
                                                         <action selector="expensesDatePickerValueChange:" destination="9tl-Xm-gpl" eventType="valueChanged" id="gsy-px-hak"/>
                                                     </connections>
@@ -1269,17 +1269,16 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="a2N-Zy-V5h"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="width" secondItem="d29-YM-tEo" secondAttribute="width" multiplier="0.799065" id="c0c-tc-qDm"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="centerY" secondItem="d29-YM-tEo" secondAttribute="centerY" id="ebO-hl-jMO"/>
-                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="mcd-rJ-RxH"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="centerX" secondItem="d29-YM-tEo" secondAttribute="centerX" id="wuP-QY-IEw"/>
+                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="CLw-rk-NVN"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="U1l-ns-PS7"/>
+                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="VAx-lp-bXp"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="gr1-nU-p11"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W" userLabel="SaveButton">
-                                        <rect key="frame" x="0.0" y="729" width="428" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="739" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ux6-IU-o6W" id="5UP-QF-ZpM">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1304,7 +1303,7 @@
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL" userLabel="ScanButton">
-                                        <rect key="frame" x="0.0" y="772.5" width="428" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="782.5" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11q-RA-JiL" id="HUP-5R-rt7">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1364,7 +1363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLl-lb-K9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015.8878504672896" y="780.77753779697628"/>
+            <point key="canvasLocation" x="2195.3271028037384" y="769.76241900647949"/>
         </scene>
         <!--Scan Receipt-->
         <scene sceneID="FEL-94-0BT">

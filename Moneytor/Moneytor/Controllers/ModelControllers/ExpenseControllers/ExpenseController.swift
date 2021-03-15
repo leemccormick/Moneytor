@@ -12,6 +12,7 @@ class ExpenseController {
     // MARK: - Properties
     static let shared = ExpenseController()
     var expenses: [Expense] = []
+    let notificationScheduler = NotificationScheduler()
     
     private lazy var fetchRequest: NSFetchRequest<Expense> = {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
@@ -31,6 +32,19 @@ class ExpenseController {
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
     }
+    
+    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
+        
+        guard let categoryID = category.id else {return}
+        let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
+        expenses.append(newExpense)
+        category.expenses?.adding(newExpense)
+        CoreDataStack.shared.saveContext()
+        notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
+        // return newIncome
+        
+    }
+    
     
     // READ
     func fetchAllExpenses() {
@@ -87,10 +101,20 @@ class ExpenseController {
         CoreDataStack.shared.saveContext()
     }
     
+    func updateExpenseWithNotificaion(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){
+        expense.name = name
+        expense.amount = NSDecimalNumber(value: amount)
+        expense.expenseCategory = category
+        expense.date = date
+        CoreDataStack.shared.saveContext()
+        notificationScheduler.scheduleExpenseNotifications(expense: expense)
+    }
+    
     // DELETE
     func deleteExpense(_ expense: Expense){
         expense.expenseCategory?.removeFromExpenses(expense)
         CoreDataStack.shared.context.delete(expense)
+        notificationScheduler.cancelExpenseNotification(expense: expense)
         CoreDataStack.shared.saveContext()
         fetchAllExpenses()
     }

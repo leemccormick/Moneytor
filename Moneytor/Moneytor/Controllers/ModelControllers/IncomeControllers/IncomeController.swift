@@ -40,13 +40,13 @@ class IncomeController {
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
-        //notificationScheduler.scheduleNotifications(income: newIncome)
+        notificationScheduler.scheduleIncomeNotifications(income: newIncome)
        // return newIncome
     }
     
-    func createNotificationFor(income: Income){
-        notificationScheduler.scheduleNotifications(income: income)
-    }
+//    func createNotificationFor(income: Income){
+//        notificationScheduler.scheduleNotifications(income: income)
+//    }
     
     // READ
     func fetchAllIncomes() {
@@ -114,14 +114,14 @@ class IncomeController {
         income.incomeCategory = category
         income.date = date
         CoreDataStack.shared.saveContext()
-        notificationScheduler.scheduleNotifications(income: income)
+        notificationScheduler.scheduleIncomeNotifications(income: income)
     }
     
     // DELETE
     func deleteIncome(_ income: Income){
         income.incomeCategory?.removeFromIncomes(income)
         CoreDataStack.shared.context.delete(income)
-        notificationScheduler.cancelNotification(income: income)
+        notificationScheduler.cancelIncomeNotification(income: income)
         CoreDataStack.shared.saveContext()
         fetchAllIncomes()
     }
@@ -133,7 +133,7 @@ class IncomeController {
         let subscription = CKQuerySubscription(recordType: "CD_Income", predicate: allIncomesPredicate, options: .firesOnRecordUpdate)
         let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.title = "MONEYTOR!"
-        notificationInfo.alertBody = "MONEYTOR APP IS USING WITH ANOTHER DEVICE FROM SOMEWHERE."
+        notificationInfo.alertBody = "MONEYTOR APP IS USING WITH ANOTHER DEVICE FROM SOMEWHERE ELSE."
         notificationInfo.soundName = "default"
         notificationInfo.shouldBadge = true
         subscription.notificationInfo = notificationInfo
