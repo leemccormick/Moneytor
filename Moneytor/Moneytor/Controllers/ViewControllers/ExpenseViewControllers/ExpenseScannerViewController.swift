@@ -15,10 +15,7 @@ class ExpenseScannerViewController: UIViewController {
     }
     
 // MARK: - Actions
-    
     @IBAction func saveButtonTapped(_ sender: Any) {
     }
     
-   
-
 }

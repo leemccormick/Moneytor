@@ -26,13 +26,10 @@ class CoreDataStack {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.automaticallyMergesChangesFromParent = true
-       // context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }
     
- 
     // MARK: - Core Data Saving support
-
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

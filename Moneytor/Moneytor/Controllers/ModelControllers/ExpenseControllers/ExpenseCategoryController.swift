@@ -14,7 +14,10 @@ class ExpenseCategoryController {
     var expenseCategories: [ExpenseCategory] = []
     var expenseCategoriesSections: [[Expense]] = []
     var expenseCategoriesTotalDict = [Dictionary<String, Double>.Element]()
-    var expenseCategoriesEmojis: [String] = []
+    let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+    let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
+    let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
+    let yearly = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
     
     private lazy var fetchRequest: NSFetchRequest<ExpenseCategory> = {
         let request = NSFetchRequest<ExpenseCategory>(entityName: "ExpenseCategory")
@@ -26,45 +29,103 @@ class ExpenseCategoryController {
     }()
     
     // MARK: - CRUD Methods
+    func createExpenseDefaultCategories(name: String, emoji: String) {
+    let newExpenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil )
+        expenseCategories.append(newExpenseCategory)
+    CoreDataStack.shared.saveContext()
+    }
+    
     // READ
     func fetchAllExpenseCategories(){
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenseCategories = fetchAllExpenseCatagories
+        //print("----------------- expenseCategories: \(expenseCategories.count) in \(#function)-----------------")
     }
     
     // UPDATE
-    func generateSectionsAndSumEachExpenseCategory() {
+   
+    func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Expense]]  {
         fetchAllExpenseCategories()
-        expenseCategoriesSections = []
-        expenseCategoriesEmojis = []
-        var section: [Expense] = []
+        var newExpenseCategoriesSections: [[Expense]] = []
+        for expenseCategory in expenseCategories {
+            //print("--------------------expenseCategories : \(expenseCategories.count) in \(#function) : ----------------------------\n)")
+            if let expenseCategoryName = expenseCategory.name {
+                let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(startedTime: start, endedTime: end, categoryName: expenseCategoryName)
+                let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
+                newExpenseCategoriesSections.append(sortedCategory.removeDuplicates())
+                //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
+                
+            }
+        }
+        //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
+        //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections.count) in \(#function) : ----------------------------\n)")
+        
+        return newExpenseCategoriesSections
+    }
+    
+    func generateCategoryDictionaryByExpensesAndReturnDict(sections: [[Expense]]) -> [Dictionary<String, Double>.Element] {
         var categoryNames: [String] = []
         var totalExpensesEachCategory: [Double] = []
         
-        for category in expenseCategories {
-            let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
-            var sum = 0.0
-            for expense in expenseArray {
-                sum += expense.amount as! Double
-                section.append(expense)
+        for expense in sections {
+            let expenseCategorySum = expense.map({$0.amount as! Double}).reduce(0.0){$0 + $1}
+            totalExpensesEachCategory.append(expenseCategorySum)
+            let expenseCategoryName = expense.map({$0.expenseCategory?.name ?? ""}).removeDuplicates()
+            let expenseCategoryEmoji = expense.map({$0.expenseCategory?.emoji ?? ""}).removeDuplicates()
+            
+            if let categoryNameArray = expenseCategoryName.first, !categoryNameArray.isEmpty,
+               let categoryEmojiArray = expenseCategoryEmoji.first, !categoryEmojiArray.isEmpty {
+                let nameEmoji = "\(categoryEmojiArray) \(categoryNameArray.capitalized) "
+                categoryNames.append(nameEmoji)
             }
-            expenseCategoriesSections.append(section)
-            section = []
-            
-             let nameEmoji = "\(category.nameString) \(category.emojoString)"
-            
-            categoryNames.append(nameEmoji)
-            totalExpensesEachCategory.append(sum)
-            expenseCategoriesEmojis.append(category.emojoString)
         }
         
-        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames, totalExpensesEachCategory))
+        for total in totalExpensesEachCategory {
+            if total == 0.0 {
+                let totalToDelete = totalExpensesEachCategory.firstIndex(of: total)
+                totalExpensesEachCategory.remove(at: totalToDelete!)
+            }
+        }
+        let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalExpensesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-        expenseCategoriesTotalDict = sortedDictionary
+        return sortedDictionary
     }
 }
 
+
+/*
 // CREATE
+func generateSectionsAndSumEachExpenseCategory() {
+       fetchAllExpenseCategories()
+       expenseCategoriesSections = []
+
+       var section: [Expense] = []
+       var categoryNames: [String] = []
+       var totalExpensesEachCategory: [Double] = []
+       
+       for category in expenseCategories {
+           let expenseArray = category.expenses?.allObjects as? [Expense] ?? []
+           
+            let newExpenseArray = expenseArray.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
+           var sum = 0.0
+           for expense in newExpenseArray {
+               sum += expense.amount as! Double
+               section.append(expense)
+           }
+           expenseCategoriesSections.append(section)
+           section = []
+           
+            let nameEmoji = "\(category.nameString) \(category.emojoString)"
+           
+           categoryNames.append(nameEmoji)
+           totalExpensesEachCategory.append(sum)
+       }
+       
+       let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalExpensesEachCategory.removeDuplicates()))
+       let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
+       expenseCategoriesTotalDict = sortedDictionary
+   }
+   
 //    func createExpenseCategories(name: String, emoji: String){
 //        let expenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
 //
@@ -151,7 +212,7 @@ class ExpenseCategoryController {
 //    }
 
 
-/* NOTE ExpenseCategory
+NOTE ExpenseCategory
  
  
  //    var expenseCategoriesDefaultForFirstLunch: [ExpenseCategory] = [
@@ -165,4 +226,5 @@ class ExpenseCategoryController {
  //                ExpenseCategory(name: "transportation", emoji: "🚘",  id: "D6424512-7973-4F7F-A9E2-01D32271A7C9", expenses: nil)
  //    ]
  //______________________________________________________________________________________
- */
+
+*/

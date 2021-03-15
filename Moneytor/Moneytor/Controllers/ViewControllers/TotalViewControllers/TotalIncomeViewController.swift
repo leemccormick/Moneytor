@@ -14,18 +14,22 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var incomeTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var lineChartView: LineChartView!
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     
     // MARK: - Properties
+    let weekly = IncomeCategoryController.shared.weekly
+    let monthly = IncomeCategoryController.shared.monthly
+    let yearly = IncomeCategoryController.shared.yearly
     var totalIncomeString = TotalController.shared.totalIncomeString
-    var incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
-    var incomeCategoryDict: [Dictionary<String, Double>.Element] = IncomeCategoryController.shared.incomeCategoriesTotalDict {
+    var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
     }
+    
     var selectedCategory: String = "" {
         didSet {
-            updateSection(selectdCategory: selectedCategory)
+            updateSectionHeader(selectdCategory: selectedCategory)
         }
     }
     
@@ -35,21 +39,47 @@ class TotalIncomeViewController: UIViewController {
         incomeTableView.delegate = self
         incomeTableView.dataSource = self
         lineChartView.delegate = self
+        TotalController.shared.generateTotalIncomeDictByMonthly()
         setupLineChart(incomeDict: incomeCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        IncomeCategoryController.shared.generateSectionsAndSumEachIncomeCategory()
-        incomeCategoryDict = IncomeCategoryController.shared.incomeCategoriesTotalDict
-        incomeCategoriesEmoji = IncomeCategoryController.shared.incomeCategoriesEmoji
+        timeSegmentedControl.selectedSegmentIndex = 1
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+    }
+    
+    func updateViewWithtime(start: Date, end: Date) {
+        let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
         setupLineChart(incomeDict: incomeCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        incomeTableView.reloadData()
+    }
+    
+    // MARK: - Actions
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
+            incomeTableView.reloadData()
+        case 1:
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            incomeTableView.reloadData()
+        case 2:
+            updateViewWithtime(start: self.yearly, end: Date())
+            incomeTableView.reloadData()
+        default:
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            incomeTableView.reloadData()
+        }
     }
     
     // MARK: - Helper Fuctions
-    func updateSection(selectdCategory: String) {
+    func updateSectionHeader(selectdCategory: String) {
         let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         if selectdCategory == "" {
             header.backgroundColor = .mtBgDarkGolder
@@ -75,9 +105,9 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
-        
-        cell.textLabel?.text = "\(incomeCategoriesEmoji[indexPath.row]) \(incomeCategoryDict[indexPath.row].key.capitalized.dropLast())"
-        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategoryDict[indexPath.row].value)
+        let incomeCategory = incomeCategoryDict[indexPath.row]
+        cell.textLabel?.text = incomeCategory.key
+        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
         return cell
     }
     
@@ -90,7 +120,12 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "TOTAL INCOMES : \(totalIncomeString)"
+        var total = 0.0
+        for incomeCategory in incomeCategoryDict {
+            total += incomeCategory.value
+        }
+        let totalIncomeStr = AmountFormatter.currencyInString(num: total)
+        return "TOTAL INCOMES : \(totalIncomeStr)"
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -106,10 +141,10 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+// MARK: - ChartViewDelegate
 extension TotalIncomeViewController: ChartViewDelegate {
     
     func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
-        
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center
         lineChartView.noDataTextColor = .mtTextLightBrown
@@ -119,14 +154,28 @@ extension TotalIncomeViewController: ChartViewDelegate {
         var sumIncome = 0.0
         var newIncomeCategoryEmojiToDisplay: [String] = []
         
-        for incomeCatagory in incomeDict {
-            if incomeCatagory.value != 0 {
+        if incomeDict.count == 1 {
+            yValues.append(ChartDataEntry(x: Double(-1), y: 0, data: ""))
+            for incomeCatagory in incomeDict {
                 
-                sumIncome += incomeCatagory.value
-                yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
-                
-                newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
-                i += 1
+                if incomeCatagory.value != 0 {
+                    
+                    sumIncome += incomeCatagory.value
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
+                    
+                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
+                    i += 1
+                }
+            }
+        } else  {
+            for incomeCatagory in incomeDict {
+                if incomeCatagory.value != 0 {
+                    sumIncome += incomeCatagory.value
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
+                    
+                    newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.firstCharacterAsString)
+                    i += 1
+                }
             }
         }
         
@@ -157,7 +206,6 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.leftAxis.axisMinimum = 0
         lineChartView.leftAxis.axisMaximum = sumIncome + (sumIncome * 0.1)
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newIncomeCategoryEmojiToDisplay)
-        newIncomeCategoryEmojiToDisplay = []
         lineChartView.xAxis.granularityEnabled = true
         lineChartView.xAxis.drawGridLinesEnabled = false
         lineChartView.xAxis.drawLabelsEnabled = true
@@ -178,22 +226,15 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.drawGridBackgroundEnabled = true
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
-        
-        
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
         let data: String  = entry.data! as! String
-        
         for income in incomeCategoryDict {
             let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
-            
             if income.key == data {
                 selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
             }
         }
     }
 }
-
-

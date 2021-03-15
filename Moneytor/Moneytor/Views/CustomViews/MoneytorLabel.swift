@@ -50,4 +50,10 @@ class MoneytorTitleFontBrownLabel: UILabel {
     
 }
 
-
+class MoneytorHeaderSectionLabel: UILabel {
+    override  func awakeFromNib() {
+        super.awakeFromNib()
+        self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
+        self.textColor = .mtTextLightBrown
+    }
+}

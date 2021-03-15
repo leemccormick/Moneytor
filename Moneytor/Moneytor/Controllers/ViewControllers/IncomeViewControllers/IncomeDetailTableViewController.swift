@@ -22,8 +22,7 @@ class IncomeDetailTableViewController: UITableViewController {
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+        self.setupToHideKeyboardOnTapOnView()
         incomeCategoryPicker.delegate = self
         incomeCategoryPicker.dataSource = self
         incomeNameTextField.delegate = self
@@ -42,10 +41,8 @@ class IncomeDetailTableViewController: UITableViewController {
         saveIncome()
     }
     
-    @IBAction func trashButtonTapped(_ sender: Any) {
-        guard let income = income else {return}
-        IncomeController.shared.deleteIncome(income)
-        navigationController?.popViewController(animated: true)
+    @IBAction func scannerButtonTapped(_ sender: Any) {
+
     }
     
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
@@ -53,6 +50,13 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     @IBAction func incomeDatePickerValueChange(_ sender: Any) {
+    }
+    
+    @IBAction func addCategoryButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func addNotifincationButtonTapped(_ sender: Any) {
+        presentAlertAskingUserIfRemindedNeeded()
     }
     
     // MARK: - Helper Fuctions
@@ -78,15 +82,14 @@ class IncomeDetailTableViewController: UITableViewController {
     func saveIncome() {
         guard let name = incomeNameTextField.text, !name.isEmpty else {
             if incomeAmountTextField.text?.isEmpty == true  {
-                presentErrorToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Don't forget to add name and amount!")
             } else {
-                presentErrorToUser(titleAlert: "INCOME'S NAME!", messageAlert: "Don't forget to name your income!")
+                presentAlertToUser(titleAlert: "INCOME'S NAME!", messageAlert: "Don't forget to name your income!")
             }
             return
-            
         }
         guard let amount = incomeAmountTextField.text, !amount.isEmpty else {
-            presentErrorToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
             return
         }
         
@@ -106,14 +109,17 @@ class IncomeDetailTableViewController: UITableViewController {
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 4 {
+        if section == 2 {
             return CGFloat(0.0)
-        } else {
+        } else if section == 3 {
+            return CGFloat(0.0)
+        } else if section == 4{
+            return CGFloat(0.0)
+        }else {
             return CGFloat(40.0)
         }
     }
 }
-
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -122,7 +128,6 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print(":::::::::::IncomeCategoryController.shared.incomeCategories.count::::::::::::\(IncomeCategoryController.shared.incomeCategories.count)")
         return IncomeCategoryController.shared.incomeCategories.count
     }
     
@@ -145,9 +150,9 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }
-    
 }
 
+// MARK: - UITextFieldDelegate
 extension IncomeDetailTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = ""
@@ -159,7 +164,50 @@ extension IncomeDetailTableViewController: UITextFieldDelegate {
         return true
     }
 }
-
+// MARK: - Income Notification
+extension IncomeDetailTableViewController {
+    
+    func presentAlertAskingUserIfRemindedNeeded(){
+        let alertController = UIAlertController(title: "INCOME REMINDER!", message:"Would you like to get notification when you get paid?", preferredStyle: .alert)
+        let noRemiderAction = UIAlertAction(title: "NO", style: .cancel)
+        let yesRemiderAction = UIAlertAction(title: "YES", style: .destructive) { (action) in
+            self.presentAlertAddIncomeNotification()
+        }
+        alertController.addAction(noRemiderAction)
+        alertController.addAction(yesRemiderAction)
+        present(alertController, animated: true)
+    }
+    
+    func  presentAlertAddIncomeNotification() {
+        guard let name = incomeNameTextField.text, !name.isEmpty else {
+            if incomeAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED FOR NOTIFICATION!", messageAlert: "Add name and amount for remider!")
+            } else {
+                presentAlertToUser(titleAlert: "INCOME'S NAME NEEDED FOR NOTIFICATION!", messageAlert: "Add income's name for your remider!")
+            }
+            return
+        }
+        guard let amount = self.incomeAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT NEEDED FOR NOTIFICATION!!", messageAlert: "Add income's amount for your remider!")
+            return
+        }
+        
+        let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nPaid Date : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
+        let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
+            
+            if let income = self.income {
+                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+            } else {
+                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+}
 
 
 

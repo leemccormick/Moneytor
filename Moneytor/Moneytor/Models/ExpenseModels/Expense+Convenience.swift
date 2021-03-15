@@ -33,6 +33,6 @@ extension Expense: SearchableRecordDelegate {
     }
     
     var expenseDateText: String {
-        self.date?.dateToString(format: .monthDayTimestamp) ?? Date().dateToString(format: .monthDayTimestamp)
+        self.date?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
     }
 }

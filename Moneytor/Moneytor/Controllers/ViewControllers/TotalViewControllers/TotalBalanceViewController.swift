@@ -17,34 +17,66 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var totalExpenseButton: UIButton!
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    
+    // MARK: - Properties
+    let weekly = TotalController.shared.weekly
+    let monthly = TotalController.shared.monthly
+    let yearly = TotalController.shared.yearly
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         pieChartView.delegate = self
+        updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        TotalController.shared.calculateTotalBalance()
-        updateViews()
+        timeSegmentedControl.selectedSegmentIndex = 1
+        TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
     }
     
     // MARK: - Actions
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateViewsByTime(startedTime: Date().startOfWeek, endedTime: Date().endOfWeek)
+        case 1:
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+        case 2:
+            updateViewsByTime(startedTime: self.yearly, endedTime: Date())
+        default:
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+        }
+    }
+
+    @IBAction func calendarButtonTapped(_ sender: Any) {
+    
+    }
+    
     @IBAction func totalIncomeButtonTapped(_ sender: Any) {
+    
     }
     
     
     @IBAction func totalExpenseButtonTapped(_ sender: Any) {
+    
     }
     
     // MARK: - Helper Fuctions
-    func updateViews() {
-        let totalIncome = TotalController.shared.totalIncome
-        let totalExpense = TotalController.shared.totalExpense
-        let totalBalanceStr = TotalController.shared.totalBalanceString
-        let totalIncomeCurrencyStr = TotalController.shared.totalIncomeString
-        let totalExpenseCurrencyStr = TotalController.shared.totalExpenseString
+    func updateViewsByTime(startedTime: Date, endedTime: Date) {
+        TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        TotalController.shared.calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: startedTime, endedTime: endedTime)
+        
+        let totalIncome = TotalController.shared.totalIncomeBySpecificTime
+        let totalExpense = TotalController.shared.totalExpenseBySpecificTime
+        let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
+        let totalExpenseCurrencyStr = TotalController.shared.totalExpensesBySpecificTimeString
+        let totalBalanceStr = TotalController.shared.totalBalanceBySpecificTimeString
+        
         totalBalanceLabel.text = totalBalanceStr
         totalIncomeButton.setTitle(totalIncomeCurrencyStr, for: .normal)
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
@@ -56,7 +88,6 @@ class TotalBalanceViewController: UIViewController {
 extension TotalBalanceViewController: ChartViewDelegate  {
     
     func setUpPieChartWith(totalIncome: Double, totalExpense: Double) {
-        
         pieChartView.noDataText = "No Data available! Enter data of your expense and income."
         pieChartView.chartDescription?.enabled = false
         pieChartView.drawHoleEnabled = false
@@ -106,3 +137,4 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         }
     }
 }
+

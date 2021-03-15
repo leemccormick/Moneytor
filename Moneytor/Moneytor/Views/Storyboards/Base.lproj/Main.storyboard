@@ -74,8 +74,52 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Income Category :" id="OvI-YW-ntw">
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="7h7-bk-DPO">
+                                        <rect key="frame" x="0.0" y="262" width="428" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7h7-bk-DPO" id="aBv-Rk-jgj">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdL-FX-aOb" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="0.0" width="362" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="PtB-Mb-ond"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJH-ft-hxZ">
+                                                    <rect key="frame" x="383" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="1gt-As-a5l"/>
+                                                        <constraint firstAttribute="height" constant="40" id="9qa-E4-tS3"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="mtLightBrownText"/>
+                                                    <state key="normal" image="plus" catalog="system">
+                                                        <color key="titleColor" name="mtLightBrownText"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addCategoryButtonTapped:" destination="9Nz-0l-ico" eventType="touchUpInside" id="4fK-dn-uKq"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <constraints>
+                                                <constraint firstItem="YJH-ft-hxZ" firstAttribute="top" secondItem="aBv-Rk-jgj" secondAttribute="top" id="1CP-yy-rxW"/>
+                                                <constraint firstItem="pdL-FX-aOb" firstAttribute="leading" secondItem="aBv-Rk-jgj" secondAttribute="leading" constant="16" id="5JG-5z-CtD"/>
+                                                <constraint firstAttribute="trailing" secondItem="YJH-ft-hxZ" secondAttribute="trailing" constant="5" id="A1P-HA-Qcx"/>
+                                                <constraint firstItem="YJH-ft-hxZ" firstAttribute="leading" secondItem="pdL-FX-aOb" secondAttribute="trailing" constant="5" id="MXK-NC-RW4"/>
+                                                <constraint firstAttribute="bottom" secondItem="pdL-FX-aOb" secondAttribute="bottom" id="URf-Za-OZv"/>
+                                                <constraint firstItem="pdL-FX-aOb" firstAttribute="top" secondItem="aBv-Rk-jgj" secondAttribute="top" id="fdf-gK-39m"/>
+                                                <constraint firstAttribute="bottom" secondItem="YJH-ft-hxZ" secondAttribute="bottom" id="lBp-Na-VOb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtGolderBG"/>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="bdI-Mg-1Kb">
-                                        <rect key="frame" x="0.0" y="262" width="428" height="132"/>
+                                        <rect key="frame" x="0.0" y="302" width="428" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bdI-Mg-1Kb" id="SGA-m0-YrV">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="132"/>
@@ -93,22 +137,69 @@
                                                 <constraint firstAttribute="trailing" secondItem="SB6-j4-3yf" secondAttribute="trailing" constant="30" id="U4J-hp-u9Q"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" name="mtDarkGolder"/>
+                                        <color key="backgroundColor" name="mtGolderBG"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="e8g-oq-bgY">
+                                        <rect key="frame" x="0.0" y="434" width="428" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e8g-oq-bgY" id="qW7-3L-kB9">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWz-v3-uBf" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="0.0" width="362" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="nsw-kI-7JR"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EoN-om-w2Z">
+                                                    <rect key="frame" x="383" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="2lA-KR-vVX"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Xkg-Rr-0St"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="mtLightBrownText"/>
+                                                    <state key="normal" image="calendar.badge.clock.rtl" catalog="system">
+                                                        <color key="titleColor" name="mtLightBrownText"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addNotifincationButtonTapped:" destination="9Nz-0l-ico" eventType="touchUpInside" id="ygX-w0-9Tp"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <constraints>
+                                                <constraint firstItem="JWz-v3-uBf" firstAttribute="top" secondItem="qW7-3L-kB9" secondAttribute="top" id="2TR-XM-V2N"/>
+                                                <constraint firstAttribute="bottom" secondItem="EoN-om-w2Z" secondAttribute="bottom" id="724-3A-NM3"/>
+                                                <constraint firstItem="EoN-om-w2Z" firstAttribute="top" secondItem="qW7-3L-kB9" secondAttribute="top" id="98h-8n-NCy"/>
+                                                <constraint firstItem="JWz-v3-uBf" firstAttribute="leading" secondItem="qW7-3L-kB9" secondAttribute="leading" constant="16" id="GT8-zC-SaP"/>
+                                                <constraint firstAttribute="bottom" secondItem="JWz-v3-uBf" secondAttribute="bottom" id="P34-gw-Ae3"/>
+                                                <constraint firstItem="EoN-om-w2Z" firstAttribute="leading" secondItem="JWz-v3-uBf" secondAttribute="trailing" constant="5" id="huo-E4-f33"/>
+                                                <constraint firstAttribute="trailing" secondItem="EoN-om-w2Z" secondAttribute="trailing" constant="5" id="s1b-nk-zYW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Income Date :" id="nTQ-2I-zfd">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="125" id="z9K-ye-3jl">
-                                        <rect key="frame" x="0.0" y="450" width="428" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="z9K-ye-3jl">
+                                        <rect key="frame" x="0.0" y="530" width="428" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z9K-ye-3jl" id="2KW-Db-ovK">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="10" width="368" height="105"/>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="Lyb-ou-Rs3" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="368" height="300"/>
                                                     <color key="tintColor" name="darkBrownText"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="300" id="Oax-tL-trH"/>
+                                                    </constraints>
                                                     <connections>
                                                         <action selector="incomeDatePickerValueChange:" destination="9Nz-0l-ico" eventType="valueChanged" id="SVP-Ur-krU"/>
                                                     </connections>
@@ -116,8 +207,8 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="ov6-K4-Idj"/>
-                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="yCz-6G-bEK"/>
+                                                <constraint firstItem="Lyb-ou-Rs3" firstAttribute="top" secondItem="2KW-Db-ovK" secondAttribute="top" constant="10" id="B94-l1-i8g"/>
+                                                <constraint firstAttribute="bottom" secondItem="Lyb-ou-Rs3" secondAttribute="bottom" constant="10" id="jqM-07-Sq8"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lyb-ou-Rs3" secondAttribute="trailing" constant="30" id="ylj-nb-3R0"/>
                                                 <constraint firstItem="Lyb-ou-Rs3" firstAttribute="leading" secondItem="2KW-Db-ovK" secondAttribute="leading" constant="30" id="z5b-Q9-TFT"/>
                                             </constraints>
@@ -129,7 +220,7 @@
                             <tableViewSection id="MmL-0w-3qC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="kMk-82-eZW">
-                                        <rect key="frame" x="0.0" y="631" width="428" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="906" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kMk-82-eZW" id="9X7-f7-f4c">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -171,9 +262,9 @@
                                     <action selector="saveButtonTapped:" destination="9Nz-0l-ico" id="0Zu-KZ-4Ny"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="trash" id="zzl-1h-qhm">
+                            <barButtonItem systemItem="camera" id="zzl-1h-qhm">
                                 <connections>
-                                    <action selector="trashButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
+                                    <action selector="scannerButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -188,7 +279,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0C-sd-pDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2151" y="-23"/>
+            <point key="canvasLocation" x="2150.467289719626" y="-23.326133909287257"/>
         </scene>
         <!--EXPENSES-->
         <scene sceneID="NxG-PF-dkU">
@@ -198,15 +289,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name or category..." id="5Od-VW-dNd" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name, category, date..." showsSearchResultsButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="5Od-VW-dNd" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" name="darkGolder"/>
                             <color key="barTintColor" name="mtDarkYellow"/>
                             <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Daily</string>
+                                <string>Weekly</string>
+                                <string>Monthly</string>
+                            </scopeButtonTitles>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="4tD-EM-cc5">
-                            <rect key="frame" x="0.0" y="754.66666793823242" width="428" height="44"/>
+                            <rect key="frame" x="0.0" y="766.66666793823242" width="428" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qt-eZa">
@@ -217,7 +313,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="expenseCell" textLabel="8qG-PP-XZc" detailTextLabel="JGd-sF-2j4" style="IBUITableViewCellStyleValue1" id="ptY-WJ-AQo">
-                                <rect key="frame" x="0.0" y="72" width="428" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptY-WJ-AQo" id="0vz-Fj-yw6">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
@@ -252,9 +348,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EXPENSES" id="QXL-CF-Xbt">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock.rtl" catalog="system" id="BwX-Nh-AeY">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="camera" catalog="system" id="BwX-Nh-AeY">
                             <connections>
-                                <action selector="calendarButtonTapped:" destination="QLi-Ig-Dqw" id="ruQ-1T-nWm"/>
+                                <action selector="calendarButtonTapped:" destination="JD4-x4-gf6" id="nhU-0b-sFF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TuO-mq-9PN">
@@ -270,6 +366,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rRl-rV-Zc3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="JD4-x4-gf6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1022" y="838"/>
         </scene>
@@ -285,43 +382,27 @@
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nma-1h-9Ow" userLabel="ScrollViewContainer">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="800"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="700"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
-                                                <rect key="frame" x="10.666666666666657" y="30" width="406.66666666666674" height="406.66666666666669"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
-                                                        <rect key="frame" x="8" y="8" width="390.66666666666669" height="390.66666666666669"/>
-                                                        <subviews>
-                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
-                                                                <rect key="frame" x="8" y="8" width="374.66666666666669" height="374.66666666666669"/>
-                                                            </activityIndicatorView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="cOS-K8-ftc" secondAttribute="trailing" constant="8" id="XFE-xa-fEH"/>
-                                                            <constraint firstAttribute="bottom" secondItem="cOS-K8-ftc" secondAttribute="bottom" constant="8" id="kLu-u2-xAZ"/>
-                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="leading" secondItem="jQu-IG-UqO" secondAttribute="leading" constant="8" id="knR-Jq-ydZ"/>
-                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="top" secondItem="jQu-IG-UqO" secondAttribute="top" constant="8" id="ved-98-Gw0"/>
-                                                        </constraints>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" name="mtDarkGolder"/>
-                                                <constraints>
-                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="top" constant="8" id="6cu-Rf-bMR"/>
-                                                    <constraint firstAttribute="bottom" secondItem="jQu-IG-UqO" secondAttribute="bottom" constant="8" id="ggf-Pl-E5W"/>
-                                                    <constraint firstAttribute="width" secondItem="Sdg-WR-LzE" secondAttribute="height" multiplier="1:1" id="mUg-Ad-gTH"/>
-                                                    <constraint firstAttribute="trailing" secondItem="jQu-IG-UqO" secondAttribute="trailing" constant="8" id="vgb-y2-fJF"/>
-                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="leading" secondItem="Sdg-WR-LzE" secondAttribute="leading" constant="8" id="vnv-Gp-9AB"/>
-                                                </constraints>
-                                            </view>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dF7-Jz-B8w" customClass="MoneytorSegment" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="42.666666666666657" y="15" width="342.66666666666674" height="32"/>
+                                                <segments>
+                                                    <segment title="Weekly"/>
+                                                    <segment title="Monthly"/>
+                                                    <segment title="Yearly"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="timeSegmentedControlValuedChanged:" destination="I7L-hC-o0h" eventType="valueChanged" id="FEn-GU-onx"/>
+                                                </connections>
+                                            </segmentedControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-h3-1Xj">
-                                                <rect key="frame" x="21.333333333333343" y="486.66666666666657" width="385.33333333333326" height="171.33333333333331"/>
+                                                <rect key="frame" x="21.333333333333343" y="482.66666666666657" width="385.33333333333326" height="171.33333333333331"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DUV-uF-JCI">
                                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="26.333333333333332"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="26.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
                                                                 </constraints>
@@ -330,7 +411,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="26.333333333333332"/>
+                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="26.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
                                                                 <nil key="highlightedColor"/>
@@ -341,7 +422,7 @@
                                                         <rect key="frame" x="0.0" y="66.333333333333371" width="385.33333333333331" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
                                                                 </constraints>
@@ -350,7 +431,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="32"/>
+                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -366,7 +447,7 @@
                                                         <rect key="frame" x="0.0" y="138.33333333333337" width="385.33333333333331" height="33"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
                                                                 </constraints>
@@ -375,7 +456,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="33"/>
+                                                                <rect key="frame" x="324" y="0.0" width="61.333333333333314" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -389,39 +470,74 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-WR-LzE" userLabel="PieChartView" customClass="PieChartView" customModule="Charts">
+                                                <rect key="frame" x="10.666666666666657" y="61.000000000000028" width="406.66666666666674" height="406.66666666666674"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQu-IG-UqO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="406.66666666666669" height="406.66666666666669"/>
+                                                        <subviews>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cOS-K8-ftc">
+                                                                <rect key="frame" x="8" y="8" width="390.66666666666669" height="390.66666666666669"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="cOS-K8-ftc" secondAttribute="trailing" constant="8" id="XFE-xa-fEH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="cOS-K8-ftc" secondAttribute="bottom" constant="8" id="kLu-u2-xAZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="leading" secondItem="jQu-IG-UqO" secondAttribute="leading" constant="8" id="knR-Jq-ydZ"/>
+                                                            <constraint firstItem="cOS-K8-ftc" firstAttribute="top" secondItem="jQu-IG-UqO" secondAttribute="top" constant="8" id="ved-98-Gw0"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" name="mtDarkGolder"/>
+                                                <constraints>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="leading" secondItem="Sdg-WR-LzE" secondAttribute="leading" id="GdT-5P-mch"/>
+                                                    <constraint firstAttribute="width" secondItem="Sdg-WR-LzE" secondAttribute="height" multiplier="1:1" id="La9-O2-10F"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jQu-IG-UqO" secondAttribute="trailing" id="mYk-IL-nCu"/>
+                                                    <constraint firstItem="jQu-IG-UqO" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="top" id="mYw-Cl-sR0"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jQu-IG-UqO" secondAttribute="bottom" id="z98-YR-6gV"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="800" id="24y-y7-uZ8"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="50" id="ER3-jm-opv"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="centerX" secondItem="Nma-1h-9Ow" secondAttribute="centerX" id="POF-jj-tKp"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="top" secondItem="Nma-1h-9Ow" secondAttribute="top" constant="30" id="ejj-Eb-Ou5"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.95" id="fOL-00-QnM"/>
-                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="ie6-72-fxz"/>
-                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="centerX" secondItem="MX9-h3-1Xj" secondAttribute="centerX" id="pyp-VR-I1I"/>
+                                            <constraint firstItem="dF7-Jz-B8w" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.8" id="Hfu-eS-qqF"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="centerX" secondItem="cOS-K8-ftc" secondAttribute="centerX" id="LC1-fE-A70"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.95" id="LlA-Ks-bYN"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="top" secondItem="dF7-Jz-B8w" secondAttribute="bottom" constant="15" id="Shu-Em-uco"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="top" secondItem="Sdg-WR-LzE" secondAttribute="bottom" constant="15" id="XTa-1m-l62"/>
+                                            <constraint firstAttribute="height" constant="700" id="bYN-Pt-UqJ"/>
+                                            <constraint firstItem="Sdg-WR-LzE" firstAttribute="centerX" secondItem="Nma-1h-9Ow" secondAttribute="centerX" id="nO4-qM-uSW"/>
+                                            <constraint firstItem="dF7-Jz-B8w" firstAttribute="top" secondItem="Nma-1h-9Ow" secondAttribute="top" constant="15" id="ncO-LK-HdV"/>
+                                            <constraint firstItem="MX9-h3-1Xj" firstAttribute="width" secondItem="Nma-1h-9Ow" secondAttribute="width" multiplier="0.9" id="vud-z5-kQZ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="width" secondItem="oW6-I8-qZC" secondAttribute="width" id="F1P-i8-tFl"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nma-1h-9Ow" secondAttribute="bottom" id="GTK-2I-jld"/>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="leading" secondItem="oW6-I8-qZC" secondAttribute="leading" id="LOx-D2-LWA"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nma-1h-9Ow" secondAttribute="trailing" id="N0k-EC-1lx"/>
-                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="top" secondItem="oW6-I8-qZC" secondAttribute="top" id="Rva-hm-IDe"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="centerX" secondItem="oW6-I8-qZC" secondAttribute="centerX" id="JrQ-25-7Sl"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="top" secondItem="oW6-I8-qZC" secondAttribute="top" id="O7u-qn-Z67"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nma-1h-9Ow" secondAttribute="bottom" id="Pfx-dW-uOY"/>
+                                    <constraint firstItem="dF7-Jz-B8w" firstAttribute="centerX" secondItem="oW6-I8-qZC" secondAttribute="centerX" id="RWi-2H-H8I"/>
+                                    <constraint firstAttribute="trailing" secondItem="Nma-1h-9Ow" secondAttribute="trailing" id="TAG-XY-OOs"/>
+                                    <constraint firstItem="Nma-1h-9Ow" firstAttribute="leading" secondItem="oW6-I8-qZC" secondAttribute="leading" id="cAZ-W1-KlO"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eyX-dE-3A7"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="eyX-dE-3A7" firstAttribute="bottom" secondItem="oW6-I8-qZC" secondAttribute="bottom" id="7AP-Xc-Vsd"/>
-                            <constraint firstItem="oW6-I8-qZC" firstAttribute="leading" secondItem="eyX-dE-3A7" secondAttribute="leading" id="FLG-U4-rBb"/>
-                            <constraint firstItem="oW6-I8-qZC" firstAttribute="top" secondItem="eyX-dE-3A7" secondAttribute="top" id="ciI-Ad-oVH"/>
-                            <constraint firstItem="eyX-dE-3A7" firstAttribute="trailing" secondItem="oW6-I8-qZC" secondAttribute="trailing" id="jGm-ET-Zvw"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="bottom" secondItem="eyX-dE-3A7" secondAttribute="bottom" id="V0z-SI-uNV"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="top" secondItem="eyX-dE-3A7" secondAttribute="top" id="f32-pI-3A3"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="trailing" secondItem="eyX-dE-3A7" secondAttribute="trailing" id="q5a-3O-k0h"/>
+                            <constraint firstItem="oW6-I8-qZC" firstAttribute="leading" secondItem="eyX-dE-3A7" secondAttribute="leading" id="qIp-rL-3WH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOTAL" id="UYf-tg-049">
+                        <barButtonItem key="leftBarButtonItem" image="camera" catalog="system" id="5Fz-oI-zPi">
+                            <connections>
+                                <action selector="calendarButtonTapped:" destination="I7L-hC-o0h" id="y1F-OE-Ozh"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="square.and.arrow.up" catalog="system" id="pHi-qs-tWM">
                                 <connections>
@@ -439,6 +555,7 @@
                         <outlet property="activityIndicator" destination="cOS-K8-ftc" id="yO4-RX-1JN"/>
                         <outlet property="activityView" destination="jQu-IG-UqO" id="NMH-tu-eoa"/>
                         <outlet property="pieChartView" destination="Sdg-WR-LzE" id="Kd2-oC-X9m"/>
+                        <outlet property="timeSegmentedControl" destination="dF7-Jz-B8w" id="8I7-Zj-TeU"/>
                         <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
                         <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
                         <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
@@ -446,7 +563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF6-Dn-xYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1022" y="-1045"/>
+            <point key="canvasLocation" x="1022" y="-1044"/>
         </scene>
         <!--EXPENSE-->
         <scene sceneID="9NE-NA-q7c">
@@ -473,51 +590,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-vC-qW2">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="SU3-dK-f97">
                                 <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                            </activityIndicatorView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3gK-Fx-jr5">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <color key="tintColor" name="mtLightBrownText"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="HX5-eo-zfc" appends="YES" id="pL1-Ws-RLY"/>
+                                </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4h-qJ-EC5">
-                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YrB-In-r1O">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="YrB-In-r1O" firstAttribute="top" secondItem="A4h-qJ-EC5" secondAttribute="top" id="55l-up-9XZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="YrB-In-r1O" secondAttribute="trailing" id="TBw-NC-PJm"/>
-                                    <constraint firstItem="YrB-In-r1O" firstAttribute="leading" secondItem="A4h-qJ-EC5" secondAttribute="leading" id="ZkO-1M-o56"/>
-                                    <constraint firstAttribute="bottom" secondItem="YrB-In-r1O" secondAttribute="bottom" id="gYK-FO-UhU"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PmB-I2-UDe"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="EoZ-vC-qW2" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="AUk-Gw-NDL"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="A4h-qJ-EC5" secondAttribute="bottom" id="Qfi-eh-RVQ"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="EoZ-vC-qW2" secondAttribute="bottom" id="SVA-am-xg4"/>
-                            <constraint firstItem="EoZ-vC-qW2" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="WKK-vO-Iao"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="A4h-qJ-EC5" secondAttribute="trailing" id="ez7-B3-cO3"/>
-                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="itE-BA-gfS"/>
-                            <constraint firstItem="A4h-qJ-EC5" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="mQV-ow-yzj"/>
-                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="EoZ-vC-qW2" secondAttribute="trailing" id="ryf-Id-ggM"/>
+                            <constraint firstItem="3gK-Fx-jr5" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="DgP-OH-Wcc"/>
+                            <constraint firstItem="SU3-dK-f97" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="Hsb-0X-U6m"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="3gK-Fx-jr5" secondAttribute="trailing" id="PAI-dY-vMf"/>
+                            <constraint firstItem="3gK-Fx-jr5" firstAttribute="top" secondItem="PmB-I2-UDe" secondAttribute="top" id="RAb-Us-eaK"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="3gK-Fx-jr5" secondAttribute="bottom" id="SvW-ce-Njo"/>
+                            <constraint firstItem="SU3-dK-f97" firstAttribute="leading" secondItem="PmB-I2-UDe" secondAttribute="leading" id="f3x-Ac-xfB"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="trailing" secondItem="SU3-dK-f97" secondAttribute="trailing" id="mkw-Lj-ocY"/>
+                            <constraint firstItem="PmB-I2-UDe" firstAttribute="bottom" secondItem="SU3-dK-f97" secondAttribute="bottom" id="sWd-7w-ZSO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CURRENCY" id="ONU-uI-NUi">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="power" catalog="system" id="XVm-Un-Ga2">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="paperplane.circle" catalog="system" id="XVm-Un-Ga2">
                             <connections>
-                                <action selector="logoutButtonTapped:" destination="nyT-zm-yWA" id="TgF-Zc-ewa"/>
+                                <action selector="userLocationButtonTapped:" destination="nyT-zm-yWA" id="eL8-Zd-VAp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="YrB-In-r1O" id="EUX-Iy-C8e"/>
-                        <outlet property="activityView" destination="A4h-qJ-EC5" id="ra6-sT-hPA"/>
-                        <outlet property="currencyMapView" destination="EoZ-vC-qW2" id="vnm-EC-8L9"/>
+                        <outlet property="activityIndicator" destination="SU3-dK-f97" id="CU6-dD-aYK"/>
+                        <outlet property="mapView" destination="3gK-Fx-jr5" id="xHX-zc-AHw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JkN-bT-LUh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer cancelsTouchesInView="NO" allowableMovement="10" minimumPressDuration="0.5" id="HX5-eo-zfc">
+                    <connections>
+                        <action selector="longPressOnMap:" destination="nyT-zm-yWA" id="xlk-F4-mUa"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1022" y="1503"/>
         </scene>
@@ -738,14 +853,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name or category..." id="0YT-BM-9gs" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name, category, date..." showsSearchResultsButton="YES" showsBookmarkButton="YES" showsCancelButton="YES" showsScopeBar="YES" id="0YT-BM-9gs" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="428" height="56"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" name="mtDarkYellow"/>
                             <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Daily</string>
+                                <string>Weekly</string>
+                                <string>Monthly</string>
+                            </scopeButtonTitles>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="F6f-ss-dQq">
-                            <rect key="frame" x="0.0" y="754.66666793823242" width="428" height="44"/>
+                            <rect key="frame" x="0.0" y="766.66666793823242" width="428" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="l7P-im-jY4">
@@ -756,13 +876,13 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeCell" textLabel="ayF-Mg-nMz" detailTextLabel="Lgr-7W-X5P" style="IBUITableViewCellStyleValue1" id="YVp-Ug-Tr9">
-                                <rect key="frame" x="0.0" y="72" width="428" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="84" width="428" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YVp-Ug-Tr9" id="ftM-Ny-qBG">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ayF-Mg-nMz" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ayF-Mg-nMz" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
                                             <rect key="frame" x="20" y="11.999999999999998" width="33" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -791,7 +911,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="INCOMES" id="HhH-AX-lSc">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock" catalog="system" id="3fb-ak-tTa">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="camera" catalog="system" id="3fb-ak-tTa">
                             <connections>
                                 <action selector="calendarButtonTapped:" destination="gUq-1d-FNd" id="FWb-pD-3YN"/>
                             </connections>
@@ -860,7 +980,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="nyT-zm-yWA" kind="relationship" relationship="rootViewController" id="WDe-aj-6Z2"/>
+                        <segue destination="nyT-zm-yWA" kind="relationship" relationship="rootViewController" id="qYa-Cw-7RM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ohQ-lr-TxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -876,7 +996,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MtF-f3-BoW">
-                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
+                                <rect key="frame" x="0.0" y="549.33333333333337" width="428" height="293.66666666666663"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="incomeCategoryCell" textLabel="JkK-2x-aNb" detailTextLabel="Fh6-fH-qgv" style="IBUITableViewCellStyleValue1" id="4PA-TV-768">
@@ -907,8 +1027,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GOm-QE-80K" customClass="MoneytorSegment" customModule="Moneytor" customModuleProvider="target">
+                                <rect key="frame" x="60" y="103" width="308" height="32"/>
+                                <segments>
+                                    <segment title="Weekly"/>
+                                    <segment title="Monthy"/>
+                                    <segment title="Yearly"/>
+                                </segments>
+                                <connections>
+                                    <action selector="timeSegmentedControlValuedChanged:" destination="mPo-6Z-NEi" eventType="valueChanged" id="AhK-gR-T7j"/>
+                                </connections>
+                            </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsy-Ug-uW1" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="21.333333333333343" y="102.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
+                                <rect key="frame" x="21.333333333333343" y="148.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mQ2-R2-JWw">
                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="385.33333333333331"/>
@@ -916,10 +1047,10 @@
                                 </subviews>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
-                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="qsy-Ug-uW1" secondAttribute="leading" id="14D-Fr-WEz"/>
-                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="top" id="GGj-HM-ebZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="fCa-Oz-n7h"/>
-                                    <constraint firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="lBm-zV-wKT"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="top" id="Kz6-1B-u6C"/>
+                                    <constraint firstAttribute="bottom" secondItem="mQ2-R2-JWw" secondAttribute="bottom" id="YKK-Cd-NW9"/>
+                                    <constraint firstAttribute="trailing" secondItem="mQ2-R2-JWw" secondAttribute="trailing" id="fdT-Qt-h2e"/>
+                                    <constraint firstItem="mQ2-R2-JWw" firstAttribute="leading" secondItem="qsy-Ug-uW1" secondAttribute="leading" id="fq8-I0-3Y2"/>
                                     <constraint firstAttribute="width" secondItem="qsy-Ug-uW1" secondAttribute="height" multiplier="1:1" id="qJI-A4-MPk"/>
                                 </constraints>
                             </view>
@@ -931,8 +1062,11 @@
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="trailing" secondItem="jzV-cO-Ikz" secondAttribute="trailing" id="KwO-H6-srN"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="leading" secondItem="jzV-cO-Ikz" secondAttribute="leading" id="OBl-bW-bTV"/>
                             <constraint firstItem="qsy-Ug-uW1" firstAttribute="width" secondItem="iJh-3f-BfW" secondAttribute="width" multiplier="0.9" id="Rva-mm-6QM"/>
+                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="top" secondItem="GOm-QE-80K" secondAttribute="bottom" constant="15" id="b5m-WC-S3m"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="width" secondItem="qsy-Ug-uW1" secondAttribute="width" multiplier="0.8" id="bLf-0S-XhO"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="centerX" secondItem="qsy-Ug-uW1" secondAttribute="centerX" id="cJT-lF-RUT"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="top" secondItem="qsy-Ug-uW1" secondAttribute="bottom" constant="15" id="dRl-B1-QqU"/>
-                            <constraint firstItem="qsy-Ug-uW1" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="dyf-2v-uar"/>
+                            <constraint firstItem="GOm-QE-80K" firstAttribute="top" secondItem="jzV-cO-Ikz" secondAttribute="top" constant="15" id="hEp-vs-RIB"/>
                             <constraint firstItem="MtF-f3-BoW" firstAttribute="bottom" secondItem="jzV-cO-Ikz" secondAttribute="bottom" id="pPP-oH-niy"/>
                         </constraints>
                     </view>
@@ -941,6 +1075,7 @@
                         <outlet property="activityIndicator" destination="mQ2-R2-JWw" id="94s-Qm-m4i"/>
                         <outlet property="incomeTableView" destination="MtF-f3-BoW" id="nWQ-pX-eM6"/>
                         <outlet property="lineChartView" destination="qsy-Ug-uW1" id="xYm-qi-Vbf"/>
+                        <outlet property="timeSegmentedControl" destination="GOm-QE-80K" id="Z9R-Es-uHP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0U-WR-Tku" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -986,7 +1121,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Expense Amount :" id="ABo-bY-F1g">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="1ZA-fD-xAM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="1ZA-fD-xAM" userLabel="Expense Amount TextField">
                                         <rect key="frame" x="0.0" y="144" width="428" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1ZA-fD-xAM" id="7r7-3j-XEM">
@@ -1009,12 +1144,52 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Expense Category :" id="UyL-xS-bbs">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="92N-tB-NKj">
-                                        <rect key="frame" x="0.0" y="262" width="428" height="132"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="09x-oc-xqf" userLabel="Category Header">
+                                        <rect key="frame" x="0.0" y="206" width="428" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="09x-oc-xqf" id="DCg-Ho-lZO">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C9-GG-Bs9" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="0.0" width="342" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="BMG-jr-KCt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvF-Ga-GwM">
+                                                    <rect key="frame" x="363" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="hx6-sv-xQy"/>
+                                                        <constraint firstAttribute="width" constant="40" id="oeq-PO-gfe"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="mtLightBrownText"/>
+                                                    <state key="normal" image="plus" catalog="system">
+                                                        <color key="titleColor" name="mtLightBrownText"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addCategoryButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="i8M-gH-S7o"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <constraints>
+                                                <constraint firstItem="0C9-GG-Bs9" firstAttribute="leading" secondItem="DCg-Ho-lZO" secondAttribute="leading" constant="16" id="197-mR-vFA"/>
+                                                <constraint firstItem="rvF-Ga-GwM" firstAttribute="leading" secondItem="0C9-GG-Bs9" secondAttribute="trailing" constant="5" id="SrH-HW-9mE"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rvF-Ga-GwM" secondAttribute="trailing" constant="5" id="YHd-6a-i8D"/>
+                                                <constraint firstItem="0C9-GG-Bs9" firstAttribute="top" secondItem="DCg-Ho-lZO" secondAttribute="top" id="Ywm-Cv-tU3"/>
+                                                <constraint firstAttribute="bottom" secondItem="rvF-Ga-GwM" secondAttribute="bottom" id="cee-fp-oYH"/>
+                                                <constraint firstAttribute="bottom" secondItem="0C9-GG-Bs9" secondAttribute="bottom" id="jdl-OJ-31J"/>
+                                                <constraint firstItem="rvF-Ga-GwM" firstAttribute="top" secondItem="DCg-Ho-lZO" secondAttribute="top" id="lRc-Ot-1W4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtGolderBG"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="92N-tB-NKj" userLabel="Category Picker">
+                                        <rect key="frame" x="0.0" y="246" width="428" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="92N-tB-NKj" id="urA-B8-nVw">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="132"/>
@@ -1034,19 +1209,59 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection headerTitle="Expense Date :" id="hM3-99-E3w">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="125" id="FpU-sC-6aH">
-                                        <rect key="frame" x="0.0" y="450" width="428" height="125"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="1pe-lV-iwQ" userLabel="Date Section Header">
+                                        <rect key="frame" x="0.0" y="378" width="428" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FpU-sC-6aH" id="d29-YM-tEo">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="125"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1pe-lV-iwQ" id="mpc-Ug-TiH">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
-                                                    <rect key="frame" x="30" y="10" width="368" height="105"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVH-ZR-UV7" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="0.0" width="342" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="aie-21-qf1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIA-RI-vdr">
+                                                    <rect key="frame" x="363" y="0.0" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="WzY-Vo-KNT"/>
+                                                        <constraint firstAttribute="width" constant="40" id="ouU-n9-W9R"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="mtLightBrownText"/>
+                                                    <state key="normal" image="calendar.badge.clock" catalog="system">
+                                                        <color key="titleColor" name="mtLightBrownText"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="addNotifincationButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="K5U-87-jqh"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <constraints>
+                                                <constraint firstItem="dVH-ZR-UV7" firstAttribute="leading" secondItem="mpc-Ug-TiH" secondAttribute="leading" constant="16" id="Q7x-dO-S9F"/>
+                                                <constraint firstItem="WIA-RI-vdr" firstAttribute="top" secondItem="mpc-Ug-TiH" secondAttribute="top" id="R14-Qs-ucr"/>
+                                                <constraint firstItem="WIA-RI-vdr" firstAttribute="leading" secondItem="dVH-ZR-UV7" secondAttribute="trailing" constant="5" id="TU0-an-0eg"/>
+                                                <constraint firstAttribute="bottom" secondItem="dVH-ZR-UV7" secondAttribute="bottom" id="br1-uJ-Gwq"/>
+                                                <constraint firstAttribute="bottom" secondItem="WIA-RI-vdr" secondAttribute="bottom" id="lJm-av-SIG"/>
+                                                <constraint firstItem="dVH-ZR-UV7" firstAttribute="top" secondItem="mpc-Ug-TiH" secondAttribute="top" id="ud0-k3-ho6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="WIA-RI-vdr" secondAttribute="trailing" constant="5" id="xmw-1e-Zf0"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtGolderBG"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="FpU-sC-6aH" userLabel="Date Picker">
+                                        <rect key="frame" x="0.0" y="419" width="428" height="320"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FpU-sC-6aH" id="d29-YM-tEo">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="368" height="300"/>
                                                     <connections>
                                                         <action selector="expensesDatePickerValueChange:" destination="9tl-Xm-gpl" eventType="valueChanged" id="gsy-px-hak"/>
                                                     </connections>
@@ -1054,20 +1269,16 @@
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="3nX-Q4-gwv"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="Z4k-OG-FfF"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="jGj-28-XXA"/>
-                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="wQv-qj-HuO"/>
+                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="CLw-rk-NVN"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="U1l-ns-PS7"/>
+                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="VAx-lp-bXp"/>
+                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="gr1-nU-p11"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="FkA-4m-f2C">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W">
-                                        <rect key="frame" x="0.0" y="631" width="428" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W" userLabel="SaveButton">
+                                        <rect key="frame" x="0.0" y="739" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ux6-IU-o6W" id="5UP-QF-ZpM">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1091,8 +1302,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL">
-                                        <rect key="frame" x="0.0" y="674.5" width="428" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL" userLabel="ScanButton">
+                                        <rect key="frame" x="0.0" y="782.5" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11q-RA-JiL" id="HUP-5R-rt7">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
@@ -1124,6 +1335,10 @@
                             <outlet property="delegate" destination="9tl-Xm-gpl" id="C7r-aF-nHw"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="0Pt-Nr-siC"/>
+                        <barButtonItem title="Item" id="GsZ-Nh-luz"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="JUs-I0-L5e">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="save" id="nkv-DZ-LHX">
@@ -1138,6 +1353,7 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="expenseAmountTextField" destination="jLO-8T-h5x" id="2mV-IG-lJW"/>
                         <outlet property="expenseCategoryPicker" destination="Ljx-Io-jPu" id="rDJ-QC-KM0"/>
@@ -1147,7 +1363,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLl-lb-K9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2016" y="781"/>
+            <point key="canvasLocation" x="2195.3271028037384" y="769.76241900647949"/>
         </scene>
         <!--Scan Receipt-->
         <scene sceneID="FEL-94-0BT">
@@ -1182,7 +1398,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-d9-Eml" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="21.333333333333343" y="102.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
+                                <rect key="frame" x="21.333333333333343" y="141.99999999999997" width="385.33333333333326" height="385.33333333333326"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gJd-d9-Eml" secondAttribute="height" multiplier="1:1" id="H1J-9G-n8A"/>
@@ -1193,7 +1409,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fvk-KX-jit">
-                                <rect key="frame" x="0.0" y="503.33333333333326" width="428" height="339.66666666666674"/>
+                                <rect key="frame" x="0.0" y="542.33333333333337" width="428" height="300.66666666666663"/>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="I2M-di-aHQ" customClass="MoneytorSearchBar" customModule="Moneytor" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
@@ -1229,15 +1445,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="oZO-NF-iRs" customClass="MoneytorSegment" customModule="Moneytor" customModuleProvider="target">
+                                <rect key="frame" x="60" y="103" width="308" height="32"/>
+                                <segments>
+                                    <segment title="Weekly"/>
+                                    <segment title="Monthly"/>
+                                    <segment title="Yearly"/>
+                                </segments>
+                                <connections>
+                                    <action selector="timeSegmentedControlValuedChanged:" destination="89d-OU-bUb" eventType="valueChanged" id="QLZ-Yc-lRE"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dyY-DZ-9z1"/>
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <constraints>
-                            <constraint firstItem="gJd-d9-Eml" firstAttribute="top" secondItem="dyY-DZ-9z1" secondAttribute="top" constant="15" id="3Ex-IJ-YG1"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="centerX" secondItem="gJd-d9-Eml" secondAttribute="centerX" id="FSE-ri-gy4"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="top" secondItem="dyY-DZ-9z1" secondAttribute="top" constant="15" id="FiA-Xs-bd6"/>
                             <constraint firstItem="gJd-d9-Eml" firstAttribute="centerX" secondItem="dyY-DZ-9z1" secondAttribute="centerX" id="Mhe-In-p3G"/>
                             <constraint firstItem="Fvk-KX-jit" firstAttribute="leading" secondItem="dyY-DZ-9z1" secondAttribute="leading" id="UtM-XN-kxk"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="bottom" secondItem="Fvk-KX-jit" secondAttribute="bottom" id="VK9-Yz-LPO"/>
+                            <constraint firstItem="oZO-NF-iRs" firstAttribute="width" secondItem="gJd-d9-Eml" secondAttribute="width" multiplier="0.8" id="foa-8Q-FgD"/>
                             <constraint firstItem="dyY-DZ-9z1" firstAttribute="trailing" secondItem="Fvk-KX-jit" secondAttribute="trailing" id="k3U-vF-nvc"/>
+                            <constraint firstItem="gJd-d9-Eml" firstAttribute="top" secondItem="oZO-NF-iRs" secondAttribute="bottom" constant="8" id="tsS-Ck-2ff"/>
                             <constraint firstItem="Fvk-KX-jit" firstAttribute="top" secondItem="gJd-d9-Eml" secondAttribute="bottom" constant="15" id="wpu-gW-V63"/>
                             <constraint firstItem="gJd-d9-Eml" firstAttribute="width" secondItem="o01-Le-aa7" secondAttribute="width" multiplier="0.9" id="z18-vy-PlT"/>
                         </constraints>
@@ -1247,6 +1477,7 @@
                         <outlet property="activityIndicator" destination="qWQ-Wc-2lf" id="swg-IJ-zIx"/>
                         <outlet property="barChartView" destination="gJd-d9-Eml" id="TOL-lk-NbL"/>
                         <outlet property="expenseTableView" destination="Fvk-KX-jit" id="8XA-SC-Wix"/>
+                        <outlet property="timeSegmentedControl" destination="oZO-NF-iRs" id="vpp-H2-iuH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGm-k0-Kvx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1255,19 +1486,21 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Egk-Ry-loT"/>
+        <segue reference="Lzo-yo-PhL"/>
         <segue reference="wuN-aR-Pod"/>
-        <segue reference="kO8-9M-xwH"/>
+        <segue reference="Bv2-vD-nDf"/>
         <segue reference="sdv-pE-Ro6"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
         <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="coinBg" width="360" height="225"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="logo" width="104" height="109"/>
         <image name="network" catalog="system" width="128" height="121"/>
-        <image name="power" catalog="system" width="128" height="124"/>
+        <image name="paperplane.circle" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <namedColor name="darkBrownText">
@@ -1287,6 +1520,12 @@
         </namedColor>
         <namedColor name="mtDarkYellow">
             <color red="0.97254901960784312" green="0.86274509803921573" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtGolderBG">
+            <color red="1" green="0.89411764705882357" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtLightBrownText">
+            <color red="0.52156862745098043" green="0.37647058823529411" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

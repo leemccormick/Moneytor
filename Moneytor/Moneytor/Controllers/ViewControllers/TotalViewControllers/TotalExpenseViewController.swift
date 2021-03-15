@@ -14,18 +14,21 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet weak var expenseTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var barChartView: BarChartView!
-    
+    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+   
     // MARK: - Properties
+    let weekly = ExpenseCategoryController.shared.weekly
+    let monthly = ExpenseCategoryController.shared.monthly
+    let yearly = ExpenseCategoryController.shared.yearly
     var totalExpenseString = TotalController.shared.totalExpenseString
-    var expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
-    var expenseCategoryDict: [Dictionary<String, Double>.Element] = ExpenseCategoryController.shared.expenseCategoriesTotalDict {
+    var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly {
             didSet {
                 setupBarChart(expenseDict: expenseCategoryDict)
             }
         }
     var selectedCategory: String = "" {
         didSet {
-            updateSection(selectdCategory: selectedCategory)
+            updateSectionHeader(selectdCategory: selectedCategory)
         }
     }
     
@@ -36,20 +39,47 @@ class TotalExpenseViewController: UIViewController {
         expenseTableView.dataSource = self
         barChartView.delegate = self
         setupBarChart(expenseDict: expenseCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ExpenseCategoryController.shared.generateSectionsAndSumEachExpenseCategory()
-        expenseCategoryDict = ExpenseCategoryController.shared.expenseCategoriesTotalDict
-        expenseCategoryEmoji = ExpenseCategoryController.shared.expenseCategoriesEmojis
+        
+        timeSegmentedControl.selectedSegmentIndex = 1
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+
+    }
+    
+    func updateViewWithtime(start: Date, end: Date) {
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         setupBarChart(expenseDict: expenseCategoryDict)
-        updateSection(selectdCategory: selectedCategory)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        expenseTableView.reloadData()
+    }
+    
+    // MARK: - Actions
+    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
+            expenseTableView.reloadData()
+        case 1:
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            expenseTableView.reloadData()
+        case 2:
+            updateViewWithtime(start: self.yearly, end: Date())
+            expenseTableView.reloadData()
+        default:
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            expenseTableView.reloadData()
+        }
     }
     
     // MARK: - Helper Fuctions
-    func updateSection(selectdCategory: String) {
+    func updateSectionHeader(selectdCategory: String) {
         let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         if selectdCategory == "" {
             header.backgroundColor = .mtBgDarkGolder
@@ -74,10 +104,10 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCategoryCell", for: indexPath)
-        cell.textLabel?.text = "\(expenseCategoryEmoji[indexPath.row]) \(expenseCategoryDict[indexPath.row].key.capitalized.dropLast())"
-        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: expenseCategoryDict[indexPath.row].value)
+        let expenseCategory = expenseCategoryDict[indexPath.row]
+        cell.textLabel?.text = expenseCategory.key
+        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: expenseCategory.value)
         
         return cell
     }
@@ -91,7 +121,12 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "TOTAL EXPENSES : \(totalExpenseString)"
+        var total = 0.0
+        for expenseCategory in expenseCategoryDict {
+            total += expenseCategory.value
+        }
+        let totalExpenseStr = AmountFormatter.currencyInString(num: total)
+        return "TOTAL EXPENSES : \(totalExpenseStr)"
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -111,13 +146,11 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
 extension TotalExpenseViewController: ChartViewDelegate {
     
     func setupBarChart(expenseDict: [Dictionary<String, Double>.Element]){
-        
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
         var newExpenseCategoryEmojiToDisplay: [String] = []
         
         for expenseCategory in expenseDict {
-            
             if expenseCategory.value != 0.0 {
                 let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: expenseCategory.key)
                 dataEntries.append(dataEntry)
@@ -132,27 +165,23 @@ extension TotalExpenseViewController: ChartViewDelegate {
                 charData.setValueTextColor(.mtDarkBlue)
                 barChartView.data = charData
                 
-                newExpenseCategoryEmojiToDisplay.append(expenseCategory.key.lastCharacterAsString())
+                newExpenseCategoryEmojiToDisplay.append(expenseCategory.key.firstCharacterAsString)
                 i += 1
             }
         }
         
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
-        newExpenseCategoryEmojiToDisplay = []
-
         barChartView.xAxis.granularityEnabled = true
              barChartView.xAxis.granularity = 1.0
         barChartView.xAxis.drawGridLinesEnabled = false
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelFont = .boldSystemFont(ofSize: 16)
-        
         let yAxis = barChartView.leftAxis
         yAxis.labelFont = UIFont(name: FontNames.textMoneytorGoodLetter, size: 14) ?? .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(6, force: true)
         yAxis.labelTextColor = .mtTextLightBrown
         yAxis.axisLineColor = .mtDarkBlue
         yAxis.labelPosition = .outsideChart
-        
         barChartView.noDataText = "No Expense Data available for Chart."
         barChartView.leftAxis.axisMinimum = 0
         barChartView.legend.enabled = false
@@ -161,25 +190,18 @@ extension TotalExpenseViewController: ChartViewDelegate {
         barChartView.doubleTapToZoomEnabled = false
         barChartView.dragEnabled = false
         barChartView.dragDecelerationEnabled = false
-     
         barChartView.leftAxis.forceLabelsEnabled = true
-        
         barChartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0, easingOption: .easeInOutBounce)
         barChartView.leftAxis.drawGridLinesEnabled = true
         barChartView.rightAxis.drawGridLinesEnabled = true
-       
         barChartView.rightAxis.enabled = false
         barChartView.drawGridBackgroundEnabled = true
-       
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
         let data: String  = entry.data! as! String
         let value: Double = entry.y
-        
         let valueString = AmountFormatter.currencyInString(num: value)
-        
         selectedCategory = "\(data.capitalized)  \(valueString)"
     }
 }
