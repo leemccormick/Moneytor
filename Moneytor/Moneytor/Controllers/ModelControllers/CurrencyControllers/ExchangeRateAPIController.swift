@@ -6,17 +6,9 @@
 //
 
 import Foundation
-//
-//  CurrencyController.swift
-//  Moneytor
-//
-//  Created by Lee McCormick on 3/11/21.
-//
-
-import Foundation
 
 class ExchangeRateAPIController {
-    // static let shared = CurrencyController()
+    
     static let baseURL = URL(string: "https://v6.exchangerate-api.com")
     static let version6 = "v6"
     static let apiKeyValue = "e5589afc2a2c9ee499a9171a"

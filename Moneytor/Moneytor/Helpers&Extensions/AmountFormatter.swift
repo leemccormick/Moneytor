@@ -70,7 +70,6 @@ struct AmountFormatter {
     
     static func twoDecimalPlaces(num: Double) -> String {
         let numberTwoDecimalPlaces = self.numberIn2DecimalPlacesAndNoGroupping.string(from: NSNumber(value: num))
-        
         return numberTwoDecimalPlaces ?? "00.00"
     }
 }

@@ -31,7 +31,7 @@ class TotalController {
     
     var totalIncomeDict = [Dictionary<String, Double>.Element]()
     var totalExpenseDictByMonthly = [Dictionary<String, Double>.Element]()
-
+    
     let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
     let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
     let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
@@ -41,7 +41,7 @@ class TotalController {
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
         var sumIncome = 0.0
-      let incomes =  IncomeController.shared.incomes
+        let incomes =  IncomeController.shared.incomes
         for income in incomes {
             let incomeAmount = income.amount as? Double ?? 0.0
             sumIncome += incomeAmount
@@ -53,7 +53,6 @@ class TotalController {
     func calculateTotalIncomesBySpecificTime(startedTime: Date, endedTime: Date) {
         let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(startedTime: startedTime, endedTime: endedTime)
         var sumIncome = 0.0
-    //  let incomes =  IncomeController.shared.incomes
         for income in incomes {
             let incomeAmount = income.amount as? Double ?? 0.0
             sumIncome += incomeAmount
@@ -64,9 +63,8 @@ class TotalController {
     
     func calculateTotalExpensesBySpecificTime(startedTime: Date, endedTime: Date) {
         let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(startedTime: startedTime, endedTime: endedTime)
-
+        
         var sumExpenses = 0.0
-    //  let incomes =  IncomeController.shared.incomes
         for expense in expenses {
             let expenseAmount = expense.amount as? Double ?? 0.0
             sumExpenses += expenseAmount
@@ -88,7 +86,7 @@ class TotalController {
     func calculateTotalExpense() {
         ExpenseController.shared.fetchAllExpenses()
         var sumExpense = 0.0
-      let expenses =  ExpenseController.shared.expenses
+        let expenses =  ExpenseController.shared.expenses
         for expense in expenses {
             let expenseAmount = expense.amount as? Double ?? 0.0
             sumExpense += expenseAmount
@@ -117,7 +115,6 @@ class TotalController {
     }
     
     func calculateTotalExpenseFrom(searchArrayResults: [Expense]) {
-       // ExpenseController.shared.fetchAllExpenses()
         var sum = 0.0
         let results =  searchArrayResults
         for result in results {
@@ -143,16 +140,7 @@ class TotalController {
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         
         let newTotalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
-    
-        print("-------------------- newTotalExpenseDict \(newTotalExpenseDict) in \(#function) : ----------------------------\n)")
+        //print("-------------------- newTotalExpenseDict \(newTotalExpenseDict) in \(#function) : ----------------------------\n)")
         return newTotalExpenseDict
     }
-   
 }
-    
-/* NOTE
- func calculateTotalIncomeByTime(_ time: Date) {
-        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(time)
-    }
- //______________________________________________________________________________________
- */

@@ -34,38 +34,36 @@ class ExpenseCategoryController {
         expenseCategories.append(newExpenseCategory)
     CoreDataStack.shared.saveContext()
     }
+    
     // READ
     func fetchAllExpenseCategories(){
         let fetchAllExpenseCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         expenseCategories = fetchAllExpenseCatagories
-        print("----------------- expenseCategories: \(expenseCategories.count) in \(#function)-----------------")
+        //print("----------------- expenseCategories: \(expenseCategories.count) in \(#function)-----------------")
     }
     
     // UPDATE
    
     func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Expense]]  {
         fetchAllExpenseCategories()
-       
         var newExpenseCategoriesSections: [[Expense]] = []
         for expenseCategory in expenseCategories {
-            print("--------------------expenseCategories : \(expenseCategories.count) in \(#function) : ----------------------------\n)")
+            //print("--------------------expenseCategories : \(expenseCategories.count) in \(#function) : ----------------------------\n)")
             if let expenseCategoryName = expenseCategory.name {
                 let newCategorySection = ExpenseController.shared.fetchExpensesFromTimePeriodAndCategory(startedTime: start, endedTime: end, categoryName: expenseCategoryName)
                 let sortedCategory = newCategorySection.sorted(by: {$0.date!.compare($1.date!) == .orderedDescending})
                 newExpenseCategoriesSections.append(sortedCategory.removeDuplicates())
-                print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
+                //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
                 
             }
         }
-        
         //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections) in \(#function) : ----------------------------\n)")
-        print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections.count) in \(#function) : ----------------------------\n)")
+        //print("-------------------- newExpenseCategoriesSections: \(newExpenseCategoriesSections.count) in \(#function) : ----------------------------\n)")
         
         return newExpenseCategoriesSections
     }
     
     func generateCategoryDictionaryByExpensesAndReturnDict(sections: [[Expense]]) -> [Dictionary<String, Double>.Element] {
-       // expenseCategoriesTotalDict = []
         var categoryNames: [String] = []
         var totalExpensesEachCategory: [Double] = []
         
@@ -88,14 +86,13 @@ class ExpenseCategoryController {
                 totalExpensesEachCategory.remove(at: totalToDelete!)
             }
         }
-        
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalExpensesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-       // expenseCategoriesTotalDict = sortedDictionary
-        
         return sortedDictionary
     }
 }
+
+
 /*
 // CREATE
 func generateSectionsAndSumEachExpenseCategory() {

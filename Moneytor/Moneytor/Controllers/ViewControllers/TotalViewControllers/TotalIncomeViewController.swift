@@ -43,7 +43,6 @@ class TotalIncomeViewController: UIViewController {
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-        // TotalController.shared.generateTotalIncomeDictByMonthly()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,11 +60,8 @@ class TotalIncomeViewController: UIViewController {
         incomeTableView.reloadData()
     }
     
-    
     // MARK: - Actions
-    
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
-        print("----------------- sender:: \(sender.selectedSegmentIndex)-----------------")
         switch sender.selectedSegmentIndex {
         case 0:
             updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
@@ -76,13 +72,10 @@ class TotalIncomeViewController: UIViewController {
         case 2:
             updateViewWithtime(start: self.yearly, end: Date())
             incomeTableView.reloadData()
-            
         default:
             updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
             incomeTableView.reloadData()
         }
-        
-        
     }
     
     // MARK: - Helper Fuctions
@@ -112,11 +105,9 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
-       
         let incomeCategory = incomeCategoryDict[indexPath.row]
         cell.textLabel?.text = incomeCategory.key
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
-  
         return cell
     }
     
@@ -150,10 +141,10 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+// MARK: - ChartViewDelegate
 extension TotalIncomeViewController: ChartViewDelegate {
     
     func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
-        
         lineChartView.noDataText = "No Income Data available for Chart."
         lineChartView.noDataTextAlignment = .center
         lineChartView.noDataTextColor = .mtTextLightBrown
@@ -177,11 +168,8 @@ extension TotalIncomeViewController: ChartViewDelegate {
                 }
             }
         } else  {
-            
-            
             for incomeCatagory in incomeDict {
                 if incomeCatagory.value != 0 {
-                    
                     sumIncome += incomeCatagory.value
                     yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
                     
@@ -191,8 +179,6 @@ extension TotalIncomeViewController: ChartViewDelegate {
             }
         }
         
-        
-        //print("-------------------- : incomeDict\(incomeDict) in \(#function) : ----------------------------\n)")
         let dataSet = LineChartDataSet(entries: yValues)
         dataSet.drawCirclesEnabled = true
         dataSet.mode = .linear
@@ -220,7 +206,6 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.leftAxis.axisMinimum = 0
         lineChartView.leftAxis.axisMaximum = sumIncome + (sumIncome * 0.1)
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newIncomeCategoryEmojiToDisplay)
-        //newIncomeCategoryEmojiToDisplay = []
         lineChartView.xAxis.granularityEnabled = true
         lineChartView.xAxis.drawGridLinesEnabled = false
         lineChartView.xAxis.drawLabelsEnabled = true
@@ -241,17 +226,12 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.drawGridBackgroundEnabled = true
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
-        
     }
     
-    
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
         let data: String  = entry.data! as! String
-        
         for income in incomeCategoryDict {
             let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
-            
             if income.key == data {
                 selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
             }

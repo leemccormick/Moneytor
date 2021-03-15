@@ -42,9 +42,7 @@ class ExpenseController {
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
         // return newIncome
-        
     }
-    
     
     // READ
     func fetchAllExpenses() {
@@ -68,7 +66,6 @@ class ExpenseController {
            return expenses
        }
        
-
     func fetchExpensesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Expense]{
         var expenses: [Expense] = []
        // let now = Date()
@@ -89,8 +86,6 @@ class ExpenseController {
         }
         return expenses
     }
-    
-    
     
     // UPDATE
     func updateWith(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){

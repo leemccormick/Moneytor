@@ -262,7 +262,7 @@
                                     <action selector="saveButtonTapped:" destination="9Nz-0l-ico" id="0Zu-KZ-4Ny"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="trash" id="zzl-1h-qhm">
+                            <barButtonItem systemItem="camera" id="zzl-1h-qhm">
                                 <connections>
                                     <action selector="scannerButtonTapped:" destination="9Nz-0l-ico" id="W9W-YJ-65a"/>
                                 </connections>
@@ -348,7 +348,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="EXPENSES" id="QXL-CF-Xbt">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock.rtl" catalog="system" id="BwX-Nh-AeY">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="camera" catalog="system" id="BwX-Nh-AeY">
                             <connections>
                                 <action selector="calendarButtonTapped:" destination="JD4-x4-gf6" id="nhU-0b-sFF"/>
                             </connections>
@@ -533,7 +533,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TOTAL" id="UYf-tg-049">
-                        <barButtonItem key="leftBarButtonItem" image="calendar.badge.clock.rtl" catalog="system" id="5Fz-oI-zPi">
+                        <barButtonItem key="leftBarButtonItem" image="camera" catalog="system" id="5Fz-oI-zPi">
                             <connections>
                                 <action selector="calendarButtonTapped:" destination="I7L-hC-o0h" id="y1F-OE-Ozh"/>
                             </connections>
@@ -911,7 +911,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="INCOMES" id="HhH-AX-lSc">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="calendar.badge.clock" catalog="system" id="3fb-ak-tTa">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="camera" catalog="system" id="3fb-ak-tTa">
                             <connections>
                                 <action selector="calendarButtonTapped:" destination="gUq-1d-FNd" id="FWb-pD-3YN"/>
                             </connections>
@@ -1260,7 +1260,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="30" y="10" width="368" height="300"/>
                                                     <connections>
                                                         <action selector="expensesDatePickerValueChange:" destination="9tl-Xm-gpl" eventType="valueChanged" id="gsy-px-hak"/>
@@ -1494,6 +1494,7 @@
     <resources>
         <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
         <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="coinBg" width="360" height="225"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="logo" width="104" height="109"/>

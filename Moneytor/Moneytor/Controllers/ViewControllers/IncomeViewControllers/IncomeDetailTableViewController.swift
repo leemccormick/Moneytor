@@ -42,7 +42,7 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
-        
+
     }
     
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
@@ -51,8 +51,6 @@ class IncomeDetailTableViewController: UITableViewController {
     
     @IBAction func incomeDatePickerValueChange(_ sender: Any) {
     }
-    
-    
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
     }
@@ -123,7 +121,6 @@ class IncomeDetailTableViewController: UITableViewController {
     }
 }
 
-
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -131,7 +128,6 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-       // print(":::::::::::IncomeCategoryController.shared.incomeCategories.count::::::::::::\(IncomeCategoryController.shared.incomeCategories.count)")
         return IncomeCategoryController.shared.incomeCategories.count
     }
     
@@ -154,7 +150,6 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
         pickerLabel?.textColor = UIColor.mtTextDarkBrown
         return pickerLabel!
     }
-    
 }
 
 // MARK: - UITextFieldDelegate

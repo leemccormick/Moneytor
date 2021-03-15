@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-   
+    
     enum DateFormatType: String {
         case full = "EEEE, MMM d, yyyy"
         case fullNumeric = "MM/dd/yyyy"
@@ -29,48 +29,24 @@ extension Date {
     }
     
     var startOfWeek: Date {
-                 let gregorian = Calendar(identifier: .gregorian)
-                 let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-                 return gregorian.date(byAdding: .day, value: 0, to: sunday!)!
-      }
-
-      var endOfWeek: Date {
-         let gregorian = Calendar(identifier: .gregorian)
-         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-         return gregorian.date(byAdding: .day, value: 7, to: sunday!)!
-      }
-
-//      var startOfPreviousWeek: Date {
-//         let gregorian = Calendar(identifier: .gregorian)
-//         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-//         return gregorian.date(byAdding: .day, value: -6, to: sunday!)!
-//      }
-//
-//      var endOfPreviousWeek: Date {
-//         let gregorian = Calendar(identifier: .gregorian)
-//         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
-//         return gregorian.date(byAdding: .day, value: 0, to: sunday!)!
-//      }
-
-      var startDateOfMonth: Date {
-         return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
-      }
-
-      var endDateOfMonth: Date {
-         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startDateOfMonth)!
-      }
-
-      var getPreviousMonthDate: Date {
-         return Calendar.current.date(byAdding: .month, value: -1, to: self)!
-      }
-
-      var startDateOfPreviousMonth: Date {
-         return getPreviousMonthDate.startDateOfMonth
-      }
-
-      var endOfPreviousMonth: Date {
-         return getPreviousMonthDate.endDateOfMonth
-      }
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        return gregorian.date(byAdding: .day, value: 0, to: sunday!)!
+    }
+    
+    var endOfWeek: Date {
+        let gregorian = Calendar(identifier: .gregorian)
+        let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
+        return gregorian.date(byAdding: .day, value: 7, to: sunday!)!
+    }
+    
+    var startDateOfMonth: Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    var endDateOfMonth: Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startDateOfMonth)!
+    }
 }
 
 extension Array where Element:Equatable {
@@ -86,12 +62,8 @@ extension Array where Element:Equatable {
     }
 }
 
-
-//For anyone who is working with arrays, here is an amazing extension I found that allows you to grab the next or previous element in the array, but it also loops around to the end/beginning if it's the last element in the array.
-
 extension BidirectionalCollection where Iterator.Element: Equatable {
     typealias Element = Self.Iterator.Element
-
     func after(_ item: Element, loop: Bool = false) -> Element? {
         if let itemIndex = self.firstIndex(of: item) {
             let lastItem: Bool = (index(after:itemIndex) == endIndex)
@@ -105,7 +77,7 @@ extension BidirectionalCollection where Iterator.Element: Equatable {
         }
         return nil
     }
-
+    
     func before(_ item: Element, loop: Bool = false) -> Element? {
         if let itemIndex = self.firstIndex(of: item) {
             let firstItem: Bool = (itemIndex == startIndex)
@@ -131,14 +103,12 @@ extension Array {
     }
 }
 
-
 extension String {
-  var firstCharacterAsString : String {
-    return self.startIndex == self.endIndex
-      ? ""
-      : String(self[self.startIndex])
-  }
-    
+    var firstCharacterAsString : String {
+        return self.startIndex == self.endIndex
+            ? ""
+            : String(self[self.startIndex])
+    }
     
     func lastCharacterAsString() -> String {
         guard let lastChar = self.last else {
@@ -146,6 +116,4 @@ extension String {
         }
         return String(lastChar)
     }
-        
-        
-    }
+}

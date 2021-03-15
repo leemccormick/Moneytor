@@ -14,8 +14,6 @@ struct FontNames {
     static let textMoneytorItalic = "Champagne & Limousines Italic"
     static let textMoneytorMoneyFont = "Money Money Plus"
     static let textMoneytorGoodLetter = "Letters for Learners"
-    
-   
 }
 
 extension UIColor {

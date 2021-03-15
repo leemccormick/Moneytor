@@ -66,6 +66,7 @@ class ExpenseDetailTableViewController: UITableViewController {
             self.navigationItem.title = "Add Expense"
             return
         }
+        
         self.navigationItem.title = "Update Expense"
         selectedExpenseCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
         expenseNameTextField.text = expense.name
@@ -93,8 +94,6 @@ class ExpenseDetailTableViewController: UITableViewController {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
         
-        
-     //   guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date)
         } else {
@@ -137,12 +136,10 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print("-------------------- ExpenseCategoryController.shared.expenseCategories.count: \(ExpenseCategoryController.shared.expenseCategories.count) in \(#function) : ----------------------------\n)")
         return ExpenseCategoryController.shared.expenseCategories.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("-----------------print :: \(print)-----------------")
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories[row]
     }
     
@@ -174,7 +171,6 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         textField.resignFirstResponder()
-        //return true
     }
 }
 

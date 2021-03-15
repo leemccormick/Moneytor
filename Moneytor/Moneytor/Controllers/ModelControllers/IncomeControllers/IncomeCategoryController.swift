@@ -28,22 +28,19 @@ class IncomeCategoryController {
         return request
     }()
     
-    // M√ARK: - CRUD Methods
+    // MARK: - CRUD Methods
     func createIncomeDefaultCategories(name: String, emoji: String) {
     let newIncomeCategory = IncomeCategory(name: name, emoji: emoji, incomes: nil)
     incomeCategories.append(newIncomeCategory)
     CoreDataStack.shared.saveContext()
     }
     
-    
     // READ
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomeCategories = fetchAllIncomeCatagories
-        print("--------------------incomeCategories : \(incomeCategories.count) in \(#function) : ----------------------------\n)")
+        //print("--------------------incomeCategories : \(incomeCategories.count) in \(#function) : ----------------------------\n)")
     }
-    
-    
     
     func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
@@ -86,16 +83,9 @@ class IncomeCategoryController {
         
         let newCategoryDict = Dictionary(uniqueKeysWithValues: zip(categoryNames.removeDuplicates(), totalIncomesEachCategory))
         let sortedDictionary = newCategoryDict.sorted{$0.key < $1.key}
-       // incomeCategoriesTotalDict = sortedDictionary
-        
         return sortedDictionary
     }
-    
-    
-    
 }
-
-
 
 /* NOTE
  

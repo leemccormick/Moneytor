@@ -22,11 +22,9 @@ class IncomeController {
         return request
     }()
     
-    
     // MARK: - CRUD Methods
     // CREATE
     func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
-        
         guard let categoryID = category.id else {return}
         let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
         incomes.append(newIncome)
@@ -41,20 +39,13 @@ class IncomeController {
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleIncomeNotifications(income: newIncome)
-       // return newIncome
     }
-    
-//    func createNotificationFor(income: Income){
-//        notificationScheduler.scheduleNotifications(income: income)
-//    }
     
     // READ
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomes = fetchIncomes
     }
-    
-    //______________________________________________________________________________________
     
     func fetchIncomesFromTimePeriod(startedTime: Date, endedTime: Date) -> [Income]{
            var incomes: [Income] = []
@@ -72,10 +63,8 @@ class IncomeController {
            return incomes
        }
        
-
     func fetchIncomesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Income]{
         var incomes: [Income] = []
-       // let now = Date()
         let fetchRequest: NSFetchRequest<Income> = NSFetchRequest <Income>(entityName: "Income")
         
         let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
@@ -93,10 +82,6 @@ class IncomeController {
         }
         return incomes
     }
-    
-    
-   
-    //______________________________________________________________________________________
 
     // UPDATE
     func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
@@ -105,7 +90,6 @@ class IncomeController {
         income.incomeCategory = category
         income.date = date
         CoreDataStack.shared.saveContext()
-       
     }
     
     func updateIncomeWithNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
