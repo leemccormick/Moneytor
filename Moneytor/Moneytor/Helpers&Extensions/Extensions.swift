@@ -116,4 +116,7 @@ extension String {
         }
         return String(lastChar)
     }
+    
+        var isnumberordouble: Bool { return Double(self.trimmingCharacters(in: .whitespaces)) != nil }
+
 }

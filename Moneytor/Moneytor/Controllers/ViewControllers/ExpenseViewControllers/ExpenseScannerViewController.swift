@@ -58,13 +58,13 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                 var text = candidate.string
                 reconizedTextArray.append(text)
                 self.note += "\(text)"
-            
+                
                 
                 var valueQualifier: VNRecognizedTextObservation?
                 
                 if let label = recognizedText {
                     if let qualifier = valueQualifier {
-                        if abs(qualifier.boundingBox.minY - observation.boundingBox.minY) < 0.01 {
+                        if abs(qualifier.boundingBox.minY - observation.boundingBox.minY) == 0.00 {
                             // The qualifier's baseline is within 1% of the current observation's baseline, it must belong to the current value.
                             let qualifierCandidate = qualifier.topCandidates(1)[0]
                             print("-------------------- qualifierCandidate: \(qualifierCandidate) in \(#function) : ----------------------------\n)")
@@ -76,29 +76,29 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                     recognizedText = "\(label) \t\(text)\n"
                 }
                 
-//
+                //
                 
                 if  text.lowercased().contains("total") || text.lowercased().contains("balance"){
-        
+                    
                     self.expenseAmount = text
                     indexForTotal = indexReconizedTextArray
                     print("-----------------indexForTotal :: \(indexForTotal)-----------------")
                     print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
                 }
                 
-               /* do {
-                    let types: NSTextCheckingResult.CheckingType = [.allTypes]
-                    let detector = try NSDataDetector(types: types.rawValue)
-                    let matches = detector.matches(in: text, options: .init(), range: NSRange(location: 0, length: text.count))
-                    if !matches.isEmpty {
-                        self.expenseDate = text
-                    } else {
-                        valueQualifier = observation
-                    }
-                } catch {
-                    print("\n==== ERROR IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
-                }
-                */
+                /* do {
+                 let types: NSTextCheckingResult.CheckingType = [.allTypes]
+                 let detector = try NSDataDetector(types: types.rawValue)
+                 let matches = detector.matches(in: text, options: .init(), range: NSRange(location: 0, length: text.count))
+                 if !matches.isEmpty {
+                 self.expenseDate = text
+                 } else {
+                 valueQualifier = observation
+                 }
+                 } catch {
+                 print("\n==== ERROR IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+                 }
+                 */
                 
                 
                 
@@ -117,68 +117,91 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                 }
                 indexReconizedTextArray += 1
             }
-           
+            
             
             self.expenseName = reconizedTextArray.first ?? "" + reconizedTextArray[1] + reconizedTextArray[2]
-            if let index = indexForTotal {
-                if reconizedTextArray.count-1 > index + 1 {
-                self.expenseAmount = reconizedTextArray[index+1]
-                }
-            }
+//            if let index = indexForTotal {
+//                if reconizedTextArray.count-1 > index + 1 {
+//                    self.expenseAmount = reconizedTextArray[index+1]
+//                }
+//            }
+            
           
-            self.textView.text = "Note: \(self.note)=========\n Expense Note :: \(self.expenseNote) \n============\n \n=======Name :::\(self.expenseName ?? "")========== \n=======Amount::: \(self.expenseAmount)========== \n=======Date\(self.expenseDate )==========)"
             
             
             print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
             var costArray: [Double] = []
             for r in reconizedTextArray {
                 print("\n==================reconizedTextArray :: \(r)-=======================")
-                let num = Double(r)
-                if let upwrapNum = num {
-                    costArray.append(upwrapNum)
+                let rSeparates = r.components(separatedBy: " ")
+                for rSeparate in rSeparates {
+                    
+                    if rSeparate.isnumberordouble {
+                        let num = Double(rSeparate)
+                        if let upwrapNum = num {
+                            if upwrapNum < 1000 {
+                            costArray.append(upwrapNum)
+                            }
+                        }
+                    }
+                    
+                    if rSeparate.contains("$") {
+                        var newR = rSeparate
+                        newR.removeFirst()
+                        let num = Double(newR)
+                        if let upwrapNum = num {
+                            costArray.append(upwrapNum)
+                        }
+                    }
+                    print("--------------------------------------------------")
+                    
                 }
             }
             
             print("----------------- costArray :: \(costArray)-----------------")
             
+            print("----------------- costArray :: \(costArray.last)-----------------")
+            let expenseAmountText = String(costArray.last ?? 0.0)
             
-            
+            self.expenseAmount = expenseAmountText
+
+            self.textView.text = "Note: \(self.note)=========\n Expense Note :: \(self.expenseNote) \n============\n \n=======Name :::\(self.expenseName ?? "")========== \n=======Amount::: \(self.expenseAmount)========== \n=======Date\(self.expenseDate )==========)"
         }
         textRecognizationRequest.recognitionLevel = .accurate
         textRecognizationRequest.usesLanguageCorrection = true
         requests = [textRecognizationRequest]
-        }
-        
-        func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-            controller.dismiss(animated: true, completion: nil)
-            
-            for i in 0..<scan.pageCount {
-                
-                let scannedImage = scan.imageOfPage(at: i)
-                if let cgImage = scannedImage.cgImage {
-                    let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
-                    do {
-                        try requestHandler.perform(self.requests)
-                        print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.title)-----------------")
-                        
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                    
-                }
-            }
-            expenseName = scan.title
-            //print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.dictionaryWithValues(forKeys: ["total",scan.title]))-----------------")
-        }
-        
-        func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-            controller.dismiss(animated: true, completion: nil)
-        }
-        
-        
-        func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-            print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
-            presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
-            controller.dismiss(animated: true, completion: nil)
-        }
     }
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        for i in 0..<scan.pageCount {
+            
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                    print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.title)-----------------")
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+        expenseName = scan.title
+        //print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.dictionaryWithValues(forKeys: ["total",scan.title]))-----------------")
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
