@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ReconizedTextScanner {
+struct ReconizedTextScanner: Hashable {
     var text: String
     var minY: Double
     var midY: Double

@@ -13,11 +13,11 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
     
     @IBOutlet weak var textView: UITextView!
     
-    var expenseName: String?
-    var expenseAmount: String = ""
-    var expenseDate: String = ""
-    var expenseNote: String = ""
-    var note: String = ""
+//    var expenseName: String?
+//    var expenseAmount: String = ""
+//    var expenseDate: String = ""
+//    var expenseNote: String = ""
+//    var note: String = ""
     
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var requests = [VNRequest]()
@@ -27,9 +27,31 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-        
-        setupVision()
+        print(ScannerController.shared.reconizedTexts)
+       // self.requests = ScannerController.shared.setupVision()
+        //ScannerController.shared.setupVision()
+        //setupVision()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       // self.textView.text = ""
+        self.requests = ScannerController.shared.setupVision()
+        let expenseName = ScannerController.shared.name
+        let expenseAmount = ScannerController.shared.amountInDouble
+        let expenseDate = ScannerController.shared.date
+        let expenseNote = ScannerController.shared.note
+       // var note: String = ""
+        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate )========== \n==================================\n)"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ScannerController.shared.deleteNameAmountAndNote()
+        self.textView.text = ""
+        
+    }
+    
     
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -37,12 +59,52 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
     }
     
     @IBAction func scanTextButtonTapped(_ sender: Any) {
+        self.textView.text = ""
+        ScannerController.shared.deleteNameAmountAndNote()
+
         let documentCameraController = VNDocumentCameraViewController()
         documentCameraController.delegate = self
         self.present(documentCameraController, animated: true, completion: nil)
     }
     
-    func setupVision() {
+    
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        for i in 0..<scan.pageCount {
+            
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                    print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.title)-----------------")
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+       // expenseName = scan.title
+        //print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.dictionaryWithValues(forKeys: ["total",scan.title]))-----------------")
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+/*
+func setupVision() {
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 print("No Results Found!")
@@ -188,37 +250,4 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         textRecognizationRequest.usesLanguageCorrection = true
         requests = [textRecognizationRequest]
     }
-    
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        controller.dismiss(animated: true, completion: nil)
-        
-        for i in 0..<scan.pageCount {
-            
-            let scannedImage = scan.imageOfPage(at: i)
-            if let cgImage = scannedImage.cgImage {
-                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
-                do {
-                    try requestHandler.perform(self.requests)
-                    print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.title)-----------------")
-                    
-                } catch {
-                    print(error.localizedDescription)
-                }
-                
-            }
-        }
-        expenseName = scan.title
-        //print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.dictionaryWithValues(forKeys: ["total",scan.title]))-----------------")
-    }
-    
-    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
-        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
+*/

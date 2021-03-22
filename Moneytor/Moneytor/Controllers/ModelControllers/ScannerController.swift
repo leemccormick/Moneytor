@@ -13,7 +13,7 @@ class ScannerController {
     
     static let shared = ScannerController()
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
-    var requests = [VNRequest]()
+   // var requests = [VNRequest]()
     var reconizedTexts: [ReconizedTextScanner] = []
     var previousReconizedTexts: ReconizedTextScanner?
     var name: String = ""
@@ -22,28 +22,31 @@ class ScannerController {
     var date: String = ""
     var note: String = ""
     
-    func setupVision() {
+    func setupVision() -> [VNRequest] {
         
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 print("No Results Found!")
                 return
             }
-      var indexOfReconizedText: Int = 0
+     
+            var indexOfReconizedText: Int = 0
             let maximumCandidates = 1
             for observation in observations {
-                let newScanner = ReconizedTextScanner()
+              
+                var newScanner = ReconizedTextScanner()
                 guard let candidate = observation.topCandidates(maximumCandidates).first else {continue}
                 let text = candidate.string
                 newScanner.text = text
              
-                    let dObservationMinY = Double(observation.boundingBox.minY)
+                let dObservationMinY = Double(observation.boundingBox.minY).round(to: 2)
                 newScanner.minY = dObservationMinY
-                    let dObservationMidY = Double(observation.boundingBox.midY)
+                let dObservationMidY = Double(observation.boundingBox.midY).round(to: 2)
                 newScanner.midY = dObservationMidY
-                    let dObservationMaxY = Double(observation.boundingBox.maxY)
+                let dObservationMaxY = Double(observation.boundingBox.maxY).round(to: 2)
                 newScanner.maxY = dObservationMaxY
-                    
+                newScanner.index = indexOfReconizedText
+                
                 do {
                     let types: NSTextCheckingResult.CheckingType = [.date]
                     let detector = try NSDataDetector(types: types.rawValue)
@@ -55,24 +58,30 @@ class ScannerController {
                 } catch {
                     print("\n==== ERROR IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
                 }
-                indexOfReconizedText += 1
-                newScanner.index += 1
+              
             self.reconizedTexts.append(newScanner)
+                indexOfReconizedText += 1
+
             }
             self.detectForNameAndAmount(reconizedTexts: self.reconizedTexts)
+            self.groupingFromTheSameLine(reconizedTexts: self.reconizedTexts)
+
         }
         textRecognizationRequest.recognitionLevel = .accurate
         textRecognizationRequest.usesLanguageCorrection = true
-        requests = [textRecognizationRequest]
+        let requests = [textRecognizationRequest]
+        return requests
     }
     
     
     func detectForNameAndAmount(reconizedTexts: [ReconizedTextScanner]) {
         var potentialAmounts: [Double] = []
+        
         for result in reconizedTexts {
+            print("-----------------result.index ::: \(result.index)-----------------\(#function)")
             self.note += result.text
             self.note += "\n"
-            if result.index == 0 || result.index == 1 || result.index == 2 {
+            if result.index == 0 || result.index == 1{
                 self.name += result.text
             }
             let rSeparates = result.text.components(separatedBy: " ")
@@ -98,6 +107,49 @@ class ScannerController {
         }
         guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
         self.amountInDouble = amountIsThelastInPotentialAmounts
+        //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
+        //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
     }
+    
+    func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
+       // let dictionary = Dictionary(grouping: reconizedTexts, by:  { $0 })
+       // var previousResult
+        
+        var midYs: [Double] = []
+        for result in reconizedTexts {
+            midYs.append(result.midY)
+        }
+        
+        let newMidYs = midYs.removeDuplicates()
+        print("----------------- midYs:: \(newMidYs)-----------------")
+        var newNote = ""
+        for n in newMidYs {
+        for r in reconizedTexts {
+                if r.midY == n {
+                    newNote += r.text
+                    newNote += "\t"
+                } else {
+                    newNote += "\n\(r.text)"
+                }
+            }
+           
+           // print("-----------------r :: \(r.text)   \t\tMidY:: \(r.midY)-----------------")
+            print("----------------- :: \(newNote)-----------------")
+        }
+    }
+    
+    
+    
+    func deleteNameAmountAndNote() {
+        self.reconizedTexts.removeAll()
+        self.reconizedTexts = []
+        self.name = ""
+        self.amount = ""
+        self.amountInDouble = 0.0
+        self.date = ""
+        self.note = ""
+      //  self.requests = []
+    }
+    
 }
 
