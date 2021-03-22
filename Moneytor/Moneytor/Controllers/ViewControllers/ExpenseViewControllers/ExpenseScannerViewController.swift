@@ -48,23 +48,43 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                 print("No Results Found!")
                 return
             }
-            var recognizedText: String?
+            var currLabel: String = ""
             var reconizedTextArray: [String] = []
             var indexReconizedTextArray: Int = 0
             var indexForTotal: Int?
             let maximumCandidates = 1
+            var valueQualifier: VNRecognizedTextObservation?
             for observation in observations {
                 guard let candidate = observation.topCandidates(maximumCandidates).first else {continue}
                 var text = candidate.string
                 reconizedTextArray.append(text)
-                self.note += "\(text)"
+                self.note += "\n \(text) ==X:\(observation.boundingBox.minX) ==MidX:\(observation.boundingBox.midX) ==MaxX:\(observation.boundingBox.maxX) ==Y:\(observation.boundingBox.minY.rounded(.toNearestOrAwayFromZero)) ==MidY:\(observation.boundingBox.midY) ==MaxY:\(observation.boundingBox.maxY)\n"
+                self.note += "\n"
                 
+              
+                if let qualifier = valueQualifier {
+                   // print("-----------------qualifier.boundingBox.minY :: \(qualifier.boundingBox.minY)-----------------")
+                   // print("----------------- observation.boundingBox.minY:: \(observation.boundingBox.minY)-----------------")
+                    
+                    let dQualifier = Double(qualifier.boundingBox.midY)
+                    let dObservation = Double(observation.boundingBox.midY)
+                  //  print("----------------- dQualifier:: \(dQualifier.round(to: 2))-----------------")
+                   // print("----------------- dObservation:: \(dObservation.round(to: 2))-----------------")
+                    
+                    if dQualifier.round(to: 2) == dObservation.round(to: 2) {
+                        print("\(currLabel) \t\t:: \(text)")
+                    } else {
+                       // print("----------------- NOT THE SAME LINE-----------------")
+                    }
                 
+                    }
+            
+                /*
                 var valueQualifier: VNRecognizedTextObservation?
                 
                 if let label = recognizedText {
                     if let qualifier = valueQualifier {
-                        if abs(qualifier.boundingBox.minY - observation.boundingBox.minY) == 0.00 {
+                        if abs(qualifier.boundingBox.minY) ==  abs(observation.boundingBox.minY) {
                             // The qualifier's baseline is within 1% of the current observation's baseline, it must belong to the current value.
                             let qualifierCandidate = qualifier.topCandidates(1)[0]
                             print("-------------------- qualifierCandidate: \(qualifierCandidate) in \(#function) : ----------------------------\n)")
@@ -75,15 +95,15 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                     self.expenseNote = "\(label) \t\(text)\n"
                     recognizedText = "\(label) \t\(text)\n"
                 }
-                
+                */
                 //
                 
                 if  text.lowercased().contains("total") || text.lowercased().contains("balance"){
                     
                     self.expenseAmount = text
                     indexForTotal = indexReconizedTextArray
-                    print("-----------------indexForTotal :: \(indexForTotal)-----------------")
-                    print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
+                   // print("-----------------indexForTotal :: \(indexForTotal)-----------------")
+                    //print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
                 }
                 
                 /* do {
@@ -99,10 +119,6 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                  print("\n==== ERROR IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
                  }
                  */
-                
-                
-                
-                
                 do {
                     let types: NSTextCheckingResult.CheckingType = [.date]
                     let detector = try NSDataDetector(types: types.rawValue)
@@ -115,6 +131,7 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                 } catch {
                     print("\n==== ERROR IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
                 }
+                currLabel = text
                 indexReconizedTextArray += 1
             }
             
@@ -129,10 +146,10 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
           
             
             
-            print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
+           // print("----------------- self.expenseAmoun:: \(self.expenseAmount)-----------------")
             var costArray: [Double] = []
             for r in reconizedTextArray {
-                print("\n==================reconizedTextArray :: \(r)-=======================")
+               // print("\n==================reconizedTextArray :: \(r)-=======================")
                 let rSeparates = r.components(separatedBy: " ")
                 for rSeparate in rSeparates {
                     
@@ -153,19 +170,19 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                             costArray.append(upwrapNum)
                         }
                     }
-                    print("--------------------------------------------------")
+                   // print("--------------------------------------------------")
                     
                 }
             }
             
-            print("----------------- costArray :: \(costArray)-----------------")
+        //    print("----------------- costArray :: \(costArray)-----------------")
             
             print("----------------- costArray :: \(costArray.last)-----------------")
             let expenseAmountText = String(costArray.last ?? 0.0)
             
             self.expenseAmount = expenseAmountText
 
-            self.textView.text = "Note: \(self.note)=========\n Expense Note :: \(self.expenseNote) \n============\n \n=======Name :::\(self.expenseName ?? "")========== \n=======Amount::: \(self.expenseAmount)========== \n=======Date\(self.expenseDate )==========)"
+            self.textView.text = "Note: \(self.note)=========\n Expense Note :: \(self.expenseNote) \n============\n \n=======Name :::\(self.expenseName ?? "")========== \n=======Amount::: \(self.expenseAmount)========== \n=======Date\(self.expenseDate )========== \n==================================\n)"
         }
         textRecognizationRequest.recognitionLevel = .accurate
         textRecognizationRequest.usesLanguageCorrection = true
