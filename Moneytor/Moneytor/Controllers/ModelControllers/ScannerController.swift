@@ -78,9 +78,9 @@ class ScannerController {
         var potentialAmounts: [Double] = []
         
         for result in reconizedTexts {
-            print("-----------------result.index ::: \(result.index)-----------------\(#function)")
-            self.note += result.text
-            self.note += "\n"
+           // print("-----------------result.index ::: \(result.index)-----------------\(#function)")
+            //self.note += result.text
+            //self.note += "\n"
             if result.index == 0 || result.index == 1{
                 self.name += result.text
             }
@@ -120,22 +120,34 @@ class ScannerController {
             midYs.append(result.midY)
         }
         
-        let newMidYs = midYs.removeDuplicates()
+        let newMidYs = midYs.removeDuplicates().sorted {$0 > $1}
         print("----------------- midYs:: \(newMidYs)-----------------")
         var newNote = ""
-        for n in newMidYs {
-        for r in reconizedTexts {
-                if r.midY == n {
-                    newNote += r.text
+        //for n in newMidYs {
+        var index = 0
+        let sortedReconizedTexts = reconizedTexts.sorted { $0.midY > $1.midY }
+
+        for r in sortedReconizedTexts {
+             print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
+            
+            if index < newMidYs.count - 1 {
+
+                if newMidYs[index] == r.midY  {
                     newNote += "\t"
+                    newNote += "\(r.text)"
+                   // newNote += "\t"
                 } else {
-                    newNote += "\n\(r.text)"
+                    newNote += "\n"
+                    newNote += "\(r.text)"
+                   // newNote += "\n"
+                    index += 1
                 }
             }
-           
-           // print("-----------------r :: \(r.text)   \t\tMidY:: \(r.midY)-----------------")
-            print("----------------- :: \(newNote)-----------------")
         }
+           
+            print("----------------- :: \(newNote)-----------------")
+       // }
+        self.note = newNote
     }
     
     
