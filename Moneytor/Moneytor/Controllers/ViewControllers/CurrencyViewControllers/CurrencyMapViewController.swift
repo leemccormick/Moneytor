@@ -242,7 +242,7 @@ extension CurrencyMapViewController {
     }
     
     func presentLocationUpdatedAlert(userContryName: String, baseCode: String) {
-        let alertController = UIAlertController(title: "Your Current Country is\n\"\(userContryName)\"", message: "Currency Converter is calculated base on your location. \nThe base currency for converter is \(baseCode).", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Your Current Country is\n\"\(userContryName)\"", message: "Currency Converter is calculated based on your location. \nThis base currency for converter is \(baseCode).", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Ok", style: .default)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)

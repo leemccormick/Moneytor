@@ -13,6 +13,8 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
     
     @IBOutlet weak var textView: UITextView!
     
+    var expenseFromScanner: Expense?
+    
 //    var expenseName: String?
 //    var expenseAmount: String = ""
 //    var expenseDate: String = ""
@@ -37,12 +39,18 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         super.viewWillAppear(animated)
        // self.textView.text = ""
         self.requests = ScannerController.shared.setupVision()
-        let expenseName = ScannerController.shared.name
-        let expenseAmount = ScannerController.shared.amountInDouble
-        let expenseDate = ScannerController.shared.date
-        let expenseNote = ScannerController.shared.note
-       // var note: String = ""
-        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate )========== \n==================================\n)"
+        createExpenseFromScanner()
+//        let expenseName = ScannerController.shared.name
+//        let expenseAmount = ScannerController.shared.amountInDouble
+//        let expenseAmountInStr = ScannerController.shared.amount
+//        let expenseDate = ScannerController.shared.date
+//        let expenseNote = ScannerController.shared.note
+//
+////        self.expenseFromScanner?.name = expenseName
+////        self.expenseFromScanner?.amount = expenseAmountInStr
+////        self.expenseFromScanner?.date = expenseDate
+//       // var note: String = ""
+//        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate )========== \n==================================\n)"
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,6 +58,25 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         ScannerController.shared.deleteNameAmountAndNote()
         self.textView.text = ""
         
+    }
+    
+    func createExpenseFromScanner() {
+        let expenseName = ScannerController.shared.name
+        let expenseAmount = ScannerController.shared.amountInDouble
+        let expenseAmountInStr = ScannerController.shared.amount
+        let expenseDate = ScannerController.shared.date.toDate()
+        let expenseNote = ScannerController.shared.note
+        let newExpense = ExpenseController.shared.createExpenseFromScannerWith(name: expenseName, amount: expenseAmount, category: ExpenseCategoryController.shared.expenseCategories[0], date: expenseDate ?? Date())
+        self.expenseFromScanner = newExpense
+        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate)========== \n==================================\n)"
+        // GO TO CityDataViewController By CODING STORYBOARD.ID
+        let storyboard = UIStoryboard(name: "Main", bundle: nil) // HAVE TO MATCH The NAME of Storyboard, this case Main.storyboard. Mostly! Strict with main.
+        let expenseDetailVC = storyboard.instantiateViewController(identifier: "expenseDetailVCStoryBoard") //HAVE TO match the Storyboard ID in storyboard
+        // The style of presenting
+       // expensesDetailVC.modalPresentationStyle = .pageSheet //You can choose the style of presenting
+        
+        // Now Presenting the next VC
+        self.present(expenseDetailVC, animated: true, completion: nil)
     }
     
     
@@ -87,12 +114,16 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
                 
             }
         }
+        navigationController?.popViewController(animated: true)
        // expenseName = scan.title
         //print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.dictionaryWithValues(forKeys: ["total",scan.title]))-----------------")
     }
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
         controller.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+
     }
     
     
@@ -100,6 +131,13 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
         controller.dismiss(animated: true, completion: nil)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
+        let expense = self.expenseFromScanner
+        destinationVC.expense = expense
     }
 }
 

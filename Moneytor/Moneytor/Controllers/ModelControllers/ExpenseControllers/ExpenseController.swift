@@ -33,6 +33,17 @@ class ExpenseController {
         CoreDataStack.shared.saveContext()
     }
     
+    func createExpenseFromScannerWith(name: String, amount:Double, category: ExpenseCategory, date: Date) -> Expense? {
+        guard let categoryID = category.id else {return nil}
+        let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
+        expenses.append(newExpense)
+        category.expenses?.adding(newExpense)
+        CoreDataStack.shared.saveContext()
+        return newExpense
+    }
+    
+    
+    
     func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
         
         guard let categoryID = category.id else {return}

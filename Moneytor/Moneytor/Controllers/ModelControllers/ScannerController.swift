@@ -107,6 +107,7 @@ class ScannerController {
         }
         guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
         self.amountInDouble = amountIsThelastInPotentialAmounts
+        self.amount = String(amountInDouble)
         //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
         //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
     }
@@ -116,29 +117,36 @@ class ScannerController {
        // var previousResult
         
         var midYs: [Double] = []
+        var minYs: [Double] = []
+        var maxYs: [Double] = []
+        let sortedReconizedTexts = reconizedTexts.sorted { $0.midY > $1.midY }
         for result in reconizedTexts {
             midYs.append(result.midY)
+            minYs.append(result.minY)
+            maxYs.append(result.maxY)
         }
         
         let newMidYs = midYs.removeDuplicates().sorted {$0 > $1}
+        let newMinYs = minYs.removeDuplicates().sorted {$0 > $1}
+        let newMaxYs = maxYs.removeDuplicates().sorted {$0 > $1}
         print("----------------- midYs:: \(newMidYs)-----------------")
         var newNote = ""
         //for n in newMidYs {
         var index = 0
-        let sortedReconizedTexts = reconizedTexts.sorted { $0.midY > $1.midY }
-
+        
         for r in sortedReconizedTexts {
              print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
             
             if index < newMidYs.count - 1 {
 
-                if newMidYs[index] == r.midY  {
-                    newNote += "\t"
+                if newMidYs[index] == r.midY || newMinYs[index] == r.minY || newMaxYs[index] == r.maxY  {
+                    newNote += "\t\t"
                     newNote += "\(r.text)"
                    // newNote += "\t"
                 } else {
                     newNote += "\n"
                     newNote += "\(r.text)"
+//                    newNote += "\n"
                    // newNote += "\n"
                     index += 1
                 }
