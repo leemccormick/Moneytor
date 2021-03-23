@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Vision
+import VisionKit
 
-class ExpenseDetailTableViewController: UITableViewController {
+class ExpenseDetailTableViewController: UITableViewController  {
     
     // MARK: - Outlets
     @IBOutlet weak var expenseNameTextField: MoneytorTextField!
@@ -18,6 +20,12 @@ class ExpenseDetailTableViewController: UITableViewController {
     // MARK: - Properties
     var expense: Expense?
     var selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories[0]
+    
+    var expenseFromScanner: Expense?
+    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    var requests = [VNRequest]()
+    
+    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -35,7 +43,20 @@ class ExpenseDetailTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         updateView()
+        self.requests = ScannerController.shared.setupVision()
+        self.expenseNameTextField.text = ScannerController.shared.name
+        self.expenseAmountTextField.text = ScannerController.shared.amount
+    
+
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ScannerController.shared.deleteNameAmountAndNote()
+       // self.textView.text = ""
+        
+    }
+    
     
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -47,7 +68,10 @@ class ExpenseDetailTableViewController: UITableViewController {
     }
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
-      
+        ScannerController.shared.deleteNameAmountAndNote()
+        let documentCameraController = VNDocumentCameraViewController()
+        documentCameraController.delegate = self
+        self.present(documentCameraController, animated: true, completion: nil)
     }
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
@@ -217,6 +241,42 @@ extension ExpenseDetailTableViewController {
         alertController.addAction(noAction)
         present(alertController, animated: true)
     }
+}
+
+// MARK: - VNDocumentCameraViewControllerDelegate
+extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelegate {
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        for i in 0..<scan.pageCount {
+            
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                    print("-----------------EXPENSE NAME FROM SCANING IS :: \(scan.title)-----------------")
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
