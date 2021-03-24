@@ -1102,7 +1102,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter expense name here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-SI-ipE" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="247" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter expense name here..." textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-SI-ipE" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="30" y="10" width="368" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1145,185 +1145,226 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="09x-oc-xqf" userLabel="Category Header">
-                                        <rect key="frame" x="0.0" y="206" width="428" height="40"/>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Expense Category :" id="vmG-73-kam">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="apD-Xq-2Ag" userLabel="Category Header">
+                                        <rect key="frame" x="0.0" y="262" width="428" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="09x-oc-xqf" id="DCg-Ho-lZO">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="apD-Xq-2Ag" id="Gfi-hT-AXG">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0C9-GG-Bs9" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kr1-0b-rYx" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="342" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="BMG-jr-KCt"/>
+                                                        <constraint firstAttribute="height" constant="40" id="54Y-E8-3Ag"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvF-Ga-GwM">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arv-tR-Wc9">
                                                     <rect key="frame" x="363" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="hx6-sv-xQy"/>
-                                                        <constraint firstAttribute="width" constant="40" id="oeq-PO-gfe"/>
+                                                        <constraint firstAttribute="height" constant="40" id="PTW-UW-rDc"/>
+                                                        <constraint firstAttribute="width" constant="40" id="VjK-Vl-p7n"/>
                                                     </constraints>
                                                     <color key="tintColor" name="mtLightBrownText"/>
                                                     <state key="normal" image="plus" catalog="system">
                                                         <color key="titleColor" name="mtLightBrownText"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="addCategoryButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="i8M-gH-S7o"/>
+                                                        <action selector="addCategoryButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="Skj-AB-WOz"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="mtGolderBG"/>
                                             <constraints>
-                                                <constraint firstItem="0C9-GG-Bs9" firstAttribute="leading" secondItem="DCg-Ho-lZO" secondAttribute="leading" constant="16" id="197-mR-vFA"/>
-                                                <constraint firstItem="rvF-Ga-GwM" firstAttribute="leading" secondItem="0C9-GG-Bs9" secondAttribute="trailing" constant="5" id="SrH-HW-9mE"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="rvF-Ga-GwM" secondAttribute="trailing" constant="5" id="YHd-6a-i8D"/>
-                                                <constraint firstItem="0C9-GG-Bs9" firstAttribute="top" secondItem="DCg-Ho-lZO" secondAttribute="top" id="Ywm-Cv-tU3"/>
-                                                <constraint firstAttribute="bottom" secondItem="rvF-Ga-GwM" secondAttribute="bottom" id="cee-fp-oYH"/>
-                                                <constraint firstAttribute="bottom" secondItem="0C9-GG-Bs9" secondAttribute="bottom" id="jdl-OJ-31J"/>
-                                                <constraint firstItem="rvF-Ga-GwM" firstAttribute="top" secondItem="DCg-Ho-lZO" secondAttribute="top" id="lRc-Ot-1W4"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="arv-tR-Wc9" secondAttribute="trailing" constant="5" id="6Ma-KY-Yyd"/>
+                                                <constraint firstAttribute="bottom" secondItem="Kr1-0b-rYx" secondAttribute="bottom" id="HwM-7v-thp"/>
+                                                <constraint firstAttribute="bottom" secondItem="arv-tR-Wc9" secondAttribute="bottom" id="NWl-SS-tZY"/>
+                                                <constraint firstItem="arv-tR-Wc9" firstAttribute="top" secondItem="Gfi-hT-AXG" secondAttribute="top" id="Uw4-iz-BPI"/>
+                                                <constraint firstItem="Kr1-0b-rYx" firstAttribute="leading" secondItem="Gfi-hT-AXG" secondAttribute="leading" constant="16" id="aiP-O6-oa5"/>
+                                                <constraint firstItem="arv-tR-Wc9" firstAttribute="leading" secondItem="Kr1-0b-rYx" secondAttribute="trailing" constant="5" id="cBK-Rv-uIT"/>
+                                                <constraint firstItem="Kr1-0b-rYx" firstAttribute="top" secondItem="Gfi-hT-AXG" secondAttribute="top" id="juG-1m-2le"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="92N-tB-NKj" userLabel="Category Picker">
-                                        <rect key="frame" x="0.0" y="246" width="428" height="132"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="Zu5-cf-umY" userLabel="Category Picker">
+                                        <rect key="frame" x="0.0" y="302" width="428" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="92N-tB-NKj" id="urA-B8-nVw">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zu5-cf-umY" id="mKd-PK-9Fz">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljx-Io-jPu" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ruS-G1-Dhf" customClass="MoneytorPickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="30" y="10" width="368" height="112"/>
                                                 </pickerView>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="Ljx-Io-jPu" firstAttribute="leading" secondItem="urA-B8-nVw" secondAttribute="leading" constant="30" id="0tK-gx-tu6"/>
-                                                <constraint firstAttribute="trailing" secondItem="Ljx-Io-jPu" secondAttribute="trailing" constant="30" id="EH6-Px-fp0"/>
-                                                <constraint firstAttribute="bottom" secondItem="Ljx-Io-jPu" secondAttribute="bottom" constant="10" id="GIU-j4-fAA"/>
-                                                <constraint firstItem="Ljx-Io-jPu" firstAttribute="top" secondItem="urA-B8-nVw" secondAttribute="top" constant="10" id="kGh-af-pF3"/>
+                                                <constraint firstAttribute="trailing" secondItem="ruS-G1-Dhf" secondAttribute="trailing" constant="30" id="PI5-bj-3Ww"/>
+                                                <constraint firstItem="ruS-G1-Dhf" firstAttribute="leading" secondItem="mKd-PK-9Fz" secondAttribute="leading" constant="30" id="Pdj-N0-xOS"/>
+                                                <constraint firstAttribute="bottom" secondItem="ruS-G1-Dhf" secondAttribute="bottom" constant="10" id="W5e-cz-z6d"/>
+                                                <constraint firstItem="ruS-G1-Dhf" firstAttribute="top" secondItem="mKd-PK-9Fz" secondAttribute="top" constant="10" id="rQB-cl-8vu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="1pe-lV-iwQ" userLabel="Date Section Header">
-                                        <rect key="frame" x="0.0" y="378" width="428" height="41"/>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Expense Date :" id="Jm0-kI-hxL" userLabel="Expense Date:">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="D6b-HI-Tsx" userLabel="Date Section Header">
+                                        <rect key="frame" x="0.0" y="490" width="428" height="41"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1pe-lV-iwQ" id="mpc-Ug-TiH">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D6b-HI-Tsx" id="xP6-El-daK">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVH-ZR-UV7" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOK-uI-qZo" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="342" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="aie-21-qf1"/>
+                                                        <constraint firstAttribute="height" constant="40" id="PTt-jb-fsb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIA-RI-vdr">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U0d-Nv-SX8">
                                                     <rect key="frame" x="363" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="WzY-Vo-KNT"/>
-                                                        <constraint firstAttribute="width" constant="40" id="ouU-n9-W9R"/>
+                                                        <constraint firstAttribute="height" constant="40" id="6J9-OU-oy6"/>
+                                                        <constraint firstAttribute="width" constant="40" id="7AQ-We-crX"/>
                                                     </constraints>
                                                     <color key="tintColor" name="mtLightBrownText"/>
                                                     <state key="normal" image="calendar.badge.clock" catalog="system">
                                                         <color key="titleColor" name="mtLightBrownText"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="addNotifincationButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="K5U-87-jqh"/>
+                                                        <action selector="addNotifincationButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="FtZ-uO-1aR"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="mtGolderBG"/>
                                             <constraints>
-                                                <constraint firstItem="dVH-ZR-UV7" firstAttribute="leading" secondItem="mpc-Ug-TiH" secondAttribute="leading" constant="16" id="Q7x-dO-S9F"/>
-                                                <constraint firstItem="WIA-RI-vdr" firstAttribute="top" secondItem="mpc-Ug-TiH" secondAttribute="top" id="R14-Qs-ucr"/>
-                                                <constraint firstItem="WIA-RI-vdr" firstAttribute="leading" secondItem="dVH-ZR-UV7" secondAttribute="trailing" constant="5" id="TU0-an-0eg"/>
-                                                <constraint firstAttribute="bottom" secondItem="dVH-ZR-UV7" secondAttribute="bottom" id="br1-uJ-Gwq"/>
-                                                <constraint firstAttribute="bottom" secondItem="WIA-RI-vdr" secondAttribute="bottom" id="lJm-av-SIG"/>
-                                                <constraint firstItem="dVH-ZR-UV7" firstAttribute="top" secondItem="mpc-Ug-TiH" secondAttribute="top" id="ud0-k3-ho6"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="WIA-RI-vdr" secondAttribute="trailing" constant="5" id="xmw-1e-Zf0"/>
+                                                <constraint firstItem="lOK-uI-qZo" firstAttribute="top" secondItem="xP6-El-daK" secondAttribute="top" id="3Qe-d1-vgd"/>
+                                                <constraint firstItem="U0d-Nv-SX8" firstAttribute="top" secondItem="xP6-El-daK" secondAttribute="top" id="5qc-gB-Ko7"/>
+                                                <constraint firstAttribute="bottom" secondItem="lOK-uI-qZo" secondAttribute="bottom" id="Jd3-x8-uhI"/>
+                                                <constraint firstItem="U0d-Nv-SX8" firstAttribute="leading" secondItem="lOK-uI-qZo" secondAttribute="trailing" constant="5" id="Nar-By-pvK"/>
+                                                <constraint firstItem="lOK-uI-qZo" firstAttribute="leading" secondItem="xP6-El-daK" secondAttribute="leading" constant="16" id="SiZ-SX-lcu"/>
+                                                <constraint firstAttribute="bottom" secondItem="U0d-Nv-SX8" secondAttribute="bottom" id="h1D-vf-WVD"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="U0d-Nv-SX8" secondAttribute="trailing" constant="5" id="i5U-0A-mjn"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtGolderBG"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="FpU-sC-6aH" userLabel="Date Picker">
-                                        <rect key="frame" x="0.0" y="419" width="428" height="320"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="fIu-je-OVV" userLabel="Date Picker">
+                                        <rect key="frame" x="0.0" y="531" width="428" height="320"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FpU-sC-6aH" id="d29-YM-tEo">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fIu-je-OVV" id="YNk-ir-wJE">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="aAK-eW-UTW" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="z57-8O-JMy" customClass="MoneytorDatePickerView" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="30" y="10" width="368" height="300"/>
-                                                    <connections>
-                                                        <action selector="expensesDatePickerValueChange:" destination="9tl-Xm-gpl" eventType="valueChanged" id="gsy-px-hak"/>
-                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="aAK-eW-UTW" secondAttribute="bottom" constant="10" id="CLw-rk-NVN"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="top" secondItem="d29-YM-tEo" secondAttribute="top" constant="10" id="U1l-ns-PS7"/>
-                                                <constraint firstAttribute="trailing" secondItem="aAK-eW-UTW" secondAttribute="trailing" constant="30" id="VAx-lp-bXp"/>
-                                                <constraint firstItem="aAK-eW-UTW" firstAttribute="leading" secondItem="d29-YM-tEo" secondAttribute="leading" constant="30" id="gr1-nU-p11"/>
+                                                <constraint firstItem="z57-8O-JMy" firstAttribute="leading" secondItem="YNk-ir-wJE" secondAttribute="leading" constant="30" id="0eK-Z7-kWk"/>
+                                                <constraint firstItem="z57-8O-JMy" firstAttribute="top" secondItem="YNk-ir-wJE" secondAttribute="top" constant="10" id="USO-az-G3d"/>
+                                                <constraint firstAttribute="trailing" secondItem="z57-8O-JMy" secondAttribute="trailing" constant="30" id="aob-E5-2fL"/>
+                                                <constraint firstAttribute="bottom" secondItem="z57-8O-JMy" secondAttribute="bottom" constant="10" id="e5N-GO-kwT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ux6-IU-o6W" userLabel="SaveButton">
-                                        <rect key="frame" x="0.0" y="739" width="428" height="43.5"/>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Expense Note :" id="CtL-rb-mOu" userLabel="Expense Note :">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="221" id="9ns-xn-XMW" userLabel="NoteTextView">
+                                        <rect key="frame" x="0.0" y="907" width="428" height="221"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ux6-IU-o6W" id="5UP-QF-ZpM">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ns-xn-XMW" id="uns-IS-wOp">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="221"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SmZ-Sl-vuU" customClass="MoneytorTextView" customModule="Moneytor" customModuleProvider="target">
+                                                    <rect key="frame" x="30" y="10" width="368" height="200"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="200" id="OSG-bl-mBO"/>
+                                                    </constraints>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" name="mtDarkGolder"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="SmZ-Sl-vuU" secondAttribute="trailing" constant="30" id="Eda-Wp-r0n"/>
+                                                <constraint firstItem="SmZ-Sl-vuU" firstAttribute="leading" secondItem="uns-IS-wOp" secondAttribute="leading" constant="30" id="H7X-1h-Zfx"/>
+                                                <constraint firstItem="SmZ-Sl-vuU" firstAttribute="top" secondItem="uns-IS-wOp" secondAttribute="top" constant="10" id="g7B-BM-JE8"/>
+                                                <constraint firstAttribute="bottom" secondItem="SmZ-Sl-vuU" secondAttribute="bottom" constant="10" id="kKI-Ym-pB9"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="mtDarkGolder"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Expense Button :" id="CAL-Td-qs8" userLabel="Expense Button :">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cjx-kV-AFC" userLabel="SaveButton">
+                                        <rect key="frame" x="0.0" y="1184" width="428" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cjx-kV-AFC" id="6mR-vs-0L9">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOD-Tq-9p1" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNG-fg-qTp" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="40" y="10" width="348" height="24"/>
                                                     <state key="normal" title="Save Expense Data"/>
                                                     <connections>
-                                                        <action selector="saveExpenseButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="Tbn-cv-gxy"/>
+                                                        <action selector="saveExpenseButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="iAJ-hx-HAy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="sOD-Tq-9p1" secondAttribute="trailing" constant="40" id="81o-Uj-ULw"/>
-                                                <constraint firstItem="sOD-Tq-9p1" firstAttribute="leading" secondItem="5UP-QF-ZpM" secondAttribute="leading" constant="40" id="Etx-9d-t9n"/>
-                                                <constraint firstItem="sOD-Tq-9p1" firstAttribute="top" secondItem="5UP-QF-ZpM" secondAttribute="top" constant="10" id="Gah-Dw-gfu"/>
-                                                <constraint firstAttribute="bottom" secondItem="sOD-Tq-9p1" secondAttribute="bottom" constant="10" id="Jqa-sU-lhY"/>
+                                                <constraint firstItem="WNG-fg-qTp" firstAttribute="top" secondItem="6mR-vs-0L9" secondAttribute="top" constant="10" id="HZp-Q2-TgK"/>
+                                                <constraint firstAttribute="bottom" secondItem="WNG-fg-qTp" secondAttribute="bottom" constant="10" id="IJe-dZ-0AS"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="WNG-fg-qTp" secondAttribute="trailing" constant="40" id="SFV-sa-vRu"/>
+                                                <constraint firstItem="WNG-fg-qTp" firstAttribute="leading" secondItem="6mR-vs-0L9" secondAttribute="leading" constant="40" id="zJd-3U-47F"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="11q-RA-JiL" userLabel="ScanButton">
-                                        <rect key="frame" x="0.0" y="782.5" width="428" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5WQ-XG-XPw" userLabel="ScanButton">
+                                        <rect key="frame" x="0.0" y="1227.5" width="428" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="11q-RA-JiL" id="HUP-5R-rt7">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5WQ-XG-XPw" id="eMi-Dv-XRN">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhG-Gs-bXI" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRY-5r-rFv" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="40" y="10" width="348" height="24"/>
                                                     <state key="normal" title="Scan Expense Data"/>
                                                     <connections>
-                                                        <action selector="scannerButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="cf1-Kt-Hij"/>
+                                                        <action selector="scannerButtonTapped:" destination="9tl-Xm-gpl" eventType="touchUpInside" id="fNZ-8t-rG2"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" name="mtDarkGolder"/>
                                             <constraints>
-                                                <constraint firstItem="qhG-Gs-bXI" firstAttribute="top" secondItem="HUP-5R-rt7" secondAttribute="top" constant="10" id="7ID-FB-v3C"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="qhG-Gs-bXI" secondAttribute="trailing" constant="40" id="Vai-EN-fQ5"/>
-                                                <constraint firstItem="qhG-Gs-bXI" firstAttribute="leading" secondItem="HUP-5R-rt7" secondAttribute="leading" constant="40" id="hz2-rT-an5"/>
-                                                <constraint firstAttribute="bottom" secondItem="qhG-Gs-bXI" secondAttribute="bottom" constant="10" id="ixZ-So-gXx"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="kRY-5r-rFv" secondAttribute="trailing" constant="40" id="KWf-Rh-qcK"/>
+                                                <constraint firstItem="kRY-5r-rFv" firstAttribute="leading" secondItem="eMi-Dv-XRN" secondAttribute="leading" constant="40" id="QCc-er-R3V"/>
+                                                <constraint firstAttribute="bottom" secondItem="kRY-5r-rFv" secondAttribute="bottom" constant="10" id="Qia-QS-fpH"/>
+                                                <constraint firstItem="kRY-5r-rFv" firstAttribute="top" secondItem="eMi-Dv-XRN" secondAttribute="top" constant="10" id="c3L-pX-Rar"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="mtDarkGolder"/>
@@ -1344,18 +1385,23 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="save" id="nkv-DZ-LHX">
                                 <connections>
-                                    <action selector="saveButtonTapped:" destination="9tl-Xm-gpl" id="Tqy-95-Wd4"/>
+                                    <action selector="saveButtonTapped:" destination="9tl-Xm-gpl" id="L86-ES-lQo"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem systemItem="camera" id="Rz4-Pt-7XW"/>
+                            <barButtonItem systemItem="camera" id="Rz4-Pt-7XW">
+                                <connections>
+                                    <action selector="scannerBarButtonTapped:" destination="9tl-Xm-gpl" id="L3Q-22-YUm"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="expenseAmountTextField" destination="jLO-8T-h5x" id="2mV-IG-lJW"/>
-                        <outlet property="expenseCategoryPicker" destination="Ljx-Io-jPu" id="rDJ-QC-KM0"/>
-                        <outlet property="expenseDatePicker" destination="aAK-eW-UTW" id="so5-jR-wwv"/>
-                        <outlet property="expenseNameTextField" destination="1Dy-SI-ipE" id="6Wj-YM-kVp"/>
+                        <outlet property="expenseAmountTextField" destination="jLO-8T-h5x" id="cPN-iU-oZL"/>
+                        <outlet property="expenseCategoryPicker" destination="ruS-G1-Dhf" id="4J2-QC-Eky"/>
+                        <outlet property="expenseDatePicker" destination="z57-8O-JMy" id="dzw-NH-fm2"/>
+                        <outlet property="expenseNameTextField" destination="1Dy-SI-ipE" id="e5q-eJ-y66"/>
+                        <outlet property="expenseNoteTextView" destination="SmZ-Sl-vuU" id="lKp-4x-JKP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLl-lb-K9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

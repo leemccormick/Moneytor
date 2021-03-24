@@ -24,18 +24,18 @@ class ExpenseController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
+    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String) {
         
         guard let categoryID = category.id else {return}
-        let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
+        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category)
         expenses.append(newExpense)
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
     }
     
-    func createExpenseFromScannerWith(name: String, amount:Double, category: ExpenseCategory, date: Date) -> Expense? {
+    func createExpenseFromScannerWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String) -> Expense? {
         guard let categoryID = category.id else {return nil}
-        let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
+        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category)
         expenses.append(newExpense)
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
@@ -44,10 +44,10 @@ class ExpenseController {
     
     
     
-    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date) {
+    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String) {
         
         guard let categoryID = category.id else {return}
-        let newExpense = Expense(name: name, amount: amount, date: date, id: categoryID, expenseCategory: category)
+        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category)
         expenses.append(newExpense)
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
@@ -99,19 +99,21 @@ class ExpenseController {
     }
     
     // UPDATE
-    func updateWith(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){
+    func updateWith(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date, note: String){
         expense.name = name
         expense.amount = NSDecimalNumber(value: amount)
         expense.expenseCategory = category
+        expense.note = note
         expense.date = date
         CoreDataStack.shared.saveContext()
     }
     
-    func updateExpenseWithNotificaion(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date){
+    func updateExpenseWithNotificaion(_ expense: Expense, name: String, amount: Double, category: ExpenseCategory, date: Date, note: String){
         expense.name = name
         expense.amount = NSDecimalNumber(value: amount)
         expense.expenseCategory = category
         expense.date = date
+        expense.note = note
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleExpenseNotifications(expense: expense)
     }

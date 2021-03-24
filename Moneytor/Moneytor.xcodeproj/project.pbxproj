@@ -26,6 +26,7 @@
 		362DDAB725FA141C005CC4F4 /* CurrencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB625FA141B005CC4F4 /* CurrencyController.swift */; };
 		362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */; };
 		362FB7D125FE01C40047DB7C /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */; };
+		363BF351260B122E00683A5A /* MoneytorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363BF350260B122E00683A5A /* MoneytorTextView.swift */; };
 		365D0645260A7DC900BBB44F /* ExpenseScannerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365D0644260A7DC900BBB44F /* ExpenseScannerTableViewController.swift */; };
 		36682CF225E42FF00075C03D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF125E42FF00075C03D /* Colors.xcassets */; };
 		36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */; };
@@ -90,6 +91,7 @@
 		362DDAB625FA141B005CC4F4 /* CurrencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyController.swift; sourceTree = "<group>"; };
 		362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIController.swift; sourceTree = "<group>"; };
 		362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		363BF350260B122E00683A5A /* MoneytorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorTextView.swift; sourceTree = "<group>"; };
 		365D0644260A7DC900BBB44F /* ExpenseScannerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseScannerTableViewController.swift; sourceTree = "<group>"; };
 		36682CF125E42FF00075C03D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold Italic.ttf"; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				36274E6725E4F4410063DE28 /* MoneytorPickerView.swift */,
 				36D0435725E9DE720034BCFC /* MoneytorSearchBar.swift */,
 				36744A1F25F75AD900BA60C9 /* MoneytorSegmentedControl.swift */,
+				363BF350260B122E00683A5A /* MoneytorTextView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				362FB7D125FE01C40047DB7C /* NotificationScheduler.swift in Sources */,
 				36AFBC9C25E41C7E00B559DB /* Moneytor.xcdatamodeld in Sources */,
 				36682D0325E438490075C03D /* StyleGuide.swift in Sources */,
+				363BF351260B122E00683A5A /* MoneytorTextView.swift in Sources */,
 				36E19BE525F893E100BFCDB0 /* Currency.swift in Sources */,
 				36274E5625E4CD890063DE28 /* ExpenseListTableViewController.swift in Sources */,
 				367BBEA825F036D600C11E59 /* TotalExpenseViewController.swift in Sources */,

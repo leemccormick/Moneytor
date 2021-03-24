@@ -39,7 +39,7 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         super.viewWillAppear(animated)
        // self.textView.text = ""
         self.requests = ScannerController.shared.setupVision()
-        createExpenseFromScanner()
+      //  createExpenseFromScanner()
 //        let expenseName = ScannerController.shared.name
 //        let expenseAmount = ScannerController.shared.amountInDouble
 //        let expenseAmountInStr = ScannerController.shared.amount
@@ -60,25 +60,25 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
         
     }
     
-    func createExpenseFromScanner() {
-        let expenseName = ScannerController.shared.name
-        let expenseAmount = ScannerController.shared.amountInDouble
-        let expenseAmountInStr = ScannerController.shared.amount
-        let expenseDate = ScannerController.shared.date.toDate()
-        let expenseNote = ScannerController.shared.note
-        let newExpense = ExpenseController.shared.createExpenseFromScannerWith(name: expenseName, amount: expenseAmount, category: ExpenseCategoryController.shared.expenseCategories[0], date: expenseDate ?? Date())
-        self.expenseFromScanner = newExpense
-        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate)========== \n==================================\n)"
-        // GO TO CityDataViewController By CODING STORYBOARD.ID
-        let storyboard = UIStoryboard(name: "Main", bundle: nil) // HAVE TO MATCH The NAME of Storyboard, this case Main.storyboard. Mostly! Strict with main.
-        let expenseDetailVC = storyboard.instantiateViewController(identifier: "expenseDetailVCStoryBoard") //HAVE TO match the Storyboard ID in storyboard
-        // The style of presenting
-       // expensesDetailVC.modalPresentationStyle = .pageSheet //You can choose the style of presenting
-        
-        // Now Presenting the next VC
-        self.present(expenseDetailVC, animated: true, completion: nil)
-    }
-    
+//    func createExpenseFromScanner() {
+//        let expenseName = ScannerController.shared.name
+//        let expenseAmount = ScannerController.shared.amountInDouble
+//        let expenseAmountInStr = ScannerController.shared.amount
+//        let expenseDate = ScannerController.shared.date.toDate()
+//        let expenseNote = ScannerController.shared.note
+//        let newExpense = ExpenseController.shared.createExpenseFromScannerWith(name: expenseName, amount: expenseAmount, category: ExpenseCategoryController.shared.expenseCategories[0], date: expenseDate ?? Date(), note: <#String#>)
+//        self.expenseFromScanner = newExpense
+//        self.textView.text = "\n Expense Note :: \(expenseNote) \n============\n \n=======Name :::\(expenseName)========== \n=======Amount::: \(expenseAmount)========== \n=======Date\(expenseDate)========== \n==================================\n)"
+//        // GO TO CityDataViewController By CODING STORYBOARD.ID
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil) // HAVE TO MATCH The NAME of Storyboard, this case Main.storyboard. Mostly! Strict with main.
+//        let expenseDetailVC = storyboard.instantiateViewController(identifier: "expenseDetailVCStoryBoard") //HAVE TO match the Storyboard ID in storyboard
+//        // The style of presenting
+//       // expensesDetailVC.modalPresentationStyle = .pageSheet //You can choose the style of presenting
+//
+//        // Now Presenting the next VC
+//        self.present(expenseDetailVC, animated: true, completion: nil)
+//    }
+//
     
     // MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {

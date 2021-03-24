@@ -9,7 +9,7 @@ import CoreData
 
 extension ExpenseCategory {
     
-    @discardableResult convenience init(name: String = "other", emoji: String = "💸", id: String = UUID().uuidString, expenses: NSSet?, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String = "_other", emoji: String = "💸", id: String = UUID().uuidString, expenses: NSSet?, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.emoji = emoji
@@ -20,7 +20,7 @@ extension ExpenseCategory {
 
 extension ExpenseCategory {
     var nameString: String {
-        name ?? "other"
+        name ?? "_other"
     }
     
     var emojoString: String {

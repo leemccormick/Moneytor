@@ -8,11 +8,12 @@
 import CoreData
 
 extension Expense {
-    @discardableResult convenience init(name: String, amount: Double, date: Date, id: String, expenseCategory: ExpenseCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String, amount: Double, date: Date, note: String, id: String, expenseCategory: ExpenseCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.amount = NSDecimalNumber(value: amount)
         self.date = date
+        self.note = note
         self.id = id
         self.expenseCategory = expenseCategory
     }
@@ -34,5 +35,9 @@ extension Expense: SearchableRecordDelegate {
     
     var expenseDateText: String {
         self.date?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
+    }
+    
+    var expenseNoteString: String {
+        note ?? ""
     }
 }

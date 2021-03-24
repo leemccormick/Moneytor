@@ -81,7 +81,7 @@ class ScannerController {
            // print("-----------------result.index ::: \(result.index)-----------------\(#function)")
             //self.note += result.text
             //self.note += "\n"
-            if result.index == 0 || result.index == 1{
+            if result.index == 0 {
                 self.name += result.text
             }
             let rSeparates = result.text.components(separatedBy: " ")
@@ -110,6 +110,7 @@ class ScannerController {
         self.amount = String(amountInDouble)
         //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
         //print("==================\n amountInDouble:: \(amountInDouble)\n=======================\(#function)")
+        //self.name.
     }
     
     func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
