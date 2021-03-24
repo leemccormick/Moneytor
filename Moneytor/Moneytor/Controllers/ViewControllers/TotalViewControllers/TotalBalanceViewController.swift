@@ -18,6 +18,7 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var dateDetailLabel: MoneytorGoodLetterLabel!
     
     // MARK: - Properties
     let weekly = TotalController.shared.weekly
@@ -76,7 +77,7 @@ class TotalBalanceViewController: UIViewController {
         let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
         let totalExpenseCurrencyStr = TotalController.shared.totalExpensesBySpecificTimeString
         let totalBalanceStr = TotalController.shared.totalBalanceBySpecificTimeString
-        
+        dateDetailLabel.text = "\(startedTime.dateToString(format: .monthDayYear)) - \(endedTime.dateToString(format: .monthDayYear))"
         totalBalanceLabel.text = totalBalanceStr
         totalIncomeButton.setTitle(totalIncomeCurrencyStr, for: .normal)
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)

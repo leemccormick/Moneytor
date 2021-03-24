@@ -45,6 +45,10 @@ class IncomeDetailTableViewController: UITableViewController {
 
     }
     
+    
+    @IBAction func scannerButtonOnViewButtonTapped(_ sender: Any) {
+    }
+    
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
         saveIncome()
     }
@@ -113,7 +117,7 @@ class IncomeDetailTableViewController: UITableViewController {
             return CGFloat(0.0)
         } else if section == 3 {
             return CGFloat(0.0)
-        } else if section == 4{
+        } else if section == 5{
             return CGFloat(0.0)
         }else {
             return CGFloat(40.0)
