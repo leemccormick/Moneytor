@@ -8,22 +8,22 @@
 import UIKit
 
 class ExpenseDocViewController: UIViewController {
-
+    
+    // MARK: - Outlets
+    @IBOutlet weak var exampleReceiptsImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        updateViewsWithAnitamateImages()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
-    */
-
+    
+    // MARK: - Methods
+    func updateViewsWithAnitamateImages() {
+        let images: [UIImage] = [#imageLiteral(resourceName: "cermak"), #imageLiteral(resourceName: "HomeDepot"), #imageLiteral(resourceName: "WholeFoods"),#imageLiteral(resourceName: "H&M")]
+        exampleReceiptsImageView.image = UIImage.animatedImage(with: images, duration: 8)
+    }
 }

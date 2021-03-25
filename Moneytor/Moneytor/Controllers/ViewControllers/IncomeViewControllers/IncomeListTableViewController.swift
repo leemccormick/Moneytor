@@ -43,8 +43,11 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     // MARK: - Actions
-    @IBAction func calendarButtonTapped(_ sender: Any) {
-
+    @IBAction func incomeDocumentButtonTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let expenseDocVC = storyboard.instantiateViewController(identifier: "incomeDocStoryBoardID")
+        expenseDocVC.modalPresentationStyle = .pageSheet
+        self.present(expenseDocVC, animated: true, completion: nil)
     }
     
     // MARK: - Helper Fuctions
