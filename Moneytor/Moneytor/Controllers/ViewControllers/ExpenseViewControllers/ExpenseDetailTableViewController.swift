@@ -52,7 +52,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ScannerController.shared.deleteNameAmountAndNote()
-        self.requests = ScannerController.shared.setupVision()
+        self.requests = ScannerController.shared.setupVisionForExpenseScanner()
     }
     
     // MARK: - Actions
@@ -148,11 +148,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         }else {
             return CGFloat(40.0)
         }
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // toScannerVC
     }
 }
 
@@ -251,7 +246,6 @@ extension ExpenseDetailTableViewController {
 extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         controller.dismiss(animated: true, completion: nil)
-        
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
             if let cgImage = scannedImage.cgImage {

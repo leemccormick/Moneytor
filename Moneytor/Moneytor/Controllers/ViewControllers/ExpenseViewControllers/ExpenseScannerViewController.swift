@@ -38,7 +38,7 @@ class ExpenseScannerViewController: UIViewController, VNDocumentCameraViewContro
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // self.textView.text = ""
-        self.requests = ScannerController.shared.setupVision()
+        self.requests = ScannerController.shared.setupVisionForExpenseScanner()
       //  createExpenseFromScanner()
 //        let expenseName = ScannerController.shared.name
 //        let expenseAmount = ScannerController.shared.amountInDouble

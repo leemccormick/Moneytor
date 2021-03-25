@@ -9,13 +9,15 @@ import CoreData
 
 extension Income {
     
-    @discardableResult convenience init(name: String, amount: Double, date: Date, id: String, incomeCategory: IncomeCategory, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String, amount: Double, date: Date, note: String, id: String, incomeCategory: IncomeCategory,  context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.amount = NSDecimalNumber(value: amount)
         self.date = date
+        self.note = note
         self.id = id
         self.incomeCategory = incomeCategory
+       
     }
 }
 
@@ -36,5 +38,10 @@ extension Income: SearchableRecordDelegate {
     var incomeDateText: String {
         self.date?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
     }
+    
+    var incomeNoteString: String {
+        note ?? ""
+    }
+    
 }
 

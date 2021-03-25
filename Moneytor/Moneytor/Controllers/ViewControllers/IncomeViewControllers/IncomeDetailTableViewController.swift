@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Vision
+import VisionKit
 
 class IncomeDetailTableViewController: UITableViewController {
     
@@ -14,10 +16,13 @@ class IncomeDetailTableViewController: UITableViewController {
     @IBOutlet weak var incomeAmountTextField: MoneytorTextField!
     @IBOutlet weak var incomeCategoryPicker: UIPickerView!
     @IBOutlet weak var incomeDatePicker: UIDatePicker!
+    @IBOutlet weak var incomeNoteTextView: MoneytorTextView!
     
     // MARK: - Properties
     var income: Income?
     var selectedIncomeCategory: IncomeCategory = IncomeCategoryController.shared.incomeCategories[0]
+    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    var requests = [VNRequest]()
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -32,8 +37,20 @@ class IncomeDetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
         IncomeCategoryController.shared.fetchAllIncomeCategories()
+        self.incomeNameTextField.text = ScannerController.shared.name
+        self.incomeAmountTextField.text = ScannerController.shared.amount
+        self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
+        self.incomeNoteTextView.text = ScannerController
+            .shared.note
         updateViews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ScannerController.shared.deleteNameAmountAndNote()
+        self.requests = ScannerController.shared.setupVisionForIncomeScanner()
     }
     
     // MARK: - Actions
@@ -42,18 +59,16 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     @IBAction func scannerButtonTapped(_ sender: Any) {
-
+        scanReceiptForIncomeResult()
     }
     
     
     @IBAction func scannerButtonOnViewButtonTapped(_ sender: Any) {
+        scanReceiptForIncomeResult()
     }
     
     @IBAction func incomeSaveButtonTapped(_ sender: Any) {
         saveIncome()
-    }
-    
-    @IBAction func incomeDatePickerValueChange(_ sender: Any) {
     }
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
@@ -61,6 +76,13 @@ class IncomeDetailTableViewController: UITableViewController {
     
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
         presentAlertAskingUserIfRemindedNeeded()
+    }
+    
+    func scanReceiptForIncomeResult() {
+        ScannerController.shared.deleteNameAmountAndNote()
+        let documentCameraController = VNDocumentCameraViewController()
+        documentCameraController.delegate = self
+        self.present(documentCameraController, animated: true, completion: nil)
     }
     
     // MARK: - Helper Fuctions
@@ -98,9 +120,9 @@ class IncomeDetailTableViewController: UITableViewController {
         }
         
         if let income = income {
-            IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date)
+            IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text )
         } else {
-            IncomeController.shared.createIncomeWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date)
+            IncomeController.shared.createIncomeWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -201,9 +223,9 @@ extension IncomeDetailTableViewController {
         let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
             
             if let income = self.income {
-                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
             } else {
-                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date)
+                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -214,5 +236,32 @@ extension IncomeDetailTableViewController {
 }
 
 
-
+extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegate {
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        for i in 0..<scan.pageCount {
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
 

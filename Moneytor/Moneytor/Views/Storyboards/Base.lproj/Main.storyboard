@@ -333,6 +333,7 @@
                         <outlet property="incomeCategoryPicker" destination="SB6-j4-3yf" id="ts8-0E-siG"/>
                         <outlet property="incomeDatePicker" destination="Lyb-ou-Rs3" id="RF9-LH-qkc"/>
                         <outlet property="incomeNameTextField" destination="2IO-cL-0MF" id="lV0-Hm-QE0"/>
+                        <outlet property="incomeNoteTextView" destination="hCM-ua-kbO" id="5AL-Aq-bqr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0C-sd-pDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
