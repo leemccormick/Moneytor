@@ -42,8 +42,11 @@ class ExpenseListTableViewController: UITableViewController {
     
     
     // MARK: - Actions
-    @IBAction func calendarButtonTapped(_ sender: Any) {
-        
+    @IBAction func documentButtonTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let expenseDocVC = storyboard.instantiateViewController(identifier: "expenseDocStoryBoardID")
+        expenseDocVC.modalPresentationStyle = .pageSheet 
+        self.present(expenseDocVC, animated: true, completion: nil)
     }
     
     // MARK: - Helper Fuctions
