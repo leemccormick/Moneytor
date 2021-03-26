@@ -26,6 +26,7 @@
 		362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */; };
 		362FB7D125FE01C40047DB7C /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */; };
 		363BF351260B122E00683A5A /* MoneytorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363BF350260B122E00683A5A /* MoneytorTextView.swift */; };
+		3657353F260D205C00FABFDF /* IncomeDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3657353E260D205C00FABFDF /* IncomeDocViewController.swift */; };
 		36653CEC260C8046008AA210 /* ExpenseDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36653CEB260C8046008AA210 /* ExpenseDocViewController.swift */; };
 		36682CF225E42FF00075C03D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF125E42FF00075C03D /* Colors.xcassets */; };
 		36682CFB25E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */; };
@@ -90,6 +91,7 @@
 		362DDAB925FA1935005CC4F4 /* ExchangeRateAPIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateAPIController.swift; sourceTree = "<group>"; };
 		362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		363BF350260B122E00683A5A /* MoneytorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneytorTextView.swift; sourceTree = "<group>"; };
+		3657353E260D205C00FABFDF /* IncomeDocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDocViewController.swift; sourceTree = "<group>"; };
 		36653CEB260C8046008AA210 /* ExpenseDocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDocViewController.swift; sourceTree = "<group>"; };
 		36682CF125E42FF00075C03D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		36682CF725E4376D0075C03D /* Champagne & Limousines Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Champagne & Limousines Bold Italic.ttf"; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				36274E4F25E4CD4E0063DE28 /* IncomeListTableViewController.swift */,
 				36274E5225E4CD650063DE28 /* IncomeDetailTableViewController.swift */,
+				3657353E260D205C00FABFDF /* IncomeDocViewController.swift */,
 			);
 			path = IncomeViewControllers;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */,
 				3671BA3C25E5B41000811F21 /* Income+Convenience.swift in Sources */,
 				36274E5F25E4CDF60063DE28 /* CurrencyMapViewController.swift in Sources */,
+				3657353F260D205C00FABFDF /* IncomeDocViewController.swift in Sources */,
 				3671BA4525E5C20100811F21 /* ExpenseController.swift in Sources */,
 				3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */,
 				36D0435825E9DE720034BCFC /* MoneytorSearchBar.swift in Sources */,
