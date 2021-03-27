@@ -23,7 +23,7 @@ class ExpenseDocViewController: UIViewController {
     
     // MARK: - Methods
     func updateViewsWithAnitamateImages() {
-        let images: [UIImage] = [#imageLiteral(resourceName: "cermak"), #imageLiteral(resourceName: "HomeDepot"), #imageLiteral(resourceName: "WholeFoods"),#imageLiteral(resourceName: "H&M")]
-        exampleReceiptsImageView.image = UIImage.animatedImage(with: images, duration: 8)
+        let images: [UIImage] = [#imageLiteral(resourceName: "e0"), #imageLiteral(resourceName: "e2"), #imageLiteral(resourceName: "e3"),#imageLiteral(resourceName: "e1")]
+        exampleReceiptsImageView.image = UIImage.animatedImage(with: images, duration: 13)
     }
 }

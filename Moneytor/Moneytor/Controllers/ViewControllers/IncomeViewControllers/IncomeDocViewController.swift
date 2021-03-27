@@ -22,7 +22,7 @@ class IncomeDocViewController: UIViewController {
     
     // MARK: - Methods
     func updateViewsWithAnitamateImages() {
-        let images: [UIImage] = [#imageLiteral(resourceName: "checkSpilt"), #imageLiteral(resourceName: "allChecks"), #imageLiteral(resourceName: "check1"),#imageLiteral(resourceName: "check2")]
+        let images: [UIImage] = [#imageLiteral(resourceName: "m1"), #imageLiteral(resourceName: "m2"), #imageLiteral(resourceName: "m3"),#imageLiteral(resourceName: "m4")]
         incomeDocImageView.image = UIImage.animatedImage(with: images, duration: 13)
     }
  

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "cermak.jpg",
+      "filename" : "e0.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "cermak@2x.jpg",
+      "filename" : "e0@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "cermak@3x.jpg",
+      "filename" : "e0@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

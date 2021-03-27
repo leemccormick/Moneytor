@@ -53,8 +53,27 @@ class TotalBalanceViewController: UIViewController {
         }
     }
 
-    @IBAction func calendarButtonTapped(_ sender: Any) {
-    
+    @IBAction func doccumentButtonTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "Moneytor Document!",
+                                                message: "Learn more about how to scan income and expense amount!" ,preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let IncomeAction = UIAlertAction(title: "Income Document!", style: .default) { (action) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let expenseDocVC = storyboard.instantiateViewController(identifier: "incomeDocStoryBoardID")
+            expenseDocVC.modalPresentationStyle = .pageSheet
+            self.present(expenseDocVC, animated: true, completion: nil)
+        }
+        let expenseAction = UIAlertAction(title: "Expense Document!", style: .default) { (action) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let expenseDocVC = storyboard.instantiateViewController(identifier: "expenseDocStoryBoardID")
+            expenseDocVC.modalPresentationStyle = .pageSheet
+            self.present(expenseDocVC, animated: true, completion: nil)
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(IncomeAction)
+        alertController.addAction(expenseAction)
+        present(alertController, animated: true)
     }
     
     @IBAction func totalIncomeButtonTapped(_ sender: Any) {

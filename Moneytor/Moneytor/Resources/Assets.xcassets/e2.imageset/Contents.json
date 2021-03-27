@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "HomeDepot.jpeg",
+      "filename" : "e2.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "HomeDepot@2x.jpeg",
+      "filename" : "e2@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "HomeDepot@3x.jpeg",
+      "filename" : "e2@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }
