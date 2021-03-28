@@ -72,6 +72,7 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
+        createNewCategory()
     }
     
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
@@ -96,6 +97,7 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeNameTextField.text = income.name
         incomeAmountTextField.text = income.incomeAmountStringToUpdate
         incomeDatePicker.date = income.date ?? Date()
+        incomeNoteTextView.text = income.note
         
         let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
         for row in 0..<numberOfRows {
@@ -235,7 +237,7 @@ extension IncomeDetailTableViewController {
     }
 }
 
-
+// MARK: - VNDocumentCameraViewControllerDelegate
 extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         controller.dismiss(animated: true, completion: nil)
@@ -254,14 +256,57 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
     }
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
         controller.dismiss(animated: true, completion: nil)
+        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
+        
+//        let alertController = UIAlertController(title: "CANCEL! INCOME SCANNER!", message: "", preferredStyle: .alert)
+//        let cancelAction = UIAlertAction(title: "CANCEL", style: .destructive) { (action) in
+//
+//        }
+//        alertController.addAction(cancelAction)
+//        present(alertController, animated: true)
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
-        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
         controller.dismiss(animated: true, completion: nil)
+//        let alertController = UIAlertController(title: "ERROR! SCANNING INCOME!", message: "Please, make sure if you are using camera propertly to scan income!", preferredStyle: .alert)
+//        let cancelAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
+//            controller.dismiss(animated: true, completion: nil)
+//        }
+//        alertController.addAction(cancelAction)
+//        present(alertController, animated: true)
+      
     }
 }
 
+// MARK: - Category
+extension IncomeDetailTableViewController {
+func createNewCategory() {
+    let alertController = UIAlertController(title: "Add New Category!",
+                                            message: "If you would like to add new income category, please enter a new income category emoji and name." ,preferredStyle: .alert)
+    alertController.addTextField { (emojiTextFiled) in
+        emojiTextFiled.placeholder = "Enter an emoji for category..."
+        emojiTextFiled.keyboardAppearance = .dark
+        emojiTextFiled.keyboardType = .default
+       // textField.
+    }
+    
+    alertController.addTextField { (nameTextFiled) in
+        nameTextFiled.placeholder = "Enter a name for category..."
+        nameTextFiled.keyboardAppearance = .dark
+        nameTextFiled.keyboardType = .default
+       // textField.
+    }
+    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
+        //DO SOMETHING HERE....
+        guard let name = alertController.textFields?.first?.text, !name.isEmpty else {return}
+        IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: alertController.textFields?.last?.text ?? "💵")
+    }
+    alertController.addAction(dismissAction)
+    alertController.addAction(doSomethingAction)
+    present(alertController, animated: true)
+}
+}
