@@ -31,15 +31,27 @@ class IncomeCategoryController {
     // MARK: - CRUD Methods
     func createIncomeDefaultCategories(name: String, emoji: String) {
     let newIncomeCategory = IncomeCategory(name: name, emoji: emoji, incomes: nil)
-    incomeCategories.append(newIncomeCategory)
-    CoreDataStack.shared.saveContext()
+        var isDuplicatedCategory: Bool = false
+        for incomeCategory in incomeCategories {
+            if newIncomeCategory.nameString.lowercased() == incomeCategory.nameString.lowercased() {
+                isDuplicatedCategory = true
+            } else {
+                isDuplicatedCategory = false
+            }
+        }
+        if isDuplicatedCategory {
+            print("\n===================ERROR! DUPLICATED CATAGORY IN \(#function) ======================\n")
+        } else {
+        incomeCategories.append(newIncomeCategory)
+                           CoreDataStack.shared.saveContext()
+        }
     }
     
     // READ
     func fetchAllIncomeCategories(){
         let fetchAllIncomeCatagories = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
         incomeCategories = fetchAllIncomeCatagories
-        //print("--------------------incomeCategories : \(incomeCategories.count) in \(#function) : ----------------------------\n)")
+        print("--------------------incomeCategories : \(incomeCategories.count) in \(#function) : ----------------------------\n)")
     }
     
     func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Income]]  {

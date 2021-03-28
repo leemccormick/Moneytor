@@ -20,7 +20,8 @@ class IncomeDetailTableViewController: UITableViewController {
     
     // MARK: - Properties
     var income: Income?
-    var selectedIncomeCategory: IncomeCategory = IncomeCategoryController.shared.incomeCategories[0]
+    //var selectedIncomeCategory: IncomeCategory = IncomeCategoryController.shared.incomeCategories[0]
+    var selectedIncomeCategory: IncomeCategory?
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var requests = [VNRequest]()
     
@@ -33,6 +34,11 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeNameTextField.delegate = self
         incomeAmountTextField.delegate = self
         IncomeCategoryController.shared.fetchAllIncomeCategories()
+        if IncomeCategoryController.shared.incomeCategories.count == 0 {
+            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+            selectedIncomeCategory = IncomeCategoryController.shared.incomeCategories.first
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +51,7 @@ class IncomeDetailTableViewController: UITableViewController {
         self.incomeNoteTextView.text = ScannerController
             .shared.note
         updateViews()
+        incomeCategoryPicker.reloadAllComponents()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -121,6 +128,7 @@ class IncomeDetailTableViewController: UITableViewController {
             return
         }
         
+        guard let selectedIncomeCategory = selectedIncomeCategory else {return}
         if let income = income {
             IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text )
         } else {
@@ -220,14 +228,16 @@ extension IncomeDetailTableViewController {
             return
         }
         
+        guard let selectedIncomeCategory = selectedIncomeCategory else {return}
+        
         let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nPaid Date : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
         let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
-            
+            guard let selectedIncomeCategory = self.selectedIncomeCategory else {return}
             if let income = self.income {
-                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
             } else {
-                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -257,7 +267,7 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
-        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
+        presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Income document scanner have been cancled!")
         
 //        let alertController = UIAlertController(title: "CANCEL! INCOME SCANNER!", message: "", preferredStyle: .alert)
 //        let cancelAction = UIAlertAction(title: "CANCEL", style: .destructive) { (action) in
@@ -302,8 +312,15 @@ func createNewCategory() {
     let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
     let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
         //DO SOMETHING HERE....
-        guard let name = alertController.textFields?.first?.text, !name.isEmpty else {return}
-        IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: alertController.textFields?.last?.text ?? "💵")
+        guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
+            self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
+            return}
+        guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
+            self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
+            return}
+        IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: emoji)
+        self.incomeCategoryPicker.reloadAllComponents()
+
     }
     alertController.addAction(dismissAction)
     alertController.addAction(doSomethingAction)

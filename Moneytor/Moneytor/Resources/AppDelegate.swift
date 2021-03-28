@@ -47,14 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         IncomeCategoryController.shared.fetchAllIncomeCategories()
-        print("-------------------- IncomeCategoryController.shared.incomeCategories: \(IncomeCategoryController.shared.incomeCategories.count) in \(#function) : ----------------------------\n)")
-        print("================================================================================\n\n\n\n\n")
-        if IncomeCategoryController.shared.incomeCategories == [] {
-            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
-            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "salary", emoji: "💳")
-            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "saving account", emoji: "💰")
-            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "checking account", emoji: "🏧")
-        }
+//        print("-------------------- IncomeCategoryController.shared.incomeCategories: \(IncomeCategoryController.shared.incomeCategories.count) in \(#function) : ----------------------------\n)")
+//        print("================================================================================\n\n\n\n\n")
+//        if IncomeCategoryController.shared.incomeCategories == [] {
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "salary", emoji: "💳")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "saving account", emoji: "💰")
+//            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "checking account", emoji: "🏧")
+//        }
         return true
     }
     
