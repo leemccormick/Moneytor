@@ -20,7 +20,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     
     // MARK: - Properties
     var expense: Expense?
-    var selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories[0]
+    var selectedExpenseCategory: ExpenseCategory?
     var expenseFromScanner: Expense?
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var requests = [VNRequest]()
@@ -35,6 +35,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseAmountTextField.delegate = self
         expenseDatePicker.isUserInteractionEnabled = true
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
+        if ExpenseCategoryController.shared.expenseCategories.count == 0 {
+            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+            selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
+        }
+        selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +51,10 @@ class ExpenseDetailTableViewController: UITableViewController  {
         self.expenseNoteTextView.text = ScannerController
             .shared.note
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
+        expenseCategoryPicker.reloadAllComponents()
+        selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
         updateView()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,6 +81,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     }
     
     @IBAction func addCategoryButtonTapped(_ sender: Any) {
+        createNewCategory()
     }
     
     @IBAction func addNotifincationButtonTapped(_ sender: Any) {
@@ -121,6 +130,8 @@ class ExpenseDetailTableViewController: UITableViewController  {
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
+        
+        guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
@@ -224,15 +235,16 @@ extension ExpenseDetailTableViewController {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT NEEDED FOR NOTIFICATION!!", messageAlert: "Add expense's amount for your remider!")
             return
         }
+        guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         
         let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS EXPENSES!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nPaid Date : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
         let yesAction = UIAlertAction(title: "YES, SET REMINDER!", style: .destructive) { (action) in
             
             if let expense = self.expense {
-                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: self.selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
             } else {
-                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: self.selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -261,16 +273,62 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
     }
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-        presentAlertToUser(titleAlert: "CANCEL! RECEIPT SCANNER!", messageAlert: "")
         controller.dismiss(animated: true, completion: nil)
+        presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Expense receipt scanner have been cancled!")
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        controller.dismiss(animated: true, completion: nil)
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
-        controller.dismiss(animated: true, completion: nil)
+        
     }
 }
+
+// MARK: - Category
+extension ExpenseDetailTableViewController {
+func createNewCategory() {
+    let alertController = UIAlertController(title: "Add New Category!",
+                                            message: "If you would like to add new expense category, please enter a new expense category emoji and name." ,preferredStyle: .alert)
+    alertController.addTextField { (emojiTextFiled) in
+        emojiTextFiled.placeholder = "Enter an emoji for category..."
+        emojiTextFiled.keyboardAppearance = .dark
+        emojiTextFiled.keyboardType = .default
+       // textField.
+    }
+    
+    alertController.addTextField { (nameTextFiled) in
+        nameTextFiled.placeholder = "Enter a name for category..."
+        nameTextFiled.keyboardAppearance = .dark
+        nameTextFiled.keyboardType = .default
+       // textField.
+    }
+    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
+        //DO SOMETHING HERE....
+        guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
+            self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
+            return}
+        guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
+            self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
+            return}
+        let newExpenseCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: name, emoji: emoji)
+        self.expenseCategoryPicker.reloadAllComponents()
+        guard let upwrapNewExpenseCategory = newExpenseCategory else {return}
+        let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
+        for row in 0..<numberOfRows {
+            if upwrapNewExpenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
+                self.expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+            }
+        }
+        self.selectedExpenseCategory = upwrapNewExpenseCategory
+    }
+    alertController.addAction(dismissAction)
+    alertController.addAction(doSomethingAction)
+    present(alertController, animated: true)
+}
+}
+
 
 
 

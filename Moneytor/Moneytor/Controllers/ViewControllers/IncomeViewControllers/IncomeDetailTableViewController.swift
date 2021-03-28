@@ -278,9 +278,11 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        
+        controller.dismiss(animated: true, completion: nil)
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
-        controller.dismiss(animated: true, completion: nil)
+        
 //        let alertController = UIAlertController(title: "ERROR! SCANNING INCOME!", message: "Please, make sure if you are using camera propertly to scan income!", preferredStyle: .alert)
 //        let cancelAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
 //            controller.dismiss(animated: true, completion: nil)

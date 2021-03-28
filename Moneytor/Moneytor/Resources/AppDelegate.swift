@@ -33,18 +33,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
                 
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
-        print("\n\n\n\n============================================================================================")
-        print("-------------------- ExpenseCategoryController.shared.expenseCategories: \(ExpenseCategoryController.shared.expenseCategories.count) in \(#function) : ----------------------------\n)")
-        if ExpenseCategoryController.shared.expenseCategories == [] {
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "food", emoji: "🍔")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "utility", emoji: "📞")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "health", emoji: "💪")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "grocery", emoji: "🛒")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "shopping", emoji: "🛍")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "entertainment", emoji: "🎬")
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "transportation", emoji: "🚘")
-        }
+//        print("\n\n\n\n============================================================================================")
+//        print("-------------------- ExpenseCategoryController.shared.expenseCategories: \(ExpenseCategoryController.shared.expenseCategories.count) in \(#function) : ----------------------------\n)")
+//        if ExpenseCategoryController.shared.expenseCategories == [] {
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "food", emoji: "🍔")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "utility", emoji: "📞")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "health", emoji: "💪")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "grocery", emoji: "🛒")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "shopping", emoji: "🛍")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "entertainment", emoji: "🎬")
+//            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "transportation", emoji: "🚘")
+//        }
         
         IncomeCategoryController.shared.fetchAllIncomeCategories()
 //        print("-------------------- IncomeCategoryController.shared.incomeCategories: \(IncomeCategoryController.shared.incomeCategories.count) in \(#function) : ----------------------------\n)")
