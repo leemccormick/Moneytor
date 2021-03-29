@@ -73,6 +73,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     
     @IBAction func scannerButtonOnViewButtonTapped(_ sender: Any) {
+       // IncomeDetailTableViewController.scannerButtonTapped(self.)
         scanReceiptForIncomeResult()
     }
     

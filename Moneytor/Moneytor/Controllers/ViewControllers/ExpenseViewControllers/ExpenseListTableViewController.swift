@@ -32,6 +32,7 @@ class ExpenseListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         expenseSearchBar.delegate = self
+        self.tableView.allowsSelection = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,24 +123,14 @@ class ExpenseListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            if self.isSearching {
-                guard let expense = self.resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
-                let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
-                let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-                let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                    ExpenseController.shared.deleteExpense(expense)
-                    self.fetchAllExpenses()
-                }
-                alertController.addAction(dismissAction)
-                alertController.addAction(deleteAction)
-                present(alertController, animated: true)
-                
-            } else {
+            if self.isSearching == false {
                 let expense = self.categoriesSections[indexPath.section][indexPath.row]
                 let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
                 let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+        
                     ExpenseController.shared.deleteExpense(expense)
+                    
                     
                     if self.expenseSearchBar.selectedScopeButtonIndex == 0 {
                         self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
@@ -152,6 +143,18 @@ class ExpenseListTableViewController: UITableViewController {
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
                 present(alertController, animated: true)
+            } else if self.isSearching == true {
+                guard let expense = self.resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
+                let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
+                let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+                    ExpenseController.shared.deleteExpense(expense)
+                    self.fetchAllExpenses()
+                }
+                alertController.addAction(dismissAction)
+                alertController.addAction(deleteAction)
+                present(alertController, animated: true)
+                
             }
             tableView.reloadData()
         }
@@ -239,6 +242,18 @@ class ExpenseListTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Row #: \(indexPath) \(#function)")
+        
+      //// performSegue(withIdentifier: "toExpenseUpdateDetailVC", sender: self)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let expenseDetailVC = storyboard.instantiateViewController(identifier: "expenseDetailVCStoryBoard")
+//        expenseDetailVC.modalPresentationStyle = .overFullScreen
+//        self.present(expenseDetailVC, animated: true, completion: nil)
+        
+        
+}
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
@@ -252,15 +267,24 @@ class ExpenseListTableViewController: UITableViewController {
         if segue.identifier ==  "toExpenseDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
-            if isSearching {
+            print("Row #: \(indexPath) \(#function)")
+            if isSearching == false {
+                            let expense = categoriesSections[indexPath.section][indexPath.row]
+                            destinationVC.expense = expense
+            } else if isSearching == true {
                 guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
-                destinationVC.expense = expense
-            } else {
-                let expense = categoriesSections[indexPath.section][indexPath.row]
                 destinationVC.expense = expense
             }
         }
-    }
+        
+//        if segue.identifier == "toExpenseUpdateDetailVC" {
+//            guard let indexPath = tableView.indexPathForSelectedRow,
+//                  let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
+//            let expense = categoriesSections[indexPath.section][indexPath.row]
+//            destinationVC.expense = expense
+//        }
+  }
+    
 }
 
 // MARK: - UISearchBarDelegate
@@ -292,22 +316,29 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
         if selectedScope == 0 {
             categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: self.daily, end: Date())
             self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
+            self.tableView.allowsSelection = true
         } else if selectedScope == 2 {
             categoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
             self.fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            self.tableView.allowsSelection = true
+
         } else {
             categoriesSections =  ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
             self.fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
+            self.tableView.allowsSelection = true
+
         }
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = false
+        isSearching = true
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = true
+        isSearching = false
         return true
     }
     

@@ -13,7 +13,7 @@
         <!--Income Detail Table View Controller-->
         <scene sceneID="s8R-wx-Up9">
             <objects>
-                <tableViewController id="9Nz-0l-ico" customClass="IncomeDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="incomeStoryBoardId" id="9Nz-0l-ico" customClass="IncomeDetailTableViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="whJ-EF-0sN">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1667,14 +1667,14 @@
                                 <rect key="frame" x="20" y="104" width="388" height="709"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KA-SG-rnK" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="264.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
                                         <string key="text">The app offer a scanning  and detecting text from income document. However for more accurate results from scanning and detecting total income's amount. Please, make sure the camera detect in amount of income and get better results by spilting long document to small pages for scanning.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cermak" translatesAutoresizingMaskIntoConstraints="NO" id="syE-bc-Wt6">
-                                        <rect key="frame" x="0.0" y="274.33333333333326" width="388" height="434.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="65.666666666666686" width="388" height="643.33333333333326"/>
                                     </imageView>
                                 </subviews>
                             </stackView>

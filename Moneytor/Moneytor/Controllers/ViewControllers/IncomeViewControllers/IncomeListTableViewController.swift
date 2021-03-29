@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Vision
+import VisionKit
 
 class IncomeListTableViewController: UITableViewController {
     
@@ -27,6 +29,8 @@ class IncomeListTableViewController: UITableViewController {
             updateFooter(total: totalIncomeSearching)
         }
     }
+    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    var requests = [VNRequest]()
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -41,16 +45,22 @@ class IncomeListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ScannerController.shared.deleteNameAmountAndNote()
+        self.requests = ScannerController.shared.setupVisionForIncomeScanner()
+    }
+    
     // MARK: - Actions
     @IBAction func incomeAddButtonTapped(_ sender: Any) {
         isSearching = false
     }
     
     @IBAction func incomeDocumentScannerButtonTapped(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let expenseDocVC = storyboard.instantiateViewController(identifier: "incomeDocStoryBoardID")
-        expenseDocVC.modalPresentationStyle = .pageSheet
-        self.present(expenseDocVC, animated: true, completion: nil)
+        ScannerController.shared.deleteNameAmountAndNote()
+        let documentCameraController = VNDocumentCameraViewController()
+        documentCameraController.delegate = self
+        self.present(documentCameraController, animated: true, completion: nil)
     }
     
     // MARK: - Helper Fuctions
@@ -314,11 +324,13 @@ extension IncomeListTableViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = false
+        isSearching = true
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = true
+        isSearching = false
         return true
     }
     
@@ -345,6 +357,46 @@ extension IncomeListTableViewController: UISearchBarDelegate {
         isSearching = false
     }
 }
+
+
+// MARK: - VNDocumentCameraViewControllerDelegate
+extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate {
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let incomeDetailVC = storyboard.instantiateViewController(identifier: "incomeStoryBoardId")
+        incomeDetailVC.modalPresentationStyle = .pageSheet
+        self.present(incomeDetailVC, animated: true, completion: nil)
+        
+        
+        for i in 0..<scan.pageCount {
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        controller.dismiss(animated: true, completion: nil)
+        presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Income document scanner have been cancled!")
+    }
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        
+        controller.dismiss(animated: true, completion: nil)
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
+    }
+}
+
 
 /* NOTE NEED Help
  
