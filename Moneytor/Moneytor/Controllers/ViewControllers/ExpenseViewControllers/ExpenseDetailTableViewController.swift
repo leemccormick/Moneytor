@@ -36,8 +36,9 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseDatePicker.isUserInteractionEnabled = true
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         if ExpenseCategoryController.shared.expenseCategories.count == 0 {
-            ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
-            selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
+            let newCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+            guard let upwrapNewCategory = newCategory else {return}
+            selectedExpenseCategory = upwrapNewCategory
         }
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
     }
@@ -54,7 +55,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
         updateView()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

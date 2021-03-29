@@ -35,23 +35,25 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeAmountTextField.delegate = self
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         if IncomeCategoryController.shared.incomeCategories.count == 0 {
-            IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
-            selectedIncomeCategory = IncomeCategoryController.shared.incomeCategories.first
+            let newCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+            guard let upwrapNewCategory = newCategory else {return}
+            selectedIncomeCategory = upwrapNewCategory
         }
+        selectedIncomeCategory = IncomeCategoryController.shared.incomeCategories.first
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
-        IncomeCategoryController.shared.fetchAllIncomeCategories()
         self.incomeNameTextField.text = ScannerController.shared.name
         self.incomeAmountTextField.text = ScannerController.shared.amount
         self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
         self.incomeNoteTextView.text = ScannerController
             .shared.note
-        updateViews()
+        IncomeCategoryController.shared.fetchAllIncomeCategories()
         incomeCategoryPicker.reloadAllComponents()
+        updateViews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -320,8 +322,16 @@ func createNewCategory() {
         guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
             self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
             return}
-        IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: emoji)
+        let newIncomeCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: emoji)
         self.incomeCategoryPicker.reloadAllComponents()
+        guard let upwrapNewIncomeCategory = newIncomeCategory else {return}
+        let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
+        for row in 0..<numberOfRows {
+            if upwrapNewIncomeCategory == IncomeCategoryController.shared.incomeCategories[row] {
+                self.incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+            }
+        }
+        self.selectedIncomeCategory = upwrapNewIncomeCategory
 
     }
     alertController.addAction(dismissAction)

@@ -22,7 +22,6 @@ class IncomeListTableViewController: UITableViewController {
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
     var sectionsIncomeDict = [Dictionary<String, Double>.Element]()
     var categoriesSections: [[Income]] =  IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
-    
     var totalIncomeSearching: Double = 0.0 {
         didSet{
             updateFooter(total: totalIncomeSearching)
@@ -43,7 +42,11 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     // MARK: - Actions
-    @IBAction func incomeDocumentButtonTapped(_ sender: Any) {
+    @IBAction func incomeAddButtonTapped(_ sender: Any) {
+        isSearching = false
+    }
+    
+    @IBAction func incomeDocumentScannerButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let expenseDocVC = storyboard.instantiateViewController(identifier: "incomeDocStoryBoardID")
         expenseDocVC.modalPresentationStyle = .pageSheet
@@ -69,7 +72,6 @@ class IncomeListTableViewController: UITableViewController {
     func updateFooter(total: Double) {
         let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         footer.backgroundColor = .mtLightYellow
-        
         let lable = UILabel(frame:footer.bounds)
         let totalString = AmountFormatter.currencyInString(num: total)
         lable.text = "TOTAL INCOMES : \(totalString)  "
@@ -111,6 +113,7 @@ class IncomeListTableViewController: UITableViewController {
             if !categoriesSections[indexPath.section].isEmpty {
                 
                 let income = categoriesSections[indexPath.section][indexPath.row]
+                cell.textLabel?.numberOfLines = 0
                 cell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 cell.detailTextLabel?.text = income.incomeAmountString
             }
@@ -120,41 +123,51 @@ class IncomeListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let income = categoriesSections[indexPath.section][indexPath.row]
-            let alertController = UIAlertController(title: "Are you sure to delete this Income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
-            let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                
-                if self.isSearching {
-                    guard let income = self.resultsIncomeFromSearching[indexPath.row] as? Income else {return}
+            
+            if isSearching {
+                guard let income = self.resultsIncomeFromSearching[indexPath.row] as? Income else {return}
+                let alertController = UIAlertController(title: "Are you sure to delete this Income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
+                let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                     IncomeController.shared.deleteIncome(income)
                     self.fetchAllIncomes()
-                    
-                } else {
-                    let income = self.categoriesSections[indexPath.section][indexPath.row]
+                }
+                alertController.addAction(dismissAction)
+                alertController.addAction(deleteAction)
+                present(alertController, animated: true)
+                
+            } else {
+                let income = self.categoriesSections[indexPath.section][indexPath.row]
+                let alertController = UIAlertController(title: "Are you sure to delete this Income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
+                let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                     IncomeController.shared.deleteIncome(income)
                     
                     if self.incomeSearchBar.selectedScopeButtonIndex == 0 {
                         self.fetchIncomesBySpecificTime(start: self.daily, end: Date())
                     } else if self.incomeSearchBar.selectedScopeButtonIndex == 2 {
                         self.fetchIncomesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-                    } else {
+                    } else  {
                         self.fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
                     }
                 }
-                tableView.reloadData()
+                alertController.addAction(dismissAction)
+                alertController.addAction(deleteAction)
+                present(alertController, animated: true)
             }
-            alertController.addAction(dismissAction)
-            alertController.addAction(deleteAction)
-            present(alertController, animated: true)
+            tableView.reloadData()
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if categoriesSections[section].count <= 0 {
-            return CGFloat(0.01)
-        } else {
+        if isSearching {
             return CGFloat(30.0)
+        } else {
+            if categoriesSections[section].count == 0 {
+                return CGFloat(0.01)
+            } else {
+                return CGFloat(30.0)
+            }
         }
     }
     
@@ -165,26 +178,70 @@ class IncomeListTableViewController: UITableViewController {
         } else {
             if tableView.numberOfRows(inSection: section) == 0 {
                 return nil
-            }
-            
-            var total = 0.0
-            var name = ""
-            var totalIncomeInEachSections: [Double] = []
-            var sectionNames: [String] = []
-            for section in categoriesSections {
-                total = 0.0
-                for income in section {
-                    total += income.amount as! Double
-                    name = income.incomeCategory?.nameString ?? ""
+            } else {
+                
+                if self.incomeSearchBar.selectedScopeButtonIndex == 0 {
+                    self.fetchIncomesBySpecificTime(start: self.daily, end: Date())
+                    var total = 0.0
+                    var name = ""
+                    var totalIncomeInEachSections: [Double] = []
+                    var sectionNames: [String] = []
+                    for section in categoriesSections {
+                        total = 0.0
+                        for income in section {
+                            total += income.amount as! Double
+                            name = income.incomeCategory?.nameString ?? ""
+                        }
+                        totalIncomeInEachSections.append(total)
+                        sectionNames.append(name)
+                    }
+                    
+                    let categoryName = sectionNames[section]
+                    let categoryTotal = totalIncomeInEachSections[section]
+                    let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
+                    return "\(categoryName.uppercased()) \(categoryTotalString)"
+                } else if self.incomeSearchBar.selectedScopeButtonIndex == 2 {
+                    self.fetchIncomesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+                    var total = 0.0
+                    var name = ""
+                    var totalIncomeInEachSections: [Double] = []
+                    var sectionNames: [String] = []
+                    for section in categoriesSections {
+                        total = 0.0
+                        for income in section {
+                            total += income.amount as! Double
+                            name = income.incomeCategory?.nameString ?? ""
+                        }
+                        totalIncomeInEachSections.append(total)
+                        sectionNames.append(name)
+                    }
+                    
+                    let categoryName = sectionNames[section]
+                    let categoryTotal = totalIncomeInEachSections[section]
+                    let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
+                    return "\(categoryName.uppercased()) \(categoryTotalString)"
+                } else {
+                    self.fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
+                    var total = 0.0
+                    var name = ""
+                    var totalIncomeInEachSections: [Double] = []
+                    var sectionNames: [String] = []
+                    for section in categoriesSections {
+                        total = 0.0
+                        for income in section {
+                            total += income.amount as! Double
+                            name = income.incomeCategory?.nameString ?? ""
+                        }
+                        totalIncomeInEachSections.append(total)
+                        sectionNames.append(name)
+                    }
+                    
+                    let categoryName = sectionNames[section]
+                    let categoryTotal = totalIncomeInEachSections[section]
+                    let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
+                    return "\(categoryName.uppercased()) \(categoryTotalString)"
                 }
-                totalIncomeInEachSections.append(total)
-                sectionNames.append(name)
             }
-            
-            let categoryName = sectionNames[section]
-            let categoryTotal = totalIncomeInEachSections[section]
-            let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
-            return "\(categoryName.uppercased()) \(categoryTotalString)"
         }
     }
     
@@ -198,6 +255,7 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "toIncomeDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
@@ -205,12 +263,14 @@ class IncomeListTableViewController: UITableViewController {
                 guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
                 destinationVC.income = income
             } else {
-                let income = categoriesSections[indexPath.section][indexPath.row]
+                let income = self.categoriesSections[indexPath.section][indexPath.row]
                 destinationVC.income = income
+                
             }
         }
     }
 }
+
 
 // MARK: - UISearchBarDelegate
 extension IncomeListTableViewController: UISearchBarDelegate {
@@ -242,13 +302,13 @@ extension IncomeListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         if selectedScope == 0 {
             categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: self.daily, end: Date())
-            fetchIncomesBySpecificTime(start: self.daily, end: Date())
+            self.fetchIncomesBySpecificTime(start: self.daily, end: Date())
         } else if selectedScope == 2 {
             categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-            fetchIncomesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            self.fetchIncomesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
         } else {
             categoriesSections =  IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
-            fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
+            self.fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
         }
     }
     

@@ -29,7 +29,7 @@ class IncomeCategoryController {
     }()
     
     // MARK: - CRUD Methods
-    func createIncomeDefaultCategories(name: String, emoji: String) {
+    func createIncomeDefaultCategories(name: String, emoji: String) -> IncomeCategory? {
     let newIncomeCategory = IncomeCategory(name: name, emoji: emoji, incomes: nil)
         var isDuplicatedCategory: Bool = false
         for incomeCategory in incomeCategories {
@@ -39,12 +39,15 @@ class IncomeCategoryController {
                 isDuplicatedCategory = false
             }
         }
+        var returnNewIncomeCategory: IncomeCategory?
         if isDuplicatedCategory {
             print("\n===================ERROR! DUPLICATED CATAGORY IN \(#function) ======================\n")
         } else {
         incomeCategories.append(newIncomeCategory)
                            CoreDataStack.shared.saveContext()
+            returnNewIncomeCategory = newIncomeCategory
         }
+        return returnNewIncomeCategory
     }
     
     // READ
