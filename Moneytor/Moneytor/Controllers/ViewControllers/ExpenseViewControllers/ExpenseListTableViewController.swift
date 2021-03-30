@@ -70,7 +70,6 @@ class ExpenseListTableViewController: UITableViewController {
         let newCategoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: start, endedTime: end)
         updateFooter(total: TotalController.shared.totalExpenseBySpecificTime)
-        //  sectionsExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: categoriesSections)
         tableView.reloadData()
         return newCategoriesSections
     }
@@ -92,25 +91,25 @@ class ExpenseListTableViewController: UITableViewController {
         if tableView.numberOfRows(inSection: section) == 0 {
             return ""
         } else {
-        var total = 0.0
-        var name = ""
-        var totalExpenseInEachSections: [Double] = []
-        var sectionNames: [String] = []
-        for section in categoriesSections {
-            total = 0.0
-            for expense in section {
-            
+            var total = 0.0
+            var name = ""
+            var totalExpenseInEachSections: [Double] = []
+            var sectionNames: [String] = []
+            for section in categoriesSections {
+                total = 0.0
+                for expense in section {
+                    
                     total += expense.expenseAmountInDouble
-                name = expense.expenseCategory?.nameString ?? ""
-          
+                    name = expense.expenseCategory?.nameString ?? ""
+                    
+                }
+                totalExpenseInEachSections.append(total)
+                sectionNames.append(name)
             }
-            totalExpenseInEachSections.append(total)
-            sectionNames.append(name)
-        }
-        let categoryName = sectionNames[section]
-        let categoryTotal = totalExpenseInEachSections[section]
-        let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
-        return "\(categoryName.uppercased()) \(categoryTotalString)"
+            let categoryName = sectionNames[section]
+            let categoryTotal = totalExpenseInEachSections[section]
+            let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
+            return "\(categoryName.uppercased()) \(categoryTotalString)"
         }
     }
     
@@ -205,69 +204,69 @@ class ExpenseListTableViewController: UITableViewController {
                 switch expenseSearchBar.selectedScopeButtonIndex {
                 case 0:
                     let expense = self.categoriesSectionsByDay[indexPath.section][indexPath.row]
-                                      let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other")  \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
-                                      let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-                                      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                                          
-                                          ExpenseController.shared.deleteExpense(expense)
-                                      //  guard let indexToDelete = self.categoriesSectionsByDay[indexPath.section][indexPath.row] else {return}
-                                       // print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
-                                        self.categoriesSectionsByDay[indexPath.section].remove(at: indexPath.row)
-                                        tableView.deleteRows(at: [indexPath], with: .fade)
-                                        tableView.reloadData()
-                                        self.categoriesSectionsByDay = self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
-                                      }
-                                      alertController.addAction(dismissAction)
-                                      alertController.addAction(deleteAction)
-                                      present(alertController, animated: true)
-                     
+                    let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other")  \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
+                    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+                        
+                        ExpenseController.shared.deleteExpense(expense)
+                        //  guard let indexToDelete = self.categoriesSectionsByDay[indexPath.section][indexPath.row] else {return}
+                        // print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
+                        self.categoriesSectionsByDay[indexPath.section].remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        tableView.reloadData()
+                        self.categoriesSectionsByDay = self.fetchExpensesBySpecificTime(start: self.daily, end: Date())
+                    }
+                    alertController.addAction(dismissAction)
+                    alertController.addAction(deleteAction)
+                    present(alertController, animated: true)
+                    
                 case 1:
                     let expense = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
                     let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other") \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
-                                      let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-                                      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                                          
-                                          ExpenseController.shared.deleteExpense(expense)
-                                        //guard let indexToDelete = self.categoriesSectionsByWeek.firstIndex(of: [expense]) else {return}
-                                        //print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
-
-                                        self.categoriesSectionsByWeek[indexPath.section].remove(at: indexPath.row)
-                                        tableView.deleteRows(at: [indexPath], with: .fade)
-                                        tableView.reloadData()
-                                        self.categoriesSectionsByWeek = self.fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
-
-                                      }
-                                      alertController.addAction(dismissAction)
-                                      alertController.addAction(deleteAction)
-                                      present(alertController, animated: true)
+                    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+                        
+                        ExpenseController.shared.deleteExpense(expense)
+                        //guard let indexToDelete = self.categoriesSectionsByWeek.firstIndex(of: [expense]) else {return}
+                        //print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
+                        
+                        self.categoriesSectionsByWeek[indexPath.section].remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        tableView.reloadData()
+                        self.categoriesSectionsByWeek = self.fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
+                        
+                    }
+                    alertController.addAction(dismissAction)
+                    alertController.addAction(deleteAction)
+                    present(alertController, animated: true)
                 case 2:
                     let expense = self.categoriesSectionsByMonth[indexPath.section][indexPath.row]
-                                      let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other") \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
+                    let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other") \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
                     
-                                      let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-                                      let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                                          
-                                          ExpenseController.shared.deleteExpense(expense)
-//                                        guard let indexToDelete = self.categoriesSectionsByMonth.firstIndex(of: [expense]) else {return}
-//                                        print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
-
-                                        self.categoriesSectionsByMonth[indexPath.section].remove(at: indexPath.row)
-                                        tableView.deleteRows(at: [indexPath], with: .fade)
-                                        tableView.reloadData()
-                                        self.categoriesSectionsByMonth = self.fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-                                          
-                                      }
-                                      alertController.addAction(dismissAction)
-                                      alertController.addAction(deleteAction)
-                                      present(alertController, animated: true)
+                    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+                        
+                        ExpenseController.shared.deleteExpense(expense)
+                        //                                        guard let indexToDelete = self.categoriesSectionsByMonth.firstIndex(of: [expense]) else {return}
+                        //                                        print("\n===================indexToDelete : \(indexToDelete) IN \(#function) ======================\n")
+                        
+                        self.categoriesSectionsByMonth[indexPath.section].remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                        tableView.reloadData()
+                        self.categoriesSectionsByMonth = self.fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+                        
+                    }
+                    alertController.addAction(dismissAction)
+                    alertController.addAction(deleteAction)
+                    present(alertController, animated: true)
                 default:
                     print("\n===================ERROR! DELETED EXPENSE IN\(#function) ======================\n")
                 }
             }
         }
     }
-                
-                  
+    
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if isSearching {
             return CGFloat(30.0)
@@ -304,16 +303,13 @@ class ExpenseListTableViewController: UITableViewController {
         } else {
             switch expenseSearchBar.selectedScopeButtonIndex {
             case 0:
-                //let dayCategoriesSection = fetchExpensesBySpecificTime(start: daily, end: Date())
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
                 tableView.reloadData()
                 return title
             case 1:
-                //let weekCategoriesSection = fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByWeek, section: section)
                 return title
             case 2:
-                //let monthCategoriesSection = fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByMonth, section: section)
                 return title
             default:
@@ -321,21 +317,8 @@ class ExpenseListTableViewController: UITableViewController {
             }
         }
     }
-                
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("Row #: \(indexPath) \(#function)")
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        guard let detailVC = UIStoryboard(name: "Main", bundle: nil)  .instantiateViewController(withIdentifier: "expenseDetailVCStoryBoard") as? ExpenseDetailTableViewController else {return}
-//
-//        let nav = UINavigationController(rootViewController: self)
-//        nav.navigationItem.backBarButtonItem?.isEnabled = true
-//        detailVC.expense = categoriesSections[indexPath.section][indexPath.row]
-//
-//        nav.modalPresentationStyle = .fullScreen
-//        present(nav, animated: true, completion: nil)
-//
-//    }
-                
+    
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
@@ -355,7 +338,7 @@ class ExpenseListTableViewController: UITableViewController {
                 destinationVC.expense = expense
             }
         }
-      
+        
         
         if segue.identifier ==  "toExpenseDetailVCByScopeBar" {
             guard let indexPath = tableView.indexPathForSelectedRow,
@@ -372,15 +355,15 @@ class ExpenseListTableViewController: UITableViewController {
                 let expense = categoriesSectionsByMonth[indexPath.section][indexPath.row]
                 destinationVC.expense = expense
             default:
-               print("\n===================ERROR! IN \(#function) ======================\n")
+                print("\n===================ERROR! IN \(#function) ======================\n")
             }
         }
         
     }
     
 }
-            
-            // MARK: - UISearchBarDelegate
+
+// MARK: - UISearchBarDelegate
 extension ExpenseListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

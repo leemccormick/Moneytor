@@ -43,5 +43,9 @@ extension Income: SearchableRecordDelegate {
         note ?? ""
     }
     
+    var incomeAmountInDouble: Double {
+        amount?.doubleValue ?? 0.0
+    }
+    
 }
 
