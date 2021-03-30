@@ -40,4 +40,8 @@ extension Expense: SearchableRecordDelegate {
     var expenseNoteString: String {
         note ?? ""
     }
+    
+    var expenseAmountInDouble: Double {
+        amount?.doubleValue ?? 0.0
+    }
 }
