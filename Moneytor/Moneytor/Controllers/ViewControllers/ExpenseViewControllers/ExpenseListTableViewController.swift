@@ -306,6 +306,7 @@ class ExpenseListTableViewController: UITableViewController {
             case 0:
                 //let dayCategoriesSection = fetchExpensesBySpecificTime(start: daily, end: Date())
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
+                tableView.reloadData()
                 return title
             case 1:
                 //let weekCategoriesSection = fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
@@ -409,10 +410,13 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
         switch expenseSearchBar.selectedScopeButtonIndex {
         case 0:
             categoriesSectionsByDay = fetchExpensesBySpecificTime(start: daily, end: Date())
+            tableView.reloadData()
         case 1:
             categoriesSectionsByWeek = fetchExpensesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
+            tableView.reloadData()
         case 2:
             categoriesSectionsByMonth = fetchExpensesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+            tableView.reloadData()
         default:
             tableView.reloadData()
         }
