@@ -57,6 +57,7 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     @IBAction func incomeDocumentScannerButtonTapped(_ sender: Any) {
+      //  IncomeDetailTableViewController.scanReceiptForIncomeResult(IncomeDetailTableViewController)
         ScannerController.shared.deleteNameAmountAndNote()
         let documentCameraController = VNDocumentCameraViewController()
         documentCameraController.delegate = self
@@ -363,25 +364,38 @@ extension IncomeListTableViewController: UISearchBarDelegate {
 extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         controller.dismiss(animated: true, completion: nil)
-        
+        for i in 0..<scan.pageCount {
+                    let scannedImage = scan.imageOfPage(at: i)
+                    if let cgImage = scannedImage.cgImage {
+                        let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                        do {
+                            try requestHandler.perform(self.requests)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                    }
+                }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let incomeDetailVC = storyboard.instantiateViewController(identifier: "incomeStoryBoardId")
-        incomeDetailVC.modalPresentationStyle = .pageSheet
-        self.present(incomeDetailVC, animated: true, completion: nil)
+        //incomeDetailVC.modalPresentationStyle = .pageSheet
         
         
-        for i in 0..<scan.pageCount {
-            let scannedImage = scan.imageOfPage(at: i)
-            if let cgImage = scannedImage.cgImage {
-                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
-                do {
-                    try requestHandler.perform(self.requests)
-                } catch {
-                    print(error.localizedDescription)
-                }
-                
-            }
-        }
+        
+        
+        
+        let nav = UINavigationController(rootViewController: incomeDetailVC)
+        
+       
+        let image = UIImage(systemName: "chevron.backward")
+        nav.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: "backClicked")
+            
+        nav.navigationItem.backBarButtonItem?.isEnabled = true
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
+        
+        
+        
     }
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
@@ -395,6 +409,9 @@ extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate 
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
     }
+    func backClicked(sender: UIBarButtonItem!) {
+        dismiss(animated: true, completion: nil);
+          }
 }
 
 

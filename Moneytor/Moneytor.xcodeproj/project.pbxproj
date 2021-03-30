@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16F6E48F26125DF6009B3429 /* ExpenseScannerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6E48E26125DF6009B3429 /* ExpenseScannerTableViewController.swift */; };
 		3606B1A825F9F444005F375F /* LocationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1A725F9F444005F375F /* LocationPin.swift */; };
 		3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */; };
 		3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AF25F9F651005F375F /* LocationPinController.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16F6E48E26125DF6009B3429 /* ExpenseScannerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseScannerTableViewController.swift; sourceTree = "<group>"; };
 		1B0E68A1C9643499C8D81A76 /* Pods-Moneytor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneytor.release.xcconfig"; path = "Target Support Files/Pods-Moneytor/Pods-Moneytor.release.xcconfig"; sourceTree = "<group>"; };
 		3606B1A725F9F444005F375F /* LocationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPin.swift; sourceTree = "<group>"; };
 		3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLocation+Convenience.swift"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				36274E5525E4CD890063DE28 /* ExpenseListTableViewController.swift */,
 				36274E5825E4CDA20063DE28 /* ExpenseDetailTableViewController.swift */,
 				36653CEB260C8046008AA210 /* ExpenseDocViewController.swift */,
+				16F6E48E26125DF6009B3429 /* ExpenseScannerTableViewController.swift */,
 			);
 			path = ExpenseViewControllers;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				36AFBC9425E41C7E00B559DB /* SceneDelegate.swift in Sources */,
 				3671BA5325E5D9E300811F21 /* UIViewController+Extension.swift in Sources */,
 				3628331525E7498200381731 /* ExpenseCategoryController.swift in Sources */,
+				16F6E48F26125DF6009B3429 /* ExpenseScannerTableViewController.swift in Sources */,
 				36274E5025E4CD4E0063DE28 /* IncomeListTableViewController.swift in Sources */,
 				36682D0B25E43CAD0075C03D /* MoneytorButton.swift in Sources */,
 				3671BA4225E5BD0300811F21 /* IncomeController.swift in Sources */,
