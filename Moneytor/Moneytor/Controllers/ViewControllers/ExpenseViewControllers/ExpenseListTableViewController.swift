@@ -337,7 +337,6 @@ class ExpenseListTableViewController: UITableViewController {
             }
         }
         
-        
         if segue.identifier ==  "toExpenseDetailVCByScopeBar" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}

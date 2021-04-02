@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16049A5E2617C18500B3382F /* BugFixIncomeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16049A5D2617C18500B3382F /* BugFixIncomeListTableViewController.swift */; };
 		16F6E48F26125DF6009B3429 /* ExpenseScannerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6E48E26125DF6009B3429 /* ExpenseScannerTableViewController.swift */; };
 		3606B1A825F9F444005F375F /* LocationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1A725F9F444005F375F /* LocationPin.swift */; };
 		3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16049A5D2617C18500B3382F /* BugFixIncomeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugFixIncomeListTableViewController.swift; sourceTree = "<group>"; };
 		16F6E48E26125DF6009B3429 /* ExpenseScannerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseScannerTableViewController.swift; sourceTree = "<group>"; };
 		1B0E68A1C9643499C8D81A76 /* Pods-Moneytor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneytor.release.xcconfig"; path = "Target Support Files/Pods-Moneytor/Pods-Moneytor.release.xcconfig"; sourceTree = "<group>"; };
 		3606B1A725F9F444005F375F /* LocationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPin.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				36274E4F25E4CD4E0063DE28 /* IncomeListTableViewController.swift */,
 				36274E5225E4CD650063DE28 /* IncomeDetailTableViewController.swift */,
 				3657353E260D205C00FABFDF /* IncomeDocViewController.swift */,
+				16049A5D2617C18500B3382F /* BugFixIncomeListTableViewController.swift */,
 			);
 			path = IncomeViewControllers;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				36274E5925E4CDA20063DE28 /* ExpenseDetailTableViewController.swift in Sources */,
 				3671BA5A25E622B000811F21 /* User.swift in Sources */,
 				3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */,
+				16049A5E2617C18500B3382F /* BugFixIncomeListTableViewController.swift in Sources */,
 				3671BA3C25E5B41000811F21 /* Income+Convenience.swift in Sources */,
 				36274E5F25E4CDF60063DE28 /* CurrencyMapViewController.swift in Sources */,
 				3657353F260D205C00FABFDF /* IncomeDocViewController.swift in Sources */,
