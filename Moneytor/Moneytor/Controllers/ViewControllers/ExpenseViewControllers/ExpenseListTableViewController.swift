@@ -20,7 +20,6 @@ class ExpenseListTableViewController: UITableViewController {
     let monthly = ExpenseCategoryController.shared.monthly
     var isSearching: Bool = false
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
-    //  var sectionsExpenseDict = [Dictionary<String, Double>.Element]()
     var categoriesSectionsByDay: [[Expense]] = []
     var categoriesSectionsByWeek: [[Expense]] = []
     var categoriesSectionsByMonth: [[Expense]] = []
@@ -150,7 +149,6 @@ class ExpenseListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell = UITableViewCell()
-        
         if isSearching {
             let searchcCell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath)
             guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return UITableViewCell()}
