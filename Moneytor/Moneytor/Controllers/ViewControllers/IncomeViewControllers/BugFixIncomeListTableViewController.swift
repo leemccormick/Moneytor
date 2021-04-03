@@ -32,6 +32,7 @@ class BugFixIncomeListTableViewController: UITableViewController {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
         categoriesSectionsByDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: daily, end: Date())
+        print("\n===================ERROR!daily:: \(daily) IN\(#function) ======================\n")
         categoriesSectionsByWeek = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
         categoriesSectionsByMonth = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
     }
@@ -120,11 +121,11 @@ extension BugFixIncomeListTableViewController {
             return 1
         } else {
             switch incomeSearchBar.selectedScopeButtonIndex {
-            case 1:
+            case 0:
                 return categoriesSectionsByDay.count
-            case 2:
+            case 1:
                 return categoriesSectionsByWeek.count
-            case 3:
+            case 2:
                 return categoriesSectionsByMonth.count
             default:
                 return 0
@@ -219,7 +220,7 @@ extension BugFixIncomeListTableViewController {
                     alertController.addAction(deleteAction)
                     present(alertController, animated: true)
                 case 1:
-                    let income = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
+                   let income = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
                     let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
                     let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
@@ -261,14 +262,26 @@ extension BugFixIncomeListTableViewController {
             switch incomeSearchBar.selectedScopeButtonIndex {
             case 0:
                 //  tableView.reloadData()
+                if categoriesSectionsByDay[section].count == 0 {
+                    return ""
+                } else {
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
                 return title
+                }
             case 1:
+                if categoriesSectionsByWeek[section].count == 0 {
+                    return ""
+                } else {
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByWeek, section: section)
                 return title
+                }
             case 2:
+                if categoriesSectionsByMonth[section].count == 0 {
+                    return ""
+                } else {
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByMonth, section: section)
                 return title
+                }
             default:
                 return ""
             }
@@ -350,10 +363,12 @@ fetchAllIncomes()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
+        print("\n===================ERROR!selectedScope \(selectedScope) IN\(#function) ======================\n")
         switch incomeSearchBar.selectedScopeButtonIndex {
+        
         case 0:
             categoriesSectionsByDay = fetchIncomesBySpecificTime(start: daily, end: Date())
+            print("\n===================ERROR! categoriesSectionsByDay :: \(categoriesSectionsByDay.count) IN\(#function) ======================\n")
             tableView.reloadData()
         case 1:
             categoriesSectionsByWeek = fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)

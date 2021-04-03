@@ -302,7 +302,6 @@ class ExpenseListTableViewController: UITableViewController {
             switch expenseSearchBar.selectedScopeButtonIndex {
             case 0:
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
-                tableView.reloadData()
                 return title
             case 1:
                 let title = configurateSectionTitle(categoriesSections: categoriesSectionsByWeek, section: section)

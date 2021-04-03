@@ -23,7 +23,7 @@ class MoneytorGoodLetterLabel: UILabel {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.textColor = .mtTextDarkBrown
+        self.textColor = .mtTextLightBrown 
         self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
     }
 }

@@ -27,6 +27,7 @@ class MoneytorSearchBar: UISearchBar {
         self.layer.borderColor = UIColor.mtLightYellow.cgColor
         self.layer.masksToBounds = true
         self.showsCancelButton = true
+       // self.barTintColor = .mtDarkYellow
        // self.showsSearchResultsButton = true
         self.tintColor = .mtTextDarkBrown
         self.searchTextField.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)!
