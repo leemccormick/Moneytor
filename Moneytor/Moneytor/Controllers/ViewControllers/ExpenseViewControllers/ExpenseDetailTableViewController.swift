@@ -17,6 +17,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     @IBOutlet weak var expenseCategoryPicker: UIPickerView!
     @IBOutlet weak var expenseDatePicker: UIDatePicker!
     @IBOutlet weak var expenseNoteTextView: UITextView!
+    @IBOutlet weak var expenseImageView: UIImageView!
     
     // MARK: - Properties
     var expense: Expense?
@@ -53,7 +54,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
       
-    
         if ScannerController.shared.hasScanned {
             self.expenseNameTextField.text = ScannerController.shared.name
             self.expenseAmountTextField.text = ScannerController.shared.amount
@@ -69,9 +69,8 @@ class ExpenseDetailTableViewController: UITableViewController  {
                     }
                 }
             }
-            updateView()
-
         }
+        updateView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -136,6 +135,14 @@ class ExpenseDetailTableViewController: UITableViewController  {
                 expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
             }
         }
+        
+        if let image = expense.image {
+            expenseImageView.image = UIImage(data: image)
+        } else {
+            expenseImageView.isHidden = true
+        }
+        
+
     }
     
     func saveExpense() {
@@ -152,16 +159,44 @@ class ExpenseDetailTableViewController: UITableViewController  {
             return}
         
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
+       
+        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
         
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
         } else {
-            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text, image: imageDate)
         }
         navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Table View
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+         return 1
+        case 1:
+         return 1
+        case 2:
+         return 2
+        case 3:
+         return 2
+        case 4:
+         return 1
+        case 5:
+            if expenseImageView.image == nil {
+                return 0
+            } else {
+                return 1
+            }
+        case 6:
+         return 2
+        default:
+            return 0
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
@@ -170,14 +205,27 @@ class ExpenseDetailTableViewController: UITableViewController  {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
-            return CGFloat(0.0)
-        } else if section == 3 {
-            return CGFloat(0.0)
-        } else if section == 5{
-            return CGFloat(0.0)
-        }else {
+        switch section {
+        case 0:
             return CGFloat(40.0)
+        case 1:
+            return CGFloat(40.0)
+        case 2:
+            return CGFloat(0.0)
+        case 3:
+            return CGFloat(0.0)
+        case 4:
+            return CGFloat(40.0)
+        case 5:
+            if expenseImageView.image == nil {
+                return CGFloat(0.0)
+            } else {
+                return CGFloat(40.0)
+            }
+        case 6:
+            return CGFloat(0.0)
+        default:
+            return CGFloat(0.0)
         }
     }
 }
@@ -256,6 +304,7 @@ extension ExpenseDetailTableViewController {
             return
         }
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
+        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
         
         let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS EXPENSES!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nPaid Date : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
@@ -264,7 +313,7 @@ extension ExpenseDetailTableViewController {
             if let expense = self.expense {
                 ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
             } else {
-                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageDate)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -280,6 +329,7 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
         controller.dismiss(animated: true, completion: nil)
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
+            expenseImageView.image = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
@@ -294,11 +344,13 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
+        expenseImageView.image = nil
         presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Expense receipt scanner have been cancled!")
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         controller.dismiss(animated: true, completion: nil)
+        expenseImageView.image = nil
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
         

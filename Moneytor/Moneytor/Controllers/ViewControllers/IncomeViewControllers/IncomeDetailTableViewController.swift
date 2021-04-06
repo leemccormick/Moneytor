@@ -129,6 +129,7 @@ class IncomeDetailTableViewController: UITableViewController {
                 incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
             }
         }
+        
     }
     
     func saveIncome() {
@@ -270,6 +271,9 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
         controller.dismiss(animated: true, completion: nil)
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
+            
+            //
+            
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
