@@ -19,6 +19,7 @@ class MoneytorNavigationController: UINavigationController {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mtTextDarkBrown]
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textMoneytorMoneyFont, size: 25)!]
     }
+    
 }
 
 class MoneytorTabBarController: UITabBarController {
@@ -28,9 +29,7 @@ class MoneytorTabBarController: UITabBarController {
     }
     
     func setupTapBar(){
-        UINavigationBar.appearance().barTintColor = .mtBgBrownHeader
-        UINavigationBar.appearance().tintColor = .mtTextDarkBrown
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)!]
+        UITabBar.appearance().unselectedItemTintColor = .mtBgGolder
      UITabBar.appearance().barTintColor = .mtBgBrownHeader
    UITabBar.appearance().tintColor = .mtTextDarkBrown
 

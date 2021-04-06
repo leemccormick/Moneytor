@@ -20,6 +20,7 @@ class ScannerController {
     var amountInDouble: Double = 0.0
     var date: String = ""
     var note: String = ""
+    var hasScanned: Bool = false
     
     // MARK: - Helper Fuctions
         func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
@@ -60,6 +61,7 @@ class ScannerController {
         }
         
         func deleteNameAmountAndNote() {
+            hasScanned = false
             self.reconizedTexts.removeAll()
             self.reconizedTexts = []
             self.name = ""
@@ -110,6 +112,7 @@ extension ScannerController {
         }
         
     func setupVisionForExpenseScanner() -> [VNRequest] {
+        hasScanned = true
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 print("No Results Found!")
@@ -160,6 +163,7 @@ extension ScannerController {
 // MARK: - SetupVision For IncomeScanner
 extension ScannerController {
     func setupVisionForIncomeScanner() -> [VNRequest] {
+        hasScanned = true
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation] else {
                 print("No Results Found!")

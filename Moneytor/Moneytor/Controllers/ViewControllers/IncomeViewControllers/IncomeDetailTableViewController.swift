@@ -46,11 +46,14 @@ class IncomeDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
+        print("\n=================== ScannerController.shared.hasScanned :: \(ScannerController.shared.hasScanned)======================IN \(#function)\n")
+        if ScannerController.shared.hasScanned == true {
         self.incomeNameTextField.text = ScannerController.shared.name
         self.incomeAmountTextField.text = ScannerController.shared.amount
         self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
         self.incomeNoteTextView.text = ScannerController
             .shared.note
+        }
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         incomeCategoryPicker.reloadAllComponents()
         updateViews()

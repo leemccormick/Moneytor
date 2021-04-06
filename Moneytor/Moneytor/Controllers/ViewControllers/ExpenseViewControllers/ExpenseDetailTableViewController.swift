@@ -46,11 +46,14 @@ class ExpenseDetailTableViewController: UITableViewController  {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
+        print("\n=================== ScannerController.shared.hasScanned :: \(ScannerController.shared.hasScanned )======================IN \(#function)\n")
+        if ScannerController.shared.hasScanned {
         self.expenseNameTextField.text = ScannerController.shared.name
         self.expenseAmountTextField.text = ScannerController.shared.amount
         self.expenseDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
         self.expenseNoteTextView.text = ScannerController
             .shared.note
+        }
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first

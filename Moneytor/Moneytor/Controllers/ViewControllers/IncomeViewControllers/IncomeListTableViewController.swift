@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Vision
+import VisionKit
 
 class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var incomeSearchBar: UISearchBar!
+
     
     // MARK: - Properties
     let daily = IncomeCategoryController.shared.daily
@@ -26,13 +29,15 @@ class IncomeListTableViewController: UITableViewController {
             updateFooter(total: totalIncomeSearching)
         }
     }
+    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
+    var requests = [VNRequest]()
+    
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
         categoriesSectionsByDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: daily, end: Date())
-        print("\n===================ERROR!daily:: \(daily) IN\(#function) ======================\n")
         categoriesSectionsByWeek = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
         categoriesSectionsByMonth = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
     }
@@ -46,7 +51,21 @@ class IncomeListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // MARK: - Actions
+    @IBAction func incomeScannerButtonTapped(_ sender: Any) {
+        scanReceiptForIncomeResult()
+        ScannerController.shared.deleteNameAmountAndNote()
+        self.requests = ScannerController.shared.setupVisionForIncomeScanner()
+    }
+    
     // MARK: - Helper Fuctions
+    func scanReceiptForIncomeResult() {
+        ScannerController.shared.deleteNameAmountAndNote()
+        let documentCameraController = VNDocumentCameraViewController()
+        documentCameraController.delegate = self
+        self.present(documentCameraController, animated: true, completion: nil)
+    }
+    
     func fetchAllIncomes(){
         IncomeController.shared.fetchAllIncomes()
         resultsIncomeFromSearching = IncomeController.shared.incomes
@@ -77,10 +96,6 @@ class IncomeListTableViewController: UITableViewController {
     }
     
     func configurateSectionTitle(categoriesSections: [[Income]], section: Int) -> String {
-        //        tableView.reloadData()
-        //        if tableView.numberOfRows(inSection: section) == 0 {
-        //            return ""
-        //        } else {
         var total = 0.0
         var name = ""
         var totalIncomeInEachSections: [Double] = []
@@ -99,21 +114,6 @@ class IncomeListTableViewController: UITableViewController {
         let categoryTotalString = AmountFormatter.currencyInString(num: categoryTotal)
         return "\(categoryName.uppercased()) \(categoryTotalString)"
     }
-    //}
-    
-}
-
-func presentAlertToDeleteIncome(income: Income) {
-    //    let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
-    //    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-    //    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-    //        IncomeController.shared.deleteIncome(income)
-    //        self.fetchAllIncomes()
-    //    }
-    //    alertController.addAction(dismissAction)
-    //    alertController.addAction(deleteAction)
-    //    present(alertController, animated: true)
-    
 }
 
 extension IncomeListTableViewController {
@@ -416,6 +416,46 @@ fetchAllIncomes()
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         isSearching = false
+    }
+}
+
+// MARK: - VNDocumentCameraViewControllerDelegate
+extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate {
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        controller.dismiss(animated: true, completion: nil)
+        for i in 0..<scan.pageCount {
+            let scannedImage = scan.imageOfPage(at: i)
+            if let cgImage = scannedImage.cgImage {
+                let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
+                do {
+                    try requestHandler.perform(self.requests)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                
+            }
+        }
+        gotoIncomeDetailVC()
+    }
+    
+    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+        controller.dismiss(animated: true, completion: nil)
+        presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Expense receipt scanner have been cancled!")
+    }
+    
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
+        controller.dismiss(animated: true, completion: nil)
+        print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
+        presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
+        
+    }
+    
+    func gotoIncomeDetailVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let  destinationVc = storyboard.instantiateViewController(identifier: "incomeDetailStoryBoardId") as? IncomeDetailTableViewController else {
+        print("Couldn't find the view controller")
+        return}
+        navigationController?.pushViewController(destinationVc, animated: true)
     }
 }
 
