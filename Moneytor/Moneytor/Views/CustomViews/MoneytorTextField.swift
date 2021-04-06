@@ -18,22 +18,22 @@ class MoneytorTextField: UITextField {
     func setupView() {
         self.addCornerRadius()
         setupPlaceholderText()
-        self.textColor = .mtTextDarkBrown
-        self.backgroundColor = .mtDarkOrage
-        self.layer.borderWidth = 2.5
-        self.layer.borderColor = UIColor.mtLightYellow.cgColor
+        self.textColor = .mtTextLightBrown
+        self.backgroundColor = .mtLightYellow
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.mtDarkOrage.cgColor
         self.layer.masksToBounds = true
     }
     
     func setupPlaceholderText() {
         let currentPlaceholder = self.placeholder ?? ""
         self.attributedPlaceholder = NSAttributedString(string: currentPlaceholder, attributes: [
-            NSAttributedString.Key.foregroundColor : UIColor.mtWhiteText,
-            NSAttributedString.Key.font : UIFont(name: FontNames.textMoneytor, size: 16)!
+            NSAttributedString.Key.foregroundColor : UIColor.lightGray,
+            NSAttributedString.Key.font : UIFont(name: FontNames.textTitleBoldMoneytor, size: 15)!
         ])
     }
     
     func updateFont(){
-        self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
+        self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 18)
     }
 }

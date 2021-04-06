@@ -217,7 +217,7 @@ extension CurrencyMapViewController {
                 let baseCode = CurrencyController.shared.findCurrencyCodeByCountyName(userCountryName)
                 if let baseCode = baseCode {
                     UserDefaults.standard.setValue(baseCode, forKey: "baseCode")
-                    print("----------------- UserDefaults:: \(UserDefaults.standard.string(forKey: "baseCode"))-----------------")
+                    print("----------------- UserDefaults:: \(String(describing: UserDefaults.standard.string(forKey: "baseCode")))-----------------")
                     self?.presentLocationUpdatedAlert(userContryName: userCountryName, baseCode: baseCode)
                 } else {
                     self?.presentAlertToUser(titleAlert: "Unable to find your current location!", messageAlert: "Currency Converter is now calculated base on USD.")

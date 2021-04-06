@@ -29,7 +29,7 @@ class MoneytorTabBarController: UITabBarController {
     }
     
     func setupTapBar(){
-        UITabBar.appearance().unselectedItemTintColor = .mtBgGolder
+        UITabBar.appearance().unselectedItemTintColor = .mtTextLightBrown
      UITabBar.appearance().barTintColor = .mtBgBrownHeader
    UITabBar.appearance().tintColor = .mtTextDarkBrown
 

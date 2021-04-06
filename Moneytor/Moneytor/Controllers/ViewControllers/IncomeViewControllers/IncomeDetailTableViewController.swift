@@ -47,15 +47,26 @@ class IncomeDetailTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
         print("\n=================== ScannerController.shared.hasScanned :: \(ScannerController.shared.hasScanned)======================IN \(#function)\n")
-        if ScannerController.shared.hasScanned == true {
-        self.incomeNameTextField.text = ScannerController.shared.name
-        self.incomeAmountTextField.text = ScannerController.shared.amount
-        self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
-        self.incomeNoteTextView.text = ScannerController
-            .shared.note
-        }
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         incomeCategoryPicker.reloadAllComponents()
+       
+        if ScannerController.shared.hasScanned == true {
+            self.incomeNameTextField.text = ScannerController.shared.name
+            self.incomeAmountTextField.text = ScannerController.shared.amount
+            self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
+            self.incomeNoteTextView.text = ScannerController
+                .shared.note
+            if let categoryFromScanner = ScannerController.shared.incomeCategory {
+                selectedIncomeCategory = categoryFromScanner
+                // print("\n===================selectedExpenseCategory :: \(selectedExpenseCategory?.nameString)======================IN \(#function)\n")
+                let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
+                for row in 0..<numberOfRows {
+                    if categoryFromScanner == IncomeCategoryController.shared.incomeCategories[row] {
+                        incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+                    }
+                }
+            }
+        }
         updateViews()
     }
     
@@ -76,7 +87,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     
     @IBAction func scannerButtonOnViewButtonTapped(_ sender: Any) {
-       // IncomeDetailTableViewController.scannerButtonTapped(self.)
+        // IncomeDetailTableViewController.scannerButtonTapped(self.)
         scanReceiptForIncomeResult()
     }
     
@@ -145,7 +156,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     // MARK: - Table View
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor.mtBgGolder
+        view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
@@ -275,12 +286,12 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
         controller.dismiss(animated: true, completion: nil)
         presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Income document scanner have been cancled!")
         
-//        let alertController = UIAlertController(title: "CANCEL! INCOME SCANNER!", message: "", preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "CANCEL", style: .destructive) { (action) in
-//
-//        }
-//        alertController.addAction(cancelAction)
-//        present(alertController, animated: true)
+        //        let alertController = UIAlertController(title: "CANCEL! INCOME SCANNER!", message: "", preferredStyle: .alert)
+        //        let cancelAction = UIAlertAction(title: "CANCEL", style: .destructive) { (action) in
+        //
+        //        }
+        //        alertController.addAction(cancelAction)
+        //        present(alertController, animated: true)
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
@@ -289,57 +300,57 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
         
-//        let alertController = UIAlertController(title: "ERROR! SCANNING INCOME!", message: "Please, make sure if you are using camera propertly to scan income!", preferredStyle: .alert)
-//        let cancelAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-//            controller.dismiss(animated: true, completion: nil)
-//        }
-//        alertController.addAction(cancelAction)
-//        present(alertController, animated: true)
-      
+        //        let alertController = UIAlertController(title: "ERROR! SCANNING INCOME!", message: "Please, make sure if you are using camera propertly to scan income!", preferredStyle: .alert)
+        //        let cancelAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
+        //            controller.dismiss(animated: true, completion: nil)
+        //        }
+        //        alertController.addAction(cancelAction)
+        //        present(alertController, animated: true)
+        
     }
 }
 
 // MARK: - Category
 extension IncomeDetailTableViewController {
-func createNewCategory() {
-    let alertController = UIAlertController(title: "Add New Category!",
-                                            message: "If you would like to add new income category, please enter a new income category emoji and name." ,preferredStyle: .alert)
-    alertController.addTextField { (emojiTextFiled) in
-        emojiTextFiled.placeholder = "Enter an emoji for category..."
-        emojiTextFiled.keyboardAppearance = .dark
-        emojiTextFiled.keyboardType = .default
-       // textField.
-    }
-    
-    alertController.addTextField { (nameTextFiled) in
-        nameTextFiled.placeholder = "Enter a name for category..."
-        nameTextFiled.keyboardAppearance = .dark
-        nameTextFiled.keyboardType = .default
-       // textField.
-    }
-    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-    let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
-        //DO SOMETHING HERE....
-        guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
-            self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
-            return}
-        guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
-            self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
-            return}
-        let newIncomeCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: emoji)
-        self.incomeCategoryPicker.reloadAllComponents()
-        guard let upwrapNewIncomeCategory = newIncomeCategory else {return}
-        let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
-        for row in 0..<numberOfRows {
-            if upwrapNewIncomeCategory == IncomeCategoryController.shared.incomeCategories[row] {
-                self.incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
-            }
+    func createNewCategory() {
+        let alertController = UIAlertController(title: "Add New Category!",
+                                                message: "If you would like to add new income category, please enter a new income category emoji and name." ,preferredStyle: .alert)
+        alertController.addTextField { (emojiTextFiled) in
+            emojiTextFiled.placeholder = "Enter an emoji for category..."
+            emojiTextFiled.keyboardAppearance = .dark
+            emojiTextFiled.keyboardType = .default
+            // textField.
         }
-        self.selectedIncomeCategory = upwrapNewIncomeCategory
-
+        
+        alertController.addTextField { (nameTextFiled) in
+            nameTextFiled.placeholder = "Enter a name for category..."
+            nameTextFiled.keyboardAppearance = .dark
+            nameTextFiled.keyboardType = .default
+            // textField.
+        }
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
+            //DO SOMETHING HERE....
+            guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
+                self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
+                return}
+            guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
+                self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
+                return}
+            let newIncomeCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: name, emoji: emoji)
+            self.incomeCategoryPicker.reloadAllComponents()
+            guard let upwrapNewIncomeCategory = newIncomeCategory else {return}
+            let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
+            for row in 0..<numberOfRows {
+                if upwrapNewIncomeCategory == IncomeCategoryController.shared.incomeCategories[row] {
+                    self.incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+                }
+            }
+            self.selectedIncomeCategory = upwrapNewIncomeCategory
+            
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(doSomethingAction)
+        present(alertController, animated: true)
     }
-    alertController.addAction(dismissAction)
-    alertController.addAction(doSomethingAction)
-    present(alertController, animated: true)
-}
 }

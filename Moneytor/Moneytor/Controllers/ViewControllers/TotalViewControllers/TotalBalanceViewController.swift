@@ -30,6 +30,7 @@ class TotalBalanceViewController: UIViewController {
         super.viewDidLoad()
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        isAppAlreadyLaunched()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,3 +159,22 @@ extension TotalBalanceViewController: ChartViewDelegate  {
     }
 }
 
+extension TotalBalanceViewController {
+    func presentFirstLoginAlert() {
+        let alertController = UIAlertController(title: "Welcome to InEx Moneytor!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
+        alertController.addAction(dismissAction)
+        present(alertController, animated: true)
+    }
+    
+    func isAppAlreadyLaunched() {
+        let hasBeenLaunched = UserDefaults.standard.bool(forKey: "hasBeenLaunched")
+        
+        if hasBeenLaunched {
+            return
+        } else {
+            presentFirstLoginAlert()
+            UserDefaults.standard.set(true, forKey: "hasBeenLaunched")
+        }
+    }
+}

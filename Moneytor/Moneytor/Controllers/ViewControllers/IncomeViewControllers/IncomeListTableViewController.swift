@@ -160,6 +160,8 @@ extension IncomeListTableViewController {
             searchCell.textLabel?.numberOfLines = 0
             searchCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
             searchCell.detailTextLabel?.text = income.incomeAmountString
+           // searchCell.selectedBackgroundView =
+            searchCell.selectionStyle = .none
             returnCell = searchCell
         } else {
             switch incomeSearchBar.selectedScopeButtonIndex {
@@ -169,6 +171,7 @@ extension IncomeListTableViewController {
                 dayCell.textLabel?.numberOfLines = 0
                 dayCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 dayCell.detailTextLabel?.text = income.incomeAmountString
+                dayCell.selectionStyle = .none
                 returnCell = dayCell
             case 1:
                 let weekCell = tableView.dequeueReusableCell(withIdentifier: "incomeWeekCell", for: indexPath)
@@ -176,6 +179,7 @@ extension IncomeListTableViewController {
                 weekCell.textLabel?.numberOfLines = 0
                 weekCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 weekCell.detailTextLabel?.text = income.incomeAmountString
+                weekCell.selectionStyle = .none
                 returnCell = weekCell
             case 2:
                 let monthCell = tableView.dequeueReusableCell(withIdentifier: "incomeMonthCell", for: indexPath)
@@ -183,6 +187,7 @@ extension IncomeListTableViewController {
                 monthCell.textLabel?.numberOfLines = 0
                 monthCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 monthCell.detailTextLabel?.text = income.incomeAmountString
+                monthCell.selectionStyle = .none
                 returnCell = monthCell
             default:
                 return returnCell
@@ -255,6 +260,9 @@ extension IncomeListTableViewController {
             }
         }
     }
+    
+   
+
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         

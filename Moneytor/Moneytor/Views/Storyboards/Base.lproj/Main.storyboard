@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="darkGolder"/>
                         <sections>
-                            <tableViewSection headerTitle="Income Name :" id="FSf-uF-s3u">
+                            <tableViewSection headerTitle="Name :" id="FSf-uF-s3u">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="YcS-g0-DL3">
                                         <rect key="frame" x="0.0" y="28" width="428" height="60"/>
@@ -46,7 +46,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Income Amount :" id="kC4-sb-trK">
+                            <tableViewSection headerTitle="Amount :" id="kC4-sb-trK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="wry-Gs-DFa">
                                         <rect key="frame" x="0.0" y="144" width="428" height="62"/>
@@ -73,7 +73,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Income Category :" id="OvI-YW-ntw">
+                            <tableViewSection headerTitle="Category :" id="OvI-YW-ntw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="7h7-bk-DPO">
                                         <rect key="frame" x="0.0" y="262" width="428" height="40"/>
@@ -82,7 +82,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdL-FX-aOb" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdL-FX-aOb" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="362" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="PtB-Mb-ond"/>
@@ -106,7 +106,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <color key="backgroundColor" name="mtDarkYellow"/>
                                             <constraints>
                                                 <constraint firstItem="YJH-ft-hxZ" firstAttribute="top" secondItem="aBv-Rk-jgj" secondAttribute="top" id="1CP-yy-rxW"/>
                                                 <constraint firstItem="pdL-FX-aOb" firstAttribute="leading" secondItem="aBv-Rk-jgj" secondAttribute="leading" constant="16" id="5JG-5z-CtD"/>
@@ -147,7 +147,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWz-v3-uBf" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWz-v3-uBf" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="362" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="nsw-kI-7JR"/>
@@ -171,7 +171,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <color key="backgroundColor" name="mtDarkYellow"/>
                                             <constraints>
                                                 <constraint firstItem="JWz-v3-uBf" firstAttribute="top" secondItem="qW7-3L-kB9" secondAttribute="top" id="2TR-XM-V2N"/>
                                                 <constraint firstAttribute="bottom" secondItem="EoN-om-w2Z" secondAttribute="bottom" id="724-3A-NM3"/>
@@ -186,7 +186,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Income Date :" id="nTQ-2I-zfd">
+                            <tableViewSection headerTitle="Date :" id="nTQ-2I-zfd">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="320" id="z9K-ye-3jl">
                                         <rect key="frame" x="0.0" y="530" width="428" height="320"/>
@@ -215,7 +215,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Income Note :" id="gst-sp-6QQ" userLabel="Income TextView :">
+                            <tableViewSection headerTitle="Note :" id="gst-sp-6QQ" userLabel="Income TextView :">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="232" id="Fgg-9e-S3V">
                                         <rect key="frame" x="0.0" y="906" width="428" height="232"/>
@@ -1252,7 +1252,7 @@
                         <color key="backgroundColor" name="mtDarkGolder"/>
                         <color key="sectionIndexBackgroundColor" name="mtDarkGolder"/>
                         <sections>
-                            <tableViewSection headerTitle="Expense Name :" id="0d7-FW-PYi">
+                            <tableViewSection headerTitle="Name :" id="0d7-FW-PYi">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="IK8-YS-Skw">
                                         <rect key="frame" x="0.0" y="28" width="428" height="60"/>
@@ -1279,7 +1279,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Expense Amount :" id="ABo-bY-F1g">
+                            <tableViewSection headerTitle="Amount :" id="ABo-bY-F1g">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="62" id="1ZA-fD-xAM" userLabel="Expense Amount TextField">
                                         <rect key="frame" x="0.0" y="144" width="428" height="62"/>
@@ -1306,7 +1306,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Expense Category :" id="vmG-73-kam">
+                            <tableViewSection headerTitle="Category :" id="vmG-73-kam">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="40" id="apD-Xq-2Ag" userLabel="Category Header">
                                         <rect key="frame" x="0.0" y="262" width="428" height="40"/>
@@ -1315,7 +1315,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kr1-0b-rYx" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Category :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kr1-0b-rYx" userLabel="Category :" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="342" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="54Y-E8-3Ag"/>
@@ -1339,7 +1339,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <color key="backgroundColor" name="mtDarkYellow"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="arv-tR-Wc9" secondAttribute="trailing" constant="5" id="6Ma-KY-Yyd"/>
                                                 <constraint firstAttribute="bottom" secondItem="Kr1-0b-rYx" secondAttribute="bottom" id="HwM-7v-thp"/>
@@ -1375,7 +1375,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Expense Date :" id="Jm0-kI-hxL" userLabel="Expense Date:">
+                            <tableViewSection headerTitle="Date :" id="Jm0-kI-hxL" userLabel="Expense Date:">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="41" id="D6b-HI-Tsx" userLabel="Date Section Header">
                                         <rect key="frame" x="0.0" y="490" width="428" height="41"/>
@@ -1384,7 +1384,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="41"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOK-uI-qZo" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Date :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOK-uI-qZo" userLabel="Date :" customClass="MoneytorHeaderSectionLabel" customModule="Moneytor" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="0.0" width="342" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="PTt-jb-fsb"/>
@@ -1408,7 +1408,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" name="mtGolderBG"/>
+                                            <color key="backgroundColor" name="mtDarkYellow"/>
                                             <constraints>
                                                 <constraint firstItem="lOK-uI-qZo" firstAttribute="top" secondItem="xP6-El-daK" secondAttribute="top" id="3Qe-d1-vgd"/>
                                                 <constraint firstItem="U0d-Nv-SX8" firstAttribute="top" secondItem="xP6-El-daK" secondAttribute="top" id="5qc-gB-Ko7"/>
@@ -1444,7 +1444,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Expense Note :" id="CtL-rb-mOu" userLabel="Expense Note :">
+                            <tableViewSection headerTitle="Note :" id="CtL-rb-mOu" userLabel="Expense Note :">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="221" id="9ns-xn-XMW" userLabel="NoteTextView">
                                         <rect key="frame" x="0.0" y="907" width="428" height="221"/>
@@ -1476,7 +1476,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Expense Button :" id="CAL-Td-qs8" userLabel="Expense Button :">
+                            <tableViewSection headerTitle="Button :" id="CAL-Td-qs8" userLabel="Expense Button :">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="cjx-kV-AFC" userLabel="SaveButton">
                                         <rect key="frame" x="0.0" y="1184" width="428" height="43.5"/>

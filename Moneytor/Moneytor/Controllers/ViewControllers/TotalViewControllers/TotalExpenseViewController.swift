@@ -42,6 +42,7 @@ class TotalExpenseViewController: UIViewController {
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +111,7 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
         let expenseCategory = expenseCategoryDict[indexPath.row]
         cell.textLabel?.text = expenseCategory.key
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: expenseCategory.value)
-        
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -207,3 +208,4 @@ extension TotalExpenseViewController: ChartViewDelegate {
         selectedCategory = "\(data.capitalized)  \(valueString)"
     }
 }
+

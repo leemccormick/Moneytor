@@ -110,6 +110,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
         let incomeCategory = incomeCategoryDict[indexPath.row]
         cell.textLabel?.text = incomeCategory.key
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
+        cell.selectionStyle = .none
         return cell
     }
     

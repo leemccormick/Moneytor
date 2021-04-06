@@ -33,6 +33,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseCategoryPicker.dataSource = self
         expenseNameTextField.delegate = self
         expenseAmountTextField.delegate = self
+        expenseNoteTextView.delegate = self
         expenseDatePicker.isUserInteractionEnabled = true
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         if ExpenseCategoryController.shared.expenseCategories.count == 0 {
@@ -41,23 +42,36 @@ class ExpenseDetailTableViewController: UITableViewController  {
             selectedExpenseCategory = upwrapNewCategory
         }
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
+//        if expenseNoteTextView.text == nil {
+//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
-        print("\n=================== ScannerController.shared.hasScanned :: \(ScannerController.shared.hasScanned )======================IN \(#function)\n")
-        if ScannerController.shared.hasScanned {
-        self.expenseNameTextField.text = ScannerController.shared.name
-        self.expenseAmountTextField.text = ScannerController.shared.amount
-        self.expenseDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
-        self.expenseNoteTextView.text = ScannerController
-            .shared.note
-        }
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
-        updateView()
+      
+    
+        if ScannerController.shared.hasScanned {
+            self.expenseNameTextField.text = ScannerController.shared.name
+            self.expenseAmountTextField.text = ScannerController.shared.amount
+            self.expenseDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
+            self.expenseNoteTextView.text = ScannerController
+                .shared.note
+            if let categoryFromScanner = ScannerController.shared.expenseCategory {
+                selectedExpenseCategory = categoryFromScanner
+                let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
+                for row in 0..<numberOfRows {
+                    if categoryFromScanner == ExpenseCategoryController.shared.expenseCategories[row] {
+                        expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+                    }
+                }
+            }
+            updateView()
+
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -112,6 +126,9 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
         expenseNoteTextView.text = expense.note
+//        if expenseNoteTextView.text == nil {
+//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
+//        }
         
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
         for row in 0..<numberOfRows {
@@ -146,7 +163,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     
     // MARK: - Table View
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor.mtBgGolder
+        view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
@@ -195,7 +212,7 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
 }
 
 // MARK: - UITextFieldDelegate
-extension ExpenseDetailTableViewController: UITextFieldDelegate {
+extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = ""
         return true
@@ -290,46 +307,46 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
 
 // MARK: - Category
 extension ExpenseDetailTableViewController {
-func createNewCategory() {
-    let alertController = UIAlertController(title: "Add New Category!",
-                                            message: "If you would like to add new expense category, please enter a new expense category emoji and name." ,preferredStyle: .alert)
-    alertController.addTextField { (emojiTextFiled) in
-        emojiTextFiled.placeholder = "Enter an emoji for category..."
-        emojiTextFiled.keyboardAppearance = .dark
-        emojiTextFiled.keyboardType = .default
-       // textField.
-    }
-    
-    alertController.addTextField { (nameTextFiled) in
-        nameTextFiled.placeholder = "Enter a name for category..."
-        nameTextFiled.keyboardAppearance = .dark
-        nameTextFiled.keyboardType = .default
-       // textField.
-    }
-    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-    let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
-        //DO SOMETHING HERE....
-        guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
-            self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
-            return}
-        guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
-            self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
-            return}
-        let newExpenseCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: name, emoji: emoji)
-        self.expenseCategoryPicker.reloadAllComponents()
-        guard let upwrapNewExpenseCategory = newExpenseCategory else {return}
-        let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
-        for row in 0..<numberOfRows {
-            if upwrapNewExpenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
-                self.expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
-            }
+    func createNewCategory() {
+        let alertController = UIAlertController(title: "Add New Category!",
+                                                message: "If you would like to add new expense category, please enter a new expense category emoji and name." ,preferredStyle: .alert)
+        alertController.addTextField { (emojiTextFiled) in
+            emojiTextFiled.placeholder = "Enter an emoji for category..."
+            emojiTextFiled.keyboardAppearance = .dark
+            emojiTextFiled.keyboardType = .default
+            // textField.
         }
-        self.selectedExpenseCategory = upwrapNewExpenseCategory
+        
+        alertController.addTextField { (nameTextFiled) in
+            nameTextFiled.placeholder = "Enter a name for category..."
+            nameTextFiled.keyboardAppearance = .dark
+            nameTextFiled.keyboardType = .default
+            // textField.
+        }
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
+            //DO SOMETHING HERE....
+            guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
+                self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
+                return}
+            guard let emoji = alertController.textFields?.first?.text, !emoji.isEmpty, emoji.isSingleEmoji else {
+                self.presentAlertToUser(titleAlert: "EMOJI ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a sigle emoji for creating new category!")
+                return}
+            let newExpenseCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: name, emoji: emoji)
+            self.expenseCategoryPicker.reloadAllComponents()
+            guard let upwrapNewExpenseCategory = newExpenseCategory else {return}
+            let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
+            for row in 0..<numberOfRows {
+                if upwrapNewExpenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
+                    self.expenseCategoryPicker.selectRow(row, inComponent: 0, animated: true)
+                }
+            }
+            self.selectedExpenseCategory = upwrapNewExpenseCategory
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(doSomethingAction)
+        present(alertController, animated: true)
     }
-    alertController.addAction(dismissAction)
-    alertController.addAction(doSomethingAction)
-    present(alertController, animated: true)
-}
 }
 
 

@@ -20,6 +20,8 @@ class ScannerController {
     var amountInDouble: Double = 0.0
     var date: String = ""
     var note: String = ""
+    var expenseCategory: ExpenseCategory?
+    var incomeCategory: IncomeCategory?
     var hasScanned: Bool = false
     
     // MARK: - Helper Fuctions
@@ -42,7 +44,7 @@ class ScannerController {
             var index = 0
             
             for r in sortedReconizedTexts {
-                print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
+               // print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
                 
                 if index < newMidYs.count - 1 &&  index < newMidYs.count - 1 && index < newMaxYs.count - 1 {
                     
@@ -56,7 +58,7 @@ class ScannerController {
                     }
                 }
             }
-            print("----------------- :: \(newNote)-----------------")
+           // print("----------------- :: \(newNote)-----------------")
             self.note = newNote
         }
         
@@ -100,6 +102,14 @@ extension ScannerController {
                         }
                     }
                 }
+                
+                for category in ExpenseCategoryController.shared.expenseCategories {
+                    print("\n=================== result ::  category \n\(result.text.lowercased().trimmingCharacters(in: .whitespaces))  ::::  \(category.nameString.lowercased().trimmingCharacters(in: .whitespaces))======================IN \(#function)\n")
+                    print("\n=================== result.text.lowercased().contains(category.nameString.lowercased()):: \(result.text.lowercased().trimmingCharacters(in: .whitespaces).contains(category.nameString.lowercased().trimmingCharacters(in: .whitespaces)))======================IN \(#function)\n")
+                    if result.text.lowercased().trimmingCharacters(in: .whitespaces) == (category.nameString.lowercased().trimmingCharacters(in: .whitespaces)) {
+                        expenseCategory = category
+                    }
+                }
             }
             let str = self.name
             if str.count > 20 {
@@ -109,7 +119,8 @@ extension ScannerController {
             guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
             self.amountInDouble = amountIsThelastInPotentialAmounts
             self.amount = String(amountInDouble)
-        }
+        print("\n===================expenseCategory :: \(expenseCategory?.nameString)======================IN \(#function)\n")
+    }
         
     func setupVisionForExpenseScanner() -> [VNRequest] {
         hasScanned = true
@@ -238,6 +249,14 @@ extension ScannerController {
                             }
                         }
                     }
+                }
+            }
+            
+            for category in IncomeCategoryController.shared.incomeCategories {
+                print("\n=================== result ::  category \n\(result.text.lowercased().trimmingCharacters(in: .whitespaces))  ::::  \(category.nameString.lowercased().trimmingCharacters(in: .whitespaces))======================IN \(#function)\n")
+                print("\n=================== result.text.lowercased().contains(category.nameString.lowercased()):: \(result.text.lowercased().trimmingCharacters(in: .whitespaces).contains(category.nameString.lowercased().trimmingCharacters(in: .whitespaces)))======================IN \(#function)\n")
+                if result.text.lowercased().trimmingCharacters(in: .whitespaces) == (category.nameString.lowercased().trimmingCharacters(in: .whitespaces)) {
+                    incomeCategory = category
                 }
             }
         }
