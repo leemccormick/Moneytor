@@ -55,6 +55,8 @@ class TotalExpenseViewController: UIViewController {
     }
     
     func updateViewWithtime(start: Date, end: Date) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         setupBarChart(expenseDict: expenseCategoryDict)
@@ -199,6 +201,8 @@ extension TotalExpenseViewController: ChartViewDelegate {
         barChartView.rightAxis.drawGridLinesEnabled = true
         barChartView.rightAxis.enabled = false
         barChartView.drawGridBackgroundEnabled = true
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

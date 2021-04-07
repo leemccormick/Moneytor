@@ -29,6 +29,8 @@ class CurrencyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         reloadLocationPins()
         mapView.cameraZoomRange = MKMapView.CameraZoomRange(
             minCenterCoordinateDistance: 1000000,
@@ -80,6 +82,8 @@ class CurrencyMapViewController: UIViewController, CLLocationManagerDelegate {
         let pins = LocationPinController.shared.loctionPins
         print("\n===================pins :: \(pins.count)======================IN \(#function)\n")
         self.mapView.addAnnotations(pins.map {pin in LocationPin(pin: pin)})
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     func saveUserRegion() {

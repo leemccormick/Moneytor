@@ -31,13 +31,17 @@ class TotalBalanceViewController: UIViewController {
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         isAppAlreadyLaunched()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        activityIndicator.isHidden = false
+//        activityIndicator.startAnimating()
         timeSegmentedControl.selectedSegmentIndex = 1
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        
     }
     
     // MARK: - Actions
@@ -52,6 +56,8 @@ class TotalBalanceViewController: UIViewController {
         default:
             updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
         }
+//        activityIndicator.isHidden = false
+//        activityIndicator.startAnimating()
     }
 
     @IBAction func doccumentButtonTapped(_ sender: Any) {
@@ -88,6 +94,8 @@ class TotalBalanceViewController: UIViewController {
     
     // MARK: - Helper Fuctions
     func updateViewsByTime(startedTime: Date, endedTime: Date) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: startedTime, endedTime: endedTime)
@@ -109,6 +117,8 @@ class TotalBalanceViewController: UIViewController {
 extension TotalBalanceViewController: ChartViewDelegate  {
     
     func setUpPieChartWith(totalIncome: Double, totalExpense: Double) {
+//        activityIndicator.isHidden = false
+//        activityIndicator.startAnimating()
         pieChartView.noDataText = "No Data available! Enter data of your expense and income."
         pieChartView.chartDescription?.enabled = false
         pieChartView.drawHoleEnabled = false
@@ -138,6 +148,8 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         dataSet.colors = ChartColorTemplates.pastel()
         dataSet.drawValuesEnabled = false
         pieChartView.data = PieChartData(dataSet: dataSet)
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

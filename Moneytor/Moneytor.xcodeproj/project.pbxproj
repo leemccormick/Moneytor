@@ -369,11 +369,11 @@
 				36AFBC9A25E41C7E00B559DB /* Moneytor.xcdatamodeld */,
 				36AFBCA925E41CA800B559DB /* Moneytor.entitlements */,
 				3671BA3825E5B0FE00811F21 /* CoreDataStack.swift */,
+				36CFE5742608509E00A53240 /* ReconizedTextScanner.swift */,
 				36E19BE325F88F0700BFCDB0 /* CurrencyExchange */,
 				366D9DD725E76D88002E63FB /* IncomeModels */,
 				366D9DD925E76DA5002E63FB /* ExpenseModels */,
 				36D0435F25E9E0770034BCFC /* UserModel */,
-				36CFE5742608509E00A53240 /* ReconizedTextScanner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -403,12 +403,12 @@
 			isa = PBXGroup;
 			children = (
 				362FB7D025FE01C40047DB7C /* NotificationScheduler.swift */,
+				36CFE57126084EFE00A53240 /* ScannerController.swift */,
 				3606B1AE25F9F62D005F375F /* CurrencyControllers */,
 				36D0436025E9E0880034BCFC /* UserController */,
 				367659A225E85A3400F63F0C /* TotalControllers */,
 				366D9DDA25E76DDC002E63FB /* IncomeControllers */,
 				366D9DDC25E76DE9002E63FB /* ExpenseControllers */,
-				36CFE57126084EFE00A53240 /* ScannerController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";

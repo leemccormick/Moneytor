@@ -54,6 +54,8 @@ class TotalIncomeViewController: UIViewController {
     }
     
     func updateViewWithtime(start: Date, end: Date) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
         setupLineChart(incomeDict: incomeCategoryDict)
@@ -229,6 +231,8 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartView.drawGridBackgroundEnabled = true
         lineChartView.animate(xAxisDuration: 2.5)
         lineChartView.legend.enabled = false
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {

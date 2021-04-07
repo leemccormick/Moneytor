@@ -13,8 +13,7 @@ class ExpenseListTableViewController: UITableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
-    @IBOutlet weak var activityView: UIView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+   
     
     // MARK: - Properties
     let daily = ExpenseCategoryController.shared.daily
