@@ -737,6 +737,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="CURRENCY" id="ONU-uI-NUi">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="70r-yG-Hkb">
+                            <connections>
+                                <action selector="deletedAllPinsButtonTapped:" destination="nyT-zm-yWA" id="Hf2-pZ-6vo"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="paperplane.circle" catalog="system" id="XVm-Un-Ga2">
                             <connections>
                                 <action selector="userLocationButtonTapped:" destination="nyT-zm-yWA" id="eL8-Zd-VAp"/>

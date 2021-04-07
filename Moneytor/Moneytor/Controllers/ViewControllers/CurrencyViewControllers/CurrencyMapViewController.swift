@@ -47,6 +47,12 @@ class CurrencyMapViewController: UIViewController, CLLocationManagerDelegate {
         getLocation()
     }
     
+    @IBAction func deletedAllPinsButtonTapped(_ sender: Any) {
+        presentAlertToDeleteAllPins()
+       self.mapView.removeAnnotations(self.mapView.annotations)
+    }
+    
+    
     // MARK: - Helper Fuctions
     func userGeoCoordination(from coordinate: CLLocationCoordinate2D) {
         let geoPos = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -69,8 +75,10 @@ class CurrencyMapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func reloadLocationPins() {
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        //self.mapView.removeAnnotations(self.mapView.annotations)
+        LocationPinController.shared.reloadLocationPins()
         let pins = LocationPinController.shared.loctionPins
+        print("\n===================pins :: \(pins.count)======================IN \(#function)\n")
         self.mapView.addAnnotations(pins.map {pin in LocationPin(pin: pin)})
     }
     
@@ -251,6 +259,17 @@ extension CurrencyMapViewController {
 
 // MARK: - Currency AlertController
 extension CurrencyMapViewController {
+    func presentAlertToDeleteAllPins() {
+        let alertController = UIAlertController(title: "Delete Pins!", message: "Are you sure to delete all annotation pins for this currency converter?", preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let calculationAction = UIAlertAction(title: "Delete Pins", style: .destructive) { (action) in
+            LocationPinController.shared.deleteAllPinLocation()
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(calculationAction)
+        present(alertController, animated: true)
+    }
+    
     func presentConvertResultsToUser(titleAlert: String, messageAlert: String, targetCode: String, baseCode: String, countryName: String, rateInString: String) {
         let alertController = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Done", style: .cancel)
