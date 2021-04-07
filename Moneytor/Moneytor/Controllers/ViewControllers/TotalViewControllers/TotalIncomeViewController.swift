@@ -15,6 +15,7 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var dateIncomeLabel: MoneytorGoodLetterLabel!
     
     // MARK: - Properties
     let weekly = IncomeCategoryController.shared.weekly
@@ -57,6 +58,7 @@ class TotalIncomeViewController: UIViewController {
         incomeCategoryDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
         setupLineChart(incomeDict: incomeCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
+        dateIncomeLabel.text = "\(start.dateToString(format: .monthDayYear)) - \(end.dateToString(format: .monthDayYear))"
         incomeTableView.reloadData()
     }
     
@@ -108,6 +110,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
         let incomeCategory = incomeCategoryDict[indexPath.row]
         cell.textLabel?.text = incomeCategory.key
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
+        cell.selectionStyle = .none
         return cell
     }
     

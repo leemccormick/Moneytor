@@ -29,10 +29,26 @@ class ExpenseCategoryController {
     }()
     
     // MARK: - CRUD Methods
-    func createExpenseDefaultCategories(name: String, emoji: String) {
-    let newExpenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil )
-        expenseCategories.append(newExpenseCategory)
-    CoreDataStack.shared.saveContext()
+    func createExpenseDefaultCategories(name: String, emoji: String) -> ExpenseCategory? {
+    let newExpenseCategory = ExpenseCategory(name: name, emoji: emoji, expenses: nil)
+        var isDuplicatedCategory: Bool = false
+        for expenseCategory in expenseCategories {
+            if newExpenseCategory.nameString.lowercased() == expenseCategory.nameString.lowercased() {
+                isDuplicatedCategory = true
+            } else {
+                isDuplicatedCategory = false
+            }
+        }
+        var returnNewExpenseCategory: ExpenseCategory?
+        if isDuplicatedCategory {
+            print("\n===================ERROR! DUPLICATED CATAGORY IN \(#function) ======================\n")
+        } else {
+            expenseCategories.append(newExpenseCategory)
+                        CoreDataStack.shared.saveContext()
+           returnNewExpenseCategory = newExpenseCategory
+        }
+        
+        return returnNewExpenseCategory
     }
     
     // READ

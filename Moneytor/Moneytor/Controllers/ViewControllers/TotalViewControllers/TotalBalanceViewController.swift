@@ -18,6 +18,7 @@ class TotalBalanceViewController: UIViewController {
     @IBOutlet weak var activityView: UIView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var dateDetailLabel: MoneytorGoodLetterLabel!
     
     // MARK: - Properties
     let weekly = TotalController.shared.weekly
@@ -29,6 +30,7 @@ class TotalBalanceViewController: UIViewController {
         super.viewDidLoad()
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        isAppAlreadyLaunched()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +54,27 @@ class TotalBalanceViewController: UIViewController {
         }
     }
 
-    @IBAction func calendarButtonTapped(_ sender: Any) {
-    
+    @IBAction func doccumentButtonTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "Moneytor Document!",
+                                                message: "Learn more about how to scan income and expense amount!" ,preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let IncomeAction = UIAlertAction(title: "Income Document!", style: .default) { (action) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let expenseDocVC = storyboard.instantiateViewController(identifier: "incomeDocStoryBoardID")
+            expenseDocVC.modalPresentationStyle = .pageSheet
+            self.present(expenseDocVC, animated: true, completion: nil)
+        }
+        let expenseAction = UIAlertAction(title: "Expense Document!", style: .default) { (action) in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let expenseDocVC = storyboard.instantiateViewController(identifier: "expenseDocStoryBoardID")
+            expenseDocVC.modalPresentationStyle = .pageSheet
+            self.present(expenseDocVC, animated: true, completion: nil)
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(IncomeAction)
+        alertController.addAction(expenseAction)
+        present(alertController, animated: true)
     }
     
     @IBAction func totalIncomeButtonTapped(_ sender: Any) {
@@ -76,7 +97,7 @@ class TotalBalanceViewController: UIViewController {
         let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
         let totalExpenseCurrencyStr = TotalController.shared.totalExpensesBySpecificTimeString
         let totalBalanceStr = TotalController.shared.totalBalanceBySpecificTimeString
-        
+        dateDetailLabel.text = "\(startedTime.dateToString(format: .monthDayYear)) - \(endedTime.dateToString(format: .monthDayYear))"
         totalBalanceLabel.text = totalBalanceStr
         totalIncomeButton.setTitle(totalIncomeCurrencyStr, for: .normal)
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
@@ -138,3 +159,22 @@ extension TotalBalanceViewController: ChartViewDelegate  {
     }
 }
 
+extension TotalBalanceViewController {
+    func presentFirstLoginAlert() {
+        let alertController = UIAlertController(title: "Welcome to InEx Moneytor!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
+        alertController.addAction(dismissAction)
+        present(alertController, animated: true)
+    }
+    
+    func isAppAlreadyLaunched() {
+        let hasBeenLaunched = UserDefaults.standard.bool(forKey: "hasBeenLaunched")
+        
+        if hasBeenLaunched {
+            return
+        } else {
+            presentFirstLoginAlert()
+            UserDefaults.standard.set(true, forKey: "hasBeenLaunched")
+        }
+    }
+}

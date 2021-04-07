@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key></key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow the camera for scanning receipts.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow location for getting accurate currency for converter.</string>
 	<key>CFBundleDevelopmentRegion</key>

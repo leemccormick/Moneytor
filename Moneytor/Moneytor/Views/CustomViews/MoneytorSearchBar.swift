@@ -27,7 +27,8 @@ class MoneytorSearchBar: UISearchBar {
         self.layer.borderColor = UIColor.mtLightYellow.cgColor
         self.layer.masksToBounds = true
         self.showsCancelButton = true
-        self.showsSearchResultsButton = true
+       // self.barTintColor = .mtDarkYellow
+       // self.showsSearchResultsButton = true
         self.tintColor = .mtTextDarkBrown
         self.searchTextField.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)!
         self.scopeBarButtonTitleTextAttributes(for: .highlighted)
@@ -36,6 +37,14 @@ class MoneytorSearchBar: UISearchBar {
         //self.searchS
 //        //scopeBarBackgroundImage = .
 //        self.isSearchResultsButtonSelected = true
+        UISegmentedControl.appearance().backgroundColor = .mtDarkYellow
+        UISegmentedControl.appearance().selectedSegmentTintColor = .mtLightYellow
+        UISegmentedControl.appearance().selectedSegmentIndex = 1
+        UISegmentedControl.appearance().setTitleTextAttributes(attributes, for: .normal)
+        UISegmentedControl.appearance().layer.borderWidth = 2.5
+        UISegmentedControl.appearance().layer.borderColor = UIColor.mtLightYellow.cgColor
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor : UIColor.mtTextLightBrown], for: .selected)
+        UISegmentedControl.appearance().addCornerRadius()
     }
     
     

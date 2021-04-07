@@ -23,7 +23,7 @@ class MoneytorGoodLetterLabel: UILabel {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.textColor = .mtTextDarkBrown
+        self.textColor = .mtTextLightBrown 
         self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
     }
 }
@@ -55,5 +55,14 @@ class MoneytorHeaderSectionLabel: UILabel {
         super.awakeFromNib()
         self.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
         self.textColor = .mtTextLightBrown
+    }
+}
+
+class MoneytorGoodLetterForDateLabel: UILabel {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.textColor = .mtTextLightBrown
+        self.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 18)
     }
 }

@@ -15,6 +15,7 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var barChartView: BarChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var dateExpenseLabel: MoneytorGoodLetterLabel!
    
     // MARK: - Properties
     let weekly = ExpenseCategoryController.shared.weekly
@@ -41,6 +42,7 @@ class TotalExpenseViewController: UIViewController {
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +59,7 @@ class TotalExpenseViewController: UIViewController {
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
+        dateExpenseLabel.text = "\(start.dateToString(format: .monthDayYear)) - \(end.dateToString(format: .monthDayYear))"
         expenseTableView.reloadData()
     }
     
@@ -108,7 +111,7 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
         let expenseCategory = expenseCategoryDict[indexPath.row]
         cell.textLabel?.text = expenseCategory.key
         cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: expenseCategory.value)
-        
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -205,3 +208,4 @@ extension TotalExpenseViewController: ChartViewDelegate {
         selectedCategory = "\(data.capitalized)  \(valueString)"
     }
 }
+

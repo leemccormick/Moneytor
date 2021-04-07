@@ -24,17 +24,17 @@ class IncomeController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date) {
+    func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String) {
         guard let categoryID = category.id else {return}
-        let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
+        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category)
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
     }
     
-    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date)  {
+    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String)  {
         guard let categoryID = category.id else {return}
-        let newIncome = Income(name: name, amount: amount, date: date, id: categoryID, incomeCategory: category)
+        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category)
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
@@ -84,19 +84,21 @@ class IncomeController {
     }
 
     // UPDATE
-    func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
+    func updateWith(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date, note: String){
         income.name = name
         income.amount = NSDecimalNumber(value: amount)
         income.incomeCategory = category
         income.date = date
+        income.note = note
         CoreDataStack.shared.saveContext()
     }
     
-    func updateIncomeWithNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date){
+    func updateIncomeWithNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date, note: String){
         income.name = name
         income.amount = NSDecimalNumber(value: amount)
         income.incomeCategory = category
         income.date = date
+        income.note = note
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleIncomeNotifications(income: income)
     }

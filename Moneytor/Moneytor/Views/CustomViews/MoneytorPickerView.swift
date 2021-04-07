@@ -14,9 +14,9 @@ class MoneytorPickerView: UIPickerView {
     }
     
     func updateView() {
-        self.backgroundColor = .mtDarkOrage
-        self.layer.borderWidth = 2.5
-        self.layer.borderColor = UIColor.mtLightYellow.cgColor
+        self.backgroundColor = .mtLightYellow
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.mtDarkOrage.cgColor
         self.addCornerRadius()
     }
 }
@@ -28,9 +28,9 @@ class MoneytorDatePickerView: UIDatePicker {
     }
     
     func updateView() {
-        self.backgroundColor = .mtDarkOrage
-        self.layer.borderWidth = 2.5
-        self.layer.borderColor = UIColor.mtLightYellow.cgColor
+        self.backgroundColor = .mtLightYellow
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.mtDarkOrage.cgColor
         self.tintColor = .mtTextDarkBrown
         self.addCornerRadius()
     }
