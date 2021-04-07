@@ -36,8 +36,6 @@ class TotalBalanceViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        activityIndicator.isHidden = false
-//        activityIndicator.startAnimating()
         timeSegmentedControl.selectedSegmentIndex = 1
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
@@ -56,12 +54,10 @@ class TotalBalanceViewController: UIViewController {
         default:
             updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
         }
-//        activityIndicator.isHidden = false
-//        activityIndicator.startAnimating()
     }
-
+    
     @IBAction func doccumentButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "Moneytor Document!",
+        let alertController = UIAlertController(title: "MiMoney Document!",
                                                 message: "Learn more about how to scan income and expense amount!" ,preferredStyle: .alert)
         
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -83,14 +79,6 @@ class TotalBalanceViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    @IBAction func totalIncomeButtonTapped(_ sender: Any) {
-    
-    }
-    
-    
-    @IBAction func totalExpenseButtonTapped(_ sender: Any) {
-    
-    }
     
     // MARK: - Helper Fuctions
     func updateViewsByTime(startedTime: Date, endedTime: Date) {
@@ -113,12 +101,10 @@ class TotalBalanceViewController: UIViewController {
     }
 }
 
-//MARK : Extension ChartViewDelegate
+// MARK: -  ChartViewDelegate
 extension TotalBalanceViewController: ChartViewDelegate  {
     
     func setUpPieChartWith(totalIncome: Double, totalExpense: Double) {
-//        activityIndicator.isHidden = false
-//        activityIndicator.startAnimating()
         pieChartView.noDataText = "No Data available! Enter data of your expense and income."
         pieChartView.chartDescription?.enabled = false
         pieChartView.drawHoleEnabled = false
@@ -134,9 +120,7 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         pieChartView.legend.horizontalAlignment = .center
         
         let incomePercent: Double = totalIncome / (totalIncome + totalExpense)
-        print("\n INCOME PERCENT ::: \(incomePercent)")
         let expensePercent: Double = totalExpense / (totalIncome + totalExpense)
-        print("\n EXPENSE PERCENT ::: \(expensePercent)")
         let incomePercentString = AmountFormatter.percentInString(num: incomePercent)
         let expensePercentString = AmountFormatter.percentInString(num: expensePercent)
         
@@ -171,9 +155,10 @@ extension TotalBalanceViewController: ChartViewDelegate  {
     }
 }
 
+// MARK: - Alert For FirstLunch
 extension TotalBalanceViewController {
     func presentFirstLoginAlert() {
-        let alertController = UIAlertController(title: "Welcome to InEx Moneytor!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Welcome to MiMoney!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)
@@ -181,7 +166,6 @@ extension TotalBalanceViewController {
     
     func isAppAlreadyLaunched() {
         let hasBeenLaunched = UserDefaults.standard.bool(forKey: "hasBeenLaunched")
-        
         if hasBeenLaunched {
             return
         } else {

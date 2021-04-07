@@ -16,17 +16,17 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet var barChartView: BarChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var dateExpenseLabel: MoneytorGoodLetterLabel!
-   
+    
     // MARK: - Properties
     let weekly = ExpenseCategoryController.shared.weekly
     let monthly = ExpenseCategoryController.shared.monthly
     let yearly = ExpenseCategoryController.shared.yearly
     var totalExpenseString = TotalController.shared.totalExpenseString
     var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly {
-            didSet {
-                setupBarChart(expenseDict: expenseCategoryDict)
-            }
+        didSet {
+            setupBarChart(expenseDict: expenseCategoryDict)
         }
+    }
     var selectedCategory: String = "" {
         didSet {
             updateSectionHeader(selectdCategory: selectedCategory)
@@ -42,27 +42,13 @@ class TotalExpenseViewController: UIViewController {
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-
-    }
-    
-    func updateViewWithtime(start: Date, end: Date) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
-        expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
-        setupBarChart(expenseDict: expenseCategoryDict)
-        updateSectionHeader(selectdCategory: selectedCategory)
-        dateExpenseLabel.text = "\(start.dateToString(format: .monthDayYear)) - \(end.dateToString(format: .monthDayYear))"
-        expenseTableView.reloadData()
     }
     
     // MARK: - Actions
@@ -98,6 +84,17 @@ class TotalExpenseViewController: UIViewController {
         lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
         header.addSubview(lable)
         expenseTableView.tableHeaderView = header
+    }
+    
+    func updateViewWithtime(start: Date, end: Date) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
+        setupBarChart(expenseDict: expenseCategoryDict)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        dateExpenseLabel.text = "\(start.dateToString(format: .monthDayYear)) - \(end.dateToString(format: .monthDayYear))"
+        expenseTableView.reloadData()
     }
 }
 
@@ -177,7 +174,7 @@ extension TotalExpenseViewController: ChartViewDelegate {
         
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
         barChartView.xAxis.granularityEnabled = true
-             barChartView.xAxis.granularity = 1.0
+        barChartView.xAxis.granularity = 1.0
         barChartView.xAxis.drawGridLinesEnabled = false
         barChartView.xAxis.drawLabelsEnabled = true
         barChartView.xAxis.labelFont = .boldSystemFont(ofSize: 16)

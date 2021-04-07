@@ -50,7 +50,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
-      
+        
         if ScannerController.shared.hasScanned {
             self.expenseNameTextField.text = ScannerController.shared.name
             self.expenseAmountTextField.text = ScannerController.shared.amount
@@ -58,7 +58,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
             self.expenseNoteTextView.text = ScannerController
                 .shared.note
             if let image = ScannerController.shared.imageScanner {
-            self.expenseImageView.image = image
+                self.expenseImageView.image = image
             }
             if let categoryFromScanner = ScannerController.shared.expenseCategory {
                 selectedExpenseCategory = categoryFromScanner
@@ -105,7 +105,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
-    
     // MARK: - Helper Fuctions
     func scanReceiptForExpenseResult() {
         ScannerController.shared.deleteNameAmountAndNote()
@@ -119,14 +118,13 @@ class ExpenseDetailTableViewController: UITableViewController  {
             self.navigationItem.title = "Add Expense"
             return
         }
-        
         self.navigationItem.title = "Update Expense"
         selectedExpenseCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
         expenseNoteTextView.text = expense.note
-
+        
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
         for row in 0..<numberOfRows {
             if expense.expenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
@@ -153,9 +151,8 @@ class ExpenseDetailTableViewController: UITableViewController  {
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
-        
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-       
+        
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
         } else {
@@ -169,15 +166,15 @@ class ExpenseDetailTableViewController: UITableViewController  {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-         return 1
+            return 1
         case 1:
-         return 1
+            return 1
         case 2:
-         return 2
+            return 2
         case 3:
-         return 2
+            return 2
         case 4:
-         return 1
+            return 1
         case 5:
             if expenseImageView.image == nil {
                 return 0
@@ -185,12 +182,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
                 return 1
             }
         case 6:
-         return 2
+            return 2
         default:
             return 0
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
@@ -227,7 +223,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -273,7 +268,6 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDeleg
 
 // MARK: - Expenses Notification
 extension ExpenseDetailTableViewController {
-    
     func presentAlertAskingUserIfRemindedNeeded(){
         let alertController = UIAlertController(title: "EXPENSE REMINDER!", message:"Would you like to set reminder for the bill that needed to be paid?", preferredStyle: .alert)
         let noRemiderAction = UIAlertAction(title: "NO", style: .cancel)
@@ -333,7 +327,6 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         }
     }
@@ -364,18 +357,15 @@ extension ExpenseDetailTableViewController {
             emojiTextFiled.placeholder = "Enter an emoji for category..."
             emojiTextFiled.keyboardAppearance = .dark
             emojiTextFiled.keyboardType = .default
-            // textField.
         }
         
         alertController.addTextField { (nameTextFiled) in
             nameTextFiled.placeholder = "Enter a name for category..."
             nameTextFiled.keyboardAppearance = .dark
             nameTextFiled.keyboardType = .default
-            // textField.
         }
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
         let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
-            //DO SOMETHING HERE....
             guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
                 self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
                 return}
@@ -398,11 +388,3 @@ extension ExpenseDetailTableViewController {
         present(alertController, animated: true)
     }
 }
-
-
-
-
-
-
-
-

@@ -12,11 +12,13 @@ class ExpenseDocViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var exampleReceiptsImageView: UIImageView!
     
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewsWithAnitamateImages()
     }
     
+    // MARK: - Actions
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

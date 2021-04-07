@@ -28,10 +28,10 @@ class ExpenseController {
         
         guard let categoryID = category.id else {return}
         if let image = image {
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
         } else {
             let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
             expenses.append(newExpense)
@@ -44,11 +44,11 @@ class ExpenseController {
         
         guard let categoryID = category.id else {return}
         if let image = image {
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
-        notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
         } else {
             let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
             expenses.append(newExpense)
@@ -65,26 +65,24 @@ class ExpenseController {
     }
     
     func fetchExpensesFromTimePeriod(startedTime: Date, endedTime: Date) -> [Expense]{
-           var expenses: [Expense] = []
-          // let now = Date()
-           let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
-           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
-           fetchRequest.predicate = datePredicate
-           fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-           do {
-               let fetchExpenses = try(CoreDataStack.shared.context.fetch(fetchRequest))
-               expenses.append(contentsOf: fetchExpenses)
-           } catch {
-               print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-           }
-           return expenses
-       }
-       
+        var expenses: [Expense] = []
+        let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
+        fetchRequest.predicate = datePredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        do {
+            let fetchExpenses = try(CoreDataStack.shared.context.fetch(fetchRequest))
+            expenses.append(contentsOf: fetchExpenses)
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+        }
+        return expenses
+    }
+    
     func fetchExpensesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Expense]{
         var expenses: [Expense] = []
-       // let now = Date()
         let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
-    
+        
         let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
         let categoryPredicate = NSPredicate(format: "expenseCategory.name == %@", categoryName)
         

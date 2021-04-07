@@ -551,8 +551,7 @@
                                                                     <color key="titleColor" name="darkBrownText"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="totalIncomeButtonTapped:" destination="I7L-hC-o0h" eventType="touchUpInside" id="vW4-4o-bbH"/>
-                                                                    <segue destination="mPo-6Z-NEi" kind="show" id="kO8-9M-xwH"/>
+                                                                    <segue destination="mPo-6Z-NEi" kind="show" id="Tcg-79-7F9"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -576,8 +575,7 @@
                                                                     <color key="titleColor" name="darkBrownText"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="totalExpenseButtonTapped:" destination="I7L-hC-o0h" eventType="touchUpInside" id="Xzy-g3-t02"/>
-                                                                    <segue destination="89d-OU-bUb" kind="show" id="Lzo-yo-PhL"/>
+                                                                    <segue destination="89d-OU-bUb" kind="show" id="uK8-yC-Zou"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -675,8 +673,8 @@
                         <outlet property="pieChartView" destination="Sdg-WR-LzE" id="Kd2-oC-X9m"/>
                         <outlet property="timeSegmentedControl" destination="dF7-Jz-B8w" id="8I7-Zj-TeU"/>
                         <outlet property="totalBalanceLabel" destination="1nZ-bZ-CDM" id="FZq-Id-0q8"/>
-                        <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="axS-l5-fOb"/>
-                        <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="In7-dd-id9"/>
+                        <outlet property="totalExpenseButton" destination="8we-IW-6K4" id="GgV-UY-VOs"/>
+                        <outlet property="totalIncomeButton" destination="6SQ-D0-yfm" id="4gG-ZD-Mfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF6-Dn-xYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1683,7 +1681,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Lzo-yo-PhL"/>
+        <segue reference="Egk-Ry-loT"/>
         <segue reference="Eka-uz-FHz"/>
         <segue reference="Bv2-vD-nDf"/>
         <segue reference="3fT-5G-8cd"/>

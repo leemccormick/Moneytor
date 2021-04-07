@@ -8,7 +8,6 @@
 import CoreData
 
 extension Income {
-    
     @discardableResult convenience init(name: String, amount: Double, date: Date, note: String, id: String, incomeCategory: IncomeCategory, image: Data?, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
@@ -22,7 +21,6 @@ extension Income {
 }
 
 extension Income: SearchableRecordDelegate {
-    
     var incomeNameString: String {
         name ?? ""
     }
@@ -46,6 +44,5 @@ extension Income: SearchableRecordDelegate {
     var incomeAmountInDouble: Double {
         amount?.doubleValue ?? 0.0
     }
-    
 }
 

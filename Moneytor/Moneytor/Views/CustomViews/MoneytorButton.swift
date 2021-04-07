@@ -8,7 +8,6 @@
 import UIKit
 
 class MoneytorButton: UIButton {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -23,7 +22,6 @@ class MoneytorButton: UIButton {
 }
 
 class MoneytorTotalButton: UIButton {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

@@ -13,7 +13,6 @@ class ExpenseListTableViewController: UITableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
-   
     
     // MARK: - Properties
     let daily = ExpenseCategoryController.shared.daily
@@ -106,10 +105,8 @@ class ExpenseListTableViewController: UITableViewController {
             for section in categoriesSections {
                 total = 0.0
                 for expense in section {
-                    
                     total += expense.expenseAmountInDouble
                     name = expense.expenseCategory?.nameString ?? ""
-                    
                 }
                 totalExpenseInEachSections.append(total)
                 sectionNames.append(name)
@@ -206,7 +203,6 @@ class ExpenseListTableViewController: UITableViewController {
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
                 present(alertController, animated: true)
-                
             } else {
                 switch expenseSearchBar.selectedScopeButtonIndex {
                 case 0:
@@ -224,7 +220,6 @@ class ExpenseListTableViewController: UITableViewController {
                     alertController.addAction(dismissAction)
                     alertController.addAction(deleteAction)
                     present(alertController, animated: true)
-                    
                 case 1:
                     let expense = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
                     let alertController = UIAlertController(title: "Are you sure to delete this Expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory?.nameString ?? "_Other") \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
@@ -265,7 +260,6 @@ class ExpenseListTableViewController: UITableViewController {
         }
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if isSearching {
             return CGFloat(30.0)
@@ -296,7 +290,6 @@ class ExpenseListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         if isSearching {
             return "🔍 SEARCHING EXPENSES \t\t\t" + AmountFormatter.currencyInString(num: totalExpenseSearching)
         } else {
@@ -315,7 +308,6 @@ class ExpenseListTableViewController: UITableViewController {
             }
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
@@ -355,9 +347,7 @@ class ExpenseListTableViewController: UITableViewController {
                 print("\n===================ERROR! IN \(#function) ======================\n")
             }
         }
-        
     }
-    
 }
 
 // MARK: - UISearchBarDelegate
@@ -367,7 +357,6 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
         if !searchText.isEmpty {
             fetchAllExpenses()
             resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "", date: $0.expenseDateText)}
-            
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
             if !results.isEmpty {
                 TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)
@@ -386,7 +375,6 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
         switch expenseSearchBar.selectedScopeButtonIndex {
         case 0:
             categoriesSectionsByDay = fetchExpensesBySpecificTime(start: daily, end: Date())
@@ -452,7 +440,6 @@ extension ExpenseListTableViewController: VNDocumentCameraViewControllerDelegate
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         }
         gotoExpenseDetailVC()
@@ -467,14 +454,13 @@ extension ExpenseListTableViewController: VNDocumentCameraViewControllerDelegate
         controller.dismiss(animated: true, completion: nil)
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
-        
     }
     
     func gotoExpenseDetailVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let  destinationVc = storyboard.instantiateViewController(identifier: "expenseDetailStoryBoardId") as? ExpenseDetailTableViewController else {
-        print("Couldn't find the view controller")
-        return}
+            print("Couldn't find the view controller")
+            return}
         navigationController?.pushViewController(destinationVc, animated: true)
     }
 }

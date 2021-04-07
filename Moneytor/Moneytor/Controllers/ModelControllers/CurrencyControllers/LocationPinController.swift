@@ -25,8 +25,6 @@ class LocationPinController {
     
     func reloadLocationPins()  {
         let request: NSFetchRequest<PinLocation> = PinLocation.fetchRequest()
-       // let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-        //request.sortDescriptors = [sortDescriptor]
         request.predicate = NSPredicate(value: true)
         CoreDataStack.shared.context.perform {
             do {

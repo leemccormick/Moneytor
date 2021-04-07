@@ -41,16 +41,14 @@ class IncomeDetailTableViewController: UITableViewController {
             selectedIncomeCategory = upwrapNewCategory
         }
         selectedIncomeCategory = IncomeCategoryController.shared.incomeCategories.first
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
-        print("\n=================== ScannerController.shared.hasScanned :: \(ScannerController.shared.hasScanned)======================IN \(#function)\n")
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         incomeCategoryPicker.reloadAllComponents()
-       
+        
         if ScannerController.shared.hasScanned == true {
             self.incomeNameTextField.text = ScannerController.shared.name
             self.incomeAmountTextField.text = ScannerController.shared.amount
@@ -89,9 +87,7 @@ class IncomeDetailTableViewController: UITableViewController {
         scanReceiptForIncomeResult()
     }
     
-    
     @IBAction func scannerButtonOnViewButtonTapped(_ sender: Any) {
-        // IncomeDetailTableViewController.scannerButtonTapped(self.)
         scanReceiptForIncomeResult()
     }
     
@@ -107,6 +103,7 @@ class IncomeDetailTableViewController: UITableViewController {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
+    // MARK: - Helper Fuctions
     func scanReceiptForIncomeResult() {
         ScannerController.shared.deleteNameAmountAndNote()
         let documentCameraController = VNDocumentCameraViewController()
@@ -114,7 +111,6 @@ class IncomeDetailTableViewController: UITableViewController {
         self.present(documentCameraController, animated: true, completion: nil)
     }
     
-    // MARK: - Helper Fuctions
     func updateViews() {
         guard let income = income else {
             self.navigationItem.title = "Add Income"
@@ -151,7 +147,6 @@ class IncomeDetailTableViewController: UITableViewController {
             presentAlertToUser(titleAlert: "INCOME'S AMOUNT!", messageAlert: "Don't forget to input income's amount!")
             return
         }
-        
         guard let selectedIncomeCategory = selectedIncomeCategory else {return}
         if let income = income {
             IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text )
@@ -166,15 +161,15 @@ class IncomeDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-         return 1
+            return 1
         case 1:
-         return 1
+            return 1
         case 2:
-         return 3
+            return 3
         case 3:
-         return 1
+            return 1
         case 4:
-         return 1
+            return 1
         case 5:
             if incomeImageView.image == nil {
                 return 0
@@ -182,7 +177,7 @@ class IncomeDetailTableViewController: UITableViewController {
                 return 1
             }
         case 6:
-         return 2
+            return 2
         default:
             return 0
         }
@@ -230,7 +225,6 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return IncomeCategoryController.shared.incomeCategories.count
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedIncomeCategory = IncomeCategoryController.shared.incomeCategories[row]
@@ -327,7 +321,6 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         }
     }
@@ -357,18 +350,15 @@ extension IncomeDetailTableViewController {
             emojiTextFiled.placeholder = "Enter an emoji for category..."
             emojiTextFiled.keyboardAppearance = .dark
             emojiTextFiled.keyboardType = .default
-            // textField.
         }
         
         alertController.addTextField { (nameTextFiled) in
             nameTextFiled.placeholder = "Enter a name for category..."
             nameTextFiled.keyboardAppearance = .dark
             nameTextFiled.keyboardType = .default
-            // textField.
         }
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
         let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
-            //DO SOMETHING HERE....
             guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
                 self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
                 return}

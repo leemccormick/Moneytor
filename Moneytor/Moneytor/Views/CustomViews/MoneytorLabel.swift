@@ -20,7 +20,6 @@ class MoneytorLabel: UILabel {
 }
 
 class MoneytorGoodLetterLabel: UILabel {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textColor = .mtTextLightBrown 
@@ -59,7 +58,6 @@ class MoneytorHeaderSectionLabel: UILabel {
 }
 
 class MoneytorGoodLetterForDateLabel: UILabel {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textColor = .mtTextLightBrown
