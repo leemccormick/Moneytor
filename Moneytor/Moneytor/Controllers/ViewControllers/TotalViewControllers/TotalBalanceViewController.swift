@@ -31,6 +31,7 @@ class TotalBalanceViewController: UIViewController {
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         isAppAlreadyLaunched()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,7 @@ class TotalBalanceViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        
     }
     
     // MARK: - Actions
@@ -53,9 +55,9 @@ class TotalBalanceViewController: UIViewController {
             updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
         }
     }
-
+    
     @IBAction func doccumentButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "Moneytor Document!",
+        let alertController = UIAlertController(title: "MiMoney Document!",
                                                 message: "Learn more about how to scan income and expense amount!" ,preferredStyle: .alert)
         
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -77,17 +79,11 @@ class TotalBalanceViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    @IBAction func totalIncomeButtonTapped(_ sender: Any) {
-    
-    }
-    
-    
-    @IBAction func totalExpenseButtonTapped(_ sender: Any) {
-    
-    }
     
     // MARK: - Helper Fuctions
     func updateViewsByTime(startedTime: Date, endedTime: Date) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: startedTime, endedTime: endedTime)
@@ -105,7 +101,7 @@ class TotalBalanceViewController: UIViewController {
     }
 }
 
-//MARK : Extension ChartViewDelegate
+// MARK: -  ChartViewDelegate
 extension TotalBalanceViewController: ChartViewDelegate  {
     
     func setUpPieChartWith(totalIncome: Double, totalExpense: Double) {
@@ -124,9 +120,7 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         pieChartView.legend.horizontalAlignment = .center
         
         let incomePercent: Double = totalIncome / (totalIncome + totalExpense)
-        print("\n INCOME PERCENT ::: \(incomePercent)")
         let expensePercent: Double = totalExpense / (totalIncome + totalExpense)
-        print("\n EXPENSE PERCENT ::: \(expensePercent)")
         let incomePercentString = AmountFormatter.percentInString(num: incomePercent)
         let expensePercentString = AmountFormatter.percentInString(num: expensePercent)
         
@@ -138,6 +132,8 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         dataSet.colors = ChartColorTemplates.pastel()
         dataSet.drawValuesEnabled = false
         pieChartView.data = PieChartData(dataSet: dataSet)
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
@@ -159,9 +155,10 @@ extension TotalBalanceViewController: ChartViewDelegate  {
     }
 }
 
+// MARK: - Alert For FirstLunch
 extension TotalBalanceViewController {
     func presentFirstLoginAlert() {
-        let alertController = UIAlertController(title: "Welcome to InEx Moneytor!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Welcome to MiMoney!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)
@@ -169,7 +166,6 @@ extension TotalBalanceViewController {
     
     func isAppAlreadyLaunched() {
         let hasBeenLaunched = UserDefaults.standard.bool(forKey: "hasBeenLaunched")
-        
         if hasBeenLaunched {
             return
         } else {

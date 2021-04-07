@@ -20,14 +20,14 @@ class NotificationScheduler {
         let dateComponents = Calendar.current.dateComponents([.day,.month,.year], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: "\(id)", content: content, trigger: trigger)
-
+        
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
                 print("Unable to add notification request: \(error.localizedDescription)")
             }
         }
     }
-
+    
     func cancelIncomeNotification(income: Income) {
         guard let id = income.id else { return }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
@@ -45,14 +45,14 @@ class NotificationScheduler {
         let dateComponents = Calendar.current.dateComponents([.day,.month,.year], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: "\(id)", content: content, trigger: trigger)
-
+        
         UNUserNotificationCenter.current().add(request) { (error) in
             if let error = error {
                 print("Unable to add notification request: \(error.localizedDescription)")
             }
         }
     }
-
+    
     func cancelExpenseNotification(expense: Expense) {
         guard let id = expense.id else { return }
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])

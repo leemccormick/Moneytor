@@ -36,7 +36,7 @@ class ExchangeRateAPIController {
         let targetCodeURL = baseCodeURL.appendingPathComponent(targetCode)
         let amountURL = targetCodeURL.appendingPathComponent(amount)
         let finalURL = amountURL
-        print("\n-----------------\n amountURL:: \(finalURL) \n-----------------\n")
+        print("\n----------------- amountURL:: \(finalURL) -----------------\n")
         
         URLSession.shared.dataTask(with: finalURL) { (data, response, error) in
             if let error = error {

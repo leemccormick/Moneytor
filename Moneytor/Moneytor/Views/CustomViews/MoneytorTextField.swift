@@ -8,7 +8,6 @@
 import UIKit
 
 class MoneytorTextField: UITextField {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

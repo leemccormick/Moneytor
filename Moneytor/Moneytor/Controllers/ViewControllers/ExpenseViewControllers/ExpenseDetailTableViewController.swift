@@ -43,9 +43,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
             selectedExpenseCategory = upwrapNewCategory
         }
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
-//        if expenseNoteTextView.text == nil {
-//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,13 +50,16 @@ class ExpenseDetailTableViewController: UITableViewController  {
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         expenseCategoryPicker.reloadAllComponents()
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
-      
+        
         if ScannerController.shared.hasScanned {
             self.expenseNameTextField.text = ScannerController.shared.name
             self.expenseAmountTextField.text = ScannerController.shared.amount
             self.expenseDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
             self.expenseNoteTextView.text = ScannerController
                 .shared.note
+            if let image = ScannerController.shared.imageScanner {
+                self.expenseImageView.image = image
+            }
             if let categoryFromScanner = ScannerController.shared.expenseCategory {
                 selectedExpenseCategory = categoryFromScanner
                 let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
@@ -71,6 +71,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
             }
         }
         updateView()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,7 +105,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
-    
     // MARK: - Helper Fuctions
     func scanReceiptForExpenseResult() {
         ScannerController.shared.deleteNameAmountAndNote()
@@ -118,16 +118,12 @@ class ExpenseDetailTableViewController: UITableViewController  {
             self.navigationItem.title = "Add Expense"
             return
         }
-        
         self.navigationItem.title = "Update Expense"
         selectedExpenseCategory = expense.expenseCategory ?? ExpenseCategoryController.shared.expenseCategories[0]
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
         expenseNoteTextView.text = expense.note
-//        if expenseNoteTextView.text == nil {
-//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
-//        }
         
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
         for row in 0..<numberOfRows {
@@ -141,8 +137,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         } else {
             expenseImageView.isHidden = true
         }
-        
-
     }
     
     func saveExpense() {
@@ -157,14 +151,12 @@ class ExpenseDetailTableViewController: UITableViewController  {
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
-        
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-       
-        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
         
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
         } else {
+            let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text, image: imageDate)
         }
         navigationController?.popViewController(animated: true)
@@ -174,15 +166,15 @@ class ExpenseDetailTableViewController: UITableViewController  {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-         return 1
+            return 1
         case 1:
-         return 1
+            return 1
         case 2:
-         return 2
+            return 2
         case 3:
-         return 2
+            return 2
         case 4:
-         return 1
+            return 1
         case 5:
             if expenseImageView.image == nil {
                 return 0
@@ -190,12 +182,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
                 return 1
             }
         case 6:
-         return 2
+            return 2
         default:
             return 0
         }
     }
-    
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
@@ -232,7 +223,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -278,7 +268,6 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDeleg
 
 // MARK: - Expenses Notification
 extension ExpenseDetailTableViewController {
-    
     func presentAlertAskingUserIfRemindedNeeded(){
         let alertController = UIAlertController(title: "EXPENSE REMINDER!", message:"Would you like to set reminder for the bill that needed to be paid?", preferredStyle: .alert)
         let noRemiderAction = UIAlertAction(title: "NO", style: .cancel)
@@ -304,7 +293,6 @@ extension ExpenseDetailTableViewController {
             return
         }
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
         
         let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS EXPENSES!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nPaid Date : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
@@ -313,7 +301,8 @@ extension ExpenseDetailTableViewController {
             if let expense = self.expense {
                 ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
             } else {
-                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageDate)
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -330,6 +319,7 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
             expenseImageView.image = scannedImage
+            ScannerController.shared.imageScanner = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
@@ -337,7 +327,6 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         }
     }
@@ -345,12 +334,14 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
         expenseImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Expense receipt scanner have been cancled!")
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         controller.dismiss(animated: true, completion: nil)
         expenseImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
         
@@ -366,18 +357,15 @@ extension ExpenseDetailTableViewController {
             emojiTextFiled.placeholder = "Enter an emoji for category..."
             emojiTextFiled.keyboardAppearance = .dark
             emojiTextFiled.keyboardType = .default
-            // textField.
         }
         
         alertController.addTextField { (nameTextFiled) in
             nameTextFiled.placeholder = "Enter a name for category..."
             nameTextFiled.keyboardAppearance = .dark
             nameTextFiled.keyboardType = .default
-            // textField.
         }
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
         let doSomethingAction = UIAlertAction(title: "Add New Category", style: .default) { (action) in
-            //DO SOMETHING HERE....
             guard let name = alertController.textFields?.last?.text, !name.isEmpty else {
                 self.presentAlertToUser(titleAlert: "NAME ERROR!\nUnable to create new category! ", messageAlert: "Make sure you input a name for creating new category!")
                 return}
@@ -400,11 +388,3 @@ extension ExpenseDetailTableViewController {
         present(alertController, animated: true)
     }
 }
-
-
-
-
-
-
-
-

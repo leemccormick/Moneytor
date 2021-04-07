@@ -24,35 +24,38 @@ class ExpenseController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) {
+    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?) {
         
         guard let categoryID = category.id else {return}
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
+        if let image = image {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+        } else {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+        }
     }
     
-    func createExpenseFromScannerWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) -> Expense? {
-        guard let categoryID = category.id else {return nil}
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
-        return newExpense
-    }
-    
-    
-    
-    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) {
+    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?) {
         
         guard let categoryID = category.id else {return}
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
-        notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
-        // return newIncome
+        if let image = image {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
+        } else {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
+        }
     }
     
     // READ
@@ -62,26 +65,24 @@ class ExpenseController {
     }
     
     func fetchExpensesFromTimePeriod(startedTime: Date, endedTime: Date) -> [Expense]{
-           var expenses: [Expense] = []
-          // let now = Date()
-           let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
-           let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
-           fetchRequest.predicate = datePredicate
-           fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-           do {
-               let fetchExpenses = try(CoreDataStack.shared.context.fetch(fetchRequest))
-               expenses.append(contentsOf: fetchExpenses)
-           } catch {
-               print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-           }
-           return expenses
-       }
-       
+        var expenses: [Expense] = []
+        let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
+        let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
+        fetchRequest.predicate = datePredicate
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        do {
+            let fetchExpenses = try(CoreDataStack.shared.context.fetch(fetchRequest))
+            expenses.append(contentsOf: fetchExpenses)
+        } catch {
+            print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+        }
+        return expenses
+    }
+    
     func fetchExpensesFromTimePeriodAndCategory(startedTime: Date, endedTime: Date, categoryName: String) -> [Expense]{
         var expenses: [Expense] = []
-       // let now = Date()
         let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest <Expense>(entityName: "Expense")
-    
+        
         let datePredicate = NSPredicate(format: "date > %@ AND date < %@", startedTime as NSDate, endedTime as NSDate)
         let categoryPredicate = NSPredicate(format: "expenseCategory.name == %@", categoryName)
         

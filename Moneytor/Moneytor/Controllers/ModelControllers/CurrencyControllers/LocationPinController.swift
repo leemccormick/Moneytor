@@ -25,8 +25,7 @@ class LocationPinController {
     
     func reloadLocationPins()  {
         let request: NSFetchRequest<PinLocation> = PinLocation.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-        request.sortDescriptors = [sortDescriptor]
+        request.predicate = NSPredicate(value: true)
         CoreDataStack.shared.context.perform {
             do {
                 let pins = try CoreDataStack.shared.context.fetch(request)
@@ -52,6 +51,21 @@ class LocationPinController {
         } catch {
             print("Error annotationView in TravelLocationMapVC : \(error.localizedDescription)")
             return nil
+        }
+    }
+    
+    func deleteAllPinLocation() {
+        let context = CoreDataStack.shared.context
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "PinLocation")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do
+                {
+                    try context.execute(deleteRequest)
+                    try context.save()
+                }
+        catch
+        {
+            print ("There was an error")
         }
     }
 }

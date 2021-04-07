@@ -8,7 +8,6 @@
 import CoreData
 
 extension IncomeCategory: SearchableRecordDelegate {
-    
     @discardableResult convenience init(name: String = "other", emoji: String = "💵", incomes: NSSet?, id: String = UUID().uuidString, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name

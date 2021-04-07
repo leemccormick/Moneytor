@@ -13,7 +13,6 @@ class IncomeListTableViewController: UITableViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var incomeSearchBar: UISearchBar!
-
     
     // MARK: - Properties
     let daily = IncomeCategoryController.shared.daily
@@ -81,7 +80,6 @@ class IncomeListTableViewController: UITableViewController {
         return newCategoriesSections
     }
     
-    
     func updateFooter(total: Double) {
         let footer = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         footer.backgroundColor = .mtLightYellow
@@ -116,8 +114,8 @@ class IncomeListTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Table view data source
 extension IncomeListTableViewController {
-    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         if isSearching {
             return 1
@@ -160,7 +158,6 @@ extension IncomeListTableViewController {
             searchCell.textLabel?.numberOfLines = 0
             searchCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
             searchCell.detailTextLabel?.text = income.incomeAmountString
-           // searchCell.selectedBackgroundView =
             searchCell.selectionStyle = .none
             returnCell = searchCell
         } else {
@@ -227,7 +224,7 @@ extension IncomeListTableViewController {
                     alertController.addAction(deleteAction)
                     present(alertController, animated: true)
                 case 1:
-                   let income = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
+                    let income = self.categoriesSectionsByWeek[indexPath.section][indexPath.row]
                     let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
                     let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                     let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
@@ -261,36 +258,31 @@ extension IncomeListTableViewController {
         }
     }
     
-   
-
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         if isSearching {
             return "🔍 SEARCHING INCOMES \t\t\t" + AmountFormatter.currencyInString(num: totalIncomeSearching)
         } else {
             switch incomeSearchBar.selectedScopeButtonIndex {
             case 0:
-                //  tableView.reloadData()
                 if categoriesSectionsByDay[section].count == 0 {
                     return ""
                 } else {
-                let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
-                return title
+                    let title = configurateSectionTitle(categoriesSections: categoriesSectionsByDay, section: section)
+                    return title
                 }
             case 1:
                 if categoriesSectionsByWeek[section].count == 0 {
                     return ""
                 } else {
-                let title = configurateSectionTitle(categoriesSections: categoriesSectionsByWeek, section: section)
-                return title
+                    let title = configurateSectionTitle(categoriesSections: categoriesSectionsByWeek, section: section)
+                    return title
                 }
             case 2:
                 if categoriesSectionsByMonth[section].count == 0 {
                     return ""
                 } else {
-                let title = configurateSectionTitle(categoriesSections: categoriesSectionsByMonth, section: section)
-                return title
+                    let title = configurateSectionTitle(categoriesSections: categoriesSectionsByMonth, section: section)
+                    return title
                 }
             default:
                 return ""
@@ -305,8 +297,6 @@ extension IncomeListTableViewController {
         header.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)
         header.textLabel?.textAlignment = .center
     }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier ==  "toIncomeDetailVCFromSearching" {
@@ -326,7 +316,6 @@ extension IncomeListTableViewController {
             destinationVC.income = income
         }
         
-        
         if segue.identifier ==  "toIncomeDetailVCFromWeek" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
@@ -340,19 +329,15 @@ extension IncomeListTableViewController {
             let income = categoriesSectionsByWeek[indexPath.section][indexPath.row]
             destinationVC.income = income
         }
-        
     }
-    
 }
-    
-    
-    
+
 // MARK: - UISearchBarDelegate
 extension IncomeListTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-fetchAllIncomes()
+            fetchAllIncomes()
             resultsIncomeFromSearching = IncomeController.shared.incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText)}
             
             guard let results = resultsIncomeFromSearching as? [Income] else {return}
@@ -373,9 +358,7 @@ fetchAllIncomes()
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print("\n===================ERROR!selectedScope \(selectedScope) IN\(#function) ======================\n")
         switch incomeSearchBar.selectedScopeButtonIndex {
-        
         case 0:
             categoriesSectionsByDay = fetchIncomesBySpecificTime(start: daily, end: Date())
             print("\n===================ERROR! categoriesSectionsByDay :: \(categoriesSectionsByDay.count) IN\(#function) ======================\n")
@@ -433,6 +416,7 @@ extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate 
         controller.dismiss(animated: true, completion: nil)
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
+            ScannerController.shared.imageScanner = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
@@ -440,7 +424,6 @@ extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate 
                 } catch {
                     print(error.localizedDescription)
                 }
-                
             }
         }
         gotoIncomeDetailVC()
@@ -455,20 +438,19 @@ extension IncomeListTableViewController: VNDocumentCameraViewControllerDelegate 
         controller.dismiss(animated: true, completion: nil)
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
-        
     }
     
     func gotoIncomeDetailVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let  destinationVc = storyboard.instantiateViewController(identifier: "incomeDetailStoryBoardId") as? IncomeDetailTableViewController else {
-        print("Couldn't find the view controller")
-        return}
+            print("Couldn't find the view controller")
+            return}
         navigationController?.pushViewController(destinationVc, animated: true)
     }
 }
 
-    
-    
-    
-    
+
+
+
+
 

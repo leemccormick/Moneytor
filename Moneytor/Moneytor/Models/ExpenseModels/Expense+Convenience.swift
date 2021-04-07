@@ -8,7 +8,7 @@
 import CoreData
 
 extension Expense {
-    @discardableResult convenience init(name: String, amount: Double, date: Date, note: String, id: String, expenseCategory: ExpenseCategory, image: Data, context: NSManagedObjectContext = CoreDataStack.shared.context) {
+    @discardableResult convenience init(name: String, amount: Double, date: Date, note: String, id: String, expenseCategory: ExpenseCategory, image: Data?, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name
         self.amount = NSDecimalNumber(value: amount)
@@ -21,7 +21,6 @@ extension Expense {
 }
 
 extension Expense: SearchableRecordDelegate {
-    
     var expenseNameString: String {
         name ?? ""
     }

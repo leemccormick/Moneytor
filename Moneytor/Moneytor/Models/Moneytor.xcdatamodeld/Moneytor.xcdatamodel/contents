@@ -19,6 +19,7 @@
         <attribute name="amount" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <relationship name="incomeCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IncomeCategory" inverseName="incomes" inverseEntity="IncomeCategory"/>
@@ -37,7 +38,7 @@
     <elements>
         <element name="Expense" positionX="-811.1640625" positionY="91.03125" width="128" height="148"/>
         <element name="ExpenseCategory" positionX="-609.02734375" positionY="105.31640625" width="128" height="103"/>
-        <element name="Income" positionX="-1237.83203125" positionY="121.328125" width="128" height="133"/>
+        <element name="Income" positionX="-1237.83203125" positionY="121.328125" width="128" height="148"/>
         <element name="IncomeCategory" positionX="-994.734375" positionY="144.45703125" width="128" height="103"/>
         <element name="PinLocation" positionX="-1035" positionY="153" width="128" height="88"/>
     </elements>

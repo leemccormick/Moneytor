@@ -8,7 +8,6 @@
 import UIKit
 
 class MoneytorTextView: UITextView {
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
@@ -17,9 +16,6 @@ class MoneytorTextView: UITextView {
     
     func setupView() {
         self.addCornerRadius()
-        //setupPlaceholderText()
-//        self.text = "Take a note here or scan documents for detail..."
-//        self.textColor = UIColor.lightGray
         self.textColor = .mtTextLightBrown
         self.backgroundColor = .mtLightYellow
         self.layer.borderWidth = 1.0

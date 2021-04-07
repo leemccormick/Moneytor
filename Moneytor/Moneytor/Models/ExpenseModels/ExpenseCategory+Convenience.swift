@@ -8,7 +8,6 @@
 import CoreData
 
 extension ExpenseCategory {
-    
     @discardableResult convenience init(name: String = "_other", emoji: String = "💸", id: String = UUID().uuidString, expenses: NSSet?, context: NSManagedObjectContext = CoreDataStack.shared.context) {
         self.init(context: context)
         self.name = name

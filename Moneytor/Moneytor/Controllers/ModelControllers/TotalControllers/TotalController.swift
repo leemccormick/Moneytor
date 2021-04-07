@@ -69,7 +69,6 @@ class TotalController {
             let expenseAmount = expense.amount as? Double ?? 0.0
             sumExpenses += expenseAmount
         }
-        
         totalExpenseBySpecificTime = sumExpenses
         totalExpensesBySpecificTimeString =  AmountFormatter.currencyInString(num: totalExpenseBySpecificTime)
     }
@@ -81,7 +80,6 @@ class TotalController {
         totalBalanceBySpecificTime = totalIncomeBySpecificTime - totalExpenseBySpecificTime
         totalBalanceBySpecificTimeString =  AmountFormatter.currencyInString(num: totalBalanceBySpecificTime)
     }
-    
     
     func calculateTotalExpense() {
         ExpenseController.shared.fetchAllExpenses()
@@ -140,7 +138,6 @@ class TotalController {
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         
         let newTotalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
-        //print("-------------------- newTotalExpenseDict \(newTotalExpenseDict) in \(#function) : ----------------------------\n)")
         return newTotalExpenseDict
     }
 }

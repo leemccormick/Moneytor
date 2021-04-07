@@ -10,7 +10,6 @@ import Vision
 import VisionKit
 
 class ScannerController {
-    
     static let shared = ScannerController()
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var reconizedTexts: [ReconizedTextScanner] = []
@@ -23,105 +22,97 @@ class ScannerController {
     var expenseCategory: ExpenseCategory?
     var incomeCategory: IncomeCategory?
     var hasScanned: Bool = false
+    var imageScanner: UIImage?
     
     // MARK: - Helper Fuctions
-        func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
-            var midYs: [Double] = []
-            var minYs: [Double] = []
-            var maxYs: [Double] = []
-            let sortedReconizedTexts = reconizedTexts.sorted { $0.midY > $1.midY }
-            for result in reconizedTexts {
-                midYs.append(result.midY)
-                minYs.append(result.minY)
-                maxYs.append(result.maxY)
-            }
-            
-            let newMidYs = midYs.removeDuplicates().sorted {$0 > $1}
-            let newMinYs = minYs.removeDuplicates().sorted {$0 > $1}
-            let newMaxYs = maxYs.removeDuplicates().sorted {$0 > $1}
-            print("----------------- midYs:: \(newMidYs)-----------------")
-            var newNote = ""
-            var index = 0
-            
-            for r in sortedReconizedTexts {
-               // print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
-                
-                if index < newMidYs.count - 1 &&  index < newMidYs.count - 1 && index < newMaxYs.count - 1 {
-                    
-                    if newMidYs[index] == r.midY || newMinYs[index] == r.minY || newMaxYs[index] == r.maxY  {
-                        newNote += "\t\t"
-                        newNote += "\(r.text)"
-                    } else {
-                        newNote += "\n"
-                        newNote += "\(r.text)"
-                        index += 1
-                    }
+    func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
+        var midYs: [Double] = []
+        var minYs: [Double] = []
+        var maxYs: [Double] = []
+        let sortedReconizedTexts = reconizedTexts.sorted { $0.midY > $1.midY }
+        for result in reconizedTexts {
+            midYs.append(result.midY)
+            minYs.append(result.minY)
+            maxYs.append(result.maxY)
+        }
+        let newMidYs = midYs.removeDuplicates().sorted {$0 > $1}
+        let newMinYs = minYs.removeDuplicates().sorted {$0 > $1}
+        let newMaxYs = maxYs.removeDuplicates().sorted {$0 > $1}
+        var newNote = ""
+        var index = 0
+        
+        for r in sortedReconizedTexts {
+            if index < newMidYs.count - 1 &&  index < newMinYs.count - 1 && index < newMaxYs.count - 1 {
+                if newMidYs[index] == r.midY || newMinYs[index] == r.minY || newMaxYs[index] == r.maxY  {
+                    newNote += "\t\t"
+                    newNote += "\(r.text)"
+                } else {
+                    newNote += "\n"
+                    newNote += "\(r.text)"
+                    index += 1
                 }
             }
-           // print("----------------- :: \(newNote)-----------------")
-            self.note = newNote
         }
-        
-        func deleteNameAmountAndNote() {
-            hasScanned = false
-            self.reconizedTexts.removeAll()
-            self.reconizedTexts = []
-            self.name = ""
-            self.amount = ""
-            self.amountInDouble = 0.0
-            self.date = ""
-            self.note = ""
-        }
+        self.note = newNote
+    }
+    
+    func deleteNameAmountAndNote() {
+        hasScanned = false
+        self.reconizedTexts.removeAll()
+        self.reconizedTexts = []
+        self.name = ""
+        self.amount = ""
+        self.amountInDouble = 0.0
+        self.date = ""
+        self.note = ""
+        self.imageScanner = nil
+    }
 }
 
 // MARK: - SetupVision For ExpenseScanner
 extension ScannerController {
+    
     func detectForNameAndAmount(reconizedTexts: [ReconizedTextScanner]) {
-            var potentialAmounts: [Double] = []
-            for result in reconizedTexts {
-                if result.index == 0 {
-                    self.name += result.text
-                }
-                let rSeparates = result.text.components(separatedBy: " ")
-                for rSeparate in rSeparates {
-                    
-                    if rSeparate.isnumberordouble {
-                        let num = Double(rSeparate)
-                        if let upwrapNum = num {
-                            if upwrapNum < 1000 {
-                                potentialAmounts.append(upwrapNum)
-                            }
-                        }
-                    }
-                    if rSeparate.contains("$") {
-                        var newR = rSeparate
-                        newR.removeFirst()
-                        let num = Double(newR)
-                        if let upwrapNum = num {
+        var potentialAmounts: [Double] = []
+        for result in reconizedTexts {
+            if result.index == 0 {
+                self.name += result.text
+            }
+            let rSeparates = result.text.components(separatedBy: " ")
+            for rSeparate in rSeparates {
+                if rSeparate.isnumberordouble {
+                    let num = Double(rSeparate)
+                    if let upwrapNum = num {
+                        if upwrapNum < 1000 {
                             potentialAmounts.append(upwrapNum)
                         }
                     }
                 }
-                
-                for category in ExpenseCategoryController.shared.expenseCategories {
-                    print("\n=================== result ::  category \n\(result.text.lowercased().trimmingCharacters(in: .whitespaces))  ::::  \(category.nameString.lowercased().trimmingCharacters(in: .whitespaces))======================IN \(#function)\n")
-                    print("\n=================== result.text.lowercased().contains(category.nameString.lowercased()):: \(result.text.lowercased().trimmingCharacters(in: .whitespaces).contains(category.nameString.lowercased().trimmingCharacters(in: .whitespaces)))======================IN \(#function)\n")
-                    if result.text.lowercased().trimmingCharacters(in: .whitespaces) == (category.nameString.lowercased().trimmingCharacters(in: .whitespaces)) {
-                        expenseCategory = category
+                if rSeparate.contains("$") {
+                    var newR = rSeparate
+                    newR.removeFirst()
+                    let num = Double(newR)
+                    if let upwrapNum = num {
+                        potentialAmounts.append(upwrapNum)
                     }
                 }
             }
-            let str = self.name
-            if str.count > 20 {
-                let start = str.index(str.startIndex, offsetBy: 20)
-                self.name = String(name.prefix(upTo: start))
+            for category in ExpenseCategoryController.shared.expenseCategories {
+                if result.text.lowercased().trimmingCharacters(in: .whitespaces) == (category.nameString.lowercased().trimmingCharacters(in: .whitespaces)) {
+                    expenseCategory = category
+                }
             }
-            guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
-            self.amountInDouble = amountIsThelastInPotentialAmounts
-            self.amount = String(amountInDouble)
-        print("\n===================expenseCategory :: \(expenseCategory?.nameString)======================IN \(#function)\n")
+        }
+        let str = self.name
+        if str.count > 20 {
+            let start = str.index(str.startIndex, offsetBy: 20)
+            self.name = String(name.prefix(upTo: start))
+        }
+        guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
+        self.amountInDouble = amountIsThelastInPotentialAmounts
+        self.amount = String(amountInDouble)
     }
-        
+    
     func setupVisionForExpenseScanner() -> [VNRequest] {
         hasScanned = true
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
@@ -129,7 +120,6 @@ extension ScannerController {
                 print("No Results Found!")
                 return
             }
-            
             var indexOfReconizedText: Int = 0
             let maximumCandidates = 1
             for observation in observations {
@@ -144,7 +134,6 @@ extension ScannerController {
                 let dObservationMaxY = Double(observation.boundingBox.maxY).round(to: 2)
                 newScanner.maxY = dObservationMaxY
                 newScanner.index = indexOfReconizedText
-                
                 do {
                     let types: NSTextCheckingResult.CheckingType = [.date]
                     let detector = try NSDataDetector(types: types.rawValue)
@@ -173,6 +162,7 @@ extension ScannerController {
 
 // MARK: - SetupVision For IncomeScanner
 extension ScannerController {
+    
     func setupVisionForIncomeScanner() -> [VNRequest] {
         hasScanned = true
         let textRecognizationRequest = VNRecognizeTextRequest { (request, error) in
@@ -180,7 +170,6 @@ extension ScannerController {
                 print("No Results Found!")
                 return
             }
-            
             var indexOfReconizedText: Int = 0
             let maximumCandidates = 1
             for observation in observations {
@@ -195,7 +184,6 @@ extension ScannerController {
                 let dObservationMaxY = Double(observation.boundingBox.maxY).round(to: 2)
                 newScanner.maxY = dObservationMaxY
                 newScanner.index = indexOfReconizedText
-                
                 do {
                     let types: NSTextCheckingResult.CheckingType = [.date]
                     let detector = try NSDataDetector(types: types.rawValue)
@@ -227,9 +215,7 @@ extension ScannerController {
             if result.index == 0 {
                 self.name += result.text
             }
-            
             let rSeparates = result.text.components(separatedBy: " ")
-            
             for rSeparate in rSeparates {
                 if rSeparate.contains("$") {
                     var newR = rSeparate
@@ -237,7 +223,6 @@ extension ScannerController {
                     let num = Double(newR)
                     if let upwrapNum = num {
                         self.amountInDouble = upwrapNum
-                        print("----------------- upwrapNum contains:: \(upwrapNum)-----------------")
                     }
                 } else {
                     
@@ -253,8 +238,6 @@ extension ScannerController {
             }
             
             for category in IncomeCategoryController.shared.incomeCategories {
-                print("\n=================== result ::  category \n\(result.text.lowercased().trimmingCharacters(in: .whitespaces))  ::::  \(category.nameString.lowercased().trimmingCharacters(in: .whitespaces))======================IN \(#function)\n")
-                print("\n=================== result.text.lowercased().contains(category.nameString.lowercased()):: \(result.text.lowercased().trimmingCharacters(in: .whitespaces).contains(category.nameString.lowercased().trimmingCharacters(in: .whitespaces)))======================IN \(#function)\n")
                 if result.text.lowercased().trimmingCharacters(in: .whitespaces) == (category.nameString.lowercased().trimmingCharacters(in: .whitespaces)) {
                     incomeCategory = category
                 }
@@ -264,7 +247,6 @@ extension ScannerController {
         if str.count > 20 {
             let start = str.index(str.startIndex, offsetBy: 20)
             self.name = String(name.prefix(upTo: start))
-            print("-------------------- name: \(name) in \(#function) : ----------------------------\n)")
         }
         if amountInDouble != 0.0  {
             self.amount = String(amountInDouble)
