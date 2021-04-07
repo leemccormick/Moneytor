@@ -57,7 +57,7 @@ class TotalBalanceViewController: UIViewController {
     }
     
     @IBAction func doccumentButtonTapped(_ sender: Any) {
-        let alertController = UIAlertController(title: "MiMoney Document!",
+        let alertController = UIAlertController(title: "MindMoney Document!",
                                                 message: "Learn more about how to scan income and expense amount!" ,preferredStyle: .alert)
         
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -158,7 +158,7 @@ extension TotalBalanceViewController: ChartViewDelegate  {
 // MARK: - Alert For FirstLunch
 extension TotalBalanceViewController {
     func presentFirstLoginAlert() {
-        let alertController = UIAlertController(title: "Welcome to MiMoney!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Welcome to MindMoney!", message: "Add Income and expense to keep tracking your money. If you have used this app before, your income and expense data will be downloaded from your iCloud shortly.", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)
@@ -174,3 +174,14 @@ extension TotalBalanceViewController {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
