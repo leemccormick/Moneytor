@@ -445,6 +445,7 @@ extension ExpenseListTableViewController: VNDocumentCameraViewControllerDelegate
         controller.dismiss(animated: true, completion: nil)
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
+            ScannerController.shared.imageScanner = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {

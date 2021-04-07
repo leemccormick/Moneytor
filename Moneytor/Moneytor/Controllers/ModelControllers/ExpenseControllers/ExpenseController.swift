@@ -24,35 +24,38 @@ class ExpenseController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) {
+    func createExpenseWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?) {
         
         guard let categoryID = category.id else {return}
+        if let image = image {
         let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
         expenses.append(newExpense)
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
+        } else {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+        }
     }
     
-    func createExpenseFromScannerWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) -> Expense? {
-        guard let categoryID = category.id else {return nil}
-        let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
-        expenses.append(newExpense)
-        category.expenses?.adding(newExpense)
-        CoreDataStack.shared.saveContext()
-        return newExpense
-    }
-    
-    
-    
-    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data) {
+    func createExpenseAndNotificationWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?) {
         
         guard let categoryID = category.id else {return}
+        if let image = image {
         let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
         expenses.append(newExpense)
         category.expenses?.adding(newExpense)
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
-        // return newIncome
+        } else {
+            let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+            expenses.append(newExpense)
+            category.expenses?.adding(newExpense)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
+        }
     }
     
     // READ

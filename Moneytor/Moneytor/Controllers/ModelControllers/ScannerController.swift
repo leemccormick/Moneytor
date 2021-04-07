@@ -23,6 +23,7 @@ class ScannerController {
     var expenseCategory: ExpenseCategory?
     var incomeCategory: IncomeCategory?
     var hasScanned: Bool = false
+    var imageScanner: UIImage?
     
     // MARK: - Helper Fuctions
         func groupingFromTheSameLine(reconizedTexts: [ReconizedTextScanner]) {
@@ -71,6 +72,7 @@ class ScannerController {
             self.amountInDouble = 0.0
             self.date = ""
             self.note = ""
+            self.imageScanner = nil
         }
 }
 

@@ -43,9 +43,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
             selectedExpenseCategory = upwrapNewCategory
         }
         selectedExpenseCategory = ExpenseCategoryController.shared.expenseCategories.first
-//        if expenseNoteTextView.text == nil {
-//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +57,9 @@ class ExpenseDetailTableViewController: UITableViewController  {
             self.expenseDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
             self.expenseNoteTextView.text = ScannerController
                 .shared.note
+            if let image = ScannerController.shared.imageScanner {
+            self.expenseImageView.image = image
+            }
             if let categoryFromScanner = ScannerController.shared.expenseCategory {
                 selectedExpenseCategory = categoryFromScanner
                 let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
@@ -71,6 +71,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
             }
         }
         updateView()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -125,10 +126,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
         expenseNoteTextView.text = expense.note
-//        if expenseNoteTextView.text == nil {
-//            expenseNoteTextView.text = "Take a note for your expense here or scan receipt for expense's detail..."
-//        }
-        
+
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
         for row in 0..<numberOfRows {
             if expense.expenseCategory == ExpenseCategoryController.shared.expenseCategories[row] {
@@ -141,8 +139,6 @@ class ExpenseDetailTableViewController: UITableViewController  {
         } else {
             expenseImageView.isHidden = true
         }
-        
-
     }
     
     func saveExpense() {
@@ -160,11 +156,10 @@ class ExpenseDetailTableViewController: UITableViewController  {
         
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
        
-        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
-        
         if let expense = expense {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
         } else {
+            let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text, image: imageDate)
         }
         navigationController?.popViewController(animated: true)
@@ -304,7 +299,6 @@ extension ExpenseDetailTableViewController {
             return
         }
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-        guard let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7) else {return}
         
         let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS EXPENSES!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nPaid Date : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .cancel)
@@ -313,7 +307,8 @@ extension ExpenseDetailTableViewController {
             if let expense = self.expense {
                 ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
             } else {
-                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageDate)
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
             }
             self.navigationController?.popViewController(animated: true)
         }
@@ -330,6 +325,7 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
             expenseImageView.image = scannedImage
+            ScannerController.shared.imageScanner = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
@@ -345,12 +341,14 @@ extension ExpenseDetailTableViewController: VNDocumentCameraViewControllerDelega
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
         expenseImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Expense receipt scanner have been cancled!")
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         controller.dismiss(animated: true, completion: nil)
         expenseImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING RECEIPT!", messageAlert: "Please, make sure if you are using camera propertly to scan receipt!")
         
