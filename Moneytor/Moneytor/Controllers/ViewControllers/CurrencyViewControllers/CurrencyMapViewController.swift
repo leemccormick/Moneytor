@@ -51,7 +51,6 @@ class CurrencyMapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func deletedAllPinsButtonTapped(_ sender: Any) {
         presentAlertToDeleteAllPins()
-       self.mapView.removeAnnotations(self.mapView.annotations)
     }
     
     
@@ -266,11 +265,12 @@ extension CurrencyMapViewController {
     func presentAlertToDeleteAllPins() {
         let alertController = UIAlertController(title: "Delete Pins!", message: "Are you sure to delete all annotation pins for this currency converter?", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let calculationAction = UIAlertAction(title: "Delete Pins", style: .destructive) { (action) in
+        let deletedAction = UIAlertAction(title: "Delete Pins", style: .destructive) { (action) in
             LocationPinController.shared.deleteAllPinLocation()
+            self.mapView.removeAnnotations(self.mapView.annotations)
         }
         alertController.addAction(dismissAction)
-        alertController.addAction(calculationAction)
+        alertController.addAction(deletedAction)
         present(alertController, animated: true)
     }
     

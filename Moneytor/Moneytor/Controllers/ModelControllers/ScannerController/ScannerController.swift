@@ -121,7 +121,7 @@ extension ScannerController {
             guard let amountIsThelastInPotentialAmounts = potentialAmounts.last else {return}
             self.amountInDouble = amountIsThelastInPotentialAmounts
             self.amount = String(amountInDouble)
-        print("\n===================expenseCategory :: \(expenseCategory?.nameString)======================IN \(#function)\n")
+      //  print("\n===================expenseCategory :: \(expenseCategory?.nameString)======================IN \(#function)\n")
     }
         
     func setupVisionForExpenseScanner() -> [VNRequest] {
