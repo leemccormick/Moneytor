@@ -57,9 +57,11 @@ class IncomeDetailTableViewController: UITableViewController {
             self.incomeDatePicker.date = ScannerController.shared.date.toDate() ?? Date()
             self.incomeNoteTextView.text = ScannerController
                 .shared.note
+            if let image = ScannerController.shared.imageScanner {
+                self.incomeImageView.image = image
+            }
             if let categoryFromScanner = ScannerController.shared.incomeCategory {
                 selectedIncomeCategory = categoryFromScanner
-                // print("\n===================selectedExpenseCategory :: \(selectedExpenseCategory?.nameString)======================IN \(#function)\n")
                 let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
                 for row in 0..<numberOfRows {
                     if categoryFromScanner == IncomeCategoryController.shared.incomeCategories[row] {
@@ -69,6 +71,7 @@ class IncomeDetailTableViewController: UITableViewController {
             }
         }
         updateViews()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,7 +133,9 @@ class IncomeDetailTableViewController: UITableViewController {
                 incomeCategoryPicker.selectRow(row, inComponent: 0, animated: true)
             }
         }
-        
+        if let image = income.image {
+            incomeImageView.image = UIImage(data: image)
+        }
     }
     
     func saveIncome() {
@@ -158,21 +163,60 @@ class IncomeDetailTableViewController: UITableViewController {
     }
     
     // MARK: - Table View
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 0:
+         return 1
+        case 1:
+         return 1
+        case 2:
+         return 3
+        case 3:
+         return 1
+        case 4:
+         return 1
+        case 5:
+            if incomeImageView.image == nil {
+                return 0
+            } else {
+                return 1
+            }
+        case 6:
+         return 2
+        default:
+            return 0
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.mtTextLightBrown
         header.textLabel?.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 20)
     }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 2 {
-            return CGFloat(0.0)
-        } else if section == 3 {
-            return CGFloat(0.0)
-        } else if section == 5{
-            return CGFloat(0.0)
-        }else {
+        switch section {
+        case 0:
             return CGFloat(40.0)
+        case 1:
+            return CGFloat(40.0)
+        case 2:
+            return CGFloat(0.0)
+        case 3:
+            return CGFloat(0.0)
+        case 4:
+            return CGFloat(40.0)
+        case 5:
+            if incomeImageView.image == nil {
+                return CGFloat(0.0)
+            } else {
+                return CGFloat(40.0)
+            }
+        case 6:
+            return CGFloat(0.0)
+        default:
+            return CGFloat(0.0)
         }
     }
 }
@@ -274,9 +318,8 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
         controller.dismiss(animated: true, completion: nil)
         for i in 0..<scan.pageCount {
             let scannedImage = scan.imageOfPage(at: i)
-            
-            //
-            
+            incomeImageView.image = scannedImage
+            ScannerController.shared.imageScanner = scannedImage
             if let cgImage = scannedImage.cgImage {
                 let requestHandler = VNImageRequestHandler.init(cgImage: cgImage, options: [:])
                 do {
@@ -291,29 +334,17 @@ extension IncomeDetailTableViewController: VNDocumentCameraViewControllerDelegat
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
         controller.dismiss(animated: true, completion: nil)
+        incomeImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         presentAlertToUser(titleAlert: "CANCELED!", messageAlert: "Income document scanner have been cancled!")
-        
-        //        let alertController = UIAlertController(title: "CANCEL! INCOME SCANNER!", message: "", preferredStyle: .alert)
-        //        let cancelAction = UIAlertAction(title: "CANCEL", style: .destructive) { (action) in
-        //
-        //        }
-        //        alertController.addAction(cancelAction)
-        //        present(alertController, animated: true)
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-        
         controller.dismiss(animated: true, completion: nil)
+        incomeImageView.image = nil
+        ScannerController.shared.imageScanner = nil
         print("\n==== ERROR SCANNING RECEIPE IN \(#function) : \(error.localizedDescription) : \(error) ====\n")
         presentAlertToUser(titleAlert: "ERROR! SCANNING INCOME!", messageAlert: "Please, make sure if you are using camera propertly to scan income!")
-        
-        //        let alertController = UIAlertController(title: "ERROR! SCANNING INCOME!", message: "Please, make sure if you are using camera propertly to scan income!", preferredStyle: .alert)
-        //        let cancelAction = UIAlertAction(title: "OK", style: .destructive) { (action) in
-        //            controller.dismiss(animated: true, completion: nil)
-        //        }
-        //        alertController.addAction(cancelAction)
-        //        present(alertController, animated: true)
-        
     }
 }
 

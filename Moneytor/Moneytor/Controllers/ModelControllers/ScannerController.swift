@@ -47,7 +47,7 @@ class ScannerController {
             for r in sortedReconizedTexts {
                // print("-----r :: \(r.text)   \t\tMidY:: \(r.midY) \t\tMinY:: \(r.minY) \t\tMaxY:: \(r.maxY)")
                 
-                if index < newMidYs.count - 1 &&  index < newMidYs.count - 1 && index < newMaxYs.count - 1 {
+                if index < newMidYs.count - 1 &&  index < newMinYs.count - 1 && index < newMaxYs.count - 1 {
                     
                     if newMidYs[index] == r.midY || newMinYs[index] == r.minY || newMaxYs[index] == r.maxY  {
                         newNote += "\t\t"
