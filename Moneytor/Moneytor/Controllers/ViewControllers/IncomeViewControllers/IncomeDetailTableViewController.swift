@@ -151,7 +151,8 @@ class IncomeDetailTableViewController: UITableViewController {
         if let income = income {
             IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text )
         } else {
-            IncomeController.shared.createIncomeWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text)
+            let imageData = incomeImageView.image?.jpegData(compressionQuality: 0.7)
+            IncomeController.shared.createIncomeWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: incomeDatePicker.date, note: incomeNoteTextView.text, image: imageData)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -256,7 +257,8 @@ extension IncomeDetailTableViewController {
             if let income = self.income {
                 IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
             } else {
-                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData)
             }
             self.navigationController?.popViewController(animated: true)
         }

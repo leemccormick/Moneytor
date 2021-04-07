@@ -24,21 +24,36 @@ class IncomeController {
     
     // MARK: - CRUD Methods
     // CREATE
-    func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String) {
+    func createIncomeWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?) {
         guard let categoryID = category.id else {return}
-        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category)
+        if let image = image {
+        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
+        } else {
+            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: nil)
+            incomes.append(newIncome)
+            category.incomes?.adding(newIncome)
+            CoreDataStack.shared.saveContext()
+        }
     }
     
-    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String)  {
+    func createIncomeAndNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?)  {
         guard let categoryID = category.id else {return}
-        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category)
+        if let image = image {
+        let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
         incomes.append(newIncome)
         category.incomes?.adding(newIncome)
         CoreDataStack.shared.saveContext()
         notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+        } else {
+            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: nil)
+            incomes.append(newIncome)
+            category.incomes?.adding(newIncome)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+        }
     }
     
     // READ
