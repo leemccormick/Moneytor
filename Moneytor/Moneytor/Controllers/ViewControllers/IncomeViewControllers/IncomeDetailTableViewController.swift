@@ -17,6 +17,7 @@ class IncomeDetailTableViewController: UITableViewController {
     @IBOutlet weak var incomeCategoryPicker: UIPickerView!
     @IBOutlet weak var incomeDatePicker: UIDatePicker!
     @IBOutlet weak var incomeNoteTextView: MoneytorTextView!
+    @IBOutlet weak var incomeImageView: UIImageView!
     
     // MARK: - Properties
     var income: Income?
