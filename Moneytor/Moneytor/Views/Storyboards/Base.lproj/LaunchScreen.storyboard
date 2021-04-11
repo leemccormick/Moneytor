@@ -19,118 +19,75 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coinBg" translatesAutoresizingMaskIntoConstraints="NO" id="UWm-4W-BWA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="u9k-ET-pnI">
-                                <rect key="frame" x="0.0" y="162.5" width="414" height="571"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="u9k-ET-pnI">
+                                <rect key="frame" x="20.5" y="123.5" width="373" height="649"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JR2-G3-FTU">
-                                        <rect key="frame" x="64" y="0.0" width="286.5" height="81.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="85.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fB4-f3-9XD">
-                                                <rect key="frame" x="0.0" y="0.0" width="40.5" height="81.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="60"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ST3-0L-Ab0">
-                                                <rect key="frame" x="60.5" y="0.0" width="43.5" height="81.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="64"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toT-mg-7Ax">
-                                                <rect key="frame" x="124" y="0.0" width="36.5" height="81.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="54"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y0I-84-abP">
-                                                <rect key="frame" x="180.5" y="0.0" width="42" height="81.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="62"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m2-0K-jIY">
-                                                <rect key="frame" x="242.5" y="0.0" width="44" height="81.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="65"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="6oi-tb-oqt">
+                                                <rect key="frame" x="0.0" y="0.0" width="60.5" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="W15-0g-8ZA">
+                                                <rect key="frame" x="80.5" y="0.0" width="60.5" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="YCi-zM-PET">
+                                                <rect key="frame" x="161" y="0.0" width="60.5" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="Cvu-0v-4Qc">
+                                                <rect key="frame" x="241.5" y="0.0" width="60.5" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="F80-fI-c3c">
+                                                <rect key="frame" x="322" y="0.0" width="51" height="85.5"/>
+                                            </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Ww3-Yh-Jrv">
-                                        <rect key="frame" x="50" y="98.5" width="314" height="90"/>
+                                        <rect key="frame" x="0.0" y="115.5" width="373" height="86"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f7v-1M-fVn">
-                                                <rect key="frame" x="0.0" y="0.0" width="48.5" height="90"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="72"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bP8-fv-ik2">
-                                                <rect key="frame" x="88.5" y="0.0" width="48.5" height="90"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="60"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="otJ-QR-3Du">
-                                                <rect key="frame" x="177" y="0.0" width="48.5" height="90"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="55"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezc-Lc-egA">
-                                                <rect key="frame" x="265.5" y="0.0" width="48.5" height="90"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="63"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="ni8-6K-LuG">
+                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="86"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="dWg-T3-ehg">
+                                                <rect key="frame" x="103.5" y="0.0" width="63" height="86"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="Qoq-Ja-Twn">
+                                                <rect key="frame" x="206.5" y="0.0" width="63" height="86"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="nf0-BC-aaK">
+                                                <rect key="frame" x="309.5" y="0.0" width="63.5" height="86"/>
+                                            </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="YGn-Ds-32i">
-                                        <rect key="frame" x="105.5" y="205.5" width="203.5" height="82.5"/>
+                                        <rect key="frame" x="48" y="231.5" width="277" height="85.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOb-g1-rTq">
-                                                <rect key="frame" x="0.0" y="0.0" width="44.5" height="82.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="66"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7Z-8L-BlI">
-                                                <rect key="frame" x="79.5" y="0.0" width="44.5" height="82.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="60"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYi-Jr-GNr">
-                                                <rect key="frame" x="159" y="0.0" width="44.5" height="82.5"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="57"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="OBm-7x-lZO">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="abI-iE-GPl">
+                                                <rect key="frame" x="104" y="0.0" width="69" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="Gbk-Ie-KfG">
+                                                <rect key="frame" x="208" y="0.0" width="69" height="85.5"/>
+                                            </imageView>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="gCM-9b-m6e">
-                                        <rect key="frame" x="126" y="305" width="162" height="99"/>
+                                        <rect key="frame" x="90" y="347" width="193" height="85.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72q-So-gYa">
-                                                <rect key="frame" x="0.0" y="0.0" width="53.5" height="99"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="67"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhL-zc-vrV">
-                                                <rect key="frame" x="108.5" y="0.0" width="53.5" height="99"/>
-                                                <fontDescription key="fontDescription" name="BradleyHandITCTT-Bold" family="Bradley Hand" pointSize="79"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="Xmy-jC-XVQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="69" height="85.5"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin" translatesAutoresizingMaskIntoConstraints="NO" id="XLY-tf-hhx">
+                                                <rect key="frame" x="124" y="0.0" width="69" height="85.5"/>
+                                            </imageView>
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="9C3-aN-OYy">
-                                        <rect key="frame" x="132" y="421" width="150" height="150"/>
+                                        <rect key="frame" x="93.5" y="462.5" width="186" height="186.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="9C3-aN-OYy" secondAttribute="height" multiplier="1:1" id="RG4-bd-gcO"/>
-                                            <constraint firstAttribute="height" constant="150" id="X2J-P8-iOY"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -142,8 +99,9 @@
                             <constraint firstItem="UWm-4W-BWA" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="1iq-9G-35P"/>
                             <constraint firstItem="u9k-ET-pnI" firstAttribute="centerX" secondItem="UWm-4W-BWA" secondAttribute="centerX" id="836-rq-HFT"/>
                             <constraint firstItem="UWm-4W-BWA" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="YEy-h0-mZT"/>
+                            <constraint firstItem="9C3-aN-OYy" firstAttribute="width" secondItem="UWm-4W-BWA" secondAttribute="width" multiplier="0.45" id="oXb-pH-Fp6"/>
                             <constraint firstItem="u9k-ET-pnI" firstAttribute="centerY" secondItem="UWm-4W-BWA" secondAttribute="centerY" id="p60-YA-byR"/>
-                            <constraint firstItem="u9k-ET-pnI" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="ui1-tB-xOO"/>
+                            <constraint firstItem="u9k-ET-pnI" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.9" id="ui1-tB-xOO"/>
                             <constraint firstAttribute="bottom" secondItem="UWm-4W-BWA" secondAttribute="bottom" id="wKR-jM-A5Z"/>
                             <constraint firstAttribute="trailing" secondItem="UWm-4W-BWA" secondAttribute="trailing" id="zAg-Gu-Bif"/>
                         </constraints>
@@ -155,6 +113,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="coin" width="69" height="64"/>
         <image name="coinBg" width="360" height="225"/>
         <image name="logo" width="104" height="109"/>
         <systemColor name="systemBackgroundColor">
