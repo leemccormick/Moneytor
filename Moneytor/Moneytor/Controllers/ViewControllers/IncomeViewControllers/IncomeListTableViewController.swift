@@ -180,7 +180,7 @@ extension IncomeListTableViewController {
                 returnCell = weekCell
             case 2:
                 let monthCell = tableView.dequeueReusableCell(withIdentifier: "incomeMonthCell", for: indexPath)
-                let income = categoriesSectionsByWeek[indexPath.section][indexPath.row]
+                let income = categoriesSectionsByMonth[indexPath.section][indexPath.row]
                 monthCell.textLabel?.numberOfLines = 0
                 monthCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
                 monthCell.detailTextLabel?.text = income.incomeAmountString
@@ -326,7 +326,7 @@ extension IncomeListTableViewController {
         if segue.identifier ==  "toIncomeDetailVCFromMonth" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-            let income = categoriesSectionsByWeek[indexPath.section][indexPath.row]
+            let income = categoriesSectionsByMonth[indexPath.section][indexPath.row]
             destinationVC.income = income
         }
     }
