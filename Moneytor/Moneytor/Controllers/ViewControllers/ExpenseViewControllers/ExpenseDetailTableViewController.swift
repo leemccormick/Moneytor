@@ -38,7 +38,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseDatePicker.isUserInteractionEnabled = true
         ExpenseCategoryController.shared.fetchAllExpenseCategories()
         if ExpenseCategoryController.shared.expenseCategories.count == 0 {
-            let newCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "_other", emoji: "💸")
+            let newCategory = ExpenseCategoryController.shared.createExpenseDefaultCategories(name: "other", emoji: "💸")
             guard let upwrapNewCategory = newCategory else {return}
             selectedExpenseCategory = upwrapNewCategory
         }

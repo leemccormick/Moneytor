@@ -118,7 +118,7 @@ extension CurrencyMapViewController: MKMapViewDelegate {
             TotalController.shared.calculateTotalBalance()
             let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
             
-            ExchangeRateAPIController.fetchCurrencyPairConverter(targetCode: selectedCode, amount: totalAmountInString) { [weak self] (results) in
+            ExchangeRateAPIController.fetchCurrencyPairConverter(targetCode: selectedCode, amount: totalAmountInString) { (results) in
                 DispatchQueue.main.async {
                     switch results {
                     case .success(let currencyPair):

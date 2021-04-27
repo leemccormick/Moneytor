@@ -36,7 +36,7 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeAmountTextField.delegate = self
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         if IncomeCategoryController.shared.incomeCategories.count == 0 {
-            let newCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: "_other", emoji: "💵")
+            let newCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: "other", emoji: "💵")
             guard let upwrapNewCategory = newCategory else {return}
             selectedIncomeCategory = upwrapNewCategory
         }

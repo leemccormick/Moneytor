@@ -326,7 +326,7 @@ extension IncomeListTableViewController {
         if segue.identifier ==  "toIncomeDetailVCFromMonth" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-            let income = categoriesSectionsByWeek[indexPath.section][indexPath.row]
+            let income = categoriesSectionsByMonth[indexPath.section][indexPath.row]
             destinationVC.income = income
         }
     }
