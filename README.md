@@ -1,5 +1,5 @@
 # Moneytor
-Expense Tracker App With CoreData and CloudKit available in the AppStore. **MindMoney** >>> [Click here](https://apps.apple.com/app/id1554896424)
+**MindMoney** is an iOS expense tracker app with CoreData and CloudKit available in the [AppStore](https://apps.apple.com/app/id1554896424)
 
 MindMoney is an app for helping you to monitor and keep tracking your incomes and expenses.
 
