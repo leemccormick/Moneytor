@@ -154,6 +154,10 @@ extension String {
         let date = dateFormatter.date(from: self)
         return date
     }
+    
+    var stringByRemovingWhitespaces: String {
+            return components(separatedBy: .whitespaces).joined()
+    }
 }
 
 // MARK: - UserDefaults

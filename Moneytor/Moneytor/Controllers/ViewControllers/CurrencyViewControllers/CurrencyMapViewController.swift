@@ -115,19 +115,23 @@ extension CurrencyMapViewController: MKMapViewDelegate {
             guard let countryName = placemark.country else {return}
             let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(countryName)
             guard let selectedCode = selectedCurrencyCode else {return}
-            TotalController.shared.calculateTotalBalance()
-            let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
+            TotalController.shared.calculateTotalBalanceByMonthly()
+            var totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalanceMontly)
+            
+            if (Double(totalAmountInString) ?? 0.0) <= 0 {
+                totalAmountInString = "1"
+            }
             
             ExchangeRateAPIController.fetchCurrencyPairConverter(targetCode: selectedCode, amount: totalAmountInString) { (results) in
                 DispatchQueue.main.async {
                     switch results {
                     case .success(let currencyPair):
                         let targetCode = currencyPair.targetCoutryCode
-                        let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
+                       // let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
                         let rateInString =  AmountFormatter.twoDecimalPlaces(num:currencyPair.rate)
                         let baseCode = currencyPair.baseCountryCode
-                        pinAnnotation.title = "Balance in \(countryName) : \(resultCovert)"
-                        pinAnnotation.subtitle =  "Rate : \(rateInString) \(targetCode) <==> 1.00 \(baseCode)"
+                       // pinAnnotation.title = "Balance in \(countryName) : \(resultCovert)"
+                        pinAnnotation.title =  "Current Exchange Rate : \(rateInString) \(targetCode) <==> 1.00 \(baseCode)"
                     case .failure(let error):
                         TotalController.shared.calculateTotalBalance()
                         pinAnnotation.title = "Total Balance : \(TotalController.shared.totalBalance)"

@@ -105,6 +105,52 @@ class ExpenseDetailTableViewController: UITableViewController  {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
+    
+    
+    @IBAction func plusAddMoreExpensesButtonTapped(_ sender: Any) {
+        var amountText = expenseAmountTextField.text ?? "0.0"
+        if amountText.contains("=") {
+            guard let index = amountText.firstIndex(of: "=") else {return}
+            let lastRange = amountText.index(amountText.startIndex, offsetBy: (amountText.count))
+            amountText.removeSubrange(index..<lastRange)
+        }
+        
+        let alertController = UIAlertController(title: "Add More Expense Amount!",
+                                                message: "If you would like to add more expense amount, please enter more amount !" ,preferredStyle: .alert)
+        alertController.addTextField { (amountTextFiled) in
+            amountTextFiled.placeholder = "Enter an amount for this expense..."
+            amountTextFiled.keyboardAppearance = .dark
+            amountTextFiled.keyboardType = .decimalPad
+            amountText += amountTextFiled.text ?? ""
+        }
+        
+        alertController.addTextField { (detailAmountTextField) in
+            detailAmountTextField.placeholder = "Expense amount's Detail..."
+            detailAmountTextField.keyboardAppearance = .dark
+            detailAmountTextField.keyboardType = .default
+            detailAmountTextField.isEnabled = false
+            detailAmountTextField.text = "\(amountText)"
+        }
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let addMoreExpenseAction = UIAlertAction(title: "Add More Amount!", style: .default) { (action) in
+            guard let amountToAdd = alertController.textFields?.first?.text, !amountToAdd.isEmpty else {
+                self.presentAlertToUser(titleAlert: "ADD AMOUNT ERROR!\nUnable to add more amount! ", messageAlert: "Make sure you input an amount for adding more amount!")
+                return}
+            amountText += "+\(amountToAdd)"
+            let arrayOfAmount = amountText.components(separatedBy: "+")
+            var arrayOfAmountWithNoWhiteSpaces: [String] = []
+            for amountString in arrayOfAmount {
+                arrayOfAmountWithNoWhiteSpaces.append(amountString.stringByRemovingWhitespaces)
+            }
+            let totalAmount = arrayOfAmountWithNoWhiteSpaces.reduce(0) {(Double($0)) + (Double($1) ?? 0.0)}
+            self.expenseAmountTextField.text = "\(amountText) = \(totalAmount)"
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(addMoreExpenseAction)
+        present(alertController, animated: true)
+    }
+    
     // MARK: - Helper Fuctions
     func scanReceiptForExpenseResult() {
         ScannerController.shared.deleteNameAmountAndNote()
@@ -151,13 +197,22 @@ class ExpenseDetailTableViewController: UITableViewController  {
         guard let amount = expenseAmountTextField.text, !amount.isEmpty else {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
+        var totalInString = "0"
+        let amountToSaveNote = "\n\n Amount Detail : \(amount)"
+        if amount.contains("=") {
+            guard let index = amount.firstIndex(of: "=") else {return}
+            var newAmountWithOutEqual = amount
+            newAmountWithOutEqual.remove(at: index)
+            totalInString = String(newAmountWithOutEqual.suffix(from: index)).stringByRemovingWhitespaces
+        } else {
+            totalInString = amount
+        }
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-        
         if let expense = expense {
-            ExpenseController.shared.updateWith(expense, name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
+            ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote)
         } else {
             let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
-            ExpenseController.shared.createExpenseWith(name: name, amount: Double(amount) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text, image: imageDate)
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote, image: imageDate)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -168,7 +223,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         case 0:
             return 1
         case 1:
-            return 1
+            return 2
         case 2:
             return 2
         case 3:
@@ -200,7 +255,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
         case 0:
             return CGFloat(40.0)
         case 1:
-            return CGFloat(40.0)
+            return CGFloat(00.0)
         case 2:
             return CGFloat(0.0)
         case 3:
@@ -252,12 +307,12 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
 // MARK: - UITextFieldDelegate
 extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.text = ""
+        //textField.text = ""
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.text = ""
+      //  textField.text = ""
         return true
     }
     

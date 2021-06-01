@@ -249,12 +249,12 @@ extension IncomeDetailTableViewController: UIPickerViewDelegate, UIPickerViewDat
 // MARK: - UITextFieldDelegate
 extension IncomeDetailTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.text = ""
+        //textField.text = ""
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.text = ""
+       // textField.text = ""
         return true
     }
 }

@@ -13,9 +13,15 @@ class TotalController {
     var totalBalance: Double = 0.0
     var totalIncome: Double = 0.0
     var totalExpense: Double = 0.0
+    var totalBalanceMontly: Double = 0.0
+    var totalIncomeMontly: Double = 0.0
+    var totalExpenseMontly: Double = 0.0
     var totalBalanceString: String = "$00.00"
     var totalIncomeString: String = "$00.00"
     var totalExpenseString: String = "$00.00"
+    var totalBalanceStringMontly: String = "$00.00"
+    var totalIncomeStringMontly: String = "$00.00"
+    var totalExpenseStringMontly: String = "$00.00"
     
     var totalIncomeSearchResults: Double = 0.0
     var totalIncomeSearchResultsInString: String = "$00.00"
@@ -36,7 +42,6 @@ class TotalController {
     let weekly = Calendar.current.date(byAdding: .day, value: -7, to: Date())!
     let monthly = Calendar.current.date(byAdding: .month, value: -1, to: Date())!
     let yearly = Calendar.current.date(byAdding: .year, value: -1, to: Date())!
-    
     
     func calculateTotalIncome() {
         IncomeController.shared.fetchAllIncomes()
@@ -139,5 +144,34 @@ class TotalController {
         
         let newTotalExpenseDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
         return newTotalExpenseDict
+    }
+    
+    func calculateTotalIncomesByMonthly() {
+        let incomes = IncomeController.shared.fetchIncomesFromTimePeriod(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        var sumIncome = 0.0
+        for income in incomes {
+            let incomeAmount = income.amount as? Double ?? 0.0
+            sumIncome += incomeAmount
+        }
+        totalIncomeMontly = sumIncome
+        totalIncomeStringMontly =  AmountFormatter.currencyInString(num: totalIncomeMontly)
+    }
+    
+    func calculateTotalExpensesByMonthly() {
+        let expenses = ExpenseController.shared.fetchExpensesFromTimePeriod(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
+        var sumExpenses = 0.0
+        for expense in expenses {
+            let expenseAmount = expense.amount as? Double ?? 0.0
+            sumExpenses += expenseAmount
+        }
+        totalExpenseMontly = sumExpenses
+        totalExpenseStringMontly =  AmountFormatter.currencyInString(num: totalExpenseMontly)
+    }
+    
+    func calculateTotalBalanceByMonthly() {
+        calculateTotalIncomesByMonthly()
+        calculateTotalExpensesByMonthly()
+        totalBalanceMontly = totalIncomeMontly - totalExpenseMontly
+        totalBalanceStringMontly =  AmountFormatter.currencyInString(num: totalBalanceMontly)
     }
 }
