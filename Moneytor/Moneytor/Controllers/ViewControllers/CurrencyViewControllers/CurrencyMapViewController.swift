@@ -127,15 +127,20 @@ extension CurrencyMapViewController: MKMapViewDelegate {
                     switch results {
                     case .success(let currencyPair):
                         let targetCode = currencyPair.targetCoutryCode
+                    
                        // let resultCovert = AmountFormatter.twoDecimalPlaces(num: currencyPair.convertResult)
                         let rateInString =  AmountFormatter.twoDecimalPlaces(num:currencyPair.rate)
                         let baseCode = currencyPair.baseCountryCode
+                        let targetCountryName = CurrencyController.shared.findCountryNameByCurrencyCode(targetCode)
                        // pinAnnotation.title = "Balance in \(countryName) : \(resultCovert)"
-                        pinAnnotation.title =  "Current Exchange Rate : \(rateInString) \(targetCode) <==> 1.00 \(baseCode)"
+                        pinAnnotation.title =  "Currency Rate: \(rateInString) \(targetCode) == 1.00 \(baseCode)"
+                        
+                        pinAnnotation.subtitle =  "Click! for converter and detail in \(targetCountryName)"
+                        //pinAnnotation.subtitle =  "Click! for currency converter and more detail of your money in \(targetCountryName)"
                     case .failure(let error):
                         TotalController.shared.calculateTotalBalance()
-                        pinAnnotation.title = "Total Balance : \(TotalController.shared.totalBalance)"
-                        pinAnnotation.subtitle =  "Unable to calculate balance in \(countryName) currency"
+                        pinAnnotation.title = "Total Monthly Balance : \(TotalController.shared.totalBalanceMontly)"
+                        pinAnnotation.subtitle =  "Unable to calculate balance in \(countryName) currency, please check your internet connection!"
                         print(error.localizedDescription)
                     }
                 }
@@ -153,7 +158,14 @@ extension CurrencyMapViewController: MKMapViewDelegate {
             let selectedCurrencyCode = CurrencyController.shared.findCurrencyCodeByCountyName(countryName)
             guard let selectedCode = selectedCurrencyCode else {return}
             TotalController.shared.calculateTotalBalance()
-            let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
+          //  let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalance)
+            
+            var totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalanceMontly)
+            
+            if (Double(totalAmountInString) ?? 0.0) <= 0 {
+                totalAmountInString = "1"
+            }
+            
             
             ExchangeRateAPIController.fetchCurrencyPairConverter(targetCode: selectedCode, amount: totalAmountInString) { [weak self] (results) in
                 DispatchQueue.main.async {
@@ -308,10 +320,30 @@ extension CurrencyMapViewController {
     }
     
     func presentAlertToCurrencyDetail(countryName: String, targetCode: String, resultCovert: String, rateInString: String,baseCode : String, totalString: String) {
-        let alertController = UIAlertController(title: "Country Name : \(countryName)",
-                                                message: "Currency Code: \(targetCode) \nRate : \(rateInString) \(targetCode) <==> 1.00 \(baseCode) \nBalance in \(baseCode): \(totalString) \nBalance in \(targetCode): \(resultCovert)", preferredStyle: .actionSheet)
+        
+        var alertController = UIAlertController()
+        if totalString == "1" {
+          //  let totalAmountInString = AmountFormatter.twoDecimalPlaces(num: TotalController.shared.totalBalanceMontly)
+           alertController = UIAlertController(title: "Country Name : \(countryName)",
+                                                    message: "Currency Code : \(targetCode) \nCurrency Rate : \(rateInString) \(targetCode) == 1.00 \(baseCode)", preferredStyle: .actionSheet)
+        } else {
+             let totalMonthlyIncome =  TotalController.shared.totalIncomeStringMontly
+            let totalMonthlyExpense = TotalController.shared.totalExpenseStringMontly
+            let targerMontlyIncome = (Double(rateInString) ?? 0.0) * TotalController.shared.totalIncomeMontly
+            let targerMontlyIncomeTwoDecimal = AmountFormatter.twoDecimalPlaces(num: targerMontlyIncome)
+            let targerMontlyExpense = (Double(rateInString) ?? 0.0) * TotalController.shared.totalExpenseMontly
+            let targerMontlyExpenseTwoDecimal = AmountFormatter.twoDecimalPlaces(num: targerMontlyExpense)
+
+            
+          //  let targerMontlyExpense = AmountFormatter.twoDecimalPlaces(Double(rateInString) ?? 0.0) * TotalController.shared.totalIncomeMontly))
+            
+            alertController = UIAlertController(title: "Country Name : \(countryName)",
+                                                    message: "Currency Code : \(targetCode) \nCurrency Rate : \(rateInString) \(targetCode) == 1.00 \(baseCode) \nMonthly Balance in \(baseCode) : \(totalString) \nMonthly Balance in \(targetCode): \(resultCovert) \nMonthly Income in \(baseCode) : \(totalMonthlyIncome) \nMonthly Income in \(targetCode) : \(targerMontlyIncomeTwoDecimal) \nMonthly Expense in \(baseCode) : \(totalMonthlyExpense) \nMonthly Expense in \(targetCode) : \(targerMontlyExpenseTwoDecimal) ", preferredStyle: .actionSheet)
+        }
+//        let alertController = UIAlertController(title: "Country Name : \(countryName)",
+//                                                message: "Currency Code : \(targetCode) \nCurrency Rate : \(rateInString) \(targetCode) == 1.00 \(baseCode) \nMonthly Balance in \(baseCode) : \(totalString) \nMonthly Balance in \(targetCode): \(resultCovert)", preferredStyle: .actionSheet)
         let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
-        let calculationAction = UIAlertAction(title: "Converter", style: .default) { (action) in
+        let calculationAction = UIAlertAction(title: "Currency Converter", style: .default) { (action) in
             print("curreny converter")
             self.presentAlertToCalculateCurrency(targetCode: targetCode, baseCode: baseCode, countryName: countryName, rateInString: rateInString)
         }

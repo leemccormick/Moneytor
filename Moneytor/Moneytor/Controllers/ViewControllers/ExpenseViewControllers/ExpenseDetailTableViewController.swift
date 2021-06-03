@@ -105,50 +105,8 @@ class ExpenseDetailTableViewController: UITableViewController  {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
-    
-    
     @IBAction func plusAddMoreExpensesButtonTapped(_ sender: Any) {
-        var amountText = expenseAmountTextField.text ?? "0.0"
-        if amountText.contains("=") {
-            guard let index = amountText.firstIndex(of: "=") else {return}
-            let lastRange = amountText.index(amountText.startIndex, offsetBy: (amountText.count))
-            amountText.removeSubrange(index..<lastRange)
-        }
-        
-        let alertController = UIAlertController(title: "Add More Expense Amount!",
-                                                message: "If you would like to add more expense amount, please enter more amount !" ,preferredStyle: .alert)
-        alertController.addTextField { (amountTextFiled) in
-            amountTextFiled.placeholder = "Enter an amount for this expense..."
-            amountTextFiled.keyboardAppearance = .dark
-            amountTextFiled.keyboardType = .decimalPad
-            amountText += amountTextFiled.text ?? ""
-        }
-        
-        alertController.addTextField { (detailAmountTextField) in
-            detailAmountTextField.placeholder = "Expense amount's Detail..."
-            detailAmountTextField.keyboardAppearance = .dark
-            detailAmountTextField.keyboardType = .default
-            detailAmountTextField.isEnabled = false
-            detailAmountTextField.text = "\(amountText)"
-        }
-        
-        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let addMoreExpenseAction = UIAlertAction(title: "Add More Amount!", style: .default) { (action) in
-            guard let amountToAdd = alertController.textFields?.first?.text, !amountToAdd.isEmpty else {
-                self.presentAlertToUser(titleAlert: "ADD AMOUNT ERROR!\nUnable to add more amount! ", messageAlert: "Make sure you input an amount for adding more amount!")
-                return}
-            amountText += "+\(amountToAdd)"
-            let arrayOfAmount = amountText.components(separatedBy: "+")
-            var arrayOfAmountWithNoWhiteSpaces: [String] = []
-            for amountString in arrayOfAmount {
-                arrayOfAmountWithNoWhiteSpaces.append(amountString.stringByRemovingWhitespaces)
-            }
-            let totalAmount = arrayOfAmountWithNoWhiteSpaces.reduce(0) {(Double($0)) + (Double($1) ?? 0.0)}
-            self.expenseAmountTextField.text = "\(amountText) = \(totalAmount)"
-        }
-        alertController.addAction(dismissAction)
-        alertController.addAction(addMoreExpenseAction)
-        present(alertController, animated: true)
+        presentAlertAddAmountOptions()
     }
     
     // MARK: - Helper Fuctions
@@ -307,12 +265,10 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
 // MARK: - UITextFieldDelegate
 extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //textField.text = ""
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-      //  textField.text = ""
         return true
     }
     
@@ -440,6 +396,157 @@ extension ExpenseDetailTableViewController {
         }
         alertController.addAction(dismissAction)
         alertController.addAction(doSomethingAction)
+        present(alertController, animated: true)
+    }
+}
+
+// MARK: - Amount
+extension ExpenseDetailTableViewController {
+    func presentAlertAddAmountOptions() {
+        let alertController = UIAlertController(title: "Add More Expense Amount!",
+                                                message: "Would you like to add more specific amount, or add tip on the expense amount?" ,preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let addSpecificAmountAction = UIAlertAction(title: "ADD AMOUNT", style: .default) { (action) in
+            self.presentAlertAddSpecificAmount()
+        }
+        let addTipToAmountAction = UIAlertAction(title: "ADD TIP", style: .default) { (action) in
+            self.presentAlertAddTip()
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(addSpecificAmountAction)
+        alertController.addAction(addTipToAmountAction)
+        present(alertController, animated: true)
+    }
+    
+    func presentAlertAddSpecificAmount() {
+        var amountText = expenseAmountTextField.text ?? "0.0"
+        if amountText.contains("=") {
+            guard let index = amountText.firstIndex(of: "=") else {return}
+            let lastRange = amountText.index(amountText.startIndex, offsetBy: (amountText.count))
+            amountText.removeSubrange(index..<lastRange)
+        }
+        
+        let alertController = UIAlertController(title: "Add Specific Amount!",
+                                                message: "If you would like to add more expense amount, please enter more amount!" ,preferredStyle: .alert)
+        alertController.addTextField { (amountTextFiled) in
+            amountTextFiled.placeholder = "Enter an amount for this expense..."
+            amountTextFiled.keyboardAppearance = .dark
+            amountTextFiled.keyboardType = .decimalPad
+            amountText += amountTextFiled.text ?? ""
+        }
+        
+        alertController.addTextField { (detailAmountTextField) in
+            detailAmountTextField.placeholder = "Expense amount's Detail..."
+            detailAmountTextField.keyboardAppearance = .dark
+            detailAmountTextField.keyboardType = .default
+            detailAmountTextField.isEnabled = false
+            detailAmountTextField.text = "\(amountText)"
+        }
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let addMoreExpenseAction = UIAlertAction(title: "Add More Amount!", style: .default) { (action) in
+            guard let amountToAdd = alertController.textFields?.first?.text, !amountToAdd.isEmpty else {
+                self.presentAlertToUser(titleAlert: "ADD AMOUNT ERROR!\nUnable to add more amount! ", messageAlert: "Make sure you input an amount for adding more amount!")
+                return}
+            amountText += "+\(amountToAdd)"
+            let arrayOfAmount = amountText.components(separatedBy: "+")
+            var arrayOfAmountWithNoWhiteSpaces: [String] = []
+            for amountString in arrayOfAmount {
+                arrayOfAmountWithNoWhiteSpaces.append(amountString.stringByRemovingWhitespaces)
+            }
+            let totalAmount = arrayOfAmountWithNoWhiteSpaces.reduce(0) {(Double($0)) + (Double($1) ?? 0.0)}
+            self.expenseAmountTextField.text = "\(amountText) = \(totalAmount)"
+            self.presentAlertAddSpecificAmount()
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(addMoreExpenseAction)
+        present(alertController, animated: true)
+    }
+    
+    func presentAlertAddTip() {
+        let alertController = UIAlertController(title: "Add Tip on Amount!",
+                                                message: "If you would like to add more expense amount, please enter more amount!" ,preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter % of the tip."
+            textField.keyboardAppearance = .dark
+            textField.keyboardType = .decimalPad
+        }
+        
+        let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let specificPercentAction = UIAlertAction(title: "Add Input Tip", style: .default) { (action) in
+            guard let tipToAddInPercent = alertController.textFields?.first?.text, !tipToAddInPercent.isEmpty else {
+                self.presentAlertToUser(titleAlert: "ADD TIP ERROR!\nUnable to add tip to the amount! ", messageAlert: "Make sure you input the percent of the tip or choose tip from the options!")
+                return}
+            let amountOfTipInNumber = (Double(tipToAddInPercent) ?? 0.0)
+            let amountOfTipInPercent = amountOfTipInNumber / 100
+            self.addTipIn(percent: amountOfTipInPercent)
+        }
+        
+        let fifteenPercentAction = UIAlertAction(title: "Add 15 % Tip", style: .default) { (action) in
+            self.addTipIn(percent: 0.15)
+        }
+        let eightteenPercentAction = UIAlertAction(title: "Add 18 % Tip", style: .default) { (action) in
+            self.addTipIn(percent: 0.18)
+            
+        }
+        let twentyPercentAction = UIAlertAction(title: "Add 20 % Tip", style: .default) { (action) in
+            self.addTipIn(percent: 0.20)
+        }
+        let twentyFivePercentAction = UIAlertAction(title: "Add 25 % Tip", style: .default) { (action) in
+            self.addTipIn(percent: 0.25)
+        }
+        
+        alertController.addAction(dismissAction)
+        alertController.addAction(specificPercentAction)
+        alertController.addAction(fifteenPercentAction)
+        alertController.addAction(eightteenPercentAction)
+        alertController.addAction(twentyPercentAction)
+        alertController.addAction(twentyFivePercentAction)
+        present(alertController, animated: true)
+    }
+    
+    func addTipIn(percent: Double) {
+        var amountText = expenseAmountTextField.text ?? "0.0"
+        if amountText.contains("=") {
+            guard let index = amountText.firstIndex(of: "=") else {return}
+            amountText.remove(at: index)
+            let firstRange = amountText.index(amountText.startIndex, offsetBy: 0)
+            amountText.removeSubrange(firstRange..<index)
+            amountText = amountText.stringByRemovingWhitespaces
+        }
+        let amountTextInDouble = Double(amountText) ?? 0.0
+        let amountOfTip = amountTextInDouble * percent
+        let amountOfTipInStringWithTwoDecimals = AmountFormatter.twoDecimalPlaces(num: amountOfTip)
+        let totalAmountPlusTip = amountTextInDouble + amountOfTip
+        let totalAmountPlusTipInStringWithTwoDecimals = AmountFormatter.twoDecimalPlaces(num: totalAmountPlusTip)
+        let detailOfAddTip = "\(amountText) + \(amountOfTipInStringWithTwoDecimals) = \(totalAmountPlusTipInStringWithTwoDecimals)"
+        
+        let stringTotalPlusTip = "\(Int(totalAmountPlusTip)).00"
+        
+        if totalAmountPlusTipInStringWithTwoDecimals == stringTotalPlusTip {
+            self.expenseAmountTextField.text = "\(amountText) + \(amountOfTipInStringWithTwoDecimals) = \(totalAmountPlusTipInStringWithTwoDecimals)"
+        } else {
+            presentAlertToRoundUp(tip: amountOfTip, total: totalAmountPlusTip, detail: detailOfAddTip, amount: amountTextInDouble)
+        }
+    }
+    
+    func presentAlertToRoundUp(tip : Double, total: Double, detail: String, amount: Double) {
+        let alertController = UIAlertController(title: "Round Up Tip!",
+                                                message: "\nAmount With Tip : \n\(detail) \n\nWould you like to round up the total to \(Int(total+1)).00 ?" ,preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "No", style: .cancel) { (action) in
+            self.expenseAmountTextField.text = detail
+        }
+        let yesRoundUpTipAction = UIAlertAction(title: "Yes", style: .default) { (action) in
+            let roundedUpIntTotal = Int(total+1)
+            let amountPlusTip = amount + tip
+            let totalDifferentOfTip = Double(roundedUpIntTotal) - amountPlusTip
+            let newTip = tip + totalDifferentOfTip
+            let newTipWithTwoDecimal = AmountFormatter.twoDecimalPlaces(num: newTip)
+            self.expenseAmountTextField.text = "\(amount) + \(newTipWithTwoDecimal) = \(roundedUpIntTotal)"
+        }
+        alertController.addAction(dismissAction)
+        alertController.addAction(yesRoundUpTipAction)
         present(alertController, animated: true)
     }
 }

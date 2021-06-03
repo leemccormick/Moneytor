@@ -31,7 +31,6 @@ class TotalBalanceViewController: UIViewController {
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         isAppAlreadyLaunched()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +38,6 @@ class TotalBalanceViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
-        
     }
     
     // MARK: - Actions
@@ -48,7 +46,7 @@ class TotalBalanceViewController: UIViewController {
         case 0:
             updateViewsByTime(startedTime: Date().startOfWeek, endedTime: Date().endOfWeek)
         case 1:
-            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         case 2:
             updateViewsByTime(startedTime: self.yearly, endedTime: Date())
         default:
