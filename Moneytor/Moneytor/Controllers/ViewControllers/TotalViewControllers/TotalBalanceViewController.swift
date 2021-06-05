@@ -74,6 +74,9 @@ class TotalBalanceViewController: UIViewController {
         alertController.addAction(dismissAction)
         alertController.addAction(IncomeAction)
         alertController.addAction(expenseAction)
+//        if let popoverController = alertController.popoverPresentationController {
+//            popoverController.barButtonItem = sender as? UIBarButtonItem
+//        }
         present(alertController, animated: true)
     }
     

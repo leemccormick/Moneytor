@@ -10,7 +10,7 @@ import UIKit
 extension UIViewController {
     
     func presentAlertToUser(titleAlert: String, messageAlert: String) {
-        let alertController = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: titleAlert, message: messageAlert, preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Ok", style: .cancel)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)
