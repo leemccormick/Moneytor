@@ -156,7 +156,12 @@ class ExpenseDetailTableViewController: UITableViewController  {
             presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT!", messageAlert: "Don't forget to input expense's amount!")
             return}
         var totalInString = "0"
-        let amountToSaveNote = "\n\n Amount Detail : \(amount)"
+        var amountToSaveNote = ""
+        if amount.contains(".") {
+            amountToSaveNote = "\n\n Amount Detail : \(amount) \tOn \(Date().dateToString(format: .monthDayYear))"
+        } else {
+            amountToSaveNote = "\n\n Amount Detail : \(amount).00 \tOn \(Date().dateToString(format: .monthDayYear))"
+        }
         if amount.contains("=") {
             guard let index = amount.firstIndex(of: "=") else {return}
             var newAmountWithOutEqual = amount
@@ -167,7 +172,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
         }
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
         if let expense = expense {
+            if expenseNoteTextView.text.contains(amountToSaveNote) {
+                ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
+                } else {
             ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote)
+                }
         } else {
             let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
             ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote, image: imageDate)
@@ -478,7 +487,7 @@ extension ExpenseDetailTableViewController {
             guard let tipToAddInPercent = alertController.textFields?.first?.text, !tipToAddInPercent.isEmpty else {
                 self.presentAlertToUser(titleAlert: "ADD TIP ERROR!\nUnable to add tip to the amount! ", messageAlert: "Make sure you input the percent of the tip or choose tip from the options!")
                 return}
-            let amountOfTipInNumber = (Double(tipToAddInPercent) ?? 0.0)
+            let amountOfTipInNumber = (Double(tipToAddInPercent) ?? 0.00)
             let amountOfTipInPercent = amountOfTipInNumber / 100
             self.addTipIn(percent: amountOfTipInPercent)
         }
