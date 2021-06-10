@@ -158,9 +158,9 @@ class ExpenseDetailTableViewController: UITableViewController  {
         var totalInString = "0"
         var amountToSaveNote = ""
         if amount.contains(".") {
-            amountToSaveNote = "\n\n Amount Detail : \(amount) \tOn \(Date().dateToString(format: .monthDayYear))"
+            amountToSaveNote = "\n\nExpense's Amount : \(amount)"
         } else {
-            amountToSaveNote = "\n\n Amount Detail : \(amount).00 \tOn \(Date().dateToString(format: .monthDayYear))"
+            amountToSaveNote = "\n\nExpense's Amount : \(amount).00"
         }
         if amount.contains("=") {
             guard let index = amount.firstIndex(of: "=") else {return}
@@ -175,11 +175,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
             if expenseNoteTextView.text.contains(amountToSaveNote) {
                 ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text)
                 } else {
-            ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote)
+            ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote + "\nUpdated On : \(Date().dateToString(format: .monthDayYear))")
                 }
         } else {
             let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
-            ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote, image: imageDate)
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote + "\nCreated On : \(Date().dateToString(format: .monthDayYear))", image: imageDate)
         }
         navigationController?.popViewController(animated: true)
     }
