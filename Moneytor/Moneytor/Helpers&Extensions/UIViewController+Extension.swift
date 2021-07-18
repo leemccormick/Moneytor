@@ -16,8 +16,7 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
-    func setupToHideKeyboardOnTapOnView()
-    {
+    func setupToHideKeyboardOnTapOnView() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(UIViewController.dismissKeyboard))
