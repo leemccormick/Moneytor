@@ -24,6 +24,9 @@ class TotalBalanceViewController: UIViewController {
     let weekly = TotalController.shared.weekly
     let monthly = TotalController.shared.monthly
     let yearly = TotalController.shared.yearly
+    var startDateIncomeStatement: Date?
+    var endDateIncomeStatement: Date?
+    let datePicker = UIDatePicker()
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -74,12 +77,12 @@ class TotalBalanceViewController: UIViewController {
         alertController.addAction(dismissAction)
         alertController.addAction(IncomeAction)
         alertController.addAction(expenseAction)
-//        if let popoverController = alertController.popoverPresentationController {
-//            popoverController.barButtonItem = sender as? UIBarButtonItem
-//        }
         present(alertController, animated: true)
     }
     
+    @IBAction func seeIncomeStatementBarButtonTapped(_ sender: Any) {
+        presentAlertGoToIncomeStatement()
+    }
     
     // MARK: - Helper Fuctions
     func updateViewsByTime(startedTime: Date, endedTime: Date) {
@@ -100,7 +103,77 @@ class TotalBalanceViewController: UIViewController {
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
         setUpPieChartWith(totalIncome: totalIncome, totalExpense: totalExpense)
     }
+    
+    
+    // MARK: - Income Statement
+    //================================================WORKING ON THIS STATEMENT FOR VERSION ===========
+    // =======Update Category Name ==================
+    // =========== Add Paid by Credit Card ==================
+    func presentAlertGoToIncomeStatement() {
+        print("\n\n\n\n\n=================== GO TO INCOME STATMENT======================IN \(#function)\n\n\n\n")
+        
+        let alertController = UIAlertController(title: "Income Statement",
+                                                message: "If you would like to see your income statement by specific date, please enter the start date and end date for the income statement." ,preferredStyle: .alert)
+        alertController.addTextField { [self] (startDateTextField) in
+            startDateTextField.placeholder = "Start Date"
+            startDateTextField.keyboardAppearance = .dark
+            //textField.keyboardType = .decimalPad
+            self.createDatePicker(textField: startDateTextField)
+            
+            startDateTextField.text = startDateIncomeStatement?.dateToString(format: .short) ?? Date().dateToString(format: .short)
+            
+        }
+        
+        alertController.addTextField { [self] (endDateTextField) in
+            endDateTextField.placeholder = "End Date"
+            endDateTextField.keyboardAppearance = .dark
+            self.createDatePicker(textField: endDateTextField)
+            endDateTextField.text = endDateIncomeStatement?.dateToString(format: .short) ?? Date().dateToString(format: .short)
+            
+            
+        }
+        
+        
+        let seeStatementAction = UIAlertAction(title: "See Statement", style: .default) { (action) in
+            self.goToTotalIncomeStatementVC()
+        }
+        let dismissAction = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alertController.addAction(seeStatementAction)
+        alertController.addAction(dismissAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    func goToTotalIncomeStatementVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let totalIncomeStatementVC = storyboard.instantiateViewController(identifier: "totalIncomeStatementNavigationStoryBoardID")
+        totalIncomeStatementVC.modalPresentationStyle = .pageSheet
+        self.present(totalIncomeStatementVC, animated: true, completion: nil)
+    }
+    
+    func createDatePicker(textField: UITextField) {
+        //let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.calendar = .current
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: #selector(saveButtonTapped))
+        toolbar.setItems([saveButton], animated: true)
+        textField.inputAccessoryView = toolbar
+        textField.inputView = datePicker
+    }
+    
+    @objc func saveButtonTapped() {
+        startDateIncomeStatement = datePicker.date
+        endDateIncomeStatement = datePicker.date
+        
+        self.view.endEditing(true)
+    }
 }
+//================================================WORKING ON THIS STATEMENT FOR VERSION ===========
 
 // MARK: -  ChartViewDelegate
 extension TotalBalanceViewController: ChartViewDelegate  {

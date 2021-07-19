@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		16049A5E2617C18500B3382F /* IncomeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16049A5D2617C18500B3382F /* IncomeListTableViewController.swift */; };
+		163DA5F126A510B1002E38BC /* TotalIncomeStatementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DA5F026A510B1002E38BC /* TotalIncomeStatementViewController.swift */; };
 		3606B1A825F9F444005F375F /* LocationPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1A725F9F444005F375F /* LocationPin.swift */; };
 		3606B1AB25F9F558005F375F /* PinLocation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */; };
 		3606B1B025F9F651005F375F /* LocationPinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3606B1AF25F9F651005F375F /* LocationPinController.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		16049A5D2617C18500B3382F /* IncomeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeListTableViewController.swift; sourceTree = "<group>"; };
+		163DA5F026A510B1002E38BC /* TotalIncomeStatementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalIncomeStatementViewController.swift; sourceTree = "<group>"; };
 		1B0E68A1C9643499C8D81A76 /* Pods-Moneytor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moneytor.release.xcconfig"; path = "Target Support Files/Pods-Moneytor/Pods-Moneytor.release.xcconfig"; sourceTree = "<group>"; };
 		3606B1A725F9F444005F375F /* LocationPin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPin.swift; sourceTree = "<group>"; };
 		3606B1AA25F9F558005F375F /* PinLocation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinLocation+Convenience.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				36274E4625E4CCDD0063DE28 /* TotalBalanceViewController.swift */,
 				367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */,
 				367BBEA725F036D600C11E59 /* TotalExpenseViewController.swift */,
+				163DA5F026A510B1002E38BC /* TotalIncomeStatementViewController.swift */,
 			);
 			path = TotalViewControllers;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				36682D0B25E43CAD0075C03D /* MoneytorButton.swift in Sources */,
 				3671BA4225E5BD0300811F21 /* IncomeController.swift in Sources */,
 				362DDABA25FA1935005CC4F4 /* ExchangeRateAPIController.swift in Sources */,
+				163DA5F126A510B1002E38BC /* TotalIncomeStatementViewController.swift in Sources */,
 				3671BA3925E5B0FE00811F21 /* CoreDataStack.swift in Sources */,
 				36682D0725E43B690075C03D /* MoneytorLabel.swift in Sources */,
 				3628331225E7440C00381731 /* IncomeCategoryController.swift in Sources */,
