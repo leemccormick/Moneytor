@@ -115,11 +115,7 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if selectedCategory == "" {
-            return CGFloat(0.01)
-        } else {
-            return CGFloat(40.0)
-        }
+        return CGFloat(0.0)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -156,17 +152,14 @@ extension TotalExpenseViewController: ChartViewDelegate {
             if expenseCategory.value != 0.0 {
                 let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: expenseCategory.key)
                 dataEntries.append(dataEntry)
-                
                 let chartDataSet = BarChartDataSet(entries: dataEntries)
                 chartDataSet.colors = ChartColorTemplates.pastel()
                 chartDataSet.drawValuesEnabled = false
-                
                 let charData = BarChartData(dataSet: chartDataSet)
                 charData.setDrawValues(true)
                 charData.setValueFont(UIFont(name: FontNames.textMoneytorGoodLetter, size: 12) ?? .boldSystemFont(ofSize: 12))
                 charData.setValueTextColor(.mtDarkBlue)
                 barChartView.data = charData
-                
                 newExpenseCategoryEmojiToDisplay.append(expenseCategory.key.firstCharacterAsString)
                 i += 1
             }

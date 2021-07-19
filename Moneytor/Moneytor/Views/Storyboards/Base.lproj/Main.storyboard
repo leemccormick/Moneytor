@@ -1488,14 +1488,14 @@
                                 <rect key="frame" x="20" y="104" width="388" height="709"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pta-Xu-NSE" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="211.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
                                         <string key="text">This app offers a scanning receipt feature. However for more accurate results from scanning and detecting total expense amount. Please, make sure expense total is on the last position/line on the receipt.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cermak" translatesAutoresizingMaskIntoConstraints="NO" id="bxC-3f-ANf">
-                                        <rect key="frame" x="0.0" y="221.33333333333329" width="388" height="487.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="65.666666666666686" width="388" height="643.33333333333326"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -1657,14 +1657,14 @@
                                 <rect key="frame" x="20" y="104" width="388" height="709"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KA-SG-rnK" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="286.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
                                         <string key="text">This app offers a scanning  and detecting text from income document. However for more accurate results from scanning and detecting total income amount. Please, make sure the camera is focused on the amount of income. You can also get better results by spilting long document to small pages for scanning.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cermak" translatesAutoresizingMaskIntoConstraints="NO" id="syE-bc-Wt6">
-                                        <rect key="frame" x="0.0" y="296.66666666666674" width="388" height="412.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="65.666666666666686" width="388" height="643.33333333333326"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
