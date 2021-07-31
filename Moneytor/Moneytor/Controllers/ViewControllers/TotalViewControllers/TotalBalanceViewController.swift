@@ -24,7 +24,13 @@ class TotalBalanceViewController: UIViewController {
     let weekly = TotalController.shared.weekly
     let monthly = TotalController.shared.monthly
     let yearly = TotalController.shared.yearly
-    var startDateIncomeStatement: Date?
+    var text: String = ""
+    var setDate: Date?
+    var startDateIncomeStatement: Date? {
+        didSet{
+            setDate = startDateIncomeStatement
+        }
+    }
     var endDateIncomeStatement: Date?
     let datePicker = UIDatePicker()
     
@@ -118,17 +124,22 @@ class TotalBalanceViewController: UIViewController {
             startDateTextField.placeholder = "Start Date"
             startDateTextField.keyboardAppearance = .dark
             //textField.keyboardType = .decimalPad
-            self.createDatePicker(textField: startDateTextField)
-            
-            startDateTextField.text = startDateIncomeStatement?.dateToString(format: .short) ?? Date().dateToString(format: .short)
-            
+            startDateTextField.text = Date().startDateOfMonth.dateToString(format: .monthDayYear)
+            let starDate = self.createDatePicker(textField: startDateTextField)
+            print("\n=================== starDate:: \(starDate)======================IN \(#function)\n")
+            startDateTextField.text = setDate?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
+         //   if let starDate = startDateIncomeStatement {
+         //   self.updateTextFieldWithDate(startDateTextField, date: starDate)
+          //  }
         }
         
         alertController.addTextField { [self] (endDateTextField) in
             endDateTextField.placeholder = "End Date"
             endDateTextField.keyboardAppearance = .dark
+            endDateTextField.text = Date().dateToString(format: .monthDayYear)
             self.createDatePicker(textField: endDateTextField)
-            endDateTextField.text = endDateIncomeStatement?.dateToString(format: .short) ?? Date().dateToString(format: .short)
+            
+            endDateTextField.text = endDateIncomeStatement?.dateToString(format: .monthDayYear) ?? Date().dateToString(format: .monthDayYear)
             
             
         }
@@ -152,26 +163,50 @@ class TotalBalanceViewController: UIViewController {
         self.present(totalIncomeStatementVC, animated: true, completion: nil)
     }
     
-    func createDatePicker(textField: UITextField) {
+    func createDatePicker(textField: UITextField) -> Date {
         //let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.calendar = .current
+        datePicker.maximumDate = Date()
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: #selector(saveButtonTapped))
+//saveButton.action(saveButton)
+    //    toolbar.setItems(<#T##items: [UIBarButtonItem]?##[UIBarButtonItem]?#>, animated: <#T##Bool#>)
+        //self.saveButton.add
+          //  UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: #selector(saveButtonTapped))
+        //self.saveButton.addTarget(self, action: #selector(saveButtonTapped(sender:)))
         toolbar.setItems([saveButton], animated: true)
         textField.inputAccessoryView = toolbar
-        textField.inputView = datePicker
+    textField.inputView = datePicker
+        self.datePicker.addTarget(self, action: #selector(dateValueChange), for: .valueChanged)
+        return datePicker.date
     }
     
     @objc func saveButtonTapped() {
+        print("===================saveButtonTappedsaveButtonTapped======================")
         startDateIncomeStatement = datePicker.date
+        print("\n=================== startDateIncomeStatement :: \(startDateIncomeStatement)======================IN \(#function)\n")
         endDateIncomeStatement = datePicker.date
         
         self.view.endEditing(true)
     }
+    
+    @objc func dateValueChange() {
+        startDateIncomeStatement = datePicker.date
+     //   updateTextFieldWithDate(<#T##textFiled: UITextField##UITextField#>, date: <#T##Date#>)
+        print("\n=================== startDateIncomeStatement:: \(startDateIncomeStatement)======================IN \(#function)\n")
+    }
+    
+    func updateTextFieldWithDate(_ textFiled: UITextField, date: Date) {
+        textFiled.text = date.dateToString(format: .monthDayYear)
+    }
+    
+//    func activateCalculateButton() {
+//        self.calculatorButton.addTarget(self, action: #selector(calculateButtonTapped(sender:)), for: .touchUpInside)
+//    }
 }
 //================================================WORKING ON THIS STATEMENT FOR VERSION ===========
 
