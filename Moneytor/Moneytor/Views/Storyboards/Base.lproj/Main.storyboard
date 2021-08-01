@@ -1724,6 +1724,81 @@
             </objects>
             <point key="canvasLocation" x="348" y="-394"/>
         </scene>
+        <!--Income Statement Date View Controller-->
+        <scene sceneID="pOW-LY-dtU">
+            <objects>
+                <viewController id="7La-yR-0mk" customClass="IncomeStatementDateViewController" customModule="Moneytor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k80-B3-okC">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-cP-6dg">
+                                <rect key="frame" x="64.333333333333343" y="138" width="299.33333333333326" height="555.66666666666663"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3N-qL-y0r">
+                                        <rect key="frame" x="0.0" y="0.0" width="299.33333333333331" height="51.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4J-5u-zYs">
+                                        <rect key="frame" x="0.0" y="61.666666666666657" width="299.33333333333331" height="51.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L9X-tT-Azo">
+                                        <rect key="frame" x="0.0" y="123.33333333333331" width="299.33333333333331" height="86.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mNW-Nq-kSW">
+                                        <rect key="frame" x="0.0" y="219.66666666666671" width="299.33333333333331" height="86.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKB-Oi-jPL">
+                                        <rect key="frame" x="0.0" y="316" width="299.33333333333331" height="76.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="seeStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="OKW-oV-ce7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-Cv-xah">
+                                        <rect key="frame" x="0.0" y="402.33333333333337" width="299.33333333333331" height="153.33333333333337"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="cancelStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="VjH-82-2nh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BOO-Nj-dqz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="height" secondItem="k80-B3-okC" secondAttribute="height" multiplier="0.6" id="ExJ-27-e3n"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="centerX" secondItem="BOO-Nj-dqz" secondAttribute="centerX" id="e1G-ok-TAh"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="top" secondItem="BOO-Nj-dqz" secondAttribute="top" constant="50" id="j3n-Oe-Myd"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="width" secondItem="k80-B3-okC" secondAttribute="width" multiplier="0.7" id="qvQ-cp-FuO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sBC-dx-cQ3"/>
+                    <connections>
+                        <outlet property="cancelStatementButton" destination="x2r-Cv-xah" id="1l9-Dx-P6C"/>
+                        <outlet property="endDateTextField" destination="mNW-Nq-kSW" id="17F-f1-6Ru"/>
+                        <outlet property="incomeStatementPromptLable" destination="q4J-5u-zYs" id="yQ2-lp-ImR"/>
+                        <outlet property="incomeTitelLable" destination="N3N-qL-y0r" id="5XE-gf-iaR"/>
+                        <outlet property="seeStatementButton" destination="EKB-Oi-jPL" id="a1a-Pz-tkW"/>
+                        <outlet property="startDateTextField" destination="L9X-tT-Azo" id="W2N-Sv-kMO"/>
+                        <outlet property="statementStackView" destination="yqF-cP-6dg" id="xA5-pb-UVK"/>
+                        <segue destination="r2Q-Kh-NU9" kind="show" id="633-Ye-obA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s5E-0c-rYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="947.66355140186909" y="-2717.4946004319654"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3bS-h9-oty">
             <objects>
@@ -1733,12 +1808,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="r2Q-Kh-NU9" kind="relationship" relationship="rootViewController" id="YVa-Xd-5nu"/>
+                        <segue destination="7La-yR-0mk" kind="relationship" relationship="rootViewController" id="2m8-3P-BOT"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXB-DS-NcK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="-2717"/>
+            <point key="canvasLocation" x="-29" y="-2717"/>
         </scene>
         <!--TOTAL INCOME-->
         <scene sceneID="wYt-sn-QGQ">
