@@ -15,7 +15,7 @@ extension Date {
         case fullNumericTimestamp = "yyyy-MM-dd HH:mm"
         case monthDayTimestamp = "MMM d, h:mm a"
         case monthYear = "MMMM yyyy"
-        case monthDayYear = "MMM d, yyyy"
+        case monthDayYear = "MMMM dd, yyyy"
         case fullWithTimezone = "E, d MMM yyyy HH:mm:ss Z"
         case fullNumericWithTimezone = "yyyy-MM-dd'T'HH:mm:ssZ"
         case short = "dd.MM.yy"

@@ -3,6 +3,7 @@
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1657,14 +1658,14 @@
                                 <rect key="frame" x="20" y="104" width="388" height="709"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7KA-SG-rnK" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="286.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
                                         <string key="text">This app offers a scanning  and detecting text from income document. However for more accurate results from scanning and detecting total income amount. Please, make sure the camera is focused on the amount of income. You can also get better results by spilting long document to small pages for scanning.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cermak" translatesAutoresizingMaskIntoConstraints="NO" id="syE-bc-Wt6">
-                                        <rect key="frame" x="0.0" y="296.66666666666674" width="388" height="412.33333333333326"/>
+                                        <rect key="frame" x="0.0" y="65.666666666666686" width="388" height="643.33333333333326"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -1732,64 +1733,202 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-cP-6dg">
-                                <rect key="frame" x="64.333333333333343" y="138" width="299.33333333333326" height="555.66666666666663"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yqF-cP-6dg">
+                                <rect key="frame" x="21.333333333333343" y="108" width="385.33333333333326" height="268.66666666666669"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3N-qL-y0r">
-                                        <rect key="frame" x="0.0" y="0.0" width="299.33333333333331" height="51.666666666666664"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0E-cz-LEz">
+                                        <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="46.333333333333336"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RIj-1h-OBI" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="46.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCOME STATEMENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8q-xV-wFf" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="51.333333333333343" width="385.33333333333331" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4J-5u-zYs">
-                                        <rect key="frame" x="0.0" y="61.666666666666657" width="299.33333333333331" height="51.666666666666657"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Ndx-IS-q67">
+                                        <rect key="frame" x="0.0" y="83.333333333333343" width="385.33333333333331" height="53.666666666666657"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q4J-5u-zYs" customClass="MoneytorGoodLetterForDateLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="38.666666666666664" height="53.666666666666664"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To see the statement by specific date, pick the dates for incomes stement." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="TtK-mk-gbr" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="38.666666666666686" y="0.0" width="308" height="53.666666666666664"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hME-R9-UIJ" customClass="MoneytorGoodLetterForDateLabel" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="346.66666666666669" y="0.0" width="38.666666666666686" height="53.666666666666664"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="q4J-5u-zYs" firstAttribute="width" secondItem="Ndx-IS-q67" secondAttribute="width" multiplier="0.1" id="B6r-SJ-53v"/>
+                                            <constraint firstItem="TtK-mk-gbr" firstAttribute="width" secondItem="Ndx-IS-q67" secondAttribute="width" multiplier="0.8" id="PWV-pm-Xjz"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YjA-fW-m3d">
+                                        <rect key="frame" x="0.0" y="142" width="385.33333333333331" height="31.666666666666657"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UWu-kX-DX0" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.66666666666665719" width="65.666666666666671" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="From : ">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="fromButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="l62-lc-0dc"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L9X-tT-Azo" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="70.666666666666657" y="0.0" width="269.66666666666674" height="31.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNU-rn-mCs" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="345.33333333333337" y="4.6666666666666572" width="40" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="eft-oh-qDK"/>
+                                                </constraints>
+                                                <color key="tintColor" name="mtBrownHearder"/>
+                                                <state key="normal" image="chevron.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="fromDropdownButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="NcI-fm-sf9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="L9X-tT-Azo" firstAttribute="width" secondItem="YjA-fW-m3d" secondAttribute="width" multiplier="0.7" id="Iin-WI-K0Z"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="DqV-UW-3C9">
+                                        <rect key="frame" x="0.0" y="178.66666666666669" width="385.33333333333331" height="31.666666666666657"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTx-ah-Wbd" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.66666666666662877" width="65.666666666666671" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="To : ">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="toButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="fMP-t9-eK4"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iSU-k9-5w7" customClass="MoneytorTextField" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="70.666666666666657" y="0.0" width="269.66666666666674" height="31.666666666666668"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HkV-0y-jgT" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="345.33333333333337" y="4.6666666666666288" width="40" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Jve-Ub-HyZ"/>
+                                                </constraints>
+                                                <color key="tintColor" name="mtBrownHearder"/>
+                                                <state key="normal" image="chevron.down" catalog="system"/>
+                                                <connections>
+                                                    <action selector="toDropdownButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="QOd-d8-wqT"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="iSU-k9-5w7" firstAttribute="width" secondItem="DqV-UW-3C9" secondAttribute="width" multiplier="0.7" id="dkz-bX-Cng"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nc8-Sq-Xf5">
+                                        <rect key="frame" x="0.0" y="215.33333333333331" width="385.33333333333331" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lv-P6-osO">
+                                                <rect key="frame" x="0.0" y="0.0" width="65.666666666666671" height="40"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeC-jp-Y7F" customClass="MoneytorButton" customModule="Moneytor" customModuleProvider="target">
+                                                <rect key="frame" x="70.666666666666657" y="0.0" width="269.66666666666674" height="40"/>
+                                                <state key="normal" title="See Statement"/>
+                                                <connections>
+                                                    <action selector="seeStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="OKW-lx-1zD"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEz-cP-eys">
+                                                <rect key="frame" x="345.33333333333337" y="0.0" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="HUA-IZ-kfU"/>
+                                                </constraints>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="KeC-jp-Y7F" firstAttribute="width" secondItem="Nc8-Sq-Xf5" secondAttribute="width" multiplier="0.7" id="QoZ-zn-udH"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3N-qL-y0r" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="260.33333333333331" width="385.33333333333331" height="8.3333333333333144"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L9X-tT-Azo">
-                                        <rect key="frame" x="0.0" y="123.33333333333331" width="299.33333333333331" height="86.333333333333314"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mNW-Nq-kSW">
-                                        <rect key="frame" x="0.0" y="219.66666666666671" width="299.33333333333331" height="86.333333333333343"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKB-Oi-jPL">
-                                        <rect key="frame" x="0.0" y="316" width="299.33333333333331" height="76.333333333333314"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="seeStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="OKW-oV-ce7"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2r-Cv-xah">
-                                        <rect key="frame" x="0.0" y="402.33333333333337" width="299.33333333333331" height="153.33333333333337"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="cancelStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="VjH-82-2nh"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Nc8-Sq-Xf5" firstAttribute="height" secondItem="yqF-cP-6dg" secondAttribute="height" multiplier="0.15" id="1UF-ST-CFe"/>
+                                    <constraint firstItem="Ndx-IS-q67" firstAttribute="height" secondItem="yqF-cP-6dg" secondAttribute="height" multiplier="0.2" id="7BP-GU-YRI"/>
+                                    <constraint firstItem="s8q-xV-wFf" firstAttribute="height" secondItem="yqF-cP-6dg" secondAttribute="height" multiplier="0.1" id="cXS-XR-Jrp"/>
+                                    <constraint firstItem="Ndx-IS-q67" firstAttribute="width" secondItem="yqF-cP-6dg" secondAttribute="width" id="fUN-qR-Oiu"/>
+                                    <constraint firstItem="DqV-UW-3C9" firstAttribute="height" secondItem="YjA-fW-m3d" secondAttribute="height" id="tZ6-S6-1q6"/>
+                                </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAH-ay-yML">
+                                <rect key="frame" x="388.66666666666669" y="93" width="24.333333333333314" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="tintColor" name="mtLightBrownText"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="x.circle" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelStatementButtonTapped:" destination="7La-yR-0mk" eventType="touchUpInside" id="Aqz-YF-Eny"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6R3-9V-Eru" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="53.666666666666657" y="406.66666666666674" width="321" height="321"/>
+                                <color key="backgroundColor" name="mtDarkGolder"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6R3-9V-Eru" secondAttribute="height" multiplier="1:1" id="LsA-dP-jYl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BOO-Nj-dqz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yqF-cP-6dg" firstAttribute="height" secondItem="k80-B3-okC" secondAttribute="height" multiplier="0.6" id="ExJ-27-e3n"/>
+                            <constraint firstItem="6R3-9V-Eru" firstAttribute="width" secondItem="k80-B3-okC" secondAttribute="width" multiplier="0.75" id="Ark-49-DkS"/>
+                            <constraint firstItem="BOO-Nj-dqz" firstAttribute="trailing" secondItem="bAH-ay-yML" secondAttribute="trailing" constant="15" id="KgL-s2-z3F"/>
+                            <constraint firstItem="6R3-9V-Eru" firstAttribute="top" secondItem="yqF-cP-6dg" secondAttribute="bottom" constant="30" id="UDV-qH-SqE"/>
+                            <constraint firstItem="6R3-9V-Eru" firstAttribute="centerX" secondItem="BOO-Nj-dqz" secondAttribute="centerX" id="VzX-BN-gTZ"/>
                             <constraint firstItem="yqF-cP-6dg" firstAttribute="centerX" secondItem="BOO-Nj-dqz" secondAttribute="centerX" id="e1G-ok-TAh"/>
-                            <constraint firstItem="yqF-cP-6dg" firstAttribute="top" secondItem="BOO-Nj-dqz" secondAttribute="top" constant="50" id="j3n-Oe-Myd"/>
-                            <constraint firstItem="yqF-cP-6dg" firstAttribute="width" secondItem="k80-B3-okC" secondAttribute="width" multiplier="0.7" id="qvQ-cp-FuO"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="top" secondItem="BOO-Nj-dqz" secondAttribute="top" constant="20" id="j3n-Oe-Myd"/>
+                            <constraint firstItem="bAH-ay-yML" firstAttribute="top" secondItem="BOO-Nj-dqz" secondAttribute="top" constant="5" id="lva-0B-ymY"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="width" secondItem="k80-B3-okC" secondAttribute="width" multiplier="0.9" id="qvQ-cp-FuO"/>
+                            <constraint firstItem="yqF-cP-6dg" firstAttribute="height" secondItem="k80-B3-okC" secondAttribute="height" multiplier="0.29" id="vJk-Bq-CHU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="sBC-dx-cQ3"/>
                     <connections>
-                        <outlet property="cancelStatementButton" destination="x2r-Cv-xah" id="1l9-Dx-P6C"/>
-                        <outlet property="endDateTextField" destination="mNW-Nq-kSW" id="17F-f1-6Ru"/>
+                        <outlet property="cancelStatementButton" destination="bAH-ay-yML" id="F4N-Mo-WLD"/>
+                        <outlet property="endDateTextField" destination="iSU-k9-5w7" id="1fW-O3-RB9"/>
+                        <outlet property="incomeLineChartView" destination="6R3-9V-Eru" id="x56-Rq-QQ8"/>
                         <outlet property="incomeStatementPromptLable" destination="q4J-5u-zYs" id="yQ2-lp-ImR"/>
                         <outlet property="incomeTitelLable" destination="N3N-qL-y0r" id="5XE-gf-iaR"/>
-                        <outlet property="seeStatementButton" destination="EKB-Oi-jPL" id="a1a-Pz-tkW"/>
+                        <outlet property="seeStatementButton" destination="KeC-jp-Y7F" id="Nsu-8k-G5u"/>
                         <outlet property="startDateTextField" destination="L9X-tT-Azo" id="W2N-Sv-kMO"/>
                         <outlet property="statementStackView" destination="yqF-cP-6dg" id="xA5-pb-UVK"/>
                         <segue destination="r2Q-Kh-NU9" kind="show" id="633-Ye-obA"/>
@@ -1919,6 +2058,7 @@
         <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="cermak" width="215" height="271.33334350585938"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="dollarsign.square" catalog="system" width="128" height="114"/>
         <image name="network" catalog="system" width="128" height="121"/>
@@ -1926,12 +2066,19 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="x.circle" catalog="system" width="128" height="121"/>
         <image name="xmark.rectangle.fill" catalog="system" width="128" height="93"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="darkBrownText">
             <color red="0.29019607843137257" green="0.22352941176470589" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="darkGolder">
             <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mtBrownHearder">
+            <color red="0.74117647058823533" green="0.57647058823529407" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mtDarkGolder">
             <color red="0.9882352941176471" green="0.81176470588235294" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

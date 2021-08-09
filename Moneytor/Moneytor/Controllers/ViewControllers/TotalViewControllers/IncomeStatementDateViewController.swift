@@ -6,38 +6,45 @@
 //
 
 import UIKit
+import DatePicker
+import Charts
 
-class IncomeStatementDateViewController: UIViewController {
+class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Outlets
     @IBOutlet weak var statementStackView: UIStackView!
     @IBOutlet weak var incomeTitelLable: UILabel!
     @IBOutlet weak var incomeStatementPromptLable: UILabel!
     @IBOutlet weak var startDateTextField: UITextField!
-    @IBOutlet weak var endDateTextField: UITextField!
+   @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var seeStatementButton: UIButton!
     @IBOutlet weak var cancelStatementButton: UIButton!
     
-    let savedStartDateButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedStartDateButtonTapped))
-    let savedEndDateButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedEndDateButtonTapped))
-
+    @IBOutlet weak var incomeLineChartView: LineChartView!
+  
     var startDateIncomeStatement: Date = Date().startDateOfMonth {
         didSet {
             startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
         }
     }
-    var endDateIncomeStatement: Date?
-    let datePicker = UIDatePicker()
     
+    var endDateIncomeStatement: Date = Date().endDateOfMonth {
+        didSet {
+            startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .none
+        self.view.backgroundColor = .mtBgDarkGolder
         self.navigationController?.navigationBar.isHidden = true
-        statementStackView.backgroundColor = .mtLightYellow
+        
+ statementStackView.backgroundColor = .mtBgDarkGolder
         statementStackView.addCornerRadius()
-        createDatePicker(textField: startDateTextField, button: savedStartDateButton)
-createDatePicker(textField: endDateTextField, button: savedEndDateButton)    }
+        
+ endDateTextField.delegate = self
+        startDateTextField.delegate = self
+    }
     
     
     @IBAction func seeStatementButtonTapped(_ sender: Any) {
@@ -47,83 +54,68 @@ createDatePicker(textField: endDateTextField, button: savedEndDateButton)    }
     @IBAction func cancelStatementButtonTapped(_ sender: Any) {
     }
     
-    
-    
-    /*func presentAlertGoToIncomeStatement() {
-        print("\n\n\n\n\n=================== GO TO INCOME STATMENT======================IN \(#function)\n\n\n\n")
-       
-        let alertController = UIAlertController(title: "Income Statement",
-                                                message: "If you would like to see your income statement by specific date, please enter the start date and end date for the income statement." ,preferredStyle: .alert)
-        alertController.addTextField { [self] (startDateTextField) in
-            startDateTextField.placeholder = "Start Date"
-            startDateTextField.keyboardAppearance = .dark
-         
-         self.createDatePicker(textField: startDateTextField)
-           // guard let starDate = self.startDateIncomeStatement.dateToString(format: .monthDayYear) else {return}
-          //  startDateTextField.text = starDate
-            
-        }
-        
+    @IBAction func fromDropdownButtonTapped(_ sender: Any) {
+        let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
+        let maxDate = Date().endDateOfMonth
+            let today = Date()
+            // Create picker object
+            let datePicker = DatePicker()
+            // Setup
+        datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
+            datePicker.setup(beginWith: today, min: minDate, max: maxDate) { (selected, date) in
+                self.startDateIncomeStatement = date ?? Date()
+                if selected, let selectedDate = date {
+                    print(selectedDate.string())
+                    self.startDateTextField.text = selectedDate.dateToString(format: .full)
 
+                    self.startDateIncomeStatement = selectedDate
+                } else {
+                    print("Cancelled")
+                }
+            }
+            // Display
+
+       datePicker.show(in: self, on: sender as? UIView)
+//        datePicker.show(in: self)
+        
+    }
+    
+    @IBAction func fromButtonTapped(_ sender: Any) {
         
         
-        let seeStatementAction = UIAlertAction(title: "See Statement", style: .default) { (action) in
-           // self.goToTotalIncomeStatementVC()
-        }
-        let dismissAction = UIAlertAction(title: "Cancel", style: .destructive)
-        alertController.addAction(seeStatementAction)
-        alertController.addAction(dismissAction)
+    }
+    
+    @IBAction func toButtonTapped(_ sender: Any) {
+       
         
-        present(alertController, animated: true)
     }
     
-*/
     
-    
-    func createDatePicker(textField: UITextField, button: UIBarButtonItem)  {
-        //let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.calendar = .current
-        datePicker.maximumDate = Date()
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-    
+    @IBAction func toDropdownButtonTapped(_ sender: Any) {
         
-       // let savedStartDateButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedStartDateButtonTapped))
-        toolbar.setItems([button], animated: true)
-        textField.inputAccessoryView = toolbar
-     self.datePicker.addTarget(self, action: #selector(dateValueChange), for: .valueChanged)
-        textField.inputView = datePicker
-        //textField.text = datePicker.date.dateToString(format: .monthDayYear)
-     
-    }
-    
-    @objc func savedStartDateButtonTapped() {
-        print("===================saveButtonTappedsaveButtonTapped======================")
-        startDateIncomeStatement = datePicker.date
-        startDateTextField.text = datePicker.date.dateToString(format: .monthDayYear)
-       // startDateIncomeStatement = datePicker.date
-        print("\n=================== startDateIncomeStatement :: \(startDateIncomeStatement)======================IN \(#function)\n")
-    }
-    
-    @objc func savedEndDateButtonTapped() {
-        print("===================saveButtonTappedsaveButtonTapped======================")
-        endDateIncomeStatement = datePicker.date
-        endDateTextField.text = datePicker.date.dateToString(format: .monthDayYear)
-       // startDateIncomeStatement = datePicker.date
-        print("\n=================== startDateIncomeStatement :: \(startDateIncomeStatement)======================IN \(#function)\n")
-    }
-    
-    @objc func dateValueChange() {
-        startDateIncomeStatement = datePicker.date
-        startDateTextField.text = datePicker.date.dateToString(format: .monthDayYear)
-       // startDateIncomeStatement = datePicker.date
-       // startDateIncomeStatement = datePicker.date
-        print("\n=================== startDateIncomeStatement:: \(startDateIncomeStatement)======================IN \(#function)\n")
-    }
-    
-    func updateTextFieldWithDate(_ textFiled: UITextField, date: Date) {
-        textFiled.text = date.dateToString(format: .monthDayYear)
+        let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
+        let maxDate = Date().endDateOfMonth
+            let today = Date()
+            // Create picker object
+            let datePicker = DatePicker()
+            // Setup
+        datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
+            datePicker.setup(beginWith: today, min: minDate, max: maxDate) { (selected, date) in
+//self.endDateIncomeStatement = date ?? Date()
+                if selected, let selectedDate = date {
+                    print(selectedDate.string())
+                    self.endDateTextField.text = selectedDate.dateToString(format: .full)
+
+                    self.endDateIncomeStatement = selectedDate
+                } else {
+                    print("Cancelled")
+                }
+            }
+            // Display
+
+       datePicker.show(in: self, on: sender as? UIView)
+//        datePicker.show(in: self)
     }
 }
+    
+   
