@@ -19,16 +19,21 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endDateTextField: UITextField!
     @IBOutlet weak var seeStatementButton: UIButton!
     @IBOutlet weak var cancelStatementButton: UIButton!
-    
     @IBOutlet weak var incomeLineChartView: LineChartView!
+    @IBOutlet weak var incomeTableView: UITableView!
     
+    // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
     var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
     }
-    
+    var selectedCategory: String = "" {
+        didSet {
+            updateSectionHeader(selectdCategory: selectedCategory)
+        }
+    }
     var startDateIncomeStatement: Date = Date().startDateOfMonth {
         didSet {
             startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
@@ -41,24 +46,32 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mtBgDarkGolder
-        self.navigationController?.navigationBar.isHidden = true
+        //self.navigationController?.navigationBar.isHidden = true
         statementStackView.backgroundColor = .mtBgDarkGolder
         statementStackView.addCornerRadius()
         endDateTextField.delegate = self
         startDateTextField.delegate = self
+        incomeTableView.delegate = self
+        incomeTableView.dataSource = self
+        incomeLineChartView.delegate = self
+        setupLineChart(incomeDict: incomeCategoryDict)
+        updateSectionHeader(selectdCategory: selectedCategory)
+        updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
         setupViews()
     }
     
+    // MARK: - Actions
     @IBAction func seeStatementButtonTapped(_ sender: Any) {
     }
-    
     
     @IBAction func cancelStatementButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -76,11 +89,11 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         showEndDatePicker()
     }
     
-    
     @IBAction func toDropdownButtonTapped(_ sender: Any) {
         showEndDatePicker()
     }
     
+    // MARK: - Helper Fuctions
     func showStartDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
         let maxDate = Date().endDateOfMonth
@@ -94,6 +107,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
                         self?.startDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
                         self?.startDateIncomeStatement = selectedDate
                         self?.updateViewWithtime(start: selectedDate, end: endDate)
+                        self?.incomeTableView.reloadData()
                     } else {
                         self?.presentAlertToUser(titleAlert: "Start Date Error!", messageAlert: "The start date must be before the end date for income statement.")
                     }
@@ -104,7 +118,6 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         }
         datePicker.show(in: self)
     }
-    
     
     func showEndDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
@@ -119,6 +132,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
                         self?.endDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
                         self?.endDateIncomeStatement = selectedDate
                         self?.updateViewWithtime(start: startDate, end: selectedDate)
+                        self?.incomeTableView.reloadData()
                     } else {
                         self?.presentAlertToUser(titleAlert: "End Date Error!", messageAlert: "The start date must be before the end date for income statement.")
                     }
@@ -130,7 +144,6 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         datePicker.show(in: self)
     }
     
-    
     func setupViews(){
         startDateTextField.isUserInteractionEnabled = false
         endDateTextField.isUserInteractionEnabled = false
@@ -138,11 +151,10 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         endDateTextField.text = endDateIncomeStatement.dateToString(format: .monthDayYear)
         
         if endDateIncomeStatement >= startDateIncomeStatement {
-        updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
+            updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
         } else {
             updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
         }
-        
     }
     
     func updateViewWithtime(start: Date, end: Date) {
@@ -151,6 +163,21 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         setupLineChart(incomeDict: incomeCategoryDict)
     }
     
+    func updateSectionHeader(selectdCategory: String) {
+        let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
+        if selectdCategory == "" {
+            header.backgroundColor = .mtBgDarkGolder
+        } else {
+            header.backgroundColor = .mtDarkYellow
+        }
+        let lable = UILabel(frame:header.bounds)
+        lable.text = "\(selectdCategory) "
+        lable.textAlignment = .center
+        lable.textColor = .mtTextLightBrown
+        lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+        header.addSubview(lable)
+        incomeTableView.tableHeaderView = header
+    }
 }
 // MARK: - ChartViewDelegate
 extension IncomeStatementDateViewController: ChartViewDelegate {
@@ -234,13 +261,56 @@ extension IncomeStatementDateViewController: ChartViewDelegate {
         //    activityIndicator.stopAnimating()
     }
     
-//    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-//        let data: String  = entry.data! as! String
-//        for income in incomeCategoryDict {
-//            let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
-//            if income.key == data {
-//                selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
-//            }
-//        }
-//    }
+        func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+            let data: String  = entry.data! as! String
+            for income in incomeCategoryDict {
+                let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
+                if income.key == data {
+                    selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
+                }
+            }
+        }
 }
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension IncomeStatementDateViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return incomeCategoryDict.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "incomeCategoryCell", for: indexPath)
+        let incomeCategory = incomeCategoryDict[indexPath.row]
+        cell.textLabel?.text = incomeCategory.key
+        cell.detailTextLabel?.text = AmountFormatter.currencyInString(num: incomeCategory.value)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(0.0)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var total = 0.0
+        for incomeCategory in incomeCategoryDict {
+            total += incomeCategory.value
+        }
+        let totalIncomeStr = AmountFormatter.currencyInString(num: total)
+        return "TOTAL INCOMES : \(totalIncomeStr)"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat(40.0)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        view.tintColor = UIColor.mtLightYellow
+        let footer = view as! UITableViewHeaderFooterView
+        footer.textLabel?.textColor = UIColor.mtTextDarkBrown
+        footer.textLabel?.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
+        footer.textLabel?.textAlignment = .center
+    }
+}
+
