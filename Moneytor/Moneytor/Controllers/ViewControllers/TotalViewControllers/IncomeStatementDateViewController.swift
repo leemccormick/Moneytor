@@ -50,7 +50,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .mtBgDarkGolder
-        //self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
         statementStackView.backgroundColor = .mtBgDarkGolder
         statementStackView.addCornerRadius()
         endDateTextField.delegate = self
@@ -69,6 +69,15 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         setupViews()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToStatementDetailsVC" {
+            guard let destinationVC = segue.destination as? IncomeStatementDetailsTableViewController else {return}
+            let startDateToSend = startDateIncomeStatement
+            let endDateToSend = endDateIncomeStatement
+            destinationVC.startDateIncomeStatement = startDateToSend
+            destinationVC.endDateIncomeStatement = endDateToSend
+        }
+    }
     // MARK: - Actions
     @IBAction func seeStatementButtonTapped(_ sender: Any) {
     }

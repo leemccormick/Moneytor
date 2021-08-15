@@ -21,11 +21,11 @@ class IncomeStatementDetailsTableViewController: UITableViewController {
     var categoriesSections: [[Income]] = []
     var startDateIncomeStatement: Date?
     var endDateIncomeStatement: Date?
-//    var totalIncomeSearching: Double = 0.0 {
-//        didSet {
-//            updateFooter(total: totalIncomeSearching)
-//        }
-////    }
+    var totalIncomeSearching: Double = 0.0 {
+        didSet {
+            updateFooter(total: totalIncomeSearching)
+        }
+    }
 //    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
 //    var requests = [VNRequest]()
 //
@@ -33,6 +33,8 @@ class IncomeStatementDetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
+        self.navigationController?.navigationBar.isHidden = false
+        
 //        categoriesSectionsByDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: daily, end: Date())
 //        categoriesSectionsByWeek = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
         
@@ -41,9 +43,23 @@ class IncomeStatementDetailsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+      //  self.navigationItem.title = "Incomes Statement \nfrom \(startDateIncomeStatement?.dateToString(format: .monthDayYear)) To \(endDateIncomeStatement?.dateToString(format: .monthDayYear))"
+       // self.navigationController?.title = "Incomes Statement from \(startDateIncomeStatement?.dateToString(format: .monthDayYear)) To \(endDateIncomeStatement?.dateToString(format: .monthDayYear))"
         guard let startDateIncome = startDateIncomeStatement,
               let endDateIncome = endDateIncomeStatement else {return}
+      //  self.navigationItem.title = "Incomes Statement \nfrom \(startDateIncome.dateToString(format: .monthDayYear)) To \(endDateIncome.dateToString(format: .monthDayYear))"
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 3
+        //label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 18)
+        label.textAlignment = .center
+        label.textColor = .mtTextDarkBrown
+        label.text = "Incomes Statement \nFrom \(startDateIncome.dateToString(format: .monthDayYearShort)) - \(endDateIncome.dateToString(format: .monthDayYearShort))"
+        self.navigationItem.titleView = label
+    
         categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: startDateIncome, end: endDateIncome)
+        
         tableView.reloadData()
     }
     
@@ -134,7 +150,7 @@ extension IncomeStatementDetailsTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var returnCell = UITableViewCell()
         if isSearching {
-            let searchCell = tableView.dequeueReusableCell(withIdentifier: "incomeSearchCell", for: indexPath)
+            let searchCell = tableView.dequeueReusableCell(withIdentifier: "incomeStatementSearchCell", for: indexPath)
             guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return UITableViewCell()}
             searchCell.textLabel?.numberOfLines = 0
             searchCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
@@ -192,16 +208,15 @@ extension IncomeStatementDetailsTableViewController {
         if isSearching {
             return "🔍 SEARCHING INCOMES \t\t\t" + AmountFormatter.currencyInString(num: totalIncomeSearching)
         } else {
-                if categoriesSections[section].count == 0 {
-                    return ""
-                } else {
-                    let title = configurateSectionTitle(categoriesSections: categoriesSections, section: section)
-                    return title
-                }
+            if categoriesSections[section].count == 0 {
+                return ""
+            } else {
+                let title = configurateSectionTitle(categoriesSections: categoriesSections, section: section)
+                return title
             }
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
@@ -236,7 +251,7 @@ extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            fetchAllIncomes()
+           // fetchAllIncomes()
             for incomes in IncomeCategoryController.shared.incomeCategoriesSections {
             resultsIncomeFromSearching = incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText, amount: $0.incomeAmountString, note: $0.incomeNoteString)}
             }
@@ -256,24 +271,7 @@ extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
             self.tableView.reloadData()
         }
     }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        switch incomeSearchBar.selectedScopeButtonIndex {
-        case 0:
-            categoriesSectionsByDay = fetchIncomesBySpecificTime(start: daily, end: Date())
-            print("\n===================ERROR! categoriesSectionsByDay :: \(categoriesSectionsByDay.count) IN\(#function) ======================\n")
-            tableView.reloadData()
-        case 1:
-            categoriesSectionsByWeek = fetchIncomesBySpecificTime(start: Date().startOfWeek, end: Date().endOfWeek)
-            tableView.reloadData()
-        case 2:
-            categoriesSectionsByMonth = fetchIncomesBySpecificTime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-            tableView.reloadData()
-        default:
-            tableView.reloadData()
-        }
-    }
-    
+        
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = false
         isSearching = true
