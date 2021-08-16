@@ -8,16 +8,11 @@
 import UIKit
 
 class IncomeStatementDetailsTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var incomeSearchBar: MoneytorSearchBar!
     // MARK: - Properties
-//    let daily = IncomeCategoryController.shared.daily
-//    let weekly = IncomeCategoryController.shared.weekly
-//    let monthly = IncomeCategoryController.shared.monthly
     var isSearching: Bool = false
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
-//    var categoriesSectionsByDay: [[Income]] = []
-//    var categoriesSectionsByWeek: [[Income]] = []
     var categoriesSections: [[Income]] = []
     var startDateIncomeStatement: Date?
     var endDateIncomeStatement: Date?
@@ -26,64 +21,47 @@ class IncomeStatementDetailsTableViewController: UITableViewController {
             updateFooter(total: totalIncomeSearching)
         }
     }
-//    let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
-//    var requests = [VNRequest]()
-//
+    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         incomeSearchBar.delegate = self
         self.navigationController?.navigationBar.isHidden = false
-        
-//        categoriesSectionsByDay = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: daily, end: Date())
-//        categoriesSectionsByWeek = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startOfWeek, end: Date().endOfWeek)
-        
-//        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: startDateIncomeStatement, end: endDateIncomeStatement)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-      //  self.navigationItem.title = "Incomes Statement \nfrom \(startDateIncomeStatement?.dateToString(format: .monthDayYear)) To \(endDateIncomeStatement?.dateToString(format: .monthDayYear))"
-       // self.navigationController?.title = "Incomes Statement from \(startDateIncomeStatement?.dateToString(format: .monthDayYear)) To \(endDateIncomeStatement?.dateToString(format: .monthDayYear))"
         guard let startDateIncome = startDateIncomeStatement,
               let endDateIncome = endDateIncomeStatement else {return}
-      //  self.navigationItem.title = "Incomes Statement \nfrom \(startDateIncome.dateToString(format: .monthDayYear)) To \(endDateIncome.dateToString(format: .monthDayYear))"
         let label = UILabel()
         label.backgroundColor = .clear
-        label.numberOfLines = 3
-        //label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.numberOfLines = 0
         label.font = UIFont(name: FontNames.textTitleBoldMoneytor, size: 18)
         label.textAlignment = .center
         label.textColor = .mtTextDarkBrown
         label.text = "Incomes Statement \nFrom \(startDateIncome.dateToString(format: .monthDayYearShort)) - \(endDateIncome.dateToString(format: .monthDayYearShort))"
         self.navigationItem.titleView = label
-    
-        categoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: startDateIncome, end: endDateIncome)
-        
+        categoriesSections = fetchIncomesBySpecificTime(start: startDateIncome, end: endDateIncome)
         tableView.reloadData()
     }
     
-    // MARK: - Actions
-//    @IBAction func incomeScannerButtonTapped(_ sender: Any) {
-//        scanReceiptForIncomeResult()
-//        ScannerController.shared.deleteNameAmountAndNote()
-//        self.requests = ScannerController.shared.setupVisionForIncomeScanner()
-//    }
-//
-    // MARK: - Helper Fuctions
-//    func scanReceiptForIncomeResult() {
-//        ScannerController.shared.deleteNameAmountAndNote()
-//        let documentCameraController = VNDocumentCameraViewController()
-//        documentCameraController.delegate = self
-//        self.present(documentCameraController, animated: true, completion: nil)
-//    }
-//
-//    func fetchAllIncomes(){
-//        IncomeController.shared.fetchAllIncomes()
-//        resultsIncomeFromSearching = IncomeController.shared.incomes
-//        updateFooter(total: TotalController.shared.totalIncomeSearchResults)
-//        tableView.reloadData()
-//    }
+    
+    func fetchSearchIncomesFromStatement(start: Date, end: Date) -> [Income] {
+        let newCategoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        var totalSearchAmount = 0.0
+        var nReturnValIncomes: [Income] = []
+        resultsIncomeFromSearching = []
+        for section in newCategoriesSections {
+            for income in section {
+                resultsIncomeFromSearching.append(income)
+                nReturnValIncomes.append(income)
+                totalSearchAmount += income.incomeAmountInDouble
+            }
+        }
+        updateFooter(total: totalSearchAmount)
+        tableView.reloadData()
+        return nReturnValIncomes
+    }
     
     func fetchIncomesBySpecificTime(start: Date, end: Date) -> [[Income]] {
         let newCategoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
@@ -134,7 +112,7 @@ extension IncomeStatementDetailsTableViewController {
             return 1
         } else {
             return categoriesSections.count
-           
+            
         }
     }
     
@@ -143,7 +121,7 @@ extension IncomeStatementDetailsTableViewController {
             return resultsIncomeFromSearching.count
         } else {
             
-                return categoriesSections[section].count
+            return categoriesSections[section].count
         }
     }
     
@@ -158,13 +136,13 @@ extension IncomeStatementDetailsTableViewController {
             searchCell.selectionStyle = .none
             returnCell = searchCell
         } else {
-                let statementCell = tableView.dequeueReusableCell(withIdentifier: "incomeStementCell", for: indexPath)
-                let income = categoriesSections[indexPath.section][indexPath.row]
+            let statementCell = tableView.dequeueReusableCell(withIdentifier: "incomeStementCell", for: indexPath)
+            let income = categoriesSections[indexPath.section][indexPath.row]
             statementCell.textLabel?.numberOfLines = 0
             statementCell.textLabel?.text = "\(income.incomeCategory?.emoji ?? "💵") \(income.incomeNameString.capitalized) \n\(income.incomeDateText)"
             statementCell.detailTextLabel?.text = income.incomeAmountString
             statementCell.selectionStyle = .none
-                returnCell = statementCell
+            returnCell = statementCell
         }
         return returnCell
     }
@@ -177,29 +155,32 @@ extension IncomeStatementDetailsTableViewController {
                 let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                     IncomeController.shared.deleteIncome(income)
-              //      self.fetchAllIncomes()
+                    guard let startDate = self.startDateIncomeStatement,
+                          let endDate = self.endDateIncomeStatement else {return}
+                    let searchedIncomes = self.fetchSearchIncomesFromStatement(start: startDate, end: endDate)
+                    self.resultsIncomeFromSearching = searchedIncomes
                 }
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
                 present(alertController, animated: true)
                 
             } else {
-            
-                    let income = self.categoriesSections[indexPath.section][indexPath.row]
-                    let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
-                    let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
-                    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                        IncomeController.shared.deleteIncome(income)
-                        self.categoriesSections[indexPath.section].remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .fade)
-                        tableView.reloadData()
-                        guard let startDate = self.startDateIncomeStatement,
-                              let endDate = self.endDateIncomeStatement else {return}
-                        self.categoriesSections = self.fetchIncomesBySpecificTime(start: startDate, end: endDate)
-                    }
-                    alertController.addAction(dismissAction)
-                    alertController.addAction(deleteAction)
-                    present(alertController, animated: true)
+                
+                let income = self.categoriesSections[indexPath.section][indexPath.row]
+                let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
+                let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
+                    IncomeController.shared.deleteIncome(income)
+                    self.categoriesSections[indexPath.section].remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    tableView.reloadData()
+                    guard let startDate = self.startDateIncomeStatement,
+                          let endDate = self.endDateIncomeStatement else {return}
+                    self.categoriesSections = self.fetchIncomesBySpecificTime(start: startDate, end: endDate)
+                }
+                alertController.addAction(dismissAction)
+                alertController.addAction(deleteAction)
+                present(alertController, animated: true)
             }
         }
     }
@@ -216,7 +197,7 @@ extension IncomeStatementDetailsTableViewController {
             }
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         view.tintColor = UIColor.mtDarkYellow
         let header = view as! UITableViewHeaderFooterView
@@ -226,23 +207,32 @@ extension IncomeStatementDetailsTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier ==  "toIncomeDetailVCFromSearching" {
-//            guard let indexPath = tableView.indexPathForSelectedRow,
-//                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-//            print("Row #: \(indexPath) \(#function)")
-//            if isSearching {
-//                guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
-//                destinationVC.income = income
-//            }
-//        }
-//
-//
-//        if segue.identifier ==  "toIncomeDetailVCFromMonth" {
-//            guard let indexPath = tableView.indexPathForSelectedRow,
-//                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-//            let income = categoriesSections[indexPath.section][indexPath.row]
-//            destinationVC.income = income
-//        }
+        if segue.identifier ==  "searchIncomeSegueToIncomeDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
+            print("Row #: \(indexPath) \(#function)")
+            if isSearching {
+                guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
+                destinationVC.income = income
+                destinationVC.startedDate = startDateIncomeStatement
+                destinationVC.endedDate = endDateIncomeStatement
+            }
+        }
+        
+        if segue.identifier ==  "incomeStatementToIncomeDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
+            let income = categoriesSections[indexPath.section][indexPath.row]
+            destinationVC.income = income
+            destinationVC.startedDate = startDateIncomeStatement
+            destinationVC.endedDate = endDateIncomeStatement
+        }
+        
+        if segue.identifier == "toIncomeDetailsVC" {
+            guard let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
+            destinationVC.startedDate = startDateIncomeStatement
+            destinationVC.endedDate = endDateIncomeStatement
+        }
     }
 }
 
@@ -251,10 +241,10 @@ extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-           // fetchAllIncomes()
-            for incomes in IncomeCategoryController.shared.incomeCategoriesSections {
+            guard let  startDate = startDateIncomeStatement,
+                  let endDate = endDateIncomeStatement else {return}
+            let incomes = fetchSearchIncomesFromStatement(start: startDate, end: endDate)
             resultsIncomeFromSearching = incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText, amount: $0.incomeAmountString, note: $0.incomeNoteString)}
-            }
             guard let results = resultsIncomeFromSearching as? [Income] else {return}
             if !results.isEmpty {
                 TotalController.shared.calculateTotalIncomeFrom(searchArrayResults:  results)
@@ -271,7 +261,7 @@ extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
             self.tableView.reloadData()
         }
     }
-        
+    
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsScopeBar = false
         isSearching = true

@@ -120,6 +120,7 @@ class ExpenseDetailTableViewController: UITableViewController  {
     func updateView() {
         guard let expense = expense else {
             self.navigationItem.title = "Add Expense"
+            expenseNoteTextView.text = "Take a note for your expense here or scan a receipt for expense's detail..."
             return
         }
         self.navigationItem.title = "Update Expense"
@@ -127,7 +128,11 @@ class ExpenseDetailTableViewController: UITableViewController  {
         expenseNameTextField.text = expense.name
         expenseAmountTextField.text = expense.expenseAmountToUpdate
         expenseDatePicker.date = expense.date ?? Date()
-        expenseNoteTextView.text = expense.note
+        if let note = expense.note, note.isEmpty {
+            expenseNoteTextView.text = "Take a note for your expense here or scan a receipt for expense's detail..."
+        } else {
+            expenseNoteTextView.text = expense.note
+        }
         
         let numberOfRows = ExpenseCategoryController.shared.expenseCategories.count
         for row in 0..<numberOfRows {
@@ -272,7 +277,7 @@ extension ExpenseDetailTableViewController: UIPickerViewDelegate, UIPickerViewDa
 }
 
 // MARK: - UITextFieldDelegate
-extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDelegate {
+extension ExpenseDetailTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
@@ -283,6 +288,15 @@ extension ExpenseDetailTableViewController: UITextFieldDelegate, UITextViewDeleg
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         textField.resignFirstResponder()
+    }
+}
+
+// MARK: - UITextViewDelegate
+extension ExpenseDetailTableViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if expenseNoteTextView.text ==  "Take a note for your expense here or scan a receipt for expense's detail..." {
+            textView.text = ""
+        }
     }
 }
 

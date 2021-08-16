@@ -25,6 +25,8 @@ class IncomeDetailTableViewController: UITableViewController {
     var selectedIncomeCategory: IncomeCategory?
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var requests = [VNRequest]()
+    var startedDate: Date?
+    var endedDate: Date?
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -34,6 +36,7 @@ class IncomeDetailTableViewController: UITableViewController {
         incomeCategoryPicker.dataSource = self
         incomeNameTextField.delegate = self
         incomeAmountTextField.delegate = self
+        incomeNoteTextView.delegate = self
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         if IncomeCategoryController.shared.incomeCategories.count == 0 {
             let newCategory = IncomeCategoryController.shared.createIncomeDefaultCategories(name: "other", emoji: "💵")
@@ -45,7 +48,7 @@ class IncomeDetailTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
+//        self.incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
         IncomeCategoryController.shared.fetchAllIncomeCategories()
         incomeCategoryPicker.reloadAllComponents()
         
@@ -114,14 +117,29 @@ class IncomeDetailTableViewController: UITableViewController {
     func updateViews() {
         guard let income = income else {
             self.navigationItem.title = "Add Income"
+            if let startedDate = startedDate,
+               let endedDate = endedDate {
+                incomeDatePicker.minimumDate = startedDate
+                incomeDatePicker.maximumDate = endedDate
+            }
+            incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
             return
+        }
+        if let startedDate = startedDate,
+           let endedDate = endedDate {
+            incomeDatePicker.minimumDate = startedDate
+            incomeDatePicker.maximumDate = endedDate
         }
         self.navigationItem.title = "Update Income"
         selectedIncomeCategory = income.incomeCategory ?? IncomeCategoryController.shared.incomeCategories[0]
         incomeNameTextField.text = income.name
         incomeAmountTextField.text = income.incomeAmountStringToUpdate
         incomeDatePicker.date = income.date ?? Date()
-        incomeNoteTextView.text = income.note
+        if let note = income.note, note.isEmpty {
+            incomeNoteTextView.text = "Take a note for your income here or scan document for income's detail..."
+        } else {
+            incomeNoteTextView.text = income.note
+        }
         
         let numberOfRows = IncomeCategoryController.shared.incomeCategories.count
         for row in 0..<numberOfRows {
@@ -256,6 +274,16 @@ extension IncomeDetailTableViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MARK: - UITextViewDelegate
+extension IncomeDetailTableViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if incomeNoteTextView.text ==  "Take a note for your income here or scan document for income's detail..." {
+            textView.text = ""
+        }
+    }
+}
+
 // MARK: - Income Notification
 extension IncomeDetailTableViewController {
     func presentAlertAskingUserIfRemindedNeeded(){

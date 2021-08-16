@@ -361,7 +361,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0C-sd-pDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2337" y="-395"/>
+            <point key="canvasLocation" x="3290" y="-1761"/>
         </scene>
         <!--EXPENSES-->
         <scene sceneID="NxG-PF-dkU">
@@ -517,7 +517,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="385.33333333333331" height="26.333333333333332"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="QfA-iQ-f1n" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="26.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="26.333333333333332"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="dTp-YH-hRc"/>
                                                                 </constraints>
@@ -526,7 +526,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1nZ-bZ-CDM" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="26.333333333333332"/>
+                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="26.333333333333332"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <color key="textColor" name="darkBrownText"/>
                                                                 <nil key="highlightedColor"/>
@@ -537,7 +537,7 @@
                                                         <rect key="frame" x="0.0" y="66.333333333333371" width="385.33333333333331" height="32"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Vz-be-6s6" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="321.66666666666669" height="32"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="Xu5-Gg-vnS"/>
                                                                 </constraints>
@@ -546,7 +546,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6SQ-D0-yfm" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="326.66666666666669" y="0.0" width="58.666666666666686" height="32"/>
+                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="32"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -561,7 +561,7 @@
                                                         <rect key="frame" x="0.0" y="138.33333333333337" width="385.33333333333331" height="33"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense :" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N22-NU-gjU" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="319" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="33"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="100" id="88G-6h-wXI"/>
                                                                 </constraints>
@@ -570,7 +570,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8we-IW-6K4" customClass="MoneytorTotalButton" customModule="Moneytor" customModuleProvider="target">
-                                                                <rect key="frame" x="324" y="0.0" width="61.333333333333314" height="33"/>
+                                                                <rect key="frame" x="105" y="0.0" width="280.33333333333331" height="33"/>
                                                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="21"/>
                                                                 <state key="normal" title="$00.00">
                                                                     <color key="titleColor" name="darkBrownText"/>
@@ -1489,14 +1489,14 @@
                                 <rect key="frame" x="20" y="104" width="388" height="709"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pta-Xu-NSE" customClass="MoneytorGoodLetterLabel" customModule="Moneytor" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="388" height="211.33333333333334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="388" height="55.666666666666664"/>
                                         <string key="text">This app offers a scanning receipt feature. However for more accurate results from scanning and detecting total expense amount. Please, make sure expense total is on the last position/line on the receipt.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cermak" translatesAutoresizingMaskIntoConstraints="NO" id="bxC-3f-ANf">
-                                        <rect key="frame" x="0.0" y="221.33333333333329" width="388" height="487.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="65.666666666666686" width="388" height="643.33333333333326"/>
                                     </imageView>
                                 </subviews>
                             </stackView>
@@ -2390,7 +2390,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <connections>
-                                    <segue destination="9cS-wV-pVV" kind="show" identifier="toIncomeDetailVCFromSearching" id="RvI-cL-hQ1"/>
+                                    <segue destination="9Nz-0l-ico" kind="show" identifier="searchIncomeSegueToIncomeDetailVC" id="Zqu-gh-whk"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomeStementCell" textLabel="2F6-La-0Ns" detailTextLabel="N6f-ml-fzT" style="IBUITableViewCellStyleValue1" id="yaG-c5-SX1">
@@ -2418,7 +2418,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" name="mtDarkGolder"/>
                                 <connections>
-                                    <segue destination="9cS-wV-pVV" kind="show" identifier="toIncomeDetailVCFromDay" id="kTn-Vt-hjG"/>
+                                    <segue destination="9Nz-0l-ico" kind="show" identifier="incomeStatementToIncomeDetailVC" id="ot9-iY-Zuf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2430,7 +2430,7 @@
                     <navigationItem key="navigationItem" title="INCOMES" id="IFu-AM-Lb5">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Hr3-NE-0hV">
                             <connections>
-                                <segue destination="9cS-wV-pVV" kind="show" id="WW7-bS-YdH"/>
+                                <segue destination="9Nz-0l-ico" kind="show" identifier="toIncomeDetailsVC" id="Rmq-0K-NyS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -2440,14 +2440,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ry-bk-gNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128" y="-2717"/>
+            <point key="canvasLocation" x="1873" y="-2717"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WW7-bS-YdH"/>
         <segue reference="Egk-Ry-loT"/>
         <segue reference="Eka-uz-FHz"/>
-        <segue reference="3fT-5G-8cd"/>
+        <segue reference="Rmq-0K-NyS"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>

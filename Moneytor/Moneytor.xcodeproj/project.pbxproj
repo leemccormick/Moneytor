@@ -148,6 +148,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1637F7DC26C9E7DD000753BA /* TotalIncomeViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */,
+				161C62C326B6333500824EE7 /* IncomeStatementDateViewController.swift */,
+				1605E9E126C221B3008EB4D8 /* IncomeStatementDetailsTableViewController.swift */,
+			);
+			path = TotalIncomeViewControllers;
+			sourceTree = "<group>";
+		};
 		16410D7C261E2E28005C859C /* CoreDataStack */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,10 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				36274E4625E4CCDD0063DE28 /* TotalBalanceViewController.swift */,
-				367BBEA425F0325000C11E59 /* TotalIncomeViewController.swift */,
+				1637F7DC26C9E7DD000753BA /* TotalIncomeViewControllers */,
 				367BBEA725F036D600C11E59 /* TotalExpenseViewController.swift */,
-				161C62C326B6333500824EE7 /* IncomeStatementDateViewController.swift */,
-				1605E9E126C221B3008EB4D8 /* IncomeStatementDetailsTableViewController.swift */,
 			);
 			path = TotalViewControllers;
 			sourceTree = "<group>";
