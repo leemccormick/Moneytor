@@ -35,7 +35,7 @@ class TotalController {
     var totalBalanceBySpecificTime: Double = 00.00
     var totalBalanceBySpecificTimeString: String = "$00.00"
     
-    var totalIncomeDict = [Dictionary<String, Double>.Element]()
+    var totalIncomeDictByMonthly = [Dictionary<String, Double>.Element]()
     var totalExpenseDictByMonthly = [Dictionary<String, Double>.Element]()
     
     let daily = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
@@ -130,7 +130,7 @@ class TotalController {
     
     func generateTotalIncomeDictByMonthly(){
         let incomes = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-        totalIncomeDict = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
+        totalIncomeDictByMonthly = IncomeCategoryController.shared.generateCategoryDictionaryByIncomesAndReturnDict(sections: incomes)
     }
     
     func generateTotalExpenseDictByMonthly(){

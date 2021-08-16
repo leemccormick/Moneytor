@@ -83,9 +83,11 @@ class TotalBalanceViewController: UIViewController {
     }
     
     @IBAction func seeIncomeStatementBarButtonTapped(_ sender: Any) {
-       // createDatePicker(textField: startDateTextField)
-      //  presentAlertGoToIncomeStatement()
-     goToTotalIncomeStatementVC()
+        goToTotalIncomeStatementVC()
+    }
+    
+    @IBAction func seeExpenseStatementBarButtonTapped(_ sender: Any) {
+        goToTotalExpenseStatementVC()
     }
     
     // MARK: - Helper Fuctions
@@ -108,85 +110,20 @@ class TotalBalanceViewController: UIViewController {
         setUpPieChartWith(totalIncome: totalIncome, totalExpense: totalExpense)
     }
     
-    
-    // MARK: - Income Statement
-    //================================================WORKING ON THIS STATEMENT FOR VERSION ===========
-    // =======Update Category Name ==================
-    // =========== Add Paid by Credit Card ==================
-//    func presentAlertGoToIncomeStatement() {
-//        print("\n\n\n\n\n=================== GO TO INCOME STATMENT======================IN \(#function)\n\n\n\n")
-//
-//        let alertController = UIAlertController(title: "Income Statement",
-//                                                message: "If you would like to see your income statement by specific date, please enter the start date and end date for the income statement." ,preferredStyle: .alert)
-//        alertController.addTextField { [self] (startDateTextField) in
-//            startDateTextField.placeholder = "Start Date"
-//            startDateTextField.keyboardAppearance = .dark
-//
-//         self.createDatePicker(textField: startDateTextField)
-//            guard let starDate = self.startDateIncomeStatement?.dateToString(format: .monthDayYear) else {return}
-//            startDateTextField.text = starDate
-//
-//        }
-//
-//
-//
-//
-//        let seeStatementAction = UIAlertAction(title: "See Statement", style: .default) { (action) in
-//            self.goToTotalIncomeStatementVC()
-//        }
-//        let dismissAction = UIAlertAction(title: "Cancel", style: .destructive)
-//        alertController.addAction(seeStatementAction)
-//        alertController.addAction(dismissAction)
-//
-//        present(alertController, animated: true)
-//    }
-//
     func goToTotalIncomeStatementVC() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let totalIncomeStatementVC = storyboard.instantiateViewController(identifier: "totalIncomeStatementNavigationStoryBoardID")
         totalIncomeStatementVC.modalPresentationStyle = .formSheet
         self.present(totalIncomeStatementVC, animated: true, completion: nil)
     }
-//
-//    func createDatePicker(textField: UITextField)  {
-//        //let datePicker = UIDatePicker()
-//        datePicker.datePickerMode = .date
-//        datePicker.preferredDatePickerStyle = .compact
-//        datePicker.calendar = .current
-//        datePicker.maximumDate = Date()
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//
-//
-//        let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savedStartDateButtonTapped))
-//        toolbar.setItems([saveButton], animated: true)
-//        textField.inputAccessoryView = toolbar
-//       // self.datePicker.addTarget(self, action: #selector(dateValueChange), for: .valueChanged)
-//        textField.inputView = datePicker
-//        textField.text = datePicker.date.dateToString(format: .monthDayYear)
-//
-//    }
-//
-//    @objc func saveButtonTapped() {
-//        print("===================saveButtonTappedsaveButtonTapped======================")
-//        startDateIncomeStatement = datePicker.date
-//        print("\n=================== startDateIncomeStatement :: \(startDateIncomeStatement)======================IN \(#function)\n")
-//    }
-//
-//    @objc func dateValueChange() {
-//        startDateIncomeStatement = datePicker.date
-//        print("\n=================== startDateIncomeStatement:: \(startDateIncomeStatement)======================IN \(#function)\n")
-//    }
-//
-//    func updateTextFieldWithDate(_ textFiled: UITextField, date: Date) {
-//        textFiled.text = date.dateToString(format: .monthDayYear)
-//    }
-//
-//    func activateCalculateButton() {
-//        self.calculatorButton.addTarget(self, action: #selector(calculateButtonTapped(sender:)), for: .touchUpInside)
-//    }
+    
+    func goToTotalExpenseStatementVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let totalIncomeStatementVC = storyboard.instantiateViewController(identifier: "totalExpenseStatementNavigationStoryBoardID")
+        totalIncomeStatementVC.modalPresentationStyle = .formSheet
+        self.present(totalIncomeStatementVC, animated: true, completion: nil)
+    }
 }
-//================================================WORKING ON THIS STATEMENT FOR VERSION ===========
 
 // MARK: -  ChartViewDelegate
 extension TotalBalanceViewController: ChartViewDelegate  {

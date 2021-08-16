@@ -78,6 +78,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
             destinationVC.endDateIncomeStatement = endDateToSend
         }
     }
+    
     // MARK: - Actions
     @IBAction func seeStatementButtonTapped(_ sender: Any) {
     }
@@ -188,9 +189,9 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
         incomeTableView.tableHeaderView = header
     }
 }
+
 // MARK: - ChartViewDelegate
 extension IncomeStatementDateViewController: ChartViewDelegate {
-    
     func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
         var yValues: [ChartDataEntry] = []
         var i = 0
@@ -266,24 +267,21 @@ extension IncomeStatementDateViewController: ChartViewDelegate {
         incomeLineChartView.drawGridBackgroundEnabled = true
         incomeLineChartView.animate(xAxisDuration: 2.5)
         incomeLineChartView.legend.enabled = false
-        //    activityIndicator.isHidden = true
-        //    activityIndicator.stopAnimating()
     }
     
-        func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-            let data: String  = entry.data! as! String
-            for income in incomeCategoryDict {
-                let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
-                if income.key == data {
-                    selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
-                }
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let data: String  = entry.data! as! String
+        for income in incomeCategoryDict {
+            let incomeCategoryValue = AmountFormatter.currencyInString(num: income.value)
+            if income.key == data {
+                selectedCategory = "\(data.capitalized)  \(incomeCategoryValue)"
             }
         }
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension IncomeStatementDateViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return incomeCategoryDict.count
     }

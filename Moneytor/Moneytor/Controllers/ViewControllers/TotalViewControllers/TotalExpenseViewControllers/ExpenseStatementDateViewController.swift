@@ -1,28 +1,30 @@
 //
-//  TotalExpenseViewController.swift
+//  expenseStatementDateViewController.swift
 //  Moneytor
 //
-//  Created by Lee McCormick on 3/3/21.
+//  Created by Lee on 8/16/21.
 //
 
 import UIKit
 import Charts
+import DatePicker
 
-class TotalExpenseViewController: UIViewController {
-    
+class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate {
+
     // MARK: - Outlets
+    @IBOutlet weak var statementStackView: UIStackView!
+    @IBOutlet weak var expenseTitelLable: UILabel!
+    @IBOutlet weak var expenseStatementPromptLable: UILabel!
+    @IBOutlet weak var startDateTextField: UITextField!
+    @IBOutlet weak var endDateTextField: UITextField!
+    @IBOutlet weak var seeStatementButton: UIButton!
+    @IBOutlet weak var cancelStatementButton: UIButton!
+    @IBOutlet weak var barChartView: BarChartView!
     @IBOutlet weak var expenseTableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var barChartView: BarChartView!
-    @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var dateExpenseLabel: MoneytorGoodLetterLabel!
     
     // MARK: - Properties
-    let weekly = ExpenseCategoryController.shared.weekly
-    let monthly = ExpenseCategoryController.shared.monthly
-    let yearly = ExpenseCategoryController.shared.yearly
     var totalExpenseString = TotalController.shared.totalExpenseString
-    var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly {
+    var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly{
         didSet {
             setupBarChart(expenseDict: expenseCategoryDict)
         }
@@ -32,44 +34,145 @@ class TotalExpenseViewController: UIViewController {
             updateSectionHeader(selectdCategory: selectedCategory)
         }
     }
+    var startDateIncomeStatement: Date = Date().startDateOfMonth {
+        didSet {
+            startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
+        }
+    }
+    
+    var endDateIncomeStatement: Date = Date().endDateOfMonth {
+        didSet {
+            endDateTextField.text = endDateIncomeStatement.dateToString(format: .monthDayYear)
+        }
+    }
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .mtBgDarkGolder
+        self.navigationController?.navigationBar.isHidden = true
+        statementStackView.backgroundColor = .mtBgDarkGolder
+        statementStackView.addCornerRadius()
+        endDateTextField.delegate = self
+        startDateTextField.delegate = self
         expenseTableView.delegate = self
         expenseTableView.dataSource = self
         barChartView.delegate = self
         setupBarChart(expenseDict: expenseCategoryDict)
         updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        timeSegmentedControl.selectedSegmentIndex = 1
-        updateSectionHeader(selectdCategory: selectedCategory)
-        updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        self.navigationController?.navigationBar.isHidden = true
+        setupViews()
     }
     
-    // MARK: - Actions
-    @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            updateViewWithtime(start: Date().startOfWeek, end: Date().endOfWeek)
-            expenseTableView.reloadData()
-        case 1:
-            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-            expenseTableView.reloadData()
-        case 2:
-            updateViewWithtime(start: self.yearly, end: Date())
-            expenseTableView.reloadData()
-        default:
-            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
-            expenseTableView.reloadData()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SegueToExpenseStatementDetailsVC" {
+            guard let destinationVC = segue.destination as? ExpenseStatementDetailsTableViewController else {return}
+            let startDateToSend = startDateIncomeStatement
+            let endDateToSend = endDateIncomeStatement
+//            destinationVC.startDateIncomeStatement = startDateToSend
+//            destinationVC.endDateIncomeStatement = endDateToSend
         }
     }
     
+    // MARK: - Actions
+    @IBAction func seeStatementButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func cancelStatementButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func fromDropdownButtonTapped(_ sender: Any) {
+        showStartDatePicker()
+    }
+    
+    @IBAction func fromButtonTapped(_ sender: Any) {
+        showStartDatePicker()
+    }
+    
+    @IBAction func toButtonTapped(_ sender: Any) {
+        showEndDatePicker()
+    }
+    
+    @IBAction func toDropdownButtonTapped(_ sender: Any) {
+        showEndDatePicker()
+    }
+    
     // MARK: - Helper Fuctions
+    func showStartDatePicker() {
+        let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
+        let maxDate = Date().endDateOfMonth
+        let today = Date()
+        let datePicker = DatePicker()
+        datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
+        datePicker.setup(beginWith: today, min: minDate, max: maxDate) { [weak self] (selected, date) in
+            if selected, let selectedDate = date {
+                if let endDate = self?.endDateIncomeStatement {
+                    if selectedDate <= endDate {
+                        self?.startDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
+                        self?.startDateIncomeStatement = selectedDate
+                        self?.updateViewWithtime(start: selectedDate, end: endDate)
+                        self?.incomeTableView.reloadData()
+                    } else {
+                        self?.presentAlertToUser(titleAlert: "Start Date Error!", messageAlert: "The start date must be before the end date for expense statement.")
+                    }
+                }
+            } else {
+                print("Cancelled")
+            }
+        }
+        datePicker.show(in: self)
+    }
+    
+    func showEndDatePicker() {
+        let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
+        let maxDate = Date().endDateOfMonth
+        let today = Date()
+        let datePicker = DatePicker()
+        datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
+        datePicker.setup(beginWith: today, min: minDate, max: maxDate) { [weak self] (selected, date) in
+            if selected, let selectedDate = date {
+                if let startDate = self?.startDateIncomeStatement {
+                    if startDate <= selectedDate {
+                        self?.endDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
+                        self?.endDateIncomeStatement = selectedDate
+                        self?.updateViewWithtime(start: startDate, end: selectedDate)
+                        self?.incomeTableView.reloadData()
+                    } else {
+                        self?.presentAlertToUser(titleAlert: "End Date Error!", messageAlert: "The start date must be before the end date for expense statement.")
+                    }
+                }
+            } else {
+                print("Cancelled")
+            }
+        }
+        datePicker.show(in: self)
+    }
+    
+    func setupViews(){
+        startDateTextField.isUserInteractionEnabled = false
+        endDateTextField.isUserInteractionEnabled = false
+        startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
+        endDateTextField.text = endDateIncomeStatement.dateToString(format: .monthDayYear)
+        
+        if endDateIncomeStatement >= startDateIncomeStatement {
+            updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
+        } else {
+            updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        }
+    }
+    
+    func updateViewWithtime(start: Date, end: Date) {
+        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
+        expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
+      setupBarChart(expenseDict: expenseCategoryDict)
+    }
+    
     func updateSectionHeader(selectdCategory: String) {
         let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))
         if selectdCategory == "" {
@@ -83,24 +186,12 @@ class TotalExpenseViewController: UIViewController {
         lable.textColor = .mtTextLightBrown
         lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
         header.addSubview(lable)
-        expenseTableView.tableHeaderView = header
-    }
-    
-    func updateViewWithtime(start: Date, end: Date) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
-        expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
-        setupBarChart(expenseDict: expenseCategoryDict)
-        updateSectionHeader(selectdCategory: selectedCategory)
-        dateExpenseLabel.text = "\(start.dateToString(format: .monthDayYear)) - \(end.dateToString(format: .monthDayYear))"
-        expenseTableView.reloadData()
+        incomeTableView.tableHeaderView = header
     }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
-extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource {
-    
+extension ExpenseStatementDateViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenseCategoryDict.count
     }
@@ -141,8 +232,7 @@ extension TotalExpenseViewController: UITableViewDelegate, UITableViewDataSource
 }
 
 // MARK: - ChartViewDelegate
-extension TotalExpenseViewController: ChartViewDelegate {
-    
+extension ExpenseStatementDateViewController: ChartViewDelegate {
     func setupBarChart(expenseDict: [Dictionary<String, Double>.Element]){
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
@@ -191,8 +281,6 @@ extension TotalExpenseViewController: ChartViewDelegate {
         barChartView.rightAxis.drawGridLinesEnabled = true
         barChartView.rightAxis.enabled = false
         barChartView.drawGridBackgroundEnabled = true
-        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
