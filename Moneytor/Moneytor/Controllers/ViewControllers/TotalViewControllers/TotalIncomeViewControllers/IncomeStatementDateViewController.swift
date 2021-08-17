@@ -24,7 +24,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     var totalIncomeString = TotalController.shared.totalIncomeString
-    var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
+    var incomeCategoryDict: [Dictionary<String, Double>.Element] = [] {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }

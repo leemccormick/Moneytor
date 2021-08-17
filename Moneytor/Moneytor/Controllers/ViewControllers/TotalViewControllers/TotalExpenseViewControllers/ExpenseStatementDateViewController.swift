@@ -117,7 +117,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
                         self?.startDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
                         self?.startDateIncomeStatement = selectedDate
                         self?.updateViewWithtime(start: selectedDate, end: endDate)
-                        self?.incomeTableView.reloadData()
+                        self?.expenseTableView.reloadData()
                     } else {
                         self?.presentAlertToUser(titleAlert: "Start Date Error!", messageAlert: "The start date must be before the end date for expense statement.")
                     }
@@ -142,7 +142,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
                         self?.endDateTextField.text = selectedDate.dateToString(format: .monthDayYear)
                         self?.endDateIncomeStatement = selectedDate
                         self?.updateViewWithtime(start: startDate, end: selectedDate)
-                        self?.incomeTableView.reloadData()
+                        self?.expenseTableView.reloadData()
                     } else {
                         self?.presentAlertToUser(titleAlert: "End Date Error!", messageAlert: "The start date must be before the end date for expense statement.")
                     }
@@ -186,7 +186,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
         lable.textColor = .mtTextLightBrown
         lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
         header.addSubview(lable)
-        incomeTableView.tableHeaderView = header
+        expenseTableView.tableHeaderView = header
     }
 }
 
