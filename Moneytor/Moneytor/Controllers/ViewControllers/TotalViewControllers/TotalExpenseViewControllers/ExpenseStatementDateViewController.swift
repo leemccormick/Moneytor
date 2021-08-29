@@ -74,8 +74,8 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
             guard let destinationVC = segue.destination as? ExpenseStatementDetailsTableViewController else {return}
             let startDateToSend = startDateIncomeStatement
             let endDateToSend = endDateIncomeStatement
-//            destinationVC.startDateIncomeStatement = startDateToSend
-//            destinationVC.endDateIncomeStatement = endDateToSend
+            destinationVC.startDateExpenseStatement = startDateToSend
+            destinationVC.endDateExpenseStatement = endDateToSend
         }
     }
     
@@ -106,7 +106,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
     // MARK: - Helper Fuctions
     func showStartDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
-        let maxDate = Date().endDateOfMonth
+      let maxDate = Date().endDateOfMonth
         let today = Date()
         let datePicker = DatePicker()
         datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
@@ -131,7 +131,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
     
     func showEndDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
-        let maxDate = Date().endDateOfMonth
+        let maxDate = Date().threeYearsLater
         let today = Date()
         let datePicker = DatePicker()
         datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
@@ -159,7 +159,6 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
         endDateTextField.isUserInteractionEnabled = false
         startDateTextField.text = startDateIncomeStatement.dateToString(format: .monthDayYear)
         endDateTextField.text = endDateIncomeStatement.dateToString(format: .monthDayYear)
-        
         if endDateIncomeStatement >= startDateIncomeStatement {
             updateViewWithtime(start: startDateIncomeStatement, end: endDateIncomeStatement)
         } else {
@@ -237,7 +236,6 @@ extension ExpenseStatementDateViewController: ChartViewDelegate {
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
         var newExpenseCategoryEmojiToDisplay: [String] = []
-        
         for expenseCategory in expenseDict {
             if expenseCategory.value != 0.0 {
                 let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: expenseCategory.key)
@@ -254,7 +252,6 @@ extension ExpenseStatementDateViewController: ChartViewDelegate {
                 i += 1
             }
         }
-        
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
         barChartView.xAxis.granularityEnabled = true
         barChartView.xAxis.granularity = 1.0

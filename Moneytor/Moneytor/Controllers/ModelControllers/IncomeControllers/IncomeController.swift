@@ -56,6 +56,43 @@ class IncomeController {
         }
     }
     
+    func createIncomeAndRepeatedNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?)  {
+        guard let categoryID = category.id else {return}
+        if let image = image {
+            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
+            incomes.append(newIncome)
+            category.incomes?.adding(newIncome)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+        } else {
+            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: nil)
+            incomes.append(newIncome)
+            category.incomes?.adding(newIncome)
+            CoreDataStack.shared.saveContext()
+            notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+        }
+    }
+    
+    func createRepeatedIncomesWith(name: String, amount:Double, category: IncomeCategory, date: Date, note: String, image: Data?) {
+        guard let categoryID = category.id else {return}
+        let repeatedDates = Date().getRepeatedDatesForAYear()
+        if let image = image {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        } else {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        }
+    }
+    
     // READ
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []
@@ -108,6 +145,16 @@ class IncomeController {
     }
     
     func updateIncomeWithNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date, note: String){
+        income.name = name
+        income.amount = NSDecimalNumber(value: amount)
+        income.incomeCategory = category
+        income.date = date
+        income.note = note
+        CoreDataStack.shared.saveContext()
+        notificationScheduler.scheduleIncomeNotifications(income: income)
+    }
+    
+    func updateIncomeWithRepeatedNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date, note: String){
         income.name = name
         income.amount = NSDecimalNumber(value: amount)
         income.incomeCategory = category

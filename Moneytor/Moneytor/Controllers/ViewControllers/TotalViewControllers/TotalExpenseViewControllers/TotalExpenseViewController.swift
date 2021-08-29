@@ -16,12 +16,14 @@ class TotalExpenseViewController: UIViewController {
     @IBOutlet var barChartView: BarChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var dateExpenseLabel: MoneytorGoodLetterLabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: - Properties
     let weekly = ExpenseCategoryController.shared.weekly
     let monthly = ExpenseCategoryController.shared.monthly
     let yearly = ExpenseCategoryController.shared.yearly
     var totalExpenseString = TotalController.shared.totalExpenseString
+    var isCancelButtonShowed: Bool?
     var expenseCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalExpenseDictByMonthly {
         didSet {
             setupBarChart(expenseDict: expenseCategoryDict)
@@ -49,9 +51,18 @@ class TotalExpenseViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        if let isCancelButtonShowed = isCancelButtonShowed, isCancelButtonShowed == true {
+            cancelButton.isHidden = false
+        } else {
+            cancelButton.isHidden = true
+        }
     }
     
     // MARK: - Actions
+    @IBAction func cancelButontapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -145,7 +156,6 @@ extension TotalExpenseViewController: ChartViewDelegate {
         var dataEntries: [BarChartDataEntry] = []
         var i = 0
         var newExpenseCategoryEmojiToDisplay: [String] = []
-        
         for expenseCategory in expenseDict {
             if expenseCategory.value != 0.0 {
                 let dataEntry = BarChartDataEntry(x: Double(i), y: Double(expenseCategory.value), data: expenseCategory.key)
@@ -162,7 +172,6 @@ extension TotalExpenseViewController: ChartViewDelegate {
                 i += 1
             }
         }
-        
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newExpenseCategoryEmojiToDisplay)
         barChartView.xAxis.granularityEnabled = true
         barChartView.xAxis.granularity = 1.0

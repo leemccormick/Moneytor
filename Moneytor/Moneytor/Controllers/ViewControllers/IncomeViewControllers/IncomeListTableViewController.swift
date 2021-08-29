@@ -333,7 +333,6 @@ extension IncomeListTableViewController {
 
 // MARK: - UISearchBarDelegate
 extension IncomeListTableViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             fetchAllIncomes()

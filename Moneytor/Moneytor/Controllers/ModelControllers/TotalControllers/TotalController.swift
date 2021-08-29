@@ -138,7 +138,6 @@ class TotalController {
         totalExpenseDictByMonthly = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
     }
     
-    
     func generateTotalExpenseDictByTime(start: Date, end: Date) -> [Dictionary<String, Double>.Element] {
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         

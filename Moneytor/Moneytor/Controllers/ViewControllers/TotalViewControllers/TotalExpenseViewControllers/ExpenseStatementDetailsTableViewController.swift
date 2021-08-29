@@ -8,8 +8,10 @@
 import UIKit
 
 class ExpenseStatementDetailsTableViewController: UITableViewController {
-
+    
+    // MARK: - Outlets
     @IBOutlet weak var expenseSearchBar: MoneytorSearchBar!
+    
     // MARK: - Properties
     var isSearching: Bool = false
     var resultsExpenseFromSearching: [SearchableRecordDelegate] = []
@@ -45,21 +47,22 @@ class ExpenseStatementDetailsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // MARK: - Helper Fuctions
     func fetchSearchExpensesFromStatement(start: Date, end: Date) -> [Expense] {
         let newCategoriesSections = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         var totalSearchAmount = 0.0
-        var nReturnValIncomes: [Expense] = []
+        var nReturnValExpenses: [Expense] = []
         resultsExpenseFromSearching = []
         for section in newCategoriesSections {
             for expense in section {
                 resultsExpenseFromSearching.append(expense)
-                nReturnValIncomes.append(expense)
+                nReturnValExpenses.append(expense)
                 totalSearchAmount += expense.expenseAmountInDouble
             }
         }
         updateFooter(total: totalSearchAmount)
         tableView.reloadData()
-        return nReturnValIncomes
+        return nReturnValExpenses
     }
     
     func fetchExpensesBySpecificTime(start: Date, end: Date) -> [[Expense]] {
@@ -75,7 +78,7 @@ class ExpenseStatementDetailsTableViewController: UITableViewController {
         footer.backgroundColor = .mtLightYellow
         let lable = UILabel(frame:footer.bounds)
         let totalString = AmountFormatter.currencyInString(num: total)
-        lable.text = "TOTAL INCOMES : \(totalString)  "
+        lable.text = "TOTAL EXPENSES : \(totalString)  "
         lable.textAlignment = .center
         lable.textColor = .mtTextDarkBrown
         lable.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 25)
@@ -149,33 +152,30 @@ extension ExpenseStatementDetailsTableViewController {
         if editingStyle == .delete {
             if isSearching == true {
                 guard let expense = self.resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
-                let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
+                let alertController = UIAlertController(title: "Are you sure to delete this expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
                 let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
                     ExpenseController.shared.deleteExpense(expense)
                     guard let startDate = self.startDateExpenseStatement,
                           let endDate = self.endDateExpenseStatement else {return}
-                    let searchedExpenses = self.fetchExpensesBySpecificTime(start: startDate, end: endDate)
-                    
+                    let searchedExpenses = self.fetchSearchExpensesFromStatement(start: startDate, end: endDate)
                     self.resultsExpenseFromSearching = searchedExpenses
                 }
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
                 present(alertController, animated: true)
-                
             } else {
-                
-                let income = self.categoriesSections[indexPath.section][indexPath.row]
-                let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
+                let expense = self.categoriesSections[indexPath.section][indexPath.row]
+                let alertController = UIAlertController(title: "Are you sure to delete this expense?", message: "Name : \(expense.expenseNameString) \nAmount : \(expense.expenseAmountString) \nCategory : \(expense.expenseCategory!.nameString.capitalized) \nDate : \(expense.expenseDateText)", preferredStyle: .actionSheet)
                 let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
                 let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (_) in
-                    IncomeController.shared.deleteIncome(income)
+                    ExpenseController.shared.deleteExpense(expense)
                     self.categoriesSections[indexPath.section].remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)
                     tableView.reloadData()
-                    guard let startDate = self.startDateIncomeStatement,
-                          let endDate = self.endDateIncomeStatement else {return}
-                    self.categoriesSections = self.fetchIncomesBySpecificTime(start: startDate, end: endDate)
+                    guard let startDate = self.startDateExpenseStatement,
+                          let endDate = self.endDateExpenseStatement else {return}
+                    self.categoriesSections = self.fetchExpensesBySpecificTime(start: startDate, end: endDate)
                 }
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
@@ -186,7 +186,7 @@ extension ExpenseStatementDetailsTableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if isSearching {
-            return "🔍 SEARCHING INCOMES \t\t\t" + AmountFormatter.currencyInString(num: totalIncomeSearching)
+            return "🔍 SEARCHING EXPENSES \t\t\t" + AmountFormatter.currencyInString(num: totalExpenseSearching)
         } else {
             if categoriesSections[section].count == 0 {
                 return ""
@@ -206,31 +206,31 @@ extension ExpenseStatementDetailsTableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier ==  "searchIncomeSegueToIncomeDetailVC" {
+        if segue.identifier ==  "searchExpenseSegueToExpenseDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
-                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
+                  let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
             print("Row #: \(indexPath) \(#function)")
             if isSearching {
-                guard let income = resultsIncomeFromSearching[indexPath.row] as? Income else {return}
-                destinationVC.income = income
-                destinationVC.startedDate = startDateIncomeStatement
-                destinationVC.endedDate = endDateIncomeStatement
+                guard let expense = resultsExpenseFromSearching[indexPath.row] as? Expense else {return}
+                destinationVC.expense = expense
+                destinationVC.startedDate = startDateExpenseStatement
+                destinationVC.endedDate = endDateExpenseStatement
             }
         }
         
-        if segue.identifier ==  "incomeStatementToIncomeDetailVC" {
+        if segue.identifier ==  "expenseStatementToExpenseDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
-                  let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-            let income = categoriesSections[indexPath.section][indexPath.row]
-            destinationVC.income = income
-            destinationVC.startedDate = startDateIncomeStatement
-            destinationVC.endedDate = endDateIncomeStatement
+                  let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
+            let expense = categoriesSections[indexPath.section][indexPath.row]
+            destinationVC.expense = expense
+            destinationVC.startedDate = startDateExpenseStatement
+            destinationVC.endedDate = endDateExpenseStatement
         }
         
-        if segue.identifier == "toIncomeDetailsVC" {
-            guard let destinationVC = segue.destination as? IncomeDetailTableViewController else {return}
-            destinationVC.startedDate = startDateIncomeStatement
-            destinationVC.endedDate = endDateIncomeStatement
+        if segue.identifier == "toExpenseDetailsVC" {
+            guard let destinationVC = segue.destination as? ExpenseDetailTableViewController else {return}
+            destinationVC.startedDate = startDateExpenseStatement
+            destinationVC.endedDate = endDateExpenseStatement
         }
     }
 }
@@ -239,35 +239,33 @@ extension ExpenseStatementDetailsTableViewController {
 extension ExpenseStatementDetailsTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            guard let  startDate = startDateIncomeStatement,
-                  let endDate = endDateIncomeStatement else {return}
-            let incomes = fetchSearchIncomesFromStatement(start: startDate, end: endDate)
-            resultsIncomeFromSearching = incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText, amount: $0.incomeAmountString, note: $0.incomeNoteString)}
-            guard let results = resultsIncomeFromSearching as? [Income] else {return}
+            guard let  startDate = startDateExpenseStatement,
+                  let endDate = endDateExpenseStatement else {return}
+            let expenses = fetchSearchExpensesFromStatement(start: startDate, end: endDate)
+            resultsExpenseFromSearching = expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "", date: $0.expenseDateText, amount: $0.expenseAmountString, note: $0.expenseNoteString)}
+            guard let results = resultsExpenseFromSearching as? [Expense] else {return}
             if !results.isEmpty {
-                TotalController.shared.calculateTotalIncomeFrom(searchArrayResults:  results)
-                totalIncomeSearching = TotalController.shared.totalIncomeSearchResults
+                TotalController.shared.calculateTotalExpenseFrom(searchArrayResults:  results)
+                totalExpenseSearching = TotalController.shared.totalExpenseSearchResults
                 self.tableView.reloadData()
             } else {
-                totalIncomeSearching = 0.0
+                totalExpenseSearching = 0.0
                 self.tableView.reloadData()
             }
             self.tableView.reloadData()
         } else if searchText == "" {
-            resultsIncomeFromSearching = []
-            totalIncomeSearching = 0.0
+            resultsExpenseFromSearching = []
+            totalExpenseSearching = 0.0
             self.tableView.reloadData()
         }
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsScopeBar = false
         isSearching = true
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsScopeBar = true
         isSearching = false
         return true
     }
@@ -281,7 +279,7 @@ extension ExpenseStatementDetailsTableViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isSearching = true
-        resultsIncomeFromSearching = []
+        resultsExpenseFromSearching = []
         tableView.reloadData()
     }
     

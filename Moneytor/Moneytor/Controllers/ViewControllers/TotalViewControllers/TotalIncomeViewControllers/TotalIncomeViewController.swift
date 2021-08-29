@@ -16,12 +16,14 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var dateIncomeLabel: MoneytorGoodLetterLabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: - Properties
     let weekly = IncomeCategoryController.shared.weekly
     let monthly = IncomeCategoryController.shared.monthly
     let yearly = IncomeCategoryController.shared.yearly
     var totalIncomeString = TotalController.shared.totalIncomeString
+    var isCancelButtonShowed: Bool?
     var incomeCategoryDict: [Dictionary<String, Double>.Element] = [] {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
@@ -50,6 +52,11 @@ class TotalIncomeViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        if let isCancelButtonShowed = isCancelButtonShowed, isCancelButtonShowed == true {
+            cancelButton.isHidden = false
+        } else {
+            cancelButton.isHidden = true
+        }
     }
     
     func updateViewWithtime(start: Date, end: Date) {
@@ -64,6 +71,10 @@ class TotalIncomeViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -101,7 +112,6 @@ class TotalIncomeViewController: UIViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return incomeCategoryDict.count
     }
@@ -143,7 +153,6 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
 
 // MARK: - ChartViewDelegate
 extension TotalIncomeViewController: ChartViewDelegate {
-    
     func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
         var yValues: [ChartDataEntry] = []
         var i = 0

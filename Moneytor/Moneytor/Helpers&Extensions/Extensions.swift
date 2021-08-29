@@ -9,26 +9,6 @@ import Foundation
 
 // MARK: - Date
 extension Date {
-    enum DateFormatType: String {
-        case full = "EEEE, MMM d, yyyy"
-        case fullNumeric = "MM/dd/yyyy"
-        case fullNumericTimestamp = "yyyy-MM-dd HH:mm"
-        case monthDayTimestamp = "MMM d, h:mm a"
-        case monthYear = "MMMM yyyy"
-        case monthDayYear = "MMMM dd, yyyy"
-        case monthDayYearShort = "MMM dd, yyyy"
-        case fullWithTimezone = "E, d MMM yyyy HH:mm:ss Z"
-        case fullNumericWithTimezone = "yyyy-MM-dd'T'HH:mm:ssZ"
-        case short = "dd.MM.yy"
-        case timestamp = "HH:mm:ss.SSS"
-    }
-    
-    func dateToString(format: DateFormatType) -> String{
-        let formatter = DateFormatter()
-        formatter.dateFormat = format.rawValue
-        return formatter.string(from: self)
-    }
-    
     var startOfWeek: Date {
         let gregorian = Calendar(identifier: .gregorian)
         let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self))
@@ -48,13 +28,108 @@ extension Date {
     var endDateOfMonth: Date {
         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startDateOfMonth)!
     }
+    
+    var endInSixMonths: Date {
+        return Calendar.current.date(byAdding: DateComponents(month: 6), to: Date().endDateOfMonth)!
+    }
+    
+    var threeYearsLater: Date {
+        return Calendar.current.date(byAdding: DateComponents(year: 3), to: Date().endDateOfMonth)!
+    }
+    
+    enum DateFormatType: String {
+        case full = "EEEE, MMM d, yyyy"
+        case fullNumeric = "MM/dd/yyyy"
+        case fullNumericTimestamp = "yyyy-MM-dd HH:mm"
+        case monthDayTimestamp = "MMM d, h:mm a"
+        case monthYear = "MMMM yyyy"
+        case monthDayYear = "MMMM dd, yyyy"
+        case monthDayYearShort = "MMM dd, yyyy"
+        case fullWithTimezone = "E, d MMM yyyy HH:mm:ss Z"
+        case fullNumericWithTimezone = "yyyy-MM-dd'T'HH:mm:ssZ"
+        case short = "dd.MM.yy"
+        case timestamp = "HH:mm:ss.SSS"
+        case onlyDate = "dd"
+    }
+    
+    func dateToString(format: DateFormatType) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        return formatter.string(from: self)
+    }
+    
+    func getRepeatedDatesForSixMonths() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 0...5 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getRepeatedDatesForSixMonths\(nReturnDates) ==> count : \(nReturnDates.count) ======================")
+        return nReturnDates
+    }
+    
+    func getRepeatedDatesForAYear() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 0...11 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getRepeatedDatesForAYear\(nReturnDates) ==> count : \(nReturnDates.count) ======================")
+        return nReturnDates
+    }
+    
+    func getRepeatedDatesForTwoYears() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 0...23 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getRepeatedDatesForTwoYears\(nReturnDates) ==> count : \(nReturnDates.count)======================")
+        return nReturnDates
+    }
+    
+    func getUpdateRepeatedDatesForSixMonths() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 1...5 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getUpdateRepeatedDatesForSixMonths\(nReturnDates) ==> count : \(nReturnDates.count)======================")
+        return nReturnDates
+    }
+    
+    func getUpdateRepeatedDatesForAYear() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 1...11 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getUpdateRepeatedDatesForAYear\(nReturnDates) ==> count : \(nReturnDates.count)======================")
+
+        return nReturnDates
+    }
+    
+    func getUpdateRepeatedDatesForTwoYears() -> [Date] {
+        var nReturnDates: [Date] = []
+        for index in 1...23 {
+            if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
+            nReturnDates.append(nextMonth)
+            }
+        }
+        print("=================== getUpdateRepeatedDatesForTwoYears\(nReturnDates) ==> count : \(nReturnDates.count)======================")
+        return nReturnDates
+    }
 }
 
 // MARK: - Array
 extension Array where Element:Equatable {
     func removeDuplicates() -> [Element] {
         var result = [Element]()
-        
         for value in self {
             if result.contains(value) == false {
                 result.append(value)

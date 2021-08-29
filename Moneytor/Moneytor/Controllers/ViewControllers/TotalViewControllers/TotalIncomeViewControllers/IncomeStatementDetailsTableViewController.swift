@@ -9,7 +9,9 @@ import UIKit
 
 class IncomeStatementDetailsTableViewController: UITableViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var incomeSearchBar: MoneytorSearchBar!
+    
     // MARK: - Properties
     var isSearching: Bool = false
     var resultsIncomeFromSearching: [SearchableRecordDelegate] = []
@@ -45,7 +47,7 @@ class IncomeStatementDetailsTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    
+    // MARK: - Helper Fuctions
     func fetchSearchIncomesFromStatement(start: Date, end: Date) -> [Income] {
         let newCategoriesSections = IncomeCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         var totalSearchAmount = 0.0
@@ -163,9 +165,7 @@ extension IncomeStatementDetailsTableViewController {
                 alertController.addAction(dismissAction)
                 alertController.addAction(deleteAction)
                 present(alertController, animated: true)
-                
             } else {
-                
                 let income = self.categoriesSections[indexPath.section][indexPath.row]
                 let alertController = UIAlertController(title: "Are you sure to delete this income?", message: "Name : \(income.incomeNameString) \nAmount : \(income.incomeAmountString) \nCategory : \(income.incomeCategory!.nameString.capitalized) \nDate : \(income.incomeDateText)", preferredStyle: .actionSheet)
                 let dismissAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -238,7 +238,6 @@ extension IncomeStatementDetailsTableViewController {
 
 // MARK: - UISearchBarDelegate
 extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             guard let  startDate = startDateIncomeStatement,
@@ -263,13 +262,11 @@ extension IncomeStatementDetailsTableViewController: UISearchBarDelegate {
     }
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsScopeBar = false
         isSearching = true
         return true
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.showsScopeBar = true
         isSearching = false
         return true
     }
