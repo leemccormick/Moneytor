@@ -104,6 +104,14 @@ class IncomeDetailTableViewController: UITableViewController {
         presentAlertAskingUserIfRemindedNeeded()
     }
     
+    @IBAction func plusAddMoreIncomesButtonTapped(_ sender: Any) {
+      //  presentAlertAddAmountOptions()
+    }
+    
+    @IBAction func monthlyIncomesButtonTapped(_ sender: Any) {
+       presentAlertMonthlyIncomes()
+    }
+    
     // MARK: - Helper Fuctions
     func scanReceiptForIncomeResult() {
         ScannerController.shared.deleteNameAmountAndNote()
@@ -176,13 +184,13 @@ class IncomeDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return 2
         case 1:
-            return 1
+            return 2
         case 2:
-            return 3
+            return 2
         case 3:
-            return 1
+            return 2
         case 4:
             return 1
         case 5:
@@ -208,9 +216,9 @@ class IncomeDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case 0:
-            return CGFloat(40.0)
+            return CGFloat(0.0)
         case 1:
-            return CGFloat(40.0)
+            return CGFloat(0.0)
         case 2:
             return CGFloat(0.0)
         case 3:
@@ -278,64 +286,6 @@ extension IncomeDetailTableViewController: UITextViewDelegate {
         if incomeNoteTextView.text ==  "Take a note for your income here or scan document for income's detail..." {
             textView.text = ""
         }
-    }
-}
-
-// MARK: - Income Notification
-extension IncomeDetailTableViewController {
-    func presentAlertAskingUserIfRemindedNeeded(){
-        let alertController = UIAlertController(title: "INCOME REMINDER!", message:"Would you like to get notification when you get paid?", preferredStyle: .alert)
-        let noRemiderAction = UIAlertAction(title: "NO", style: .destructive)
-        let yesRemiderAction = UIAlertAction(title: "YES", style: .default) { (action) in
-            self.presentAlertAddIncomeNotification()
-        }
-        alertController.addAction(yesRemiderAction)
-        alertController.addAction(noRemiderAction)
-        present(alertController, animated: true)
-    }
-    
-    func  presentAlertAddIncomeNotification() {
-        guard let name = incomeNameTextField.text, !name.isEmpty else {
-            if incomeAmountTextField.text?.isEmpty == true  {
-                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED FOR NOTIFICATION!", messageAlert: "Add name and amount for remider!")
-            } else {
-                presentAlertToUser(titleAlert: "INCOME'S NAME NEEDED FOR NOTIFICATION!", messageAlert: "Add income's name for your remider!")
-            }
-            return
-        }
-        guard let amount = self.incomeAmountTextField.text, !amount.isEmpty else {
-            presentAlertToUser(titleAlert: "INCOME'S AMOUNT NEEDED FOR NOTIFICATION!!", messageAlert: "Add income's amount for your remider!")
-            return
-        }
-        
-        guard let selectedIncomeCategory = selectedIncomeCategory else {return}
-        
-        let alertController = UIAlertController(title: "SET REMIDER FOR THIS INCOME!", message: "Name : \(name.capitalized) \nAmount : \(amount) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nPaid Date : \(incomeDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
-        let noAction = UIAlertAction(title: "CANCEL", style: .destructive)
-        let yesAction = UIAlertAction(title: "SET A REMINDER!", style: .default) { (action) in
-            guard let selectedIncomeCategory = self.selectedIncomeCategory else {return}
-            if let income = self.income {
-                IncomeController.shared.updateIncomeWithNotification(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
-            } else {
-                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
-                IncomeController.shared.createIncomeAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData)
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
-        let yesMonthlyAction = UIAlertAction(title: "SET MONTHLY REMINDERS!", style: .default) { (action) in
-            guard let selectedIncomeCategory = self.selectedIncomeCategory else {return}
-            if let income = self.income {
-                IncomeController.shared.updateIncomeWithRepeatedNotification(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
-            } else {
-                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
-                IncomeController.shared.createIncomeAndRepeatedNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData)
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
-        alertController.addAction(yesAction)
-        alertController.addAction(yesMonthlyAction)
-        alertController.addAction(noAction)
-        present(alertController, animated: true)
     }
 }
 
@@ -411,6 +361,197 @@ extension IncomeDetailTableViewController {
         }
         alertController.addAction(doSomethingAction)
         alertController.addAction(dismissAction)
+        present(alertController, animated: true)
+    }
+}
+
+// MARK: - Income Notification
+extension IncomeDetailTableViewController {
+    func presentAlertAskingUserIfRemindedNeeded(){
+        let alertController = UIAlertController(title: "INCOME REMINDER!", message:"Would you like to get notification when you get paid?", preferredStyle: .alert)
+        let noRemiderAction = UIAlertAction(title: "NO", style: .destructive)
+        let yesRemiderAction = UIAlertAction(title: "YES", style: .default) { (action) in
+            self.presentAlertAddIncomeNotification()
+        }
+        alertController.addAction(yesRemiderAction)
+        alertController.addAction(noRemiderAction)
+        present(alertController, animated: true)
+    }
+    
+    func  presentAlertAddIncomeNotification() {
+        guard let name = incomeNameTextField.text, !name.isEmpty else {
+            if incomeAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED FOR REMINDER!", messageAlert: "Add name and amount for remider!")
+            } else {
+                presentAlertToUser(titleAlert: "INCOME'S NAME NEEDED FOR REMINDER!", messageAlert: "Add income's name for your remider!")
+            }
+            return
+        }
+        guard let amount = self.incomeAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT NEEDED FOR REMINDER!!", messageAlert: "Add income's amount for your remider!")
+            return
+        }
+        let amountInString = AmountFormatter.currencyInString(num: Double(amount) ?? 0.0)
+        guard let selectedIncomeCategory = selectedIncomeCategory else {return}
+        
+        let alertController = UIAlertController(title: "SET REMIDER FOR DUE DATE OF THIS INCOME!", message: "Name : \(name.capitalized) \nAmount : \(amountInString) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nPay Day : \(expenseDatePicker.date.dateToString(format: .monthDayYear))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .destructive)
+        let yesRepeatedNotificationAction = UIAlertAction(title: "SET MONTHLY REMINDERS!", style: .default) { (action) in
+            self.presentAlertMonthlyRemindersSelection()
+        }
+        let yesAction = UIAlertAction(title: "SET A REMINDER!", style: .default) { (action) in
+            if let expense = self.expense {
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+            } else {
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                ExpenseController.shared.createExpenseAndNotificationWith(name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(yesRepeatedNotificationAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+    
+    func presentAlertMonthlyRemindersSelection() {
+        guard let name = expenseNameTextField.text, !name.isEmpty else {
+            if expenseAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "EXPENSE'S INPUT NEEDED FOR REMINDER!", messageAlert: "Add name and amount for remider!")
+            } else {
+                presentAlertToUser(titleAlert: "EXPENSE'S NAME NEEDED FOR REMINDER!", messageAlert: "Add expense's name for your remider!")
+            }
+            return
+        }
+        guard let amount = self.expenseAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "EXPENSE'S AMOUNT NEEDED FOR REMINDER!", messageAlert: "Add expense's amount for your remider!")
+            return
+        }
+        let amountInString = AmountFormatter.currencyInString(num: Double(amount) ?? 0.0)
+        guard let selectedExpenseCategory = selectedExpenseCategory else {return}
+        let alertController = UIAlertController(title: "SET REMINDERS AND MONTHLY EXPENSES!", message: "\nPlease, select how long would you like to set reminders and automatically input expenses monthly? \n\nName : \(name.capitalized) \nAmount : \(amountInString) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nMothly Paid Date : \(expenseDatePicker.date.dateToString(format: .onlyDate))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .destructive)
+        let yesSixMonthsAction = UIAlertAction(title: "SET FOR 6 MONTHS!", style: .default) { (action) in
+            if let expense = self.expense {
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let fiveMonths = self.expenseDatePicker.date.getUpdateRepeatedDatesForSixMonths()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: fiveMonths,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            } else {
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let sixMonths = self.expenseDatePicker.date.getRepeatedDatesForSixMonths()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: sixMonths,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        let yesOneYearAction = UIAlertAction(title: "SET FOR 1 YEAR!", style: .default) { (action) in
+            if let expense = self.expense {
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let elevenMonths = self.expenseDatePicker.date.getUpdateRepeatedDatesForAYear()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: elevenMonths,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            } else {
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let oneYear = self.expenseDatePicker.date.getRepeatedDatesForAYear()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: oneYear,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        let yesTwoYearAction = UIAlertAction(title: "SET FOR 2 YEARS!", style: .default) { (action) in
+            if let expense = self.expense {
+                ExpenseController.shared.updateExpenseWithNotificaion(expense, name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text)
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let twentyThreeMonths = self.expenseDatePicker.date.getUpdateRepeatedDatesForTwoYears()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: twentyThreeMonths,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            } else {
+                let imageData = self.expenseImageView.image?.jpegData(compressionQuality: 0.7)
+                let twoYears = self.expenseDatePicker.date.getRepeatedDatesForTwoYears()
+                ExpenseController.shared.createMonthlyExpensesAndNotificationsWith(repeatDuration: twoYears,name: name, amount: Double(amount) ?? 00.00, category: selectedExpenseCategory, date: self.expenseDatePicker.date, note: self.expenseNoteTextView.text, image: imageData)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(yesSixMonthsAction)
+        alertController.addAction(yesOneYearAction)
+        alertController.addAction(yesTwoYearAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true)
+    }
+}
+
+
+// MARK: - Monthly Expenses
+extension IncomeDetailTableViewController {
+    func presentAlertMonthlyIncomes(){
+        let alertController = UIAlertController(title: "MONTHLY INCOMES!", message:"Would you like to set this income to be automatically input monthly?", preferredStyle: .alert)
+        let noRemiderAction = UIAlertAction(title: "NO", style: .destructive)
+        let yesRemiderAction = UIAlertAction(title: "YES", style: .default) { (action) in
+            self.presentAlertAddMonthlyIncomes()
+        }
+        alertController.addAction(yesRemiderAction)
+        alertController.addAction(noRemiderAction)
+        present(alertController, animated: true)
+    }
+    
+    func presentAlertAddMonthlyIncomes() {
+        guard let name = incomeNameTextField.text, !name.isEmpty else {
+            if incomeAmountTextField.text?.isEmpty == true  {
+                presentAlertToUser(titleAlert: "INCOME'S INPUT NEEDED!", messageAlert: "Add name and amount for setting an income to be automatically input monthly!")
+            } else {
+                presentAlertToUser(titleAlert: "INCOME'S NAME NEEDED!", messageAlert: "Add income's name for setting an income to be automatically input monthly!")
+            }
+            return
+        }
+        guard let amount = self.incomeAmountTextField.text, !amount.isEmpty else {
+            presentAlertToUser(titleAlert: "INCOME'S AMOUNT NEEDED!", messageAlert: "Add income's amount for setting an income to be automatically input monthly!")
+            return
+        }
+        let amountInString = AmountFormatter.currencyInString(num: Double(amount) ?? 0.0)
+        guard let selectedIncomeCategory = selectedIncomeCategory else {return}
+        let alertController = UIAlertController(title: "SET INCOME MONTHLY INPUT!", message: "Name : \(name.capitalized) \nAmount : \(amountInString) \nCategory : \(selectedIncomeCategory.nameString.capitalized) \nMothly Paid Date : \(incomeDatePicker.date.dateToString(format: .onlyDate))", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "CANCEL", style: .destructive)
+        let yesSixMonthsAction = UIAlertAction(title: "SET FOR 6 MONTHS!", style: .default) { (action) in
+            if let income = self.income {
+                IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let fiveMonths = self.incomeDatePicker.date.getUpdateRepeatedDatesForSixMonths()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: fiveMonths)
+            } else {
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let sixMonths = self.incomeDatePicker.date.getRepeatedDatesForSixMonths()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: sixMonths)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        let yesOneYearAction = UIAlertAction(title: "SET FOR 1 YEAR!", style: .default) { (action) in
+            if let income = self.income {
+                IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let elevenMonths = self.incomeDatePicker.date.getUpdateRepeatedDatesForAYear()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: elevenMonths)
+            } else {
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let oneYear = self.incomeDatePicker.date.getRepeatedDatesForAYear()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: oneYear)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        let yesTwoYearAction = UIAlertAction(title: "SET FOR 2 YEARS!", style: .default) { (action) in
+            if let income = self.income {
+                IncomeController.shared.updateWith(income, name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text)
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let twentyThreeMonths = self.incomeDatePicker.date.getUpdateRepeatedDatesForTwoYears()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: twentyThreeMonths)
+            } else {
+                let imageData = self.incomeImageView.image?.jpegData(compressionQuality: 0.7)
+                let twoYears = self.incomeDatePicker.date.getRepeatedDatesForTwoYears()
+                IncomeController.shared.createMonthlyIncomesWith(name: name, amount: Double(amount) ?? 00.00, category: selectedIncomeCategory, date: self.incomeDatePicker.date, note: self.incomeNoteTextView.text, image: imageData, repeatedDuration: twoYears)
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertController.addAction(yesSixMonthsAction)
+        alertController.addAction(yesOneYearAction)
+        alertController.addAction(yesTwoYearAction)
+        alertController.addAction(noAction)
         present(alertController, animated: true)
     }
 }

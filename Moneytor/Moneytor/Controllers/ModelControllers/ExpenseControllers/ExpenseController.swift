@@ -60,9 +60,13 @@ class ExpenseController {
     func createMonthlyExpensesAndNotificationsWith(repeatDuration: [Date], name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?) {
         guard let categoryID = category.id else {return}
         let repeatedDates = repeatDuration
+        var monthlyNote = "*** This is monthly expense. ***"
+        if note != "Take a note for your expense here or scan a receipt for expense's detail..." {
+            monthlyNote = "*** This is monthly expense. *** \n\(note)"
+        }
         if let image = image {
             for date in repeatedDates {
-                let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+                let newExpense = Expense(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, expenseCategory: category, image: image)
                 expenses.append(newExpense)
                 category.expenses?.adding(newExpense)
                 notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
@@ -70,7 +74,7 @@ class ExpenseController {
             }
         } else {
             for date in repeatedDates {
-                let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+                let newExpense = Expense(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, expenseCategory: category, image: nil)
                 expenses.append(newExpense)
                 category.expenses?.adding(newExpense)
                 notificationScheduler.scheduleExpenseNotifications(expense: newExpense)
@@ -82,16 +86,20 @@ class ExpenseController {
     func createMonthlyExpensesWith(name: String, amount:Double, category: ExpenseCategory, date: Date, note: String, image: Data?, repeatedDuration: [Date]) {
         guard let categoryID = category.id else {return}
         let repeatedDates = repeatedDuration
+        var monthlyNote = "*** This is monthly expense. ***"
+        if note != "Take a note for your expense here or scan a receipt for expense's detail..." {
+            monthlyNote = "*** This is monthly expense. *** \n\(note)"
+        }
         if let image = image {
             for date in repeatedDates {
-                let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: image)
+                let newExpense = Expense(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, expenseCategory: category, image: image)
                 expenses.append(newExpense)
                 category.expenses?.adding(newExpense)
                 CoreDataStack.shared.saveContext()
             }
         } else {
             for date in repeatedDates {
-                let newExpense = Expense(name: name, amount: amount, date: date, note: note, id: categoryID, expenseCategory: category, image: nil)
+                let newExpense = Expense(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, expenseCategory: category, image: nil)
                 expenses.append(newExpense)
                 category.expenses?.adding(newExpense)
                 CoreDataStack.shared.saveContext()

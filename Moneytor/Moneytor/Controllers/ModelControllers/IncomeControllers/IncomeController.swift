@@ -56,36 +56,49 @@ class IncomeController {
         }
     }
     
-    func createIncomeAndRepeatedNotificationWith(name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?)  {
+    func createMonthlyIncomesAndNotificationsWith(repeatDuration: [Date],name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?)  {
         guard let categoryID = category.id else {return}
+        let repeatedDates = repeatDuration
+        var monthlyNote = "*** This is monthly income. ***"
+        if note != "Take a note for your income here or scan document for income's detail..." {
+            monthlyNote = "*** This is monthly income. *** \n\(note)"
+        }
         if let image = image {
-            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
-            incomes.append(newIncome)
-            category.incomes?.adding(newIncome)
-            CoreDataStack.shared.saveContext()
-            notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+                CoreDataStack.shared.saveContext()
+            }
         } else {
-            let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: nil)
-            incomes.append(newIncome)
-            category.incomes?.adding(newIncome)
-            CoreDataStack.shared.saveContext()
-            notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: nil)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+                CoreDataStack.shared.saveContext()
+            }
         }
     }
     
-    func createRepeatedIncomesWith(name: String, amount:Double, category: IncomeCategory, date: Date, note: String, image: Data?) {
+    func createMonthlyIncomesWith(name: String, amount:Double, category: IncomeCategory, date: Date, note: String, image: Data?, repeatedDuration: [Date]) {
         guard let categoryID = category.id else {return}
-        let repeatedDates = Date().getRepeatedDatesForAYear()
+        let repeatedDates = repeatedDuration
+        var monthlyNote = "*** This is monthly income. ***"
+        if note != "Take a note for your income here or scan document for income's detail..." {
+            monthlyNote = "*** This is monthly income. *** \n\(note)"
+        }
         if let image = image {
             for date in repeatedDates {
-                let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
                 incomes.append(newIncome)
                 category.incomes?.adding(newIncome)
                 CoreDataStack.shared.saveContext()
             }
         } else {
             for date in repeatedDates {
-                let newIncome = Income(name: name, amount: amount, date: date, note: note, id: categoryID, incomeCategory: category, image: image)
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
                 incomes.append(newIncome)
                 category.incomes?.adding(newIncome)
                 CoreDataStack.shared.saveContext()
