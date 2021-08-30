@@ -24,6 +24,12 @@ class TotalBalanceViewController: UIViewController {
     let weekly = TotalController.shared.weekly
     let monthly = TotalController.shared.monthly
     let yearly = TotalController.shared.yearly
+    var text: String = ""
+    var setDate: Date?
+    var startDateIncomeStatement: Date?
+    var endDateIncomeStatement: Date?
+    let datePicker = UIDatePicker()
+    var isCancelButtonShowed: Bool = false
     
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
@@ -31,7 +37,6 @@ class TotalBalanceViewController: UIViewController {
         pieChartView.delegate = self
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         isAppAlreadyLaunched()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,7 +44,6 @@ class TotalBalanceViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
-        
     }
     
     // MARK: - Actions
@@ -48,7 +52,7 @@ class TotalBalanceViewController: UIViewController {
         case 0:
             updateViewsByTime(startedTime: Date().startOfWeek, endedTime: Date().endOfWeek)
         case 1:
-            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endOfWeek)
+            updateViewsByTime(startedTime: Date().startDateOfMonth, endedTime: Date().endDateOfMonth)
         case 2:
             updateViewsByTime(startedTime: self.yearly, endedTime: Date())
         default:
@@ -79,6 +83,13 @@ class TotalBalanceViewController: UIViewController {
         present(alertController, animated: true)
     }
     
+    @IBAction func seeIncomeStatementBarButtonTapped(_ sender: Any) {
+        goToTotalIncomeStatementVC()
+    }
+    
+    @IBAction func seeExpenseStatementBarButtonTapped(_ sender: Any) {
+        goToTotalExpenseStatementVC()
+    }
     
     // MARK: - Helper Fuctions
     func updateViewsByTime(startedTime: Date, endedTime: Date) {
@@ -87,7 +98,6 @@ class TotalBalanceViewController: UIViewController {
         TotalController.shared.calculateTotalExpensesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalIncomesBySpecificTime(startedTime: startedTime, endedTime: endedTime)
         TotalController.shared.calculateTotalBalanceBySpecificTime(startedTime: startedTime, endedTime: endedTime)
-        
         let totalIncome = TotalController.shared.totalIncomeBySpecificTime
         let totalExpense = TotalController.shared.totalExpenseBySpecificTime
         let totalIncomeCurrencyStr = TotalController.shared.totalIncomeBySpecificTimeString
@@ -99,11 +109,37 @@ class TotalBalanceViewController: UIViewController {
         totalExpenseButton.setTitle(totalExpenseCurrencyStr, for: .normal)
         setUpPieChartWith(totalIncome: totalIncome, totalExpense: totalExpense)
     }
+    
+    func goToTotalIncomeStatementVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let totalIncomeStatementVC = storyboard.instantiateViewController(identifier: "totalIncomeStatementNavigationStoryBoardID")
+        totalIncomeStatementVC.modalPresentationStyle = .formSheet
+        self.present(totalIncomeStatementVC, animated: true, completion: nil)
+    }
+    
+    func goToTotalExpenseStatementVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let totalIncomeStatementVC = storyboard.instantiateViewController(identifier: "totalExpenseStatementNavigationStoryBoardID")
+        totalIncomeStatementVC.modalPresentationStyle = .formSheet
+        self.present(totalIncomeStatementVC, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "totalExpenseVCSegue" {
+            if let destinationVC = segue.destination as? TotalExpenseViewController {
+                destinationVC.isCancelButtonShowed = true
+            }
+        }
+        if segue.identifier == "toTotalIncomeVCSegue" {
+            if let destinationVC = segue.destination as? TotalIncomeViewController {
+                destinationVC.isCancelButtonShowed = true
+            }
+        }
+    }
 }
 
 // MARK: -  ChartViewDelegate
 extension TotalBalanceViewController: ChartViewDelegate  {
-    
     func setUpPieChartWith(totalIncome: Double, totalExpense: Double) {
         pieChartView.noDataText = "No Data available! Enter data of your expense and income."
         pieChartView.chartDescription?.enabled = false
@@ -118,12 +154,10 @@ extension TotalBalanceViewController: ChartViewDelegate  {
         pieChartView.legend.font = UIFont(name: FontNames.textMoneytorGoodLetter, size: 20)!
         pieChartView.legend.verticalAlignment = .bottom
         pieChartView.legend.horizontalAlignment = .center
-        
         let incomePercent: Double = totalIncome / (totalIncome + totalExpense)
         let expensePercent: Double = totalExpense / (totalIncome + totalExpense)
         let incomePercentString = AmountFormatter.percentInString(num: incomePercent)
         let expensePercentString = AmountFormatter.percentInString(num: expensePercent)
-        
         var entries: [PieChartDataEntry] = Array()
         entries.append(PieChartDataEntry(value: incomePercent, label: "Income \(incomePercentString)", data: "income"))
         entries.append(PieChartDataEntry(value: expensePercent, label: "Expense \(expensePercentString)", data: "expense"))
@@ -137,20 +171,15 @@ extension TotalBalanceViewController: ChartViewDelegate  {
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
         let data: String  = entry.data! as! String
-        
         if data == "income" {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let totalIncomeVC = storyboard.instantiateViewController(identifier: "totalIncomeVCStoryBoardId")
-            totalIncomeVC.modalPresentationStyle = .popover
-            self.present(totalIncomeVC, animated: true, completion: nil)
-            
+            navigationController?.pushViewController(totalIncomeVC, animated: true)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let totalIncomeVC = storyboard.instantiateViewController(identifier: "totalExpenseVCStoryBoardId")
-            totalIncomeVC.modalPresentationStyle = .popover
-            self.present(totalIncomeVC, animated: true, completion: nil)
+            let totalExpenseVC = storyboard.instantiateViewController(identifier: "totalExpenseVCStoryBoardId")
+            navigationController?.pushViewController(totalExpenseVC, animated: true)
         }
     }
 }

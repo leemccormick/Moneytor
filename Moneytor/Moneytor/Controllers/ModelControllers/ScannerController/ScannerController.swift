@@ -71,7 +71,6 @@ class ScannerController {
 
 // MARK: - SetupVision For ExpenseScanner
 extension ScannerController {
-    
     func detectForNameAndAmount(reconizedTexts: [ReconizedTextScanner]) {
         var potentialAmounts: [Double] = []
         for result in reconizedTexts {

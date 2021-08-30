@@ -2,17 +2,25 @@ PODS:
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
+  - DatePicker (1.3.1):
+    - Extended
+  - Extended (1.0.5)
 
 DEPENDENCIES:
   - Charts
+  - DatePicker (~> 1.3.0)
 
 SPEC REPOS:
   trunk:
     - Charts
+    - DatePicker
+    - Extended
 
 SPEC CHECKSUMS:
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
+  DatePicker: 05ddbd2b57d00ce6f44c1f0611ced32f948d33a6
+  Extended: c463225e0c29b2823847866c1b106827772ac678
 
-PODFILE CHECKSUM: 349050abc0441ad90788836829067b7e53decf7a
+PODFILE CHECKSUM: a2c84a30f14ffe55d15a31fd5f63d4679981e92e
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

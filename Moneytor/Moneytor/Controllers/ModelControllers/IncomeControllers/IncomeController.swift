@@ -56,6 +56,56 @@ class IncomeController {
         }
     }
     
+    func createMonthlyIncomesAndNotificationsWith(repeatDuration: [Date],name: String, amount: Double, category: IncomeCategory, date: Date, note: String, image: Data?)  {
+        guard let categoryID = category.id else {return}
+        let repeatedDates = repeatDuration
+        var monthlyNote = "*** This is monthly income. ***"
+        if note != "Take a note for your income here or scan document for income's detail..." {
+            monthlyNote = "*** This is monthly income. *** \n\(note)"
+        }
+        if let image = image {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        } else {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: nil)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                notificationScheduler.scheduleIncomeNotifications(income: newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        }
+    }
+    
+    func createMonthlyIncomesWith(name: String, amount:Double, category: IncomeCategory, date: Date, note: String, image: Data?, repeatedDuration: [Date]) {
+        guard let categoryID = category.id else {return}
+        let repeatedDates = repeatedDuration
+        var monthlyNote = "*** This is monthly income. ***"
+        if note != "Take a note for your income here or scan document for income's detail..." {
+            monthlyNote = "*** This is monthly income. *** \n\(note)"
+        }
+        if let image = image {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        } else {
+            for date in repeatedDates {
+                let newIncome = Income(name: name, amount: amount, date: date, note: monthlyNote, id: categoryID, incomeCategory: category, image: image)
+                incomes.append(newIncome)
+                category.incomes?.adding(newIncome)
+                CoreDataStack.shared.saveContext()
+            }
+        }
+    }
+    
     // READ
     func fetchAllIncomes() {
         let fetchIncomes = (try? CoreDataStack.shared.context.fetch(fetchRequest)) ?? []

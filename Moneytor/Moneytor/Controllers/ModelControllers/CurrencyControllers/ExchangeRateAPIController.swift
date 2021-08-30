@@ -57,3 +57,4 @@ class ExchangeRateAPIController {
         }.resume()
     }
 }
+

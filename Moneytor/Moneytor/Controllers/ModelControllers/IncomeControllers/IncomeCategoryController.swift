@@ -59,7 +59,6 @@ class IncomeCategoryController {
     func generateSectionsCategoiesByTimePeriod(start: Date, end: Date) -> [[Income]]  {
         fetchAllIncomeCategories()
         var newIncomeCategoriesSections: [[Income]] = []
-        
         for incomeCategory in incomeCategories {
             if let incomeCategoryName = incomeCategory.name {
                 let newCategorySection = IncomeController.shared.fetchIncomesFromTimePeriodAndCategory(startedTime: start, endedTime: end, categoryName: incomeCategoryName)
