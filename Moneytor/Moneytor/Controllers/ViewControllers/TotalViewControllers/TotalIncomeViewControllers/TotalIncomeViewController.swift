@@ -16,18 +16,19 @@ class TotalIncomeViewController: UIViewController {
     @IBOutlet weak var lineChartView: LineChartView!
     @IBOutlet weak var timeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var dateIncomeLabel: MoneytorGoodLetterLabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: - Properties
     let weekly = IncomeCategoryController.shared.weekly
     let monthly = IncomeCategoryController.shared.monthly
     let yearly = IncomeCategoryController.shared.yearly
     var totalIncomeString = TotalController.shared.totalIncomeString
-    var incomeCategoryDict: [Dictionary<String, Double>.Element] = TotalController.shared.totalIncomeDict {
+    var isCancelButtonShowed: Bool?
+    var incomeCategoryDict: [Dictionary<String, Double>.Element] = [] {
         didSet {
             setupLineChart(incomeDict: incomeCategoryDict)
         }
     }
-    
     var selectedCategory: String = "" {
         didSet {
             updateSectionHeader(selectdCategory: selectedCategory)
@@ -51,6 +52,11 @@ class TotalIncomeViewController: UIViewController {
         timeSegmentedControl.selectedSegmentIndex = 1
         updateSectionHeader(selectdCategory: selectedCategory)
         updateViewWithtime(start: Date().startDateOfMonth, end: Date().endDateOfMonth)
+        if let isCancelButtonShowed = isCancelButtonShowed, isCancelButtonShowed == true {
+            cancelButton.isHidden = false
+        } else {
+            cancelButton.isHidden = true
+        }
     }
     
     func updateViewWithtime(start: Date, end: Date) {
@@ -65,6 +71,10 @@ class TotalIncomeViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func timeSegmentedControlValuedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -102,7 +112,6 @@ class TotalIncomeViewController: UIViewController {
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return incomeCategoryDict.count
     }
@@ -117,11 +126,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if selectedCategory == "" {
-            return CGFloat(0.01)
-        } else {
-            return CGFloat(40.0)
-        }
+        return CGFloat(0.0)
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -148,12 +153,7 @@ extension TotalIncomeViewController: UITableViewDelegate, UITableViewDataSource 
 
 // MARK: - ChartViewDelegate
 extension TotalIncomeViewController: ChartViewDelegate {
-    
     func setupLineChart(incomeDict: [Dictionary<String, Double>.Element]) {
-        lineChartView.noDataText = "No Income Data available for Chart."
-        lineChartView.noDataTextAlignment = .center
-        lineChartView.noDataTextColor = .mtTextLightBrown
-        
         var yValues: [ChartDataEntry] = []
         var i = 0
         var sumIncome = 0.0
@@ -162,12 +162,9 @@ extension TotalIncomeViewController: ChartViewDelegate {
         if incomeDict.count == 1 {
             yValues.append(ChartDataEntry(x: Double(-1), y: 0, data: ""))
             for incomeCatagory in incomeDict {
-                
                 if incomeCatagory.value != 0 {
-                    
                     sumIncome += incomeCatagory.value
-                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
-                    
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome.round(to: 2), data: incomeCatagory.key))
                     newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.lastCharacterAsString())
                     i += 1
                 }
@@ -176,8 +173,7 @@ extension TotalIncomeViewController: ChartViewDelegate {
             for incomeCatagory in incomeDict {
                 if incomeCatagory.value != 0 {
                     sumIncome += incomeCatagory.value
-                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome, data: incomeCatagory.key))
-                    
+                    yValues.append(ChartDataEntry(x: Double(i), y: sumIncome.round(to: 2), data: incomeCatagory.key))
                     newIncomeCategoryEmojiToDisplay.append(incomeCatagory.key.firstCharacterAsString)
                     i += 1
                 }
@@ -200,14 +196,15 @@ extension TotalIncomeViewController: ChartViewDelegate {
         lineChartData.setValueFont(UIFont(name: FontNames.textMoneytorGoodLetter, size: 12) ?? .boldSystemFont(ofSize: 12))
         lineChartData.setValueTextColor(.mtDarkBlue)
         lineChartView.data = lineChartData
-        
+        lineChartView.noDataText = "No Income Data available for Chart."
+        lineChartView.noDataTextAlignment = .center
+        lineChartView.noDataTextColor = .mtTextLightBrown
         let yAxis = lineChartView.leftAxis
         yAxis.labelFont = UIFont(name: FontNames.textMoneytorGoodLetter, size: 14) ?? .boldSystemFont(ofSize: 12)
         yAxis.setLabelCount(5, force: true)
         yAxis.labelTextColor = .mtTextLightBrown
         yAxis.axisLineColor = .mtDarkBlue
         yAxis.labelPosition = .outsideChart
-        
         lineChartView.leftAxis.axisMinimum = 0
         lineChartView.leftAxis.axisMaximum = sumIncome + (sumIncome * 0.1)
         lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: newIncomeCategoryEmojiToDisplay)

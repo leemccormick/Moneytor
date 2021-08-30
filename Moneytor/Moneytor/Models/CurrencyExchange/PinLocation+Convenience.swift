@@ -16,5 +16,3 @@ extension PinLocation {
         self.longitude = longitude
     }
 }
-
-

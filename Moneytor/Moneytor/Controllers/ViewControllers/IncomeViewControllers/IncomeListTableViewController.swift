@@ -31,7 +31,6 @@ class IncomeListTableViewController: UITableViewController {
     let textRecognizationQueue = DispatchQueue.init(label: "TextRecognizationQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem, target: nil)
     var requests = [VNRequest]()
     
-    
     // MARK: - Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -334,11 +333,10 @@ extension IncomeListTableViewController {
 
 // MARK: - UISearchBarDelegate
 extension IncomeListTableViewController: UISearchBarDelegate {
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             fetchAllIncomes()
-            resultsIncomeFromSearching = IncomeController.shared.incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText)}
+            resultsIncomeFromSearching = IncomeController.shared.incomes.filter{$0.matches(searchTerm: searchText, name: $0.incomeNameString, category: $0.incomeCategory?.name ?? "", date: $0.incomeDateText, amount: $0.incomeAmountString, note: $0.incomeNoteString)}
             
             guard let results = resultsIncomeFromSearching as? [Income] else {return}
             if !results.isEmpty {

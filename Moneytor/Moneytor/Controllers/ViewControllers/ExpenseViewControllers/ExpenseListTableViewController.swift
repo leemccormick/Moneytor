@@ -356,7 +356,7 @@ extension ExpenseListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             fetchAllExpenses()
-            resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "", date: $0.expenseDateText)}
+            resultsExpenseFromSearching = ExpenseController.shared.expenses.filter{$0.matches(searchTerm: searchText, name: $0.expenseNameString, category: $0.expenseCategory?.name ?? "", date: $0.expenseDateText, amount: $0.expenseAmountString, note: $0.expenseNoteString)}
             guard let results = resultsExpenseFromSearching as? [Expense] else {return}
             if !results.isEmpty {
                 TotalController.shared.calculateTotalExpenseFrom(searchArrayResults: results)

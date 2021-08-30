@@ -6,8 +6,8 @@
 //
 
 import UserNotifications
-class NotificationScheduler {
-    
+
+class NotificationScheduler {    
     // MARK: - scheduleNotifications For Income
     func scheduleIncomeNotifications(income: Income) {
         guard let date = income.date,
