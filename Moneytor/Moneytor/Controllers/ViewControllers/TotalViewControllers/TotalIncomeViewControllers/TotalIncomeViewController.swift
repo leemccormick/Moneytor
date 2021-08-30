@@ -91,7 +91,7 @@ class TotalIncomeViewController: UIViewController {
             incomeTableView.reloadData()
         }
     }
-
+    
     // MARK: - Helper Fuctions
     func updateSectionHeader(selectdCategory: String) {
         let header = UITableView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 40))

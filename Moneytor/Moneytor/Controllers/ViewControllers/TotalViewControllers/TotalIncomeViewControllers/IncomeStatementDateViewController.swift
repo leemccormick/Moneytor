@@ -131,7 +131,7 @@ class IncomeStatementDateViewController: UIViewController, UITextFieldDelegate {
     
     func showEndDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
-        let maxDate = Date().endInSixMonths
+        let maxDate = Date().threeYearsLater
         let today = Date()
         let datePicker = DatePicker()
         datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)

@@ -10,7 +10,7 @@ import Charts
 import DatePicker
 
 class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var statementStackView: UIStackView!
     @IBOutlet weak var expenseTitelLable: UILabel!
@@ -106,7 +106,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
     // MARK: - Helper Fuctions
     func showStartDatePicker() {
         let minDate = DatePickerHelper.shared.dateFrom(day: 01, month: 01, year: 2015)!
-      let maxDate = Date().endDateOfMonth
+        let maxDate = Date().endDateOfMonth
         let today = Date()
         let datePicker = DatePicker()
         datePicker.setColors(main: .mtTextLightBrown, background: .mtLightYellow, inactive: .mtDarkOrage)
@@ -169,7 +169,7 @@ class ExpenseStatementDateViewController: UIViewController, UITextFieldDelegate 
     func updateViewWithtime(start: Date, end: Date) {
         let expenses = ExpenseCategoryController.shared.generateSectionsCategoiesByTimePeriod(start: start, end: end)
         expenseCategoryDict = ExpenseCategoryController.shared.generateCategoryDictionaryByExpensesAndReturnDict(sections: expenses)
-      setupBarChart(expenseDict: expenseCategoryDict)
+        setupBarChart(expenseDict: expenseCategoryDict)
     }
     
     func updateSectionHeader(selectdCategory: String) {

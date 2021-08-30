@@ -62,10 +62,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 0...5 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getRepeatedDatesForSixMonths\(nReturnDates) ==> count : \(nReturnDates.count) ======================")
         return nReturnDates
     }
     
@@ -73,10 +72,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 0...11 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getRepeatedDatesForAYear\(nReturnDates) ==> count : \(nReturnDates.count) ======================")
         return nReturnDates
     }
     
@@ -84,10 +82,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 0...23 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getRepeatedDatesForTwoYears\(nReturnDates) ==> count : \(nReturnDates.count)======================")
         return nReturnDates
     }
     
@@ -95,10 +92,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 1...5 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getUpdateRepeatedDatesForSixMonths\(nReturnDates) ==> count : \(nReturnDates.count)======================")
         return nReturnDates
     }
     
@@ -106,11 +102,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 1...11 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getUpdateRepeatedDatesForAYear\(nReturnDates) ==> count : \(nReturnDates.count)======================")
-
         return nReturnDates
     }
     
@@ -118,10 +112,9 @@ extension Date {
         var nReturnDates: [Date] = []
         for index in 1...23 {
             if let nextMonth = Calendar.current.date(byAdding: .month, value: index, to: self) {
-            nReturnDates.append(nextMonth)
+                nReturnDates.append(nextMonth)
             }
         }
-        print("=================== getUpdateRepeatedDatesForTwoYears\(nReturnDates) ==> count : \(nReturnDates.count)======================")
         return nReturnDates
     }
 }
@@ -232,7 +225,7 @@ extension String {
     }
     
     var stringByRemovingWhitespaces: String {
-            return components(separatedBy: .whitespaces).joined()
+        return components(separatedBy: .whitespaces).joined()
     }
 }
 

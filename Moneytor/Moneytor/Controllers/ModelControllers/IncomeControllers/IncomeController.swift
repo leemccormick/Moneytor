@@ -167,16 +167,6 @@ class IncomeController {
         notificationScheduler.scheduleIncomeNotifications(income: income)
     }
     
-    func updateIncomeWithRepeatedNotification(_ income: Income, name: String, amount: Double, category: IncomeCategory, date: Date, note: String){
-        income.name = name
-        income.amount = NSDecimalNumber(value: amount)
-        income.incomeCategory = category
-        income.date = date
-        income.note = note
-        CoreDataStack.shared.saveContext()
-        notificationScheduler.scheduleIncomeNotifications(income: income)
-    }
-    
     // DELETE
     func deleteIncome(_ income: Income){
         income.incomeCategory?.removeFromIncomes(income)

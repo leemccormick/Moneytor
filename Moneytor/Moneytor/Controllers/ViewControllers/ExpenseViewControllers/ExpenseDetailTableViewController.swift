@@ -197,8 +197,15 @@ class ExpenseDetailTableViewController: UITableViewController  {
                 ExpenseController.shared.updateWith(expense, name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote + "\nUpdated On : \(Date().dateToString(format: .monthDayYear))")
             }
         } else {
-            let imageDate = expenseImageView.image?.jpegData(compressionQuality: 0.7)
-            ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: expenseNoteTextView.text + amountToSaveNote + "\nCreated On : \(Date().dateToString(format: .monthDayYear))", image: imageDate)
+            let imageData = expenseImageView.image?.jpegData(compressionQuality: 0.7)
+            var textViewNote = ""
+            if expenseNoteTextView.text == "Take a note for your expense here or scan a receipt for expense's detail..." {
+                textViewNote = ""
+            } else {
+                textViewNote = expenseNoteTextView.text
+            }
+            let textViewNoteToSave = "\(textViewNote) \n\(amountToSaveNote)  \nCreated On : \(Date().dateToString(format: .monthDayYear))"
+            ExpenseController.shared.createExpenseWith(name: name, amount: Double(totalInString) ?? 0.0, category: selectedExpenseCategory, date: expenseDatePicker.date, note: textViewNoteToSave, image: imageData)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -674,7 +681,7 @@ extension ExpenseDetailTableViewController {
         }
         let amountInString = AmountFormatter.currencyInString(num: Double(amount) ?? 0.0)
         guard let selectedExpenseCategory = selectedExpenseCategory else {return}
-        let alertController = UIAlertController(title: "SET REMINDERS AND MONTHLY EXPENSES!", message: "\nPlease, select how long would you like to set reminders and automatically input expenses monthly? \n\nName : \(name.capitalized) \nAmount : \(amountInString) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nMothly Bill Date : \(expenseDatePicker.date.dateToString(format: .onlyDate))", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "SET REMINDERS AND MONTHLY EXPENSES!", message: "\nPlease, select how long would you like to set reminders and automatically input expenses monthly? \n\nName : \(name.capitalized) \nAmount : \(amountInString) \nCategory : \(selectedExpenseCategory.nameString.capitalized) \nMonthly Bill Date : \(expenseDatePicker.date.dateToString(format: .onlyDate))", preferredStyle: .alert)
         let noAction = UIAlertAction(title: "CANCEL", style: .destructive)
         let yesSixMonthsAction = UIAlertAction(title: "SET FOR 6 MONTHS!", style: .default) { (action) in
             if let expense = self.expense {
